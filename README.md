@@ -5,6 +5,7 @@ Dual Interest
 
 ## Descripcion_del_Juego
 *Te interesa colaborar con el enemigo para poder ganar.*
+
 Dual Interests es un videojuego multijugador de dos personas en el que cada jugador controla a un personaje y, combinando fases cooperativas y de duelo, compiten por la superioridad en una serie de minijuegos en los que deberán recolectar calaveras que les darán puntos.
 
 
