@@ -1,11 +1,13 @@
+import {TimerScene} from './scenes/TimerScene.js'
 window.onload=function (){
+
     const config = {
         width: 320,
         height: 180,
         parent: "container",
         type: Phaser.AUTO,
 
-        scene: [],
+        scene: [TimerScene],
         input: {
             gamepad: true
         },
