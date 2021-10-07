@@ -1,15 +1,16 @@
 import {SampleScene} from './scenes/SampleScene.js'
 import {TransitionsScene} from './scenes/TransitionsScene.js'
+import {CharacterTestScene} from './scenes/CharacterTestScene.js'
 window.onload=function (){
 
     const config = {
-        width: 320,
-        height: 180,
+        width: 800,//Cambiar el tamaño por escena
+        height: 500,
         parent: "container",
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
-        scene: [TransitionsScene],
+        scene: [CharacterTestScene, TransitionsScene],
         input: {
             gamepad: true
         },
@@ -18,7 +19,8 @@ window.onload=function (){
             default: "arcade",
             arcade: {
                 gravity: {
-                    y: 500
+                    y: 300,
+                    debug: true
                 }
             }
         }
