@@ -1,4 +1,4 @@
-import {TimerScene} from './scenes/TimerScene.js'
+import {SampleScene} from './scenes/SampleScene.js'
 window.onload=function (){
 
     const config = {
@@ -7,7 +7,7 @@ window.onload=function (){
         parent: "container",
         type: Phaser.AUTO,
 
-        scene: [TimerScene],
+        scene: [SampleScene],
         input: {
             gamepad: true
         },
