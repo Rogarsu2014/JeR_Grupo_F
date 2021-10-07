@@ -1,4 +1,5 @@
 import {SampleScene} from './scenes/SampleScene.js'
+import {TransitionsScene} from './scenes/TransitionsScene.js'
 window.onload=function (){
 
     const config = {
@@ -6,8 +7,9 @@ window.onload=function (){
         height: 180,
         parent: "container",
         type: Phaser.AUTO,
+        backgroundColor:"#4488AA",
 
-        scene: [SampleScene],
+        scene: [TransitionsScene],
         input: {
             gamepad: true
         },
