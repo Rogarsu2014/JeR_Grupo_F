@@ -1,5 +1,5 @@
 
-export class TimerScene extends Phaser.Scene{
+export class SampleScene extends Phaser.Scene{
 
     constructor() {
         super("TimerScene");
