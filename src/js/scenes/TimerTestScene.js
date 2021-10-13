@@ -20,7 +20,7 @@ export class TimerTestScene extends Phaser.Scene{
     }
 
     update(){
-        this.timerText.setText(this.timer.getRemainingSeconds())
+        this.timerText.setText(this.timer.getRemainingSeconds(true))
         console.log(this.timer.getRemainingSeconds(true))
     }
 }
