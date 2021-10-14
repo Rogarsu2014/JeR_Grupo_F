@@ -101,7 +101,8 @@ export class Player extends SpriteObject{
     }
 
     jump(){
-        this.player.setVelocityY(-500);
+        if(this.isOnFloor())
+            this.player.setVelocityY(-500);
     }
     isOnFloor(){
         return this.player.body.onFloor();

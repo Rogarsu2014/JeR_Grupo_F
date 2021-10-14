@@ -19,18 +19,18 @@ export class InputProcessor {
 
     }
 
-    leftMovement(){
-        this.player.setVelocityX(-300);
-        this.player.anims.play('left', true);
-    }
-    rightMovement(){
-        this.player.setVelocityX(300);
-        this.player.anims.play('right', true);
-    }
-
-    jumpAction(){
-        if(this.player.isOnFloor())
-            this.player.jump();
-    }
+    // leftMovement(){
+    //     this.player.setVelocityX(-300);
+    //     this.player.anims.play('left', true);
+    // }
+    // rightMovement(){
+    //     this.player.setVelocityX(300);
+    //     this.player.anims.play('right', true);
+    // }
+    //
+    // jumpAction(){
+    //     if(this.player.isOnFloor())
+    //         this.player.jump();
+    // }
     dashAction(){}
 }
