@@ -11,7 +11,7 @@ window.onload=function (){
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
-        scene: [TimerTestScene,CharacterTestScene, TransitionsScene],
+        scene: [CharacterTestScene,TimerTestScene, TransitionsScene],
         input: {
             gamepad: true
         },
