@@ -1,6 +1,6 @@
 import {SpriteObject} from "./SpriteObject.js";
 
-export class Player extends SpriteObject{
+export class Player_I extends SpriteObject{
 
 
     constructor(context,playerInput) {
@@ -54,35 +54,35 @@ export class Player extends SpriteObject{
         this.playerInput.update();
     }
 
-    processCursors(){
-        if (this.context.cursors.left.isDown)//Move left
-        {
-            this.player.setVelocityX(-300);
-
-            this.player.anims.play('left', true);
-        }
-        else if (this.context.cursors.right.isDown)//Move right
-        {
-            this.player.setVelocityX(300);
-
-            this.player.anims.play('right', true);
-        }
-        else //Stay still
-        {
-            this.player.setVelocityX(0);
-
-            this.player.anims.play('turn');
-        }
-
-        if (this.context.cursors.up.isDown && this.player.body.onFloor())//Jump as long as you are on the floor
-        {
-            this.player.setVelocityY(-500);
-        }
-        if (this.context.cursors.down.isDown)//Optional go down key
-        {
-            this.player.setVelocityY(600);
-        }
-    }
+    // processCursors(){
+    //     if (this.context.cursors.left.isDown)//Move left
+    //     {
+    //         this.player.setVelocityX(-300);
+    //
+    //         this.player.anims.play('left', true);
+    //     }
+    //     else if (this.context.cursors.right.isDown)//Move right
+    //     {
+    //         this.player.setVelocityX(300);
+    //
+    //         this.player.anims.play('right', true);
+    //     }
+    //     else //Stay still
+    //     {
+    //         this.player.setVelocityX(0);
+    //
+    //         this.player.anims.play('turn');
+    //     }
+    //
+    //     if (this.context.cursors.up.isDown && this.player.body.onFloor())//Jump as long as you are on the floor
+    //     {
+    //         this.player.setVelocityY(-500);
+    //     }
+    //     if (this.context.cursors.down.isDown)//Optional go down key
+    //     {
+    //         this.player.setVelocityY(600);
+    //     }
+    // }
 
     moveLeft(){
         this.player.setVelocityX(-300);

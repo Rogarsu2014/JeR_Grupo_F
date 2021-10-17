@@ -1,5 +1,5 @@
 import {TaskManager} from "../objects/TaskManager.js";
-import {Player} from "../objects/Player.js";
+import {Player_I} from "../objects/Player_I.js";
 import {SpriteObject} from "../objects/SpriteObject.js";
 import {GamepadProcessor} from "../util/InputProcessors/GamepadProcessor.js";
 import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
@@ -18,10 +18,10 @@ export class CooperativeStage  extends Phaser.Scene{
             ()=>console.log("Task 4 completed")
         ],()=>console.log("All tasks completed"));
 
-        this.player1 = new Player(this)
+        this.player1 = new Player_I(this)
         this.player1.setPlayerInput(new GamepadProcessor(this,this.player1,0,0));
 
-        this.player2 = new Player(this)
+        this.player2 = new Player_I(this)
         this.player2.setPlayerInput(new KeyboardProcessor(this,this.player2,'SPACE',0,'LEFT','RIGHT'));
     }
 
@@ -42,7 +42,7 @@ export class CooperativeStage  extends Phaser.Scene{
     update(){
         this.player1.update();
         this.player2.update();
-        console.log("update")
+        // console.log("update")
         // this.gamepadProcessor.update();
     }
 }
