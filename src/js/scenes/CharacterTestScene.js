@@ -1,4 +1,6 @@
-import {Player} from './Player.js'
+import {Player_I} from '../objects/Player_I.js'
+import {GamepadProcessor} from "../util/InputProcessors/GamepadProcessor.js";
+import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
 
 var players = [];
 var keys;
@@ -18,9 +20,11 @@ export class CharacterTestScene extends Phaser.Scene {
 
         
         //Create the character at 0,0 and change its origin
-        var player1 = new Player(this, 100, 100, "dude", 0);
+        var player1 = new Player_I(this, 100, 100, "dude", 0);
+        player1.setPlayerInput(new GamepadProcessor(this,player1,0,0));
         players[0] = player1;
-        var player2 = new Player(this, 200, 100, "dude", 1);
+        var player2 = new Player_I(this, 200, 100, "dude", 1);
+        player2.setPlayerInput(new KeyboardProcessor(this,player2,'SPACE',0,'LEFT','RIGHT'));
         players[1] = player2;
 
         chocarse = this.physics.add.collider(players[0], players[1]);
@@ -54,7 +58,7 @@ export class CharacterTestScene extends Phaser.Scene {
     }
 
     update() {
-        players[0].update(keys);
-        players[1].update(keys);
+        players[0].update();
+        players[1].update();
     }
 }

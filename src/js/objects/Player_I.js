@@ -1,27 +1,40 @@
-import {SpriteObject} from "./SpriteObject.js";
+export class Player_I extends Phaser.Physics.Arcade.Sprite {
 
-export class Player_I extends SpriteObject{
+    /*
+        constructor(context,playerInput) {
+            super(context);
+            this.context= context;
+            this.player=undefined;
+            this.playerInput =undefined;
+    */
+    constructor(scene, x, y, sprite, numero) {
+        super(scene, x, y, sprite);
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+        //Particular player object gravity
+        this.setGravityY(1500);
+        //Add a little bounce effect
+        this.setBounce(0.2);
+        //Make the player collide with the screen borderd
+        this.setCollideWorldBounds(true);
+        this.numero = numero;
 
-
-    constructor(context,playerInput) {
-        super(context);
-        this.context= context;
-        this.player=undefined;
-        this.playerInput =undefined;
+        this.context= scene;
     }
 
-    setPlayerInput(playerInput){
+    setPlayerInput(playerInput) {
         this.playerInput = playerInput;
     }
-    init(){
+    init() {
 
     }
-    preload(){
-        this.context.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
+    preload() {
+        this.context.load.spritesheet("dude", "./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
     }
 
-    create(){
-        this.player = this.context.physics.add.sprite(0, 0, 'dude').setOrigin(0,0);
+    create() {
+        /*
+        this.player = this.context.physics.add.sprite(0, 0, 'dude').setOrigin(0, 0);
         //Particular player object gravity
         this.player.setGravityY(1500);
         //Add a little bounce effect
@@ -48,9 +61,11 @@ export class Player_I extends SpriteObject{
             frameRate: 10,
             repeat: -1
         });
+        */
+
     }
 
-    update(){
+    update() {
         this.playerInput.update();
     }
 
@@ -84,27 +99,27 @@ export class Player_I extends SpriteObject{
     //     }
     // }
 
-    moveLeft(){
-        this.player.setVelocityX(-300);
+    moveLeft() {
+        this.setVelocityX(-300);
 
-        this.player.anims.play('left', true);
+        this.anims.play('left', true);
     }
-    idle(){
-        this.player.setVelocityX(0);
+    idle() {
+        this.setVelocityX(0);
 
-        this.player.anims.play('turn');
+        this.anims.play('turn');
     }
-    moveRight(){
-        this.player.setVelocityX(300);
+    moveRight() {
+        this.setVelocityX(300);
 
-        this.player.anims.play('right', true);
+        this.anims.play('right', true);
     }
 
-    jump(){
-        if(this.isOnFloor())
-            this.player.setVelocityY(-500);
+    jump() {
+        if (this.isOnFloor())
+            this.setVelocityY(-500);
     }
-    isOnFloor(){
-        return this.player.body.onFloor();
+    isOnFloor() {
+        return this.body.onFloor();
     }
 }
