@@ -14,7 +14,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     update(keys) {
 
         if (this.numero == 0) {
-            console.log("entra");
             if (keys.A.isDown)//Move left
             {
                 this.setVelocityX(-300);

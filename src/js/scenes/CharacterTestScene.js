@@ -2,6 +2,7 @@ import {Player} from './Player.js'
 
 var players = [];
 var keys;
+var chocarse;
 
 export class CharacterTestScene extends Phaser.Scene {
     constructor() {
@@ -21,6 +22,8 @@ export class CharacterTestScene extends Phaser.Scene {
         players[0] = player1;
         var player2 = new Player(this, 200, 100, "dude", 1);
         players[1] = player2;
+
+        chocarse = this.physics.add.collider(players[0], players[1]);
 
         //Create the character animations (current ones are from tutorial)
         this.anims.create({
