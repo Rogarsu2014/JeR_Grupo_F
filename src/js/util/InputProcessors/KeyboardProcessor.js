@@ -1,43 +1,42 @@
 import {InputProcessor} from "./InputProcessor.js";
 
 export class KeyboardProcessor extends InputProcessor {
-    constructor(context,player,jumpButton,dashButton,left,right) {
+    constructor(context,player,jumpButton,dashButton,left,right ,down, empujar) {
         super(context,player,jumpButton,dashButton);
-
         this.left=this.context.input.keyboard.addKey(left);
         this.right=this.context.input.keyboard.addKey(right);
+        this.down=this.context.input.keyboard.addKey(down);
+        this.empujar=this.context.input.keyboard.addKey(empujar);
         this.context.input.keyboard.on("keydown-"+jumpButton,()=>this.player.jump())
-        // this.context.input.keyboard.on("keydown-"+dashButton,()=>this.player.jump())
-        //
-        // this.context.input.keyboard.on("keydown-"+left,()=>this.player.moveLeft())
-        // this.context.input.keyboard.on("keyup-"+left,()=>this.player.idle())
-        //
-        // this.context.input.keyboard.on("keydown-"+right,()=>this.player.moveRight())
-        // this.context.input.keyboard.on("keyup-"+right,()=>this.player.idle())
-
     }
 
-    update(){
+    update(chocarse, jugador){
+
         if (this.left.isDown)//Move left
         {
-            this.player.moveLeft()
+            this.player.moveLeft();
         }
         else if (this.right.isDown)//Move right
         {
-            this.player.moveRight()
+            this.player.moveRight();
+        }
+        /*
+        else if (this.jumpButton.isDown)
+        {
+            this.player.jump();
+        }
+        */
+        else if (this.down.isDown)//Move left
+        {
+            this.player.moveDown();
         }
         else //Stay still
         {
-            this.player.idle()
+            this.player.idle();
         }
-
-        // if (this.context.cursors.up.isDown && this.player.isOnFloor())//Jump as long as you are on the floor
-        // {
-        //     this.player.jump()
-        // }
-        // if (this.context.cursors.down.isDown)//Optional go down key
-        // {
-        //     // this.player.setVelocityY(600);
-        // }
+        if (this.empujar.isDown)//Move left
+        {
+            jugador.serEmpujado(chocarse);
+        }
     }
 }
