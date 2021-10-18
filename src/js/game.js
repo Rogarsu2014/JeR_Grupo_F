@@ -19,7 +19,7 @@ window.onload=function (){
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage
         scene: [Preloader,Coop1],
 
-        main,
+        //main,
         input: {
             gamepad: true
         },
