@@ -7,7 +7,8 @@ export class KeyboardProcessor extends InputProcessor {
         this.right=this.context.input.keyboard.addKey(right);
         this.down=this.context.input.keyboard.addKey(down);
         this.empujar=this.context.input.keyboard.addKey(empujar);
-        this.context.input.keyboard.on("keydown-"+jumpButton,()=>this.player.jump())
+        this.jumpButton=this.context.input.keyboard.addKey(jumpButton);
+        //this.context.input.keyboard.on("keydown-"+jumpButton,()=>this.player.jump());
     }
 
     update(chocarse, jugador){
@@ -19,13 +20,7 @@ export class KeyboardProcessor extends InputProcessor {
         else if (this.right.isDown)//Move right
         {
             this.player.moveRight();
-        }
-        /*
-        else if (this.jumpButton.isDown)
-        {
-            this.player.jump();
-        }
-        */
+        }       
         else if (this.down.isDown)//Move left
         {
             this.player.moveDown();
@@ -37,6 +32,10 @@ export class KeyboardProcessor extends InputProcessor {
         if (this.empujar.isDown)//Move left
         {
             jugador.serEmpujado(chocarse);
+        }
+        if (this.jumpButton.isDown)
+        {
+            this.player.jump();
         }
     }
 }

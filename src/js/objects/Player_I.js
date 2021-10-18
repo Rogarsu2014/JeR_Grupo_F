@@ -1,3 +1,5 @@
+import { Timer } from "../util/Timer.js";
+
 export class Player_I extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite);
@@ -61,12 +63,16 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
             console.log("2");
             if(this.body.touching.left == true){
                 console.log("3");
-                this.setX(this.x +80);
-                this.anims.play('left', true);
+                //this.setX(this.x +80);
+                this.setAccelerationX(100000);
+                var timer = new Timer(this.context, 50, ()=>this.setAccelerationX(0));
+                timer.startTimer();
             }
             else if(this.body.touching.right == true){
                 console.log("4");
-                this.setX(this.x -80);
+                this.setAccelerationX(-100000);
+                var timer = new Timer(this.context, 50, ()=>this.setAccelerationX(0));
+                timer.startTimer();
             }
             
         }
