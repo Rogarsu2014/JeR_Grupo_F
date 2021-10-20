@@ -3,16 +3,24 @@ import {TransitionsScene} from './scenes/TransitionsScene.js'
 import {CharacterTestScene} from './scenes/CharacterTestScene.js'
 import {TimerTestScene} from "./scenes/TimerTestScene.js";
 import {CooperativeStage} from "./scenes/CooperativeStage.js";
+
+import  {Preloader} from "./util/Preloader.js"
+import {Coop1} from "./scenes/Coop1.js";
+
 window.onload=function (){
 
     const config = {
-        width: 800,//Cambiar el tamaño por escena
-        height: 500,
+        width: 960,//Cambiar el tamaño por escena
+        height: 640,
         parent: "container",
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
-        scene: [CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage],
+      //Carga de escenas
+        // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage
+        scene: [Preloader,Coop1],
+
+        //main,      //Esto estaba antes descomentado sin coma
         input: {
             gamepad: true
         },
