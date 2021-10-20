@@ -10,7 +10,6 @@ export class Preloader extends Phaser.Scene {
 
     preload(){
         this.load.image('tileset', '../Resources/assets/level/tileset.png');
-        this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
 
         //botones de los jugadores
         this.load.image('botonR','../Resources/assets/level/Boton1.png');
