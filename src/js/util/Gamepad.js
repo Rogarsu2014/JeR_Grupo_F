@@ -3,7 +3,6 @@ export class Gamepad {
     constructor(context, padIndex = 0) {
 
         this.padIndex=padIndex;
-        // this.setPad(padIndex);
         this.context = context;
 
     }

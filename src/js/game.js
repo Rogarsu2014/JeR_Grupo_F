@@ -16,10 +16,11 @@ window.onload=function (){
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
+      //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage
         scene: [Preloader,Coop1],
 
-        //main,
+        //main,      //Esto estaba antes descomentado sin coma
         input: {
             gamepad: true
         },
