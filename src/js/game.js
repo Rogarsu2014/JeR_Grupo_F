@@ -3,6 +3,8 @@ import {TransitionsScene} from './scenes/TransitionsScene.js'
 import {CharacterTestScene} from './scenes/CharacterTestScene.js'
 import {TimerTestScene} from "./scenes/TimerTestScene.js";
 import {CooperativeStage} from "./scenes/CooperativeStage.js";
+
+
 window.onload=function (){
 
     const config = {
@@ -15,7 +17,6 @@ window.onload=function (){
 
         scene: [CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage],
 
-        main
         input: {
             gamepad: true
         },
