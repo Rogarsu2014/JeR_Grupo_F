@@ -18,9 +18,8 @@ window.onload=function (){
 
       //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage
-        scene: [Preloader,Coop1],
+        scene: [CharacterTestScene, Preloader,Coop1],
 
-        //main,      //Esto estaba antes descomentado sin coma
         input: {
             gamepad: true
         },
