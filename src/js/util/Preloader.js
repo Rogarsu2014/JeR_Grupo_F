@@ -9,16 +9,16 @@ export class Preloader extends Phaser.Scene {
     }
 
     preload(){
-        this.load.image('tileset', '../assets/tileset.png');
-        this.load.tilemapTiledJSON('Coop1Map', '../assets/Coop1.json');
+        this.load.image('tileset', '../Resources/assets/level/tileset.png');
+        this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
 
         //botones de los jugadores
-        this.load.image('botonR','../assets/Boton1.png');
-        this.load.image('botonL','../assets/Boton2.png');
-        this.load.image('horizontalSpawn','../assets/blocker6.png');
-        this.load.image('horizontal','../assets/blocker2.png');
-        this.load.image('1x1','../assets/blocker1.png');
-        this.load.image('door','../assets/Door.png');
+        this.load.image('botonR','../Resources/assets/level/Boton1.png');
+        this.load.image('botonL','../Resources/assets/level/Boton2.png');
+        this.load.image('horizontalSpawn','../Resources/assets/level/blocker6.png');
+        this.load.image('horizontal','../Resources/assets/level/blocker2.png');
+        this.load.image('1x1','../Resources/assets/level/blocker1.png');
+        this.load.image('door','../Resources/assets/level/Door.png');
     }
     create(){
         console.log("Preload hecho");
