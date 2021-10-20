@@ -3,6 +3,7 @@ import {TransitionsScene} from './scenes/TransitionsScene.js'
 import {CharacterTestScene} from './scenes/CharacterTestScene.js'
 import {TimerTestScene} from "./scenes/TimerTestScene.js";
 import {CooperativeStage} from "./scenes/CooperativeStage.js";
+import {MenuScene} from "./scenes/MenuScene.js";
 
 import  {Preloader} from "./util/Preloader.js"
 import {Coop1} from "./scenes/Coop1.js";
@@ -18,9 +19,9 @@ window.onload=function (){
 
       //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage
-        scene: [Preloader,Coop1],
+        //scene: [Preloader,Coop1],
 
-        scene: [CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage],
+        scene: [MenuScene,CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage],
 
         //main,      //Esto estaba antes descomentado sin coma
         input: {

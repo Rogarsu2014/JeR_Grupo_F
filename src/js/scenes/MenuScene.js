@@ -7,11 +7,11 @@ export class MenuScene extends Phaser.Scene{
   
     preload ()
     {
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('star', 'assets/star.png');
+        this.load.image('sky', './Resources/assets/sky.png');
+        this.load.image('star', './Resources/assets/star.png');
     
-        this.load.image('play_button', 'assets/play_button.png');
-        this.load.image('options_button', 'assets/options_button.png');
+        this.load.image('play_button', './Resources/assets/play_button.png');
+        this.load.image('options_button', './Resources/assets/options_button.png');
     }    
 
     create(){
@@ -19,18 +19,18 @@ export class MenuScene extends Phaser.Scene{
         var tittle;
         this.add.image(0, 0, 'sky').setOrigin(0).setDepth(0);
 
-        let selectSprite = this.add.image(game.renderer.width / 2 - 100, game.renderer.height / 2 - 100,'star');
+        let selectSprite = this.add.image(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2 - 100,'star');
         selectSprite.setVisible(false)
         selectSprite.setScale(1); 
 
-        tittle = this.add.text(game.renderer.width / 3, game.renderer.height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
-        let playButton = this.add.image(game.renderer.width / 2, game.renderer.height / 2, 'play_button').setDepth(1);
-        let optionsButton = this.add.image(game.renderer.width / 2, game.renderer.height / 2 + 100, 'options_button').setDepth(1);
+        tittle = this.add.text(this.game.renderer.width / 3, this.game.renderer.height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
+        let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'play_button').setDepth(1);
+        let optionsButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, 'options_button').setDepth(1);
 
         playButton.setInteractive();
         playButton.on("pointerover",()=>{ 
             selectSprite.setVisible(true)
-            selectSprite.setPosition(game.renderer.width / 2 - 100, game.renderer.height / 2)
+            selectSprite.setPosition(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2)
             console.log("Boton para Jugar")})
 
         playButton.on("pointerout",()=>{ 
@@ -40,7 +40,7 @@ export class MenuScene extends Phaser.Scene{
         optionsButton.setInteractive();
         optionsButton.on("pointerover",()=>{ 
             selectSprite.setVisible(true)
-            selectSprite.setPosition(game.renderer.width / 2 - 100, game.renderer.height / 2 + 100)
+            selectSprite.setPosition(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2 + 100)
             console.log("Boton de Opciones")})
             
         optionsButton.on("pointerout",()=>{ 
