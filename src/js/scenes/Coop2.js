@@ -5,21 +5,21 @@ import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
 var players = [];
 var chocarse;
 
-export class Coop1 extends Phaser.Scene{
+export class Coop2 extends Phaser.Scene{
 
     constructor() {
-        super("Coop1");
+        super("Coop2");
     }
 
     preload(){
-        //IMPORTAR MAPA Y JUGADOR
         this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
-        this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
+        
+        []
+        this.load.tilemapTiledJSON('Coop2Map', '../Resources/assets/level/Coop2.json');
         }
 
     create(){
-        //CREA EL MAPA
-        const map = this.make.tilemap({ key: 'Coop1Map'});
+        const map = this.make.tilemap({ key: 'Coop2Map'});
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
         map.createStaticLayer('Background', tileset);
@@ -27,19 +27,13 @@ export class Coop1 extends Phaser.Scene{
 
         floor.setCollisionByProperty({ collides: true });
 
-        //DEFINE OBJETOS QUE APARECERÁN LUEGO
-        let plat1;
-        let plat2;
+        let plat;
         let door;
 
-        //OBJETOS QUE APARECEN Y DESAPARECEN
-        this.platform1 = this.physics.add.staticGroup();
-        this.platform1.create(384,384,'1x1').setOrigin(0,0);
-        
-        this.platform2 = this.physics.add.staticGroup();
-        this.platform2.create(192,256,'horizontal').setOrigin(0,0);
+        //faltan colisiones con el pj, son estilo;
+        // this.physics.add.collider(player, obj);
 
-        let butIniAbajo = this.add.image(800,384,'botonR').setOrigin(0,0);
+        let butIniArriba = this.add.image(384,384,'botonR').setOrigin(0,0);       
 
         //Create the character at 0,0 and change its origin
         var player1 = new Player_I(this, 100, 100, "dude");
@@ -74,7 +68,7 @@ export class Coop1 extends Phaser.Scene{
             repeat: -1
         });
         
-        console.log("Escena 1 creada");
+        console.log("Escena 2 creada");
     }
 
     update(){
@@ -83,25 +77,17 @@ export class Coop1 extends Phaser.Scene{
         chocarse = false;
     //Añadir colisiones con los botones, lo que va debajo es lo que genera cada boton
             //Se pulsa el boton rojo 1
-        //    butIniAbajo.setVisible(false);
-        //    let butArriba = this.add.image(480,64,'botonL').setOrigin(0,0);
-        //    plat1 =  this.physics.add.staticGroup();
-        //    plat1.create(640,128,'horizontalSpawn').setOrigin(0,0);
+        //    butIniArriba.setVisible(false);
+        // let butAbajo = this.add.image(448,512,'botonL').setOrigin(0,0);
         
             //Se pulsa el boton 2
-        //    butArriba.setVisible(false);
-        //    let butAbajo2 = this.add.image(448,384,'botonR').setOrigin(0,0);
-        //    plat2 =  this.physics.add.staticGroup();
-        //    plat2.create(512,448,'horizontalSpawn').setOrigin(0,0);
-        
-            //Se pulsa el boton 3
-        //    butAbajo2.setVisible(false);
-        //    let butAbajo3 = this.add.image(320,512,'botonL').setOrigin(0,0);
-        //    this.platform2.setVisible(false);
+        //   butAbajo.setVisible(false);
+        // let butFinal = this.add.image(512,320,'botonR').setOrigin(0,0);
+        // plat =  this.physics.add.staticGroup();
+        // plat.create(512,384,'1x1').setOrigin(0,0);
 
                 //Fin nivel
-        //    butAbajo3.setVisible(false);
-        //    this.door = this.add.image(0,448,'door').setOrigin(0,0);
-        //    this.platform1.setVisible(false);
+        //    butFinal.setVisible(false);
+        // this.door = this.add.image(896,448,'door').setOrigin(0,0);
     }
 }

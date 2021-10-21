@@ -1,4 +1,5 @@
 import { Coop1 } from '../scenes/Coop1.js'
+import { Coop2 } from '../scenes/Coop2.js'
 
 //Esta escena es para precargar assets, 
 //el create tiene que ir a game, por lo que hace falta importarlo, lo tengo ahora al coop1 para testear ~ Pablo
@@ -21,7 +22,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('Coop1');
+        this.scene.start('Coop2');
     }
 
 }
