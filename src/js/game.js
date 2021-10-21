@@ -7,6 +7,7 @@ import {MenuScene} from "./scenes/MenuScene.js";
 
 import  {Preloader} from "./util/Preloader.js"
 import {Coop1} from "./scenes/Coop1.js";
+import {Coop2} from "./scenes/Coop2.js";
 
 window.onload=function (){
 
@@ -17,8 +18,10 @@ window.onload=function (){
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
+        //Carga de escenas
+        // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
+        
         scene: [MenuScene,CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage],
-
 
         input: {
             gamepad: true

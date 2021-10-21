@@ -5,22 +5,25 @@ import { KeyboardProcessor } from "../util/InputProcessors/KeyboardProcessor.js"
 var players = [];
 var chocarse;
 
+
 export class Coop1 extends Phaser.Scene {
+
 
     constructor() {
         super("Coop1");
     }
-    init(){
-
-    }
+  
+    init(){}
+  
     preload() {
+        //IMPORTAR MAPA Y JUGADOR     
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
         this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
     }
 
     create() {
 
-        
+        //CREACIÓN DEL MAPA
         const map = this.make.tilemap({ key: 'Coop1Map' });
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
@@ -29,37 +32,38 @@ export class Coop1 extends Phaser.Scene {
 
         floor.setCollisionByProperty({ collides: true });
 
+        //DEFINE OBJETOS QUE APARECERÁN LUEGO
         let plat1;
         let plat2;
         let door;
 
-
+        //OBJETOS QUE APARECEN Y DESAPARECEN
         this.platform1 = this.physics.add.staticGroup();
         this.platform1.create(384, 384, '1x1').setOrigin(0, 0);
 
         this.platform2 = this.physics.add.staticGroup();
         this.platform2.create(192, 256, 'horizontal').setOrigin(0, 0);
 
-        let butIniAbajo = this.add.image(800, 384, 'botonR').setOrigin(0, 0);
-        
-
+        let butIniAbajo = this.add.image(800,384,'botonR').setOrigin(0,0);
+      
+        //Create the character at 0,0 and change its origin
+      
         var player1 = new Player_I(this, 400, 100, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
         players[0] = player1;
+      
         var player2 = new Player_I(this, 200, 100, "dude");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
-
-        //Colisiones
-
+      
+      //Colisiones
         this.physics.add.collider(players[0], players[1], function(){
             chocarse = true;
         });
-
         this.physics.add.collider(players[0], floor);
         this.physics.add.collider(players[1], floor);
-
-        //Create the character animations (current ones are from tutorial)
+      
+       //Create the character animations (current ones are from tutorial)
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
@@ -80,10 +84,10 @@ export class Coop1 extends Phaser.Scene {
             repeat: -1
         });
 
-
         console.log("Escena 1 creada");
     }
 
+  
     update() {
 
         players[0].update(chocarse, players[1]);
