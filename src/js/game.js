@@ -3,6 +3,7 @@ import {TransitionsScene} from './scenes/TransitionsScene.js'
 import {CharacterTestScene} from './scenes/CharacterTestScene.js'
 import {TimerTestScene} from "./scenes/TimerTestScene.js";
 import {CooperativeStage} from "./scenes/CooperativeStage.js";
+import {MenuScene} from "./scenes/MenuScene.js";
 
 import  {Preloader} from "./util/Preloader.js"
 import {Coop1} from "./scenes/Coop1.js";
@@ -17,11 +18,11 @@ window.onload=function (){
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
-      //Carga de escenas
-        // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage
-        scene: [Preloader,Coop2],
+        //Carga de escenas
+        // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
+        
+        scene: [MenuScene,CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage],
 
-        //main,      //Esto estaba antes descomentado sin coma
         input: {
             gamepad: true
         },
