@@ -22,6 +22,7 @@ export class Preloader extends Phaser.Scene {
         this.load.image('horizonta3x1','../Resources/assets/level/blocker3 3x1.png');
         this.load.image('horizontalSpawn','../Resources/assets/level/blocker6 4x1.png');
         this.load.image('vertical1-5','../Resources/assets/level/blocker7 1x1-5.png');
+        this.load.image('vertical4-5','../Resources/assets/level/blocker8 1x4-5.png');
         this.load.image('door','../Resources/assets/level/Door.png');
     }
     create(){
