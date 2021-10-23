@@ -5,19 +5,19 @@ import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
 var players = [];
 var chocarse;
 
-export class Coop2 extends Phaser.Scene{
+export class Coop3 extends Phaser.Scene{
 
     constructor() {
-        super("Coop2");
+        super("Coop3");
     }
 
     preload(){
         this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
-        this.load.tilemapTiledJSON('Coop2Map', '../Resources/assets/level/Coop2.json');
+        this.load.tilemapTiledJSON('Coop3Map', '../Resources/assets/level/Coop3.json');
         }
 
     create(){
-        const map = this.make.tilemap({ key: 'Coop2Map'});
+        const map = this.make.tilemap({ key: 'Coop3Map'});
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
         map.createStaticLayer('Background', tileset);
@@ -28,10 +28,19 @@ export class Coop2 extends Phaser.Scene{
         let plat;
         let door;
 
+        let platArr1 =  this.physics.add.staticGroup();
+        platArr1.create(320,224,'1x1').setOrigin(0,0);
+        let platArr2 =  this.physics.add.staticGroup();
+        platArr2.create(768,288,'horizonta3x1').setOrigin(0,0);
+        let platAbj =  this.physics.add.staticGroup();
+        platAbj.create(704,352,'vertical1-5').setOrigin(0,0);
+        let butIniArr = this.add.image(256,224,'botonR').setOrigin(0,0);
+        let butIniAbj = this.add.image(320,448,'botonL').setOrigin(0,0);
+
         //faltan colisiones con el pj, son estilo;
         // this.physics.add.collider(player, obj);
 
-        let butIniArriba = this.add.image(384,384,'botonR').setOrigin(0,0);       
+        //let butIniArriba = this.add.image(384,384,'botonR').setOrigin(0,0);       
 
         //Create the character at 0,0 and change its origin
         var player1 = new Player_I(this, 100, 100, "dude");
@@ -74,18 +83,28 @@ export class Coop2 extends Phaser.Scene{
         players[1].update(chocarse, players[0]);
         chocarse = false;
     //Añadir colisiones con los botones, lo que va debajo es lo que genera cada boton
-            //Se pulsa el boton rojo 1
-        //    butIniArriba.setVisible(false);
-        // let butAbajo = this.add.image(448,512,'botonL').setOrigin(0,0);
-        
-            //Se pulsa el boton 2
-        //   butAbajo.setVisible(false);
-        // let butFinal = this.add.image(512,320,'botonR').setOrigin(0,0);
-        // plat =  this.physics.add.staticGroup();
-        // plat.create(512,384,'1x1').setOrigin(0,0);
+            //Botón de arriba pulsado
+        /*butIniArr.setVisible(false);
+        let butAbj2 = this.add.image(768,512,'botonL').setOrigin(0,0);
+        plat =  this.physics.add.staticGroup();
+        plat.create(448,448,'horizontalSpawn').setOrigin(0,0);
+        plat.create(64,0,'vertical4-5').setOrigin(0,0);*/
 
-                //Fin nivel
-        //    butFinal.setVisible(false);
-        // this.door = this.add.image(896,448,'door').setOrigin(0,0);
+        //Botón de abajo pulsado
+        
+        /*butIniAbj.setVisible(false);
+        platArr1.setVisible(false);
+        let butArr2 = this.add.image(460,224,'botonR').setOrigin(0,0);*/
+
+        //Segundo botón supeior pillado
+        /*butArr2.setVisible(false);
+        platAbj.setVisible(false);*/
+
+        //Segundo botón inferior pillado
+        /*butAbj2.setVisible(false);
+        platArr2.setVisible(false);*/
+
+        //la puerta apareceria al tocar la llave
+        //this.door = this.add.image(896,448,'door').setOrigin(0,0);
     }
 }

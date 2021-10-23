@@ -4,10 +4,11 @@ import {CharacterTestScene} from './scenes/CharacterTestScene.js'
 import {TimerTestScene} from "./scenes/TimerTestScene.js";
 import {CooperativeStage} from "./scenes/CooperativeStage.js";
 import {MenuScene} from "./scenes/MenuScene.js";
-
+import {FinPartida} from "./scenes/FinPartida.js";
 import  {Preloader} from "./util/Preloader.js"
 import {Coop1} from "./scenes/Coop1.js";
 import {Coop2} from "./scenes/Coop2.js";
+import {Coop3} from "./scenes/Coop3.js";
 
 window.onload=function (){
 
@@ -20,8 +21,8 @@ window.onload=function (){
 
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
-        
-        scene: [Preloader,CooperativeStage,Coop1,MenuScene,CharacterTestScene,TimerTestScene, TransitionsScene],
+        scene: [Preloader, CharacterTestScene, Coop1, FinPartida, MenuScene,TimerTestScene, TransitionsScene, CooperativeStage],
+
 
         input: {
             gamepad: true
@@ -31,15 +32,24 @@ window.onload=function (){
             default: "arcade",
             arcade: {
                 gravity: {
-                    y: 300
-                },
-                debug: true
-            }
-        }
 
+                    y: 300,
+                    
+                }
+            },
+            debug: true
+        }
     }
 
-
     var game = new Phaser.Game(config)
+    game.config.musicConfig = {
+        mute: false,
+        volume: 0.1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: false,
+        delay: 0
+    }
 }
 

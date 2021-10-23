@@ -35,7 +35,7 @@ export class KeyboardProcessor extends InputProcessor {
         }
         if (this.jumpButton.isDown)
         {
-            this.player.jump();
+            this.player.jump(chocarse);
         }
     }
 }
