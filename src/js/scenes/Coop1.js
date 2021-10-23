@@ -42,9 +42,6 @@ export class Coop1 extends Phaser.Scene {
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
         map.createStaticLayer('Background', tileset);
-        const floor = map.createStaticLayer('Level', tileset);
-
-        floor.setCollisionByProperty({ collides: true });
 
         // ************** platforms
         this.platforms=[]
@@ -56,6 +53,10 @@ export class Coop1 extends Phaser.Scene {
         this.platforms.push(platform3)
         var platform4 = new Platform(this, 384, 384, '1x1', 0, 64)
         this.platforms.push(platform4)
+
+        const floor = map.createStaticLayer('Level', tileset);
+
+        floor.setCollisionByProperty({ collides: true });
 
         var player1 = new Player_I(this, 928, 64, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
