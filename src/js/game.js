@@ -7,6 +7,8 @@ import {MenuScene} from "./scenes/MenuScene.js";
 import {FinPartida} from "./scenes/FinPartida.js";
 import  {Preloader} from "./util/Preloader.js"
 import {Coop1} from "./scenes/Coop1.js";
+import {Coop2} from "./scenes/Coop2.js";
+import {Coop3} from "./scenes/Coop3.js";
 
 window.onload=function (){
 

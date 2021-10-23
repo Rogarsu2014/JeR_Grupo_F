@@ -8,11 +8,14 @@ var calaveras = [];
 var chocarse;
 var puntuaciones = [];
 
+
 export class Coop1 extends Phaser.Scene {
+
 
     constructor() {
         super("Coop1");
     }
+
     init(){
     }
     preload() {
@@ -34,17 +37,14 @@ export class Coop1 extends Phaser.Scene {
         this.platform2 = this.physics.add.staticGroup();
         this.platform2.create(192, 256, 'horizontal').setOrigin(0, 0);
 
-        let butIniAbajo = this.add.image(800, 384, 'botonR').setOrigin(0, 0);
 
-        //Colisiones
+        let butIniAbajo = this.add.image(800, 384, 'botonR').setOrigin(0, 0);
 
         this.physics.add.collider(players[0], players[1], function(){
             chocarse = true;
         });
-
         this.physics.add.collider(players[0], floor);
         this.physics.add.collider(players[1], floor);
-
         
         puntuaciones[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
         puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].puntos);
@@ -67,9 +67,11 @@ export class Coop1 extends Phaser.Scene {
             });
         }
 
+
         console.log("Escena 1 creada");
     }
 
+  
     update() {
 
         players[0].update(chocarse, players[1]);
