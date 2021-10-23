@@ -1,7 +1,7 @@
 import { Timer } from "../util/Timer.js";
 
 export class Player_I extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, spriteKey) {
+    constructor(scene, x, y, spriteKey, puntos = 0) {
         super(scene, x, y, spriteKey);
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -13,6 +13,8 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true);
         this.context= scene;
         this.spriteKey = spriteKey;
+        this.puntos = puntos;
+        this.position = (x, y);
 
 
          //Create the character animations (current ones are from tutorial)
@@ -74,9 +76,14 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
         this.setVelocityY(600);
     }
 
-    jump() {//Jump as long as you are on the floor
-        if (this.isOnFloor())
-            this.setVelocityY(-500);
+    jump(chocarse) {//Jump as long as you are on the floor
+        if (this.isOnFloor()){
+            this.setVelocityY(-550);
+        }else if(chocarse == true){
+            if(this.body.touching.down == true){
+                this.setVelocityY(-500);
+            }
+        }   
     }
     isOnFloor() {//Optional go down key
         return this.body.onFloor();
@@ -95,5 +102,8 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
             }
             
         }
+    }
+    sumarPuntos(cantidad){
+        this.puntos += cantidad;
     }
 }

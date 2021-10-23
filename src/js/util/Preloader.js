@@ -10,9 +10,7 @@ export class Preloader extends Phaser.Scene {
 
     preload(){
         this.load.image('tileset', '../Resources/assets/level/tileset.png');
-
         //botones de los jugadores
-        
         this.load.image('botonR','../Resources/assets/level/Boton1.png');
         this.load.image('botonL','../Resources/assets/level/Boton2.png');
         this.load.image('horizontalSpawn','../Resources/assets/level/blocker6.png');

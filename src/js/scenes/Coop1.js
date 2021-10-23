@@ -1,9 +1,12 @@
-import { Player_I } from '../objects/Player_I.js'
+import { Player_I } from '../objects/Player_I.js';
+import { Skull } from '../objects/Skull.js';
 import { GamepadProcessor } from "../util/InputProcessors/GamepadProcessor.js";
 import { KeyboardProcessor } from "../util/InputProcessors/KeyboardProcessor.js";
 
 var players = [];
+var calaveras = [];
 var chocarse;
+var puntuaciones = [];
 
 export class Coop1 extends Phaser.Scene {
 
@@ -16,6 +19,7 @@ export class Coop1 extends Phaser.Scene {
     preload() {
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
         this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
+        this.load.image("calavera", "./Resources/assets/items/Calavera.png");//Current sprites from tutorial
     }
 
     create() {
@@ -46,7 +50,7 @@ export class Coop1 extends Phaser.Scene {
         var player1 = new Player_I(this, 400, 100, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
         players[0] = player1;
-        var player2 = new Player_I(this, 200, 100, "dude");
+        var player2 = new Player_I(this, 100, 100, "dude");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
 
@@ -59,27 +63,27 @@ export class Coop1 extends Phaser.Scene {
         this.physics.add.collider(players[0], floor);
         this.physics.add.collider(players[1], floor);
 
-        //Create the character animations (current ones are from tutorial)
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
+        
+        puntuaciones[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
+        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[0].puntos);
 
-        this.anims.create({
-            key: 'turn',
-            frames: [{ key: 'dude', frame: 4 }],
-            frameRate: 20
-        });
-
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
+        //Creación de todas las calaveras
+       calaveras.push(new Skull(this, 20, 500, "calavera"));
+       calaveras.push(new Skull(this, 20, 100, "calavera"));
+       calaveras.push(new Skull(this, 700, 100, "calavera"));
+       calaveras.push(new Skull(this, 750, 400, "calavera"));
+       calaveras.push(new Skull(this, 350, 550, "calavera"));
+        
+        for(let i = 0; i < calaveras.length; i+=1){
+            this.physics.add.collider(players[0], calaveras[i], function () {
+                calaveras[i].desaparicion(players[0]);
+                puntuaciones[0].setText("Jugador 1: "+players[0].puntos);
+            });
+            this.physics.add.collider(players[1], calaveras[i], function () {
+                calaveras[i].desaparicion(players[1]);
+                puntuaciones[1].setText("Jugador 1: "+players[1].puntos);
+            });
+        }
 
         console.log("Escena 1 creada");
     }

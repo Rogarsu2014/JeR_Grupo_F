@@ -17,7 +17,7 @@ window.onload=function (){
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
-        scene: [MenuScene,CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage],
+        scene: [CharacterTestScene, Preloader, Coop1, MenuScene,TimerTestScene, TransitionsScene, CooperativeStage],
 
 
         input: {
@@ -33,10 +33,7 @@ window.onload=function (){
                 }
             }
         }
-
     }
-
-
     var game = new Phaser.Game(config)
 }
 
