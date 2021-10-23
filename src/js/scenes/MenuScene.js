@@ -15,22 +15,25 @@ export class MenuScene extends Phaser.Scene{
     }    
 
     create(){
+        var ancho = this.game.renderer.width;
+        var alto = this.game.renderer.height;
+        
         console.log("Main menu scene test")
         var tittle;
         this.add.image(0, 0, 'sky').setOrigin(0).setDepth(0);
 
-        let selectSprite = this.add.image(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2 - 100,'star');
+        let selectSprite = this.add.image(ancho / 2 - 100, alto / 2 - 100,'star');
         selectSprite.setVisible(false)
         selectSprite.setScale(1); 
 
-        tittle = this.add.text(this.game.renderer.width / 3, this.game.renderer.height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
-        let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'play_button').setDepth(1);
-        let optionsButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, 'options_button').setDepth(1);
+        tittle = this.add.text(ancho / 3, alto * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
+        let playButton = this.add.image(ancho / 2, alto / 2, 'play_button').setDepth(1);
+        let optionsButton = this.add.image(ancho / 2, alto / 2 + 100, 'options_button').setDepth(1);
 
         playButton.setInteractive();
         playButton.on("pointerover",()=>{ 
             selectSprite.setVisible(true)
-            selectSprite.setPosition(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2)
+            selectSprite.setPosition(ancho / 2 - 100, alto / 2)
             console.log("Boton para Jugar")})
 
         playButton.on("pointerout",()=>{ 
@@ -40,7 +43,7 @@ export class MenuScene extends Phaser.Scene{
         optionsButton.setInteractive();
         optionsButton.on("pointerover",()=>{ 
             selectSprite.setVisible(true)
-            selectSprite.setPosition(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2 + 100)
+            selectSprite.setPosition(ancho / 2 - 100, alto / 2 + 100)
             console.log("Boton de Opciones")})
             
         optionsButton.on("pointerout",()=>{ 

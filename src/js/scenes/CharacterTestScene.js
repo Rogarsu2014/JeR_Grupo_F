@@ -37,7 +37,7 @@ export class CharacterTestScene extends Phaser.Scene {
         });
 
         puntuaciones[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
-        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[0].puntos);
+        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].puntos);
 
         //Creación de todas las calaveras
        calaveras.push(new Skull(this, 300, 600, "calavera"));

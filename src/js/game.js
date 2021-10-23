@@ -4,6 +4,7 @@ import {CharacterTestScene} from './scenes/CharacterTestScene.js'
 import {TimerTestScene} from "./scenes/TimerTestScene.js";
 import {CooperativeStage} from "./scenes/CooperativeStage.js";
 import {MenuScene} from "./scenes/MenuScene.js";
+import {FinPartida} from "./scenes/FinPartida.js";
 
 import  {Preloader} from "./util/Preloader.js"
 import {Coop1} from "./scenes/Coop1.js";
@@ -17,7 +18,7 @@ window.onload=function (){
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
-        scene: [CharacterTestScene, Preloader, Coop1, MenuScene,TimerTestScene, TransitionsScene, CooperativeStage],
+        scene: [FinPartida, CharacterTestScene, Preloader, Coop1, MenuScene,TimerTestScene, TransitionsScene, CooperativeStage],
 
 
         input: {
