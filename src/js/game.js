@@ -21,7 +21,7 @@ window.onload=function (){
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
         
-        scene: [MenuScene,CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage],
+        scene: [Preloader,CooperativeStage,Coop1,MenuScene,CharacterTestScene,TimerTestScene, TransitionsScene],
 
         input: {
             gamepad: true
@@ -31,9 +31,9 @@ window.onload=function (){
             default: "arcade",
             arcade: {
                 gravity: {
-                    y: 300,
-                    debug: true
-                }
+                    y: 300
+                },
+                debug: true
             }
         }
 
