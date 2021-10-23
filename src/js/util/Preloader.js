@@ -1,4 +1,5 @@
-import { Coop1 } from '../scenes/Coop1.js'
+//import { Coop1 } from '../scenes/Coop1.js'
+//import {CharacterTestScene} from './scenes/CharacterTestScene.js'
 
 //Esta escena es para precargar assets, 
 //el create tiene que ir a game, por lo que hace falta importarlo, lo tengo ahora al coop1 para testear ~ Pablo
@@ -17,10 +18,19 @@ export class Preloader extends Phaser.Scene {
         this.load.image('horizontal','../Resources/assets/level/blocker2.png');
         this.load.image('1x1','../Resources/assets/level/blocker1.png');
         this.load.image('door','../Resources/assets/level/Door.png');
+
+        //Prueba
+        this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
+        this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
+        this.load.image("calavera", "./Resources/assets/items/Calavera.png");//Current sprites from tutorial
+        this.load.audio("puntos+", "./Resources/assets/sounds/puntos.mp3");//https://www.youtube.com/watch?v=SoeT6x0O-CM
+        this.load.audio("dano", "./Resources/assets/sounds/dano.mp3");//https://www.youtube.com/watch?v=dLED_gBGQsk
+        this.load.image("trampa", "./Resources/assets/items/trampa.png");
+
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('Coop1');
+        this.scene.start('CharacterTestScene');
     }
 
 }

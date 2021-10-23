@@ -5,7 +5,6 @@ import {TimerTestScene} from "./scenes/TimerTestScene.js";
 import {CooperativeStage} from "./scenes/CooperativeStage.js";
 import {MenuScene} from "./scenes/MenuScene.js";
 import {FinPartida} from "./scenes/FinPartida.js";
-
 import  {Preloader} from "./util/Preloader.js"
 import {Coop1} from "./scenes/Coop1.js";
 
@@ -18,7 +17,7 @@ window.onload=function (){
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
-        scene: [FinPartida, CharacterTestScene, Preloader, Coop1, MenuScene,TimerTestScene, TransitionsScene, CooperativeStage],
+        scene: [Preloader, CharacterTestScene, Coop1, FinPartida, MenuScene,TimerTestScene, TransitionsScene, CooperativeStage],
 
 
         input: {
@@ -30,10 +29,11 @@ window.onload=function (){
             arcade: {
                 gravity: {
                     y: 300,
-                    debug: true
+                    
                 }
-            }
-        },
+            },
+            debug: true
+        }
     }
 
     var game = new Phaser.Game(config)
