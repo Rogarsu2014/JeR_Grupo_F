@@ -18,6 +18,7 @@ export class CharacterTestScene extends Phaser.Scene {
     preload() {
         this.load.spritesheet("dude", "./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
         this.load.image("calavera", "./Resources/assets/items/Calavera.png");
+        this.load.image("trampa", "./Resources/assets/items/trampa.png");
     }
     create() {
         console.log("Character Test Scene created");
@@ -53,7 +54,16 @@ export class CharacterTestScene extends Phaser.Scene {
                 puntuaciones[1].setText("Jugador 1: "+players[1].puntos);
             });
         }
-                
+            
+        var trampa = new Trampa(this, 600, 600, "trampa");
+        this.physics.add.collider(players[0], trampa, function () {
+            trampa.dañar(players[0]);
+            puntuaciones[0].setText("Jugador 1: "+players[0].puntos);
+        });
+        this.physics.add.collider(players[1], trampa, function () {
+            trampa.dañar(players[1]);
+            puntuaciones[1].setText("Jugador 1: "+players[1].puntos);
+        });
     }
 
     update() {
