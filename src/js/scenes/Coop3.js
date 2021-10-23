@@ -31,9 +31,9 @@ export class Coop3 extends Phaser.Scene{
         let platArr1 =  this.physics.add.staticGroup();
         platArr1.create(320,224,'1x1').setOrigin(0,0);
         let platArr2 =  this.physics.add.staticGroup();
-        platArr2.create(768,288,'horizonta3x1').setOrigin(0,0);
+        platArr2.create(768,288,'horizontal3x1').setOrigin(0,0);
         let platAbj =  this.physics.add.staticGroup();
-        platAbj.create(704,352,'vertical1-5').setOrigin(0,0);
+        platAbj.create(704,352,'vertical1x1-5').setOrigin(0,0);
         let butIniArr = this.add.image(256,224,'botonR').setOrigin(0,0);
         let butIniAbj = this.add.image(320,448,'botonL').setOrigin(0,0);
 
@@ -87,8 +87,8 @@ export class Coop3 extends Phaser.Scene{
         /*butIniArr.setVisible(false);
         let butAbj2 = this.add.image(768,512,'botonL').setOrigin(0,0);
         plat =  this.physics.add.staticGroup();
-        plat.create(448,448,'horizontalSpawn').setOrigin(0,0);
-        plat.create(64,0,'vertical4-5').setOrigin(0,0);*/
+        plat.create(448,448,'horizontal4x1').setOrigin(0,0);
+        plat.create(64,0,'vertical1x4-5').setOrigin(0,0);*/
 
         //Botón de abajo pulsado
         
