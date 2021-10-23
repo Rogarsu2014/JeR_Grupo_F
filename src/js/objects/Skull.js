@@ -11,6 +11,7 @@ export class Skull extends Phaser.Physics.Arcade.Sprite {
         this.context= scene;
         this.spriteKey = spriteKey;
         this.puntos = 100;
+        this.music = this.context.sound.add("puntos+", this.context.game.config.musicConfig);
     }
     init() {
 
@@ -25,6 +26,7 @@ export class Skull extends Phaser.Physics.Arcade.Sprite {
         
     }
     desaparicion(jugador){
+        this.music.play();
         jugador.sumarPuntos(this.puntos);
         this.destroy();
     }

@@ -32,8 +32,18 @@ window.onload=function (){
                     debug: true
                 }
             }
-        }
+        },
     }
+
     var game = new Phaser.Game(config)
+    game.config.musicConfig = {
+        mute: false,
+        volume: 0.1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: false,
+        delay: 0
+    }
 }
 

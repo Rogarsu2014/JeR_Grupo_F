@@ -19,6 +19,8 @@ export class CharacterTestScene extends Phaser.Scene {
         this.load.spritesheet("dude", "./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
         this.load.image("calavera", "./Resources/assets/items/Calavera.png");
         this.load.image("trampa", "./Resources/assets/items/trampa.png");
+        this.load.audio("puntos+", "./Resources/assets/sounds/puntos.mp3");//https://www.youtube.com/watch?v=SoeT6x0O-CM
+        this.load.audio("dano", "./Resources/assets/sounds/dano.mp3");//https://www.youtube.com/watch?v=dLED_gBGQsk
     }
     create() {
         console.log("Character Test Scene created");

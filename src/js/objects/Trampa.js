@@ -13,6 +13,7 @@ export class Trampa extends Phaser.Physics.Arcade.Sprite {
         this.context = scene;
         this.spriteKey = spriteKey;
         this.puntos = -50;
+        this.music = this.context.sound.add("dano", this.context.game.config.musicConfig);
     }
     init() {
 
@@ -28,6 +29,7 @@ export class Trampa extends Phaser.Physics.Arcade.Sprite {
     }
     dañar(jugador) {
         jugador.sumarPuntos(this.puntos);
+        this.music.play();
         jugador.setPosition(jugador.position);
         jugador.body.moves = false;
         var timer = new Timer(this.context, 2000, () => jugador.body.moves = true);
