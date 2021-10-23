@@ -1,8 +1,6 @@
-import {SampleScene} from './scenes/SampleScene.js'
 import {TransitionsScene} from './scenes/TransitionsScene.js'
 import {CharacterTestScene} from './scenes/CharacterTestScene.js'
 import {TimerTestScene} from "./scenes/TimerTestScene.js";
-import {CooperativeStage} from "./scenes/CooperativeStage.js";
 import {MenuScene} from "./scenes/MenuScene.js";
 import {FinPartida} from "./scenes/FinPartida.js";
 import  {Preloader} from "./util/Preloader.js"
@@ -19,7 +17,9 @@ window.onload=function (){
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
 
-        scene: [Preloader, CharacterTestScene, Coop1, FinPartida, MenuScene,TimerTestScene, TransitionsScene, CooperativeStage],
+        //Carga de escenas
+        // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
+        scene: [Preloader, CharacterTestScene, Coop1, FinPartida, MenuScene,TimerTestScene, TransitionsScene],
 
 
         input: {
@@ -30,6 +30,7 @@ window.onload=function (){
             default: "arcade",
             arcade: {
                 gravity: {
+
                     y: 300,
                     
                 }
