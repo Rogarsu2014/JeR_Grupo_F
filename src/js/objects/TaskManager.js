@@ -20,9 +20,9 @@ export class TaskManager {
                 let timerTween=context.tweens.add({
                     targets: pointsCounter[playerIndex],
                     paused:true,
-                    scaleX:1.3,
+                    scaleX:.9,
                     ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                    duration: 250,
+                    duration: 100,
                     yoyo:true,
                     repeat: 0,            // -1: infinity
                 });

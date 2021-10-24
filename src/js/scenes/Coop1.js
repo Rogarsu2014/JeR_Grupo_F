@@ -82,8 +82,8 @@ export class Coop1 extends Phaser.Scene {
         players[0].points = data.jug1;
         players[1].points = data.jug2;
         ///******* players points
-        puntuaciones[0] = this.add.text(30, 0, "Jugador 1: " + players[0].points);
-        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: " + players[1].points);
+        puntuaciones[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points).setOrigin(.5,.5);
+        puntuaciones[1] = this.add.text(790+60+30, 32, "Jugador 2: " + players[1].points).setOrigin(.5,.5);
 
         //*************** buttons
         var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
@@ -116,7 +116,7 @@ export class Coop1 extends Phaser.Scene {
             targets: this.timerText,
             paused:true,
             scale:1.3,
-            ease: 'Bounce.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            ease: 'Elastic.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
             duration: 250,
             yoyo:true,
             repeat: 0,            // -1: infinity
