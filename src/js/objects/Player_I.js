@@ -1,7 +1,7 @@
 import { Timer } from "../util/Timer.js";
 
 export class Player_I extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, spriteKey, puntos = 0) {
+    constructor(scene, x, y, spriteKey, points = 0) {
         super(scene, x, y, spriteKey);
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -14,7 +14,7 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
         this.setScale(0.07);
         this.context= scene;
         this.spriteKey = spriteKey;
-        this.puntos = puntos;
+        this.points = points;
         this.position = (x, y);
 
 

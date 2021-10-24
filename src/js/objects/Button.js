@@ -22,6 +22,7 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
     }
 
     removeCollider(){
-        this.body.destroy()
+        // this.body.destroy()
+        this.disableBody()
     }
 }
