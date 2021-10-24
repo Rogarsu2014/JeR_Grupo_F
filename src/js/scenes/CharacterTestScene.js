@@ -76,7 +76,7 @@ export class CharacterTestScene extends Phaser.Scene {
         players[1].update(chocarse, players[0]);
         chocarse = false;
         if(contador == 0){
-            this.scene.start("Coop1", {jug1:players[0].puntos, jug2:players[1].puntos});
+            this.scene.start("Coop2", {jug1:players[0].puntos, jug2:players[1].puntos});
         }
     }
 }
