@@ -11,6 +11,7 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
         this.setBounce(0.2);
         //Make the player collide with the screen borderd
         this.setCollideWorldBounds(true);
+        this.setScale(0.07);
         this.context= scene;
         this.spriteKey = spriteKey;
         this.puntos = puntos;
@@ -20,20 +21,20 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
          //Create the character animations (current ones are from tutorial)
          this.context.anims.create({
             key: 'left' + this.spriteKey,
-            frames: this.anims.generateFrameNumbers(this.spriteKey, { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers(this.spriteKey, { start: 0, end: 6 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.context.anims.create({
             key: 'turn' + this.spriteKey,
-            frames: [{ key: this.spriteKey, frame: 4 }],
+            frames: [{ key: this.spriteKey, frame: 7 }],
             frameRate: 20
         });
 
         this.context.anims.create({
             key: 'right' + this.spriteKey,
-            frames: this.anims.generateFrameNumbers(this.spriteKey, { start: 5, end: 8 }),
+            frames: this.anims.generateFrameNumbers(this.spriteKey, { start: 8, end: 14 }),
             frameRate: 10,
             repeat: -1
         });

@@ -27,13 +27,13 @@ window.onload=function (){
             gamepad: true
         },
 
-        physics: {
-            debug: true, 
+        physics: { 
             default: "arcade",
             arcade: {
                 gravity: {
                     y: 300,
-                }
+                },
+                debug: true
             },
         },
     }

@@ -41,7 +41,7 @@ export class Coop1 extends Phaser.Scene {
         const map = this.make.tilemap({ key: 'Coop1Map' });
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
-        map.createStaticLayer('Background', tileset);
+        map.createLayer('Background', tileset);
 
         // ************** platforms
         this.platforms=[]
@@ -54,7 +54,7 @@ export class Coop1 extends Phaser.Scene {
         var platform4 = new Platform(this, 384, 384, '1x1', 0, 64)
         this.platforms.push(platform4)
 
-        const floor = map.createStaticLayer('Level', tileset);
+        const floor = map.createLayer('Level', tileset);
 
         floor.setCollisionByProperty({ collides: true });
 
