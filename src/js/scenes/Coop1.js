@@ -45,11 +45,11 @@ export class Coop1 extends Phaser.Scene {
 
         // ************** platforms
         this.platforms=[]
-        var platform1= new Platform(this, 896, 128, '1x1', -64*4, 0)
+        var platform1= new Platform(this, 896, 128, 'horizontal4x1', -64*4, 0)
         this.platforms.push(platform1)
-        var platform2= new Platform(this, 768, 448, '1x1', -64*4, 0)
+        var platform2= new Platform(this, 768, 448, 'horizontal4x1', -64*4, 0)
         this.platforms.push(platform2)
-        var platform3 = new Platform(this, 192, 256, '1x1', -64*2, 0)
+        var platform3 = new Platform(this, 192, 256, 'horizontal2x1', -64*2, 0)
         this.platforms.push(platform3)
         var platform4 = new Platform(this, 384, 384, '1x1', 0, 64)
         this.platforms.push(platform4)

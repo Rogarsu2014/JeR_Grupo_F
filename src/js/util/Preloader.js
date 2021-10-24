@@ -1,6 +1,8 @@
 import { Coop1 } from '../scenes/Coop1.js'
 import { Coop2 } from '../scenes/Coop2.js'
 import { Coop3 } from '../scenes/Coop3.js'
+import { Comp1 } from '../scenes/Comp1.js'
+
 
 
 //Esta escena es para precargar assets, 
@@ -13,15 +15,20 @@ export class Preloader extends Phaser.Scene {
 
     preload(){
         this.load.image('tileset', '../Resources/assets/level/tileset.png');
+        this.load.image('tileset2', '../Resources/assets/level/tileset2.png');
+        this.load.image('tileset3', '../Resources/assets/level/tileset3.png');
         //botones de los jugadores
         this.load.image('botonR','../Resources/assets/level/Boton1.png');
+        this.load.image('botonRP','../Resources/assets/level/Boton1Puls.png');
         this.load.image('botonL','../Resources/assets/level/Boton2.png');
+        this.load.image('botonLP','../Resources/assets/level/Boton2Puls.png');
+        //plataformas móviles
         this.load.image('1x1','../Resources/assets/level/blocker1 1x1.png');
-        this.load.image('horizontal','../Resources/assets/level/blocker2 2x1.png');
-        this.load.image('horizonta3x1','../Resources/assets/level/blocker3 3x1.png');
-        this.load.image('horizontalSpawn','../Resources/assets/level/blocker6 4x1.png');
-        this.load.image('vertical1-5','../Resources/assets/level/blocker7 1x1-5.png');
-        this.load.image('vertical4-5','../Resources/assets/level/blocker8 1x4-5.png');
+        this.load.image('horizontal2x1','../Resources/assets/level/blocker2 2x1.png');
+        this.load.image('horizontal3x1','../Resources/assets/level/blocker3 3x1.png');
+        this.load.image('horizontal4x1','../Resources/assets/level/blocker6 4x1.png');
+        this.load.image('vertical1x1-5','../Resources/assets/level/blocker7 1x1-5.png');
+        this.load.image('vertical1x4-5','../Resources/assets/level/blocker8 1x4-5.png');
         this.load.image('door','../Resources/assets/level/Door.png');
 
         //Prueba
