@@ -6,6 +6,7 @@ import {TaskManager} from "../objects/TaskManager.js";
 import {Button} from "../objects/Button.js";
 import {Platform} from "../objects/Platform.js";
 import {Timer} from "../util/Timer.js";
+import {Door} from "../objects/Door.js";
 
 
 var players = [];
@@ -25,19 +26,25 @@ export class Coop1 extends Phaser.Scene {
     }
 
     init() {
+
         this.timer = new Timer(this, 5000)
 
-        this.taskManager = new TaskManager(4, [1, 0, 1, 0], () => console.log("All tasks completed"), this.timer, players, 500, puntuaciones);
+        this.taskManager = new TaskManager(this,4, [1, 0, 1, 0], () => {
+            console.log("All tasks completed");
+            door.open()
+        }, this.timer, players, 500, puntuaciones,this.timerText);
 
         this.timer.onComplete(() => {
             console.log(
                 this.taskManager.getPlayerWithMoreTasksCompleted()
             );
+            this.timer.pauseTimer();
         })
     }
 
     preload() {
     }
+
 
     create(data) {
 
@@ -60,8 +67,10 @@ export class Coop1 extends Phaser.Scene {
 
         ///************** floor
         const floor = map.createStaticLayer('Level', tileset);
-
         floor.setCollisionByProperty({collides: true});
+
+        //**************** door
+        door = new Door(this, 64, 448, 'door')
 
         ///************** players
         var player1 = new Player_I(this, 928, 64, "dude");
@@ -99,16 +108,34 @@ export class Coop1 extends Phaser.Scene {
 
         //*************** timer
         this.timer.startTimer();
-        this.timerText = this.add.text(this.game.config.width * 0.5, 20, 'test');
+        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {
+            fontSize: '40px'
+        }).setOrigin(0.5,0.5);
+
+        let timerTween=this.tweens.add({
+            targets: this.timerText,
+            paused:true,
+            scale:1.3,
+            ease: 'Bounce.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 250,
+            yoyo:true,
+            repeat: 0,            // -1: infinity
+        });
+
+        this.taskManager.setOnTaskCompletedTween(timerTween)
+
 
         ///************** collisions
+        //***** door and players
+        this.physics.add.collider(players[0], door, () => door.playerEntered(players[0]))
+        this.physics.add.collider(players[1], door, () => door.playerEntered(players[1]))
+        //***** between players
         this.physics.add.collider(players[0], players[1], function () {
             chocarse = true;
         });
-        this.physics.add.collider(players[0], floor);
-        this.physics.add.collider(players[1], floor);
+        //***** players and floor
         this.addStageFloorCollisions(floor);
-
+        //**** players and platforms
         this.setPlatformsColliders();
 
         console.log("Escena 1 creada");
@@ -133,6 +160,12 @@ export class Coop1 extends Phaser.Scene {
         for (let i = 0; i < this.platforms.length; i++) {
             this.physics.add.collider(players[0], this.platforms[i], () => console.log("over platform"))
             this.physics.add.collider(players[1], this.platforms[i], () => console.log("over platform"))
+        }
+    }
+
+    setPlayerDoorInteraction() {
+        for (let i = 0; i < players.length; i++) {
+            this.physics.add.collider(players[i], door.playerEntered(players[i]))
         }
     }
 

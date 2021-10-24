@@ -32,7 +32,11 @@ export class Timer extends Phaser.Time.TimerEvent{
     }
 
 
-    addSeconds(seconds) {
+    addSeconds(seconds, callback=null) {
         this.event.delay+=seconds
+
+        if(callback!=null){
+            callback();
+        }
     }
 }
