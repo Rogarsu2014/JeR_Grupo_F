@@ -26,17 +26,15 @@ window.onload=function (){
             gamepad: true
         },
 
-        physics: {
+        physics: { 
             default: "arcade",
             arcade: {
                 gravity: {
-
                     y: 300,
-                    
                 },
                 debug: true
-            }
-        }
+            },
+        },
     }
 
     var game = new Phaser.Game(config)
