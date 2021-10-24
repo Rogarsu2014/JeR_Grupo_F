@@ -1,7 +1,7 @@
-import { Player_I } from '../objects/Player_I.js';
-import { Skull } from '../objects/Skull.js';
-import { GamepadProcessor } from "../util/InputProcessors/GamepadProcessor.js";
-import { KeyboardProcessor } from "../util/InputProcessors/KeyboardProcessor.js";
+import {Player_I} from '../objects/Player_I.js';
+import {Skull} from '../objects/Skull.js';
+import {GamepadProcessor} from "../util/InputProcessors/GamepadProcessor.js";
+import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
 import {TaskManager} from "../objects/TaskManager.js";
 import {Button} from "../objects/Button.js";
 import {Platform} from "../objects/Platform.js";
@@ -12,7 +12,10 @@ var players = [];
 var calaveras = [];
 var chocarse;
 var puntuaciones = [];
+var door;
 
+/// Player 1 is upper layer player.
+/// Player 2 is down layer player
 
 export class Coop1 extends Phaser.Scene {
 
@@ -21,102 +24,96 @@ export class Coop1 extends Phaser.Scene {
         super("Coop1");
     }
 
-    init(){
-        this.timer= new Timer(this,20000,()=>console.log("completed"))
+    init() {
+        this.timer = new Timer(this, 5000)
 
-        this.taskManager = new TaskManager(4, ["J1", "J2", "J1", "J2"], [
-            () => this.timer.addSeconds(5000),
-            () => this.timer.addSeconds(5000),
-            () => this.timer.addSeconds(5000),
-            () => this.timer.addSeconds(5000)
-        ], () => console.log("All tasks completed"));
+        this.taskManager = new TaskManager(4, [1, 0, 1, 0], () => console.log("All tasks completed"), this.timer, players, 500, puntuaciones);
+
+        this.timer.onComplete(() => {
+            console.log(
+                this.taskManager.getPlayerWithMoreTasksCompleted()
+            );
+        })
     }
+
     preload() {
     }
 
     create(data) {
 
-
-        
-        const map = this.make.tilemap({ key: 'Coop1Map' });
+        //*************** tilemap
+        const map = this.make.tilemap({key: 'Coop1Map'});
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
         map.createStaticLayer('Background', tileset);
 
         // ************** platforms
-        this.platforms=[]
-        var platform1= new Platform(this, 896, 128, 'horizontal4x1', -64*4, 0)
+        this.platforms = []
+        var platform1 = new Platform(this, 896, 128, '1x1', -64 * 4, 0)
         this.platforms.push(platform1)
-        var platform2= new Platform(this, 768, 448, 'horizontal4x1', -64*4, 0)
+        var platform2 = new Platform(this, 768, 448, '1x1', -64 * 4, 0)
         this.platforms.push(platform2)
-        var platform3 = new Platform(this, 192, 256, 'horizontal2x1', -64*2, 0)
+        var platform3 = new Platform(this, 192, 256, '1x1', -64 * 2, 0)
         this.platforms.push(platform3)
         var platform4 = new Platform(this, 384, 384, '1x1', 0, 64)
         this.platforms.push(platform4)
 
+        ///************** floor
         const floor = map.createStaticLayer('Level', tileset);
 
-        floor.setCollisionByProperty({ collides: true });
+        floor.setCollisionByProperty({collides: true});
 
+        ///************** players
         var player1 = new Player_I(this, 928, 64, "dude");
-        player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
+        player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
         players[0] = player1;
         var player2 = new Player_I(this, 820, 384, "dude");
-        player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
+        player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
         players[1] = player2;
-        players[0].puntos = data.jug1;
-        players[1].puntos = data.jug2;
+        players[0].points = data.jug1;
+        players[1].points = data.jug2;
+        ///******* players points
+        puntuaciones[0] = this.add.text(30, 0, "Jugador 1: " + players[0].points);
+        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: " + players[1].points);
 
-        this.physics.add.collider(players[0], players[1], function(){
+        //*************** buttons
+        var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
+            platform2.enable();
+            this.taskManager.taskCompleted()
+        }, players[0]);
+
+        var button2_P1 = new Button(this, 360, 443 + 128, 'botonL', () => {
+            platform4.enable();
+            this.taskManager.taskCompleted()
+        }, players[0]);
+
+        var button1_P2 = new Button(this, 780, 443, 'botonR', () => {
+            platform1.enable();
+            this.taskManager.taskCompleted()
+        }, players[1]);
+
+        var button2_P2 = new Button(this, 480, 443, 'botonR', () => {
+            platform3.enable();
+            this.taskManager.taskCompleted();
+        }, players[1]);
+
+        //*************** timer
+        this.timer.startTimer();
+        this.timerText = this.add.text(this.game.config.width * 0.5, 20, 'test');
+
+        ///************** collisions
+        this.physics.add.collider(players[0], players[1], function () {
             chocarse = true;
         });
         this.physics.add.collider(players[0], floor);
         this.physics.add.collider(players[1], floor);
-        
-        puntuaciones[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
-        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].puntos);
-
-        
-        var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
-            platform2.enable();
-            this.taskManager.taskCompleted();
-            button1_P1.setVisible(false);
-            var button1_P1P = new Button(this, 478, 96, 'botonLP');
-        }, players[0]);
-
-        var button2_P1 = new Button(this, 360, 443 + 128, 'botonL',  () => {
-            platform4.enable();
-            this.taskManager.taskCompleted();
-            button2_P1.setVisible(false);
-            var button2_P1P = new Button(this, 358, 443 + 101, 'botonLP');
-        }, players[0]);
-
-        var button1_P2 = new Button(this, 780, 443, 'botonR',  () => {
-            platform1.enable();
-            this.taskManager.taskCompleted();
-            button1_P2.setVisible(false);
-            var button1_P2P = new Button(this, 778, 416, 'botonRP');
-        }, players[1]);
-
-        var button2_P2 = new Button(this, 480, 443, 'botonR',  () => {
-            platform3.enable();
-            this.taskManager.taskCompleted();
-            button2_P2.setVisible(false);
-            var button2_P2P = new Button(this, 478, 416, 'botonRP');
-        }, players[1]);
-
-
         this.addStageFloorCollisions(floor);
 
         this.setPlatformsColliders();
 
-        this.timer.startTimer();
-        this.timerText= this.add.text(this.game.config.width *0.5, 20,'test');
-
         console.log("Escena 1 creada");
     }
 
-  
     update() {
         players[0].update(chocarse, players[1]);
         players[1].update(chocarse, players[0]);
@@ -126,11 +123,16 @@ export class Coop1 extends Phaser.Scene {
         this.UpdatePlatforms();
     }
 
-    setPlatformsColliders(){
+
+    addPointsToPlayer(playerIndex, points) {
+        players[0].puntos += points;
+    }
+
+    setPlatformsColliders() {
 
         for (let i = 0; i < this.platforms.length; i++) {
-            this.physics.add.collider(players[0],  this.platforms[i],()=>console.log("over platform" ))
-            this.physics.add.collider(players[1],  this.platforms[i],()=>console.log("over platform" ))
+            this.physics.add.collider(players[0], this.platforms[i], () => console.log("over platform"))
+            this.physics.add.collider(players[1], this.platforms[i], () => console.log("over platform"))
         }
     }
 
@@ -140,8 +142,7 @@ export class Coop1 extends Phaser.Scene {
     }
 
 
-
-    UpdatePlatforms(){
+    UpdatePlatforms() {
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }

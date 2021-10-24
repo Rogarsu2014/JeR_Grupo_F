@@ -1,17 +1,22 @@
 import {Task} from "./Task.js";
 
 export class TaskManager {
-    constructor(taskCount, playersOrder,onCompletedCallbacks, onAllCompleted) {
+    constructor(taskCount, playersOrder, onAllCompleted,timer, players, onCompletedPoints, pointsCounter) {
         this.tasks =[];
         this.onAllCompleted=onAllCompleted;
         this.playerCompletedTasksCount= {}
 
         for (let i = 0; i < taskCount; i++) {
 
-            if(this.playerCompletedTasksCount[playersOrder[i]]===undefined)
-                this.playerCompletedTasksCount[playersOrder[i]]=0;
+            let playerIndex=playersOrder[i];
+            if(this.playerCompletedTasksCount[playerIndex]===undefined)
+                this.playerCompletedTasksCount[playerIndex]=0;
 
-            this.tasks.push(new Task(playersOrder[i],onCompletedCallbacks[i]));
+            this.tasks.push(new Task(playersOrder[i],()=>{
+                timer.addSeconds(5000);
+                players[playerIndex].points += onCompletedPoints;
+                pointsCounter[playerIndex].setText( "Jugador"+(playerIndex+1)+ ": "+ players[playerIndex].points)
+            }));
         }
 
         this.taskIndex=-1
