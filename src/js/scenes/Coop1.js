@@ -45,11 +45,11 @@ export class Coop1 extends Phaser.Scene {
 
         // ************** platforms
         this.platforms=[]
-        var platform1= new Platform(this, 896, 128, '1x1', -64*4, 0)
+        var platform1= new Platform(this, 896, 128, 'horizontal4x1', -64*4, 0)
         this.platforms.push(platform1)
-        var platform2= new Platform(this, 768, 448, '1x1', -64*4, 0)
+        var platform2= new Platform(this, 768, 448, 'horizontal4x1', -64*4, 0)
         this.platforms.push(platform2)
-        var platform3 = new Platform(this, 192, 256, '1x1', -64*2, 0)
+        var platform3 = new Platform(this, 192, 256, 'horizontal2x1', -64*2, 0)
         this.platforms.push(platform3)
         var platform4 = new Platform(this, 384, 384, '1x1', 0, 64)
         this.platforms.push(platform4)
@@ -79,22 +79,30 @@ export class Coop1 extends Phaser.Scene {
         
         var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
             platform2.enable();
-            this.taskManager.taskCompleted()
+            this.taskManager.taskCompleted();
+            button1_P1.setVisible(false);
+            var button1_P1P = new Button(this, 478, 96, 'botonLP');
         }, players[0]);
 
         var button2_P1 = new Button(this, 360, 443 + 128, 'botonL',  () => {
             platform4.enable();
-            this.taskManager.taskCompleted()
+            this.taskManager.taskCompleted();
+            button2_P1.setVisible(false);
+            var button2_P1P = new Button(this, 358, 443 + 101, 'botonLP');
         }, players[0]);
 
         var button1_P2 = new Button(this, 780, 443, 'botonR',  () => {
             platform1.enable();
-            this.taskManager.taskCompleted()
+            this.taskManager.taskCompleted();
+            button1_P2.setVisible(false);
+            var button1_P2P = new Button(this, 778, 416, 'botonRP');
         }, players[1]);
 
         var button2_P2 = new Button(this, 480, 443, 'botonR',  () => {
             platform3.enable();
             this.taskManager.taskCompleted();
+            button2_P2.setVisible(false);
+            var button2_P2P = new Button(this, 478, 416, 'botonRP');
         }, players[1]);
 
 
