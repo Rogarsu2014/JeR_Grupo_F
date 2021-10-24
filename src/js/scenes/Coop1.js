@@ -45,7 +45,7 @@ export class Coop1 extends Phaser.Scene {
     preload() {
     }
 
-
+    create(data){
         //this.physics.world.setFPS(120);
         
         const map = this.make.tilemap({ key: 'Coop1Map' });
@@ -86,25 +86,6 @@ export class Coop1 extends Phaser.Scene {
         puntuaciones[1] = this.add.text(790+60+30, 32, "Jugador 2: " + players[1].points).setOrigin(.5,.5);
 
         //*************** buttons
-        // var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
-        //     platform2.enable();
-        //     this.taskManager.taskCompleted()
-        // }, players[0]);
-        //
-        // var button2_P1 = new Button(this, 360, 443 + 128, 'botonL', () => {
-        //     platform4.enable();
-        //     this.taskManager.taskCompleted()
-        // }, players[0]);
-        //
-        // var button1_P2 = new Button(this, 780, 443, 'botonR', () => {
-        //     platform1.enable();
-        //     this.taskManager.taskCompleted()
-        // }, players[1]);
-        //
-        // var button2_P2 = new Button(this, 480, 443, 'botonR', () => {
-        //     platform3.enable();
-        //     this.taskManager.taskCompleted();
-        // }, players[1]);
         var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
             platform2.enable();
             this.taskManager.taskCompleted();

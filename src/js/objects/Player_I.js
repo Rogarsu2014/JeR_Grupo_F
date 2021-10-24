@@ -1,3 +1,4 @@
+import { cameraShake } from "../util/cameraEffects.js";
 import { Timer } from "../util/Timer.js";
 
 export class Player_I extends Phaser.Physics.Arcade.Sprite {
@@ -89,7 +90,7 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
     isOnFloor() {//Optional go down key
         return this.body.onFloor();
     }
-    serEmpujado(chocarse){
+    selfPush(chocarse){
         if(chocarse == true){
             if(this.body.touching.left == true){
                 this.setAccelerationX(100000);
@@ -104,7 +105,7 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
             
         }
     }
-    sumarPuntos(cantidad){
+    addPoints(cantidad){
         this.puntos += cantidad;
     }
 }

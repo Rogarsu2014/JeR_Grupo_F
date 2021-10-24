@@ -31,7 +31,7 @@ export class KeyboardProcessor extends InputProcessor {
         }
         if (this.empujar.isDown)//Move left
         {
-            jugador.serEmpujado(chocarse);
+            jugador.selfPush(chocarse);
         }
         if (this.jumpButton.isDown)
         {
