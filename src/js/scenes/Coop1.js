@@ -36,7 +36,7 @@ export class Coop1 extends Phaser.Scene {
 
     create(data) {
 
-
+        //this.physics.world.setFPS(120);
         
         const map = this.make.tilemap({ key: 'Coop1Map' });
         const tileset = map.addTilesetImage('Tileset', 'tileset');
