@@ -38,24 +38,16 @@ export class Coop2 extends Phaser.Scene{
 
         map.createStaticLayer('Background', tileset);
 
-        // ************** platforms 512,384,'1x1').setOrigin(0,0);
+        // ************** platforms
         this.platforms=[];
         var platform1= new Platform(this, 448, 448,  '1x1', 64, -64)
         this.platforms.push(platform1)
 
         const floor = map.createStaticLayer('Level', tileset);
 
-        floor.setCollisionByProperty({ collides: true });
+        floor.setCollisionByProperty({ collides: true });    
 
-        //let plat;
-        //let door;
-
-        //faltan colisiones con el pj, son estilo;
-        // this.physics.add.collider(player, obj);
-
-        //let butIniArriba = this.add.image(384,384,'botonR').setOrigin(0,0);       
-
-        //Create the character at 0,0 and change its origin
+        //Creacion de pjs
         var player1 = new Player_I(this, 100, 500, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
         players[0] = player1;
@@ -138,17 +130,6 @@ export class Coop2 extends Phaser.Scene{
         chocarse = false;
         this.timerText.setText(this.timer.getRemainingSeconds(true));
         this.UpdatePlatforms();
-
-    //Añadir colisiones con los botones, lo que va debajo es lo que genera cada boton
-            //Se pulsa el boton rojo 1
-        //    butIniArriba.setVisible(false);
-        // let butAbajo = this.add.image(448,512,'botonL').setOrigin(0,0);
-        
-            //Se pulsa el boton 2
-        //   butAbajo.setVisible(false);
-        // let butFinal = this.add.image(512,320,'botonR').setOrigin(0,0);
-        // plat =  this.physics.add.staticGroup();
-        // plat.create(512,384,'1x1').setOrigin(0,0);
 
                 //Fin nivel
         //    butFinal.setVisible(false);

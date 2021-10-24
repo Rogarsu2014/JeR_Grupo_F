@@ -20,7 +20,7 @@ window.onload=function (){
 
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
-        scene: [Preloader, CharacterTestScene, Coop2, FinPartida, MenuScene,TimerTestScene, TransitionsScene],
+        scene: [Preloader, CharacterTestScene, Comp1, FinPartida, MenuScene,TimerTestScene, TransitionsScene],
 
 
         input: {

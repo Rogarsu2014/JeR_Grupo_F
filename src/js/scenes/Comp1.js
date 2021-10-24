@@ -1,9 +1,15 @@
 import {Player_I} from '../objects/Player_I.js'
+import { Skull } from '../objects/Skull.js'
 import {GamepadProcessor} from "../util/InputProcessors/GamepadProcessor.js";
 import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
+import {Button} from "../objects/Button.js";
+import {Platform} from "../objects/Platform.js";
+import {Timer} from "../util/Timer.js";
 
 var players = [];
+var calaveras = [];
 var chocarse;
+var puntuaciones = [];
 
 export class Comp1 extends Phaser.Scene{
 
@@ -11,27 +17,24 @@ export class Comp1 extends Phaser.Scene{
         super("Comp1");
     }
 
+    init(){
+        this.timer= new Timer(this,60000,()=>console.log("completed"))
+    }
+
     preload(){
         this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
-        this.load.tilemapTiledJSON('Coop2Map', '../Resources/assets/level/Comp1.json');
+        this.load.tilemapTiledJSON('Comp1Map', '../Resources/assets/level/Comp1.json');
         }
 
-    create(){
-        const map = this.make.tilemap({ key: 'Coop2Map'});
+    create(data){
+        const map = this.make.tilemap({ key: 'Comp1Map'});
+        console.log("peta preComp1Map");
         const tileset = map.addTilesetImage('TilesetComp', 'tileset2');
 
         map.createStaticLayer('Fondo', tileset);
         const floor = map.createStaticLayer('Level', tileset);
 
         floor.setCollisionByProperty({ collides: true });
-
-        //let plat;
-        //let door;
-
-        //faltan colisiones con el pj, son estilo;
-        // this.physics.add.collider(player, obj);
-
-        //let butIniArriba = this.add.image(384,384,'botonR').setOrigin(0,0);       
 
         //Create the character at 0,0 and change its origin
         var player1 = new Player_I(this, 100, 100, "dude");
@@ -40,32 +43,27 @@ export class Comp1 extends Phaser.Scene{
         var player2 = new Player_I(this, 200, 100, "dude");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
+        players[0].puntos = data.jug1;
+        players[1].puntos = data.jug2;
 
         this.physics.add.collider(players[0], players[1], function(){
             chocarse = true;
         });
-
-        //Create the character animations (current ones are from tutorial)
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'turn',
-            frames: [{ key: 'dude', frame: 4 }],
-            frameRate: 20
-        });
-
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
         
+        this.physics.add.collider(players[0], floor);
+        this.physics.add.collider(players[1], floor);
+
+        puntuaciones[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
+        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].puntos);
+
+        this.addStageFloorCollisions(floor);
+
+        this.setPlatformsColliders();
+
+        this.timer.startTimer();
+        this.timerText= this.add.text(this.game.config.width *0.5, 20,'test');
+
+
         console.log("Escena 2 creada");
     }
 
@@ -73,19 +71,28 @@ export class Comp1 extends Phaser.Scene{
         players[0].update(chocarse, players[1]);
         players[1].update(chocarse, players[0]);
         chocarse = false;
-    //Añadir colisiones con los botones, lo que va debajo es lo que genera cada boton
-            //Se pulsa el boton rojo 1
-        //    butIniArriba.setVisible(false);
-        // let butAbajo = this.add.image(448,512,'botonL').setOrigin(0,0);
-        
-            //Se pulsa el boton 2
-        //   butAbajo.setVisible(false);
-        // let butFinal = this.add.image(512,320,'botonR').setOrigin(0,0);
-        // plat =  this.physics.add.staticGroup();
-        // plat.create(512,384,'1x1').setOrigin(0,0);
+        this.timerText.setText(this.timer.getRemainingSeconds(true));
+        this.UpdatePlatforms();
+    }
 
-                //Fin nivel
-        //    butFinal.setVisible(false);
-        // this.door = this.add.image(896,448,'door').setOrigin(0,0);
+    setPlatformsColliders(){
+
+        for (let i = 0; i < this.platforms.length; i++) {
+            this.physics.add.collider(players[0],  this.platforms[i],()=>console.log("over platform" ))
+            this.physics.add.collider(players[1],  this.platforms[i],()=>console.log("over platform" ))
+        }
+    }
+
+    addStageFloorCollisions(floor) {
+        this.physics.add.collider(players[0], floor);
+        this.physics.add.collider(players[1], floor);
+    }
+
+
+
+    UpdatePlatforms(){
+        for (let i = 0; i < this.platforms.length; i++) {
+            this.platforms[i].movePlatform()
+        }
     }
 }
