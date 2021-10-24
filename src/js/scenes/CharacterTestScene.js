@@ -33,8 +33,8 @@ export class CharacterTestScene extends Phaser.Scene {
         });
 
 
-        puntuaciones[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
-        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].puntos);
+        puntuaciones[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].points);
+        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].points);
 
         //Creación de todas las calaveras
        calaveras.push(new Skull(this, 300, 600, "calavera"));
@@ -47,12 +47,12 @@ export class CharacterTestScene extends Phaser.Scene {
         for(let i = 0; i < calaveras.length; i+=1){
             this.physics.add.collider(players[0], calaveras[i], function () {
                 calaveras[i].desaparicion(players[0]);
-                puntuaciones[0].setText("Jugador 1: "+players[0].puntos);
+                puntuaciones[0].setText("Jugador 1: "+players[0].points);
                 contador--;
             });
             this.physics.add.collider(players[1], calaveras[i], function () {
                 calaveras[i].desaparicion(players[1]);
-                puntuaciones[1].setText("Jugador 2: "+players[1].puntos);
+                puntuaciones[1].setText("Jugador 2: "+players[1].points);
                 contador--;
             });
         }
@@ -60,11 +60,11 @@ export class CharacterTestScene extends Phaser.Scene {
         var trampa = new Trampa(this, 600, 600, "trampa");
         this.physics.add.collider(players[0], trampa, function () {
             trampa.dañar(players[0]);
-            puntuaciones[0].setText("Jugador 1: "+players[0].puntos);
+            puntuaciones[0].setText("Jugador 1: "+players[0].points);
         });
         this.physics.add.collider(players[1], trampa, function () {
             trampa.dañar(players[1]);
-            puntuaciones[1].setText("Jugador 2: "+players[1].puntos);
+            puntuaciones[1].setText("Jugador 2: "+players[1].points);
         });
 
 
@@ -76,7 +76,7 @@ export class CharacterTestScene extends Phaser.Scene {
         players[1].update(chocarse, players[0]);
         chocarse = false;
         if(contador == 0){
-            this.scene.start("Coop2", {jug1:players[0].puntos, jug2:players[1].puntos});
+            this.scene.start("Coop1", {jug1:players[0].points, jug2:players[1].points});
         }
     }
 }

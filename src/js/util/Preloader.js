@@ -14,6 +14,11 @@ export class Preloader extends Phaser.Scene {
     }
 
     preload(){
+
+
+        // transitions
+        this.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
+
         this.load.image('tileset', '../Resources/assets/level/tileset.png');
         this.load.image('tileset2', '../Resources/assets/level/tileset2.png');
         this.load.image('tileset3', '../Resources/assets/level/tileset3.png');
