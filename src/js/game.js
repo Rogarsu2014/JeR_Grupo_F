@@ -15,7 +15,7 @@ import {Comp2} from "./scenes/Comp2.js";
 window.onload=function (){
 
     const config = {
-        width: 1408,//960,//Cambiar el tamaño por escena
+        width: 960,//1408,//Cambiar el tamaño por escena
         height: 640,//448,//640,
         parent: "container",
         type: Phaser.AUTO,

@@ -7,7 +7,7 @@ export class Trampa extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         //Particular player object gravity
         this.setGravityY(-300);
-        //this.setScale(0.5);
+        this.setScale(0.15);
         this.setImmovable(1);
         this.setCollideWorldBounds(true);
         this.context = scene;
