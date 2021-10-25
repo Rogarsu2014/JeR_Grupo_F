@@ -21,7 +21,6 @@ export class Preloader extends Phaser.Scene {
         this.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
 
         this.load.image('tileset', '../Resources/assets/level/tileset.png');
-        this.load.image('plat', '../Resources/assets/level/escalon.png');
         //botones de los jugadores
         this.load.image('botonR','../Resources/assets/level/Boton1.png');
         this.load.image('botonRP','../Resources/assets/level/Boton1Puls.png');
@@ -35,6 +34,10 @@ export class Preloader extends Phaser.Scene {
         this.load.image('vertical1x1-5','../Resources/assets/level/blocker7 1x1-5.png');
         this.load.image('vertical1x4-5','../Resources/assets/level/blocker8 1x4-5.png');
         this.load.image('door','../Resources/assets/level/Door.png');
+        //platagormas estáticas
+        this.load.image('platS','../Resources/assets/level/escalonplano.png');
+        this.load.image('platM','../Resources/assets/level/escalonplano2.png');
+        this.load.image('platL','../Resources/assets/level/escalonplano3.png');
 
         //Prueba
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
@@ -61,8 +64,8 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('Comp2');
-        //this.scene.start('JoinScreen');
+        this.scene.start('JoinScreen');
+        //this.scene.start('Comp2');
     }
 
 }
