@@ -55,13 +55,14 @@ export class Preloader extends Phaser.Scene {
         this.load.image('star', './Resources/assets/star.png');
         this.load.image('play_button', './Resources/assets/play_button.png');
         this.load.image('options_button', './Resources/assets/options_button.png');
+        this.load.image("daia0", "./Resources/assets/items/Daia0.png");//Current sprites from tutorial
+        this.load.image("ibban", "./Resources/assets/items/Ibban.png");//Current sprites from tutorial
 
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('Coop3');
-
-
+        this.scene.start('Comp2');
+        //this.scene.start('JoinScreen');
     }
 
 }
