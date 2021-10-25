@@ -28,8 +28,6 @@ export class Coop2 extends Phaser.Scene{
     }
 
     preload(){
-        this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
-        this.load.tilemapTiledJSON('Coop2Map', '../Resources/assets/level/Coop2.json');
         }
 
     create(data){
@@ -51,7 +49,7 @@ export class Coop2 extends Phaser.Scene{
         var player1 = new Player_I(this, 100, 500, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
         players[0] = player1;
-        var player2 = new Player_I(this, 200, 500, "dude");
+        var player2 = new Player_I(this, 200, 500, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
         players[0].puntos = data.jug1;
