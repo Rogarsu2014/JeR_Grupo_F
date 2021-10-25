@@ -1,17 +1,33 @@
 import {Task} from "./Task.js";
 
 export class TaskManager {
-    constructor(taskCount, playersOrder,onCompletedCallbacks, onAllCompleted) {
+    constructor(context,taskCount, playersOrder, onAllCompleted,timer, players, onCompletedPoints, pointsCounter) {
         this.tasks =[];
         this.onAllCompleted=onAllCompleted;
         this.playerCompletedTasksCount= {}
 
         for (let i = 0; i < taskCount; i++) {
 
-            if(this.playerCompletedTasksCount[playersOrder[i]]===undefined)
-                this.playerCompletedTasksCount[playersOrder[i]]=0;
+            let playerIndex=playersOrder[i];
+            if(this.playerCompletedTasksCount[playerIndex]===undefined)
+                this.playerCompletedTasksCount[playerIndex]=0;
 
-            this.tasks.push(new Task(playersOrder[i],onCompletedCallbacks[i]));
+
+            this.tasks.push(new Task(playersOrder[i],()=>{
+                timer.addSeconds(5000);
+                players[playerIndex].points += onCompletedPoints;
+                pointsCounter[playerIndex].setText( "Jugador"+(playerIndex+1)+ ": "+ players[playerIndex].points)
+                let timerTween=context.tweens.add({
+                    targets: pointsCounter[playerIndex],
+                    paused:true,
+                    scaleX:.9,
+                    ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                    duration: 100,
+                    yoyo:true,
+                    repeat: 0,            // -1: infinity
+                });
+                timerTween.play()
+            }));
         }
 
         this.taskIndex=-1
@@ -28,7 +44,11 @@ export class TaskManager {
             this.onAllCompleted();
         }
     }
-
+    setOnTaskCompletedTween(onCompleteTween){
+        for (let i = 0; i < this.tasks.length; i++) {
+            this.tasks[i].setOnCompleteTween(onCompleteTween);
+        }
+    }
     getPlayerWithMoreTasksCompleted(){
         if(this.taskIndex!=-1)
             return this.tasks[this.taskIndex].getPlayer();
