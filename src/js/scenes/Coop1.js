@@ -7,6 +7,7 @@ import {Button} from "../objects/Button.js";
 import {Platform} from "../objects/Platform.js";
 import {Timer} from "../util/Timer.js";
 import {Door} from "../objects/Door.js";
+import {cameraFadeIn, SweepTransitionHorizontal} from "../util/cameraEffects.js";
 
 
 var players = [];
@@ -29,10 +30,10 @@ export class Coop1 extends Phaser.Scene {
 
         this.timer = new Timer(this, 5000)
 
-        this.taskManager = new TaskManager(this,4, [1, 0, 1, 0], () => {
+        this.taskManager = new TaskManager(this, 4, [1, 0, 1, 0], () => {
             console.log("All tasks completed");
             door.open()
-        }, this.timer, players, 500, puntuaciones,this.timerText);
+        }, this.timer, players, 500, puntuaciones, this.timerText);
 
         this.timer.onComplete(() => {
             console.log(
@@ -79,32 +80,18 @@ export class Coop1 extends Phaser.Scene {
         var player2 = new Player_I(this, 820, 384, "dude");
         player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
         players[1] = player2;
+
         players[0].points = data.jug1;
         players[1].points = data.jug2;
+
+        players[0].disableMovement()
+        players[1].disableMovement()
         ///******* players points
-        puntuaciones[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points).setOrigin(.5,.5);
-        puntuaciones[1] = this.add.text(790+60+30, 32, "Jugador 2: " + players[1].points).setOrigin(.5,.5);
+        puntuaciones[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points).setOrigin(.5, .5);
+        puntuaciones[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points).setOrigin(.5, .5);
 
         //*************** buttons
-        // var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
-        //     platform2.enable();
-        //     this.taskManager.taskCompleted()
-        // }, players[0]);
-        //
-        // var button2_P1 = new Button(this, 360, 443 + 128, 'botonL', () => {
-        //     platform4.enable();
-        //     this.taskManager.taskCompleted()
-        // }, players[0]);
-        //
-        // var button1_P2 = new Button(this, 780, 443, 'botonR', () => {
-        //     platform1.enable();
-        //     this.taskManager.taskCompleted()
-        // }, players[1]);
-        //
-        // var button2_P2 = new Button(this, 480, 443, 'botonR', () => {
-        //     platform3.enable();
-        //     this.taskManager.taskCompleted();
-        // }, players[1]);
+
         var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
             platform2.enable();
             this.taskManager.taskCompleted();
@@ -112,21 +99,21 @@ export class Coop1 extends Phaser.Scene {
             var button1_P1P = new Button(this, 478, 123, 'botonLP');
         }, players[0]);
 
-        var button2_P1 = new Button(this, 360, 443 + 128, 'botonL',  () => {
+        var button2_P1 = new Button(this, 360, 443 + 128, 'botonL', () => {
             platform4.enable();
             this.taskManager.taskCompleted();
             button2_P1.setVisible(false);
             var button2_P1P = new Button(this, 358, 443 + 128, 'botonLP');
         }, players[0]);
 
-        var button1_P2 = new Button(this, 780, 443, 'botonR',  () => {
+        var button1_P2 = new Button(this, 780, 443, 'botonR', () => {
             platform1.enable();
             this.taskManager.taskCompleted();
             button1_P2.setVisible(false);
             var button1_P2P = new Button(this, 778, 443, 'botonRP');
         }, players[1]);
 
-        var button2_P2 = new Button(this, 480, 443, 'botonR',  () => {
+        var button2_P2 = new Button(this, 480, 443, 'botonR', () => {
             platform3.enable();
             this.taskManager.taskCompleted();
             button2_P2.setVisible(false);
@@ -134,23 +121,37 @@ export class Coop1 extends Phaser.Scene {
         }, players[1]);
 
         //*************** timer
+
         this.timer.startTimer();
+        this.timer.pauseTimer();
+        this.loadTransition = new SweepTransitionHorizontal(this);
+        this.loadTransition.addToScene()
+        this.loadTransition.playTransition(() => {
+
+                this.timer.resumeTimer();
+                players[0].enableMovement()
+                players[1].enableMovement()
+            }, 500, 500
+        )
+
+
         this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {
             fontSize: '40px'
-        }).setOrigin(0.5,0.5);
+        }).setOrigin(0.5, 0.5);
 
-        let timerTween=this.tweens.add({
+        let timerTween = this.tweens.add({
             targets: this.timerText,
-            paused:true,
-            scale:1.3,
-            ease: 'Elastic.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 250,
-            yoyo:true,
+            paused: true,
+            scale: 2,
+            y:'-=10',
+            ease: 'Bounce.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 125,
+            yoyo: true,
             repeat: 0,            // -1: infinity
         });
 
-        this.taskManager.setOnTaskCompletedTween(timerTween)
 
+        this.taskManager.setOnTaskCompletedTween(timerTween)
 
         ///************** collisions
         //***** door and players
@@ -160,6 +161,7 @@ export class Coop1 extends Phaser.Scene {
         this.physics.add.collider(players[0], players[1], function () {
             chocarse = true;
         });
+
         //***** players and floor
         this.addStageFloorCollisions(floor);
         //**** players and platforms

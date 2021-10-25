@@ -75,7 +75,12 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
     moveDown() {
         this.setVelocityY(600);
     }
-
+    disableMovement(){
+        this.body.moves=false
+    }
+    enableMovement(){
+        this.body.moves=true
+    }
     jump(chocarse) {//Jump as long as you are on the floor
         if (this.isOnFloor()){
             this.setVelocityY(-550);
