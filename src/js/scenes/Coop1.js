@@ -7,13 +7,13 @@ import {Button} from "../objects/Button.js";
 import {Platform} from "../objects/Platform.js";
 import {Timer} from "../util/Timer.js";
 import {Door} from "../objects/Door.js";
-import {cameraFadeIn, SweepTransitionHorizontal} from "../util/cameraEffects.js";
+import {cameraFadeIn, cameraShake, SweepTransition, SweepTransitionHorizontal} from "../util/cameraEffects.js";
 
 
 var players = [];
 var calaveras = [];
 var chocarse;
-var puntuaciones = [];
+var pointsCounter = [];
 var door;
 
 /// Player 1 is upper layer player.
@@ -33,12 +33,13 @@ export class Coop1 extends Phaser.Scene {
         this.taskManager = new TaskManager(this, 4, [1, 0, 1, 0], () => {
             console.log("All tasks completed");
             door.open()
-        }, this.timer, players, 500, puntuaciones, this.timerText);
+        }, this.timer, players, this.updatePoints, 500);
 
         this.timer.onComplete(() => {
             console.log(
                 this.taskManager.getPlayerWithMoreTasksCompleted()
             );
+            this.timeOver()
             this.timer.pauseTimer();
         })
     }
@@ -71,14 +72,15 @@ export class Coop1 extends Phaser.Scene {
         floor.setCollisionByProperty({collides: true});
 
         //**************** door
-        door = new Door(this, 64, 448, 'door')
+        door = new Door(this, 64, 448, 'door', this.timer)
 
         ///************** players
         var player1 = new Player_I(this, 928, 64, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
         players[0] = player1;
         var player2 = new Player_I(this, 820, 384, "dude");
-        player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
+        // player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
+        player2.setPlayerInput(new GamepadProcessor(this, player2, 0, 0, 1));
         players[1] = player2;
 
         players[0].points = data.jug1;
@@ -87,9 +89,8 @@ export class Coop1 extends Phaser.Scene {
         players[0].disableMovement()
         players[1].disableMovement()
         ///******* players points
-        puntuaciones[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
-        puntuaciones[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points,{fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
-        puntuaciones[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points,{fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        pointsCounter[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        pointsCounter[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
 
@@ -130,13 +131,13 @@ export class Coop1 extends Phaser.Scene {
         this.loadTransition.playTransition(() => {
 
                 this.timer.resumeTimer();
-                players[0].enableMovement()
-                players[1].enableMovement()
+                this.enableAllPlayersMovement()
             }, 500, 500
         )
 
 
-        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {fontFamily: 'ink-free-normal',
+        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {
+            fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setOrigin(0.5, 0.5);
 
@@ -171,6 +172,25 @@ export class Coop1 extends Phaser.Scene {
         console.log("Escena 1 creada");
     }
 
+    timeOver() {
+
+        let playerIndexWithMoreTasksCompleted = this.taskManager.getPlayerWithMoreTasksCompleted();
+        this.timerOverUpdatePoints(this, playerIndexWithMoreTasksCompleted, 500)
+
+        let playerWithLessTasksCompleted = this.taskManager.getPlayerWithLessTasksCompleted();
+        this.timerOverUpdatePoints(this, playerWithLessTasksCompleted, -500)
+
+        let timeOverTimer = new Timer(this, 1000, () => {
+            let endTransition = new SweepTransition(this);
+            endTransition.addToScene()
+            endTransition.playTransition(() => {
+                this.startNextLevel()
+            }, 1000, 2000)
+        })
+        timeOverTimer.startTimer()
+
+    }
+
     update() {
         players[0].update(chocarse, players[1]);
         players[1].update(chocarse, players[0]);
@@ -180,9 +200,94 @@ export class Coop1 extends Phaser.Scene {
         this.UpdatePlatforms();
     }
 
+    updatePoints(context, playerIndex, points) {
+        if ((players[playerIndex].points + points) <= 0) {
+            players[playerIndex].points = 0;
+        } else {
+            players[playerIndex].points += points;
+        }
+        pointsCounter[playerIndex].setText("Jugador" + (playerIndex + 1) + ": " + players[playerIndex].points);
+
+        let textTween = context.tweens.add({
+            targets: pointsCounter[playerIndex],
+            paused: true,
+            scaleX: .9,
+            ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 100,
+            yoyo: true,
+            repeat: 0,            // -1: infinity
+        });
+        textTween.play()
+    }
+
+    timerOverUpdatePoints(context, playerIndex, points) {
+        if ((players[playerIndex].points + points) <= 0) {
+            players[playerIndex].points = 0;
+        } else {
+            players[playerIndex].points += points;
+        }
+        pointsCounter[playerIndex].setText("Jugador" + (playerIndex + 1) + ": " + players[playerIndex].points);
+
+        let textTween;
+        if (points < 0)
+            textTween = context.tweens.add({
+                targets: pointsCounter[playerIndex],
+                paused: true,
+                rotation: .5,
+                // scaleX:1.5,
+                scaleY: 1.2,
+                y: '+=5',
+                ease: 'Sine.easeIn',
+                onStart: () => {
+                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 0, 0));
+                },
+                onComplete: (tween) => {
+                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
+                },
+                // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 100,
+                yoyo: true,
+                repeat: 1,            // -1: infinity
+            });
+        else
+            textTween = context.tweens.add({
+                targets: pointsCounter[playerIndex],
+                paused: true,
+                scaleX: 1.5,
+                y: '+=15',
+                ease: 'Quart.in',
+                onStart: () => {
+                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(0, 255, 255));
+                },
+                onComplete: () => {
+                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
+                },
+                // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 200,
+                yoyo: true,
+                repeat: 0,            // -1: infinity
+            });
+        textTween.play()
+    }
+
+    enableAllPlayersMovement() {
+        for (let i = 0; i < players.length; i++) {
+            players[i].enableMovement()
+        }
+    }
+
+    disableAllPlayersMovement() {
+        for (let i = 0; i < players.length; i++) {
+            players[i].disableMovement()
+        }
+    }
 
     addPointsToPlayer(playerIndex, points) {
         players[0].puntos += points;
+    }
+
+    startNextLevel() {
+        this.scene.start("CharacterTestScene", null)
     }
 
     setPlatformsColliders() {

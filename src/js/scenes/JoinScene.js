@@ -11,7 +11,7 @@ const playerLeaveGamepadButton = 1;
 let arePlayersJoined = [false, false];
 
 let playersInput = []
-
+let joinedPlayers = []
 let inputDictionary={}
 
 export class JoinScreen extends Phaser.Scene {
@@ -32,6 +32,7 @@ export class JoinScreen extends Phaser.Scene {
         });
 
         this.input.gamepad.on('down',(gamepad,button, value)=> {
+
             if(button.index===playerJoinGamepadButton) {
                 for (let i = 0; i < arePlayersJoined.length; i++) {
                     if (arePlayersJoined[i] === false) {

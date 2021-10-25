@@ -7,6 +7,7 @@ import  {Preloader} from "./util/Preloader.js"
 import {Coop1} from "./scenes/Coop1.js";
 import {Coop2} from "./scenes/Coop2.js";
 import {Coop3} from "./scenes/Coop3.js";
+import {JoinScreen} from "./scenes/JoinScene.js";
 
 window.onload=function (){
 
@@ -19,7 +20,7 @@ window.onload=function (){
 
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
-        scene: [Preloader, CharacterTestScene, Coop1, FinPartida, MenuScene,TimerTestScene, TransitionsScene],
+        scene: [ Preloader,JoinScreen,CharacterTestScene, Coop1, FinPartida, MenuScene,TimerTestScene, TransitionsScene],
 
 
         input: {
