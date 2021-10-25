@@ -22,8 +22,6 @@ export class Comp1 extends Phaser.Scene{
     }
 
     preload(){
-        this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
-        this.load.tilemapTiledJSON('Comp1Map', '../Resources/assets/level/comp1v2.json');
         }
 
     create(data){
