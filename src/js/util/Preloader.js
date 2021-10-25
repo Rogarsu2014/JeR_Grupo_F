@@ -39,6 +39,8 @@ export class Preloader extends Phaser.Scene {
 
         //Prueba
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
+        this.load.tilemapTiledJSON('Comp2Map', '../Resources/assets/level/comp2v2.json');
+        this.load.image('Comp2Platf','../Resources/assets/level/comp2v2.png')
         this.load.spritesheet("dude","./Resources/assets/items/SPRITE_SHIIIIIITTT.png", { frameWidth: 706, frameHeight: 672 });//Current sprites from tutorial
         this.load.spritesheet("dude2","./Resources/assets/items/spriteshit2.png", { frameWidth: 731, frameHeight: 526 });//Current sprites from tutorial
         this.load.image("calavera", "./Resources/assets/items/skull.png");//Current sprites from tutorial

@@ -21,21 +21,18 @@ export class Comp2 extends Phaser.Scene{
     }
 
     preload(){
-        this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
-        this.load.tilemapTiledJSON('Comp2Map', '../Resources/assets/level/Comp2.json');
-        this.load.image('Comp2Platf','../Resources/assets/level/Comp2.png')
         }
 
     create(data){
         const map = this.make.tilemap({ key: 'Comp2Map'});
-        const tileset = map.addTilesetImage('TilesetCompVert', 'tileset3');
+        const tileset = map.addTilesetImage('Tileset', 'tileset');
 
-        map.createStaticLayer('Fondo', tileset);
+        map.createStaticLayer('Background', tileset);
         const floor = map.createStaticLayer('Level', tileset);
         
-        this.platforms=[]
-        var platform1= new Platform(this, 0, 0, 'Comp2Platf', 0, 0)
-        this.platforms.push(platform1)
+        //this.platforms=[]
+        //var platform1= new Platform(this, 0, 0, 'Comp2Platf', 0, 0)
+        //this.platforms.push(platform1)
 
         floor.setCollisionByProperty({ collides: true });
 
@@ -61,7 +58,7 @@ export class Comp2 extends Phaser.Scene{
 
         this.addStageFloorCollisions(floor);
 
-        this.setPlatformsColliders();
+        //this.setPlatformsColliders();
 
         this.timer.startTimer();
         this.timerText= this.add.text(this.game.config.width *0.5, 20,'test');
@@ -75,7 +72,7 @@ export class Comp2 extends Phaser.Scene{
         players[1].update(chocarse, players[0]);
         chocarse = false;
         this.timerText.setText(this.timer.getRemainingSeconds(true));
-        this.UpdatePlatforms();
+        //this.UpdatePlatforms();
     }
 
     setPlatformsColliders(){
