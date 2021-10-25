@@ -7,7 +7,9 @@ export class Timer extends Phaser.Time.TimerEvent{
         this.event=undefined
         this.callback=callback
     }
-
+    onComplete(callback){
+        this.callback=callback
+    }
     startTimer(){
         this.event= this.context.time.addEvent({
             delay:this.time,
@@ -30,7 +32,11 @@ export class Timer extends Phaser.Time.TimerEvent{
     }
 
 
-    addSeconds(seconds) {
+    addSeconds(seconds, callback=null) {
         this.event.delay+=seconds
+
+        if(callback!=null){
+            callback();
+        }
     }
 }

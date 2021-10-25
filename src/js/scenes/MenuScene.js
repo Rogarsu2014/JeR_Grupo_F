@@ -39,22 +39,21 @@ export class MenuScene extends Phaser.Scene{
         playButton.on("pointerover",() => { 
             this.selectSprite.setVisible(true)
             this.selectSprite.setPosition(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2)
-            console.log("Boton para Jugar")
         })
 
         playButton.on("pointerout",() => { 
             this.selectSprite.setVisible(false);
-            console.log("Boton para Jugar Raton Fuera")})
+        })
 
         optionsButton.setInteractive();
         optionsButton.on("pointerover",() => { 
             this.selectSprite.setVisible(true)
             this.selectSprite.setPosition(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2 + 100)
-            console.log("Boton de Opciones")})
+        })
             
         optionsButton.on("pointerout",() => { 
             this.selectSprite.setVisible(false)
-            console.log("Boton de Opciones Raton Fuera")})
+        })
 
         playButton.on('pointerdown', (pointer) => { 
             if (pointer.leftButtonDown()) {
@@ -102,8 +101,7 @@ export class MenuScene extends Phaser.Scene{
     }
 	
     
-    update(e) {  
-		
+    update() {  
 		if (this.cursors.up.isDown) {
             this.selectNextButton(-1)
 		} else if (this.cursors.down.isDown) {
