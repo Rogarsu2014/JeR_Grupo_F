@@ -7,18 +7,12 @@ export class MenuScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('sky', './Resources/assets/sky.png');
-        this.load.image('star', './Resources/assets/star.png');
-
-        this.load.image('play_button', './Resources/assets/play_button.png');
-        this.load.image('options_button', './Resources/assets/options_button.png');
     }
 
     create() {
         var width= this.game.renderer.width;
         var height = this.game.renderer.height;
 
-        console.log("Main menu scene test")
         var tittle;
         this.add.image(0, 0, 'sky').setOrigin(0).setDepth(0);
 
@@ -34,24 +28,20 @@ export class MenuScene extends Phaser.Scene {
         playButton.on("pointerover", () => {
             selectSprite.setVisible(true)
             selectSprite.setPosition(width/ 2 - 100, height / 2)
-            console.log("Boton para Jugar")
         })
 
         playButton.on("pointerout", () => {
             selectSprite.setVisible(false);
-            console.log("Boton para Jugar - 1")
         })
 
         optionsButton.setInteractive();
         optionsButton.on("pointerover", () => {
             selectSprite.setVisible(true)
             selectSprite.setPosition(width/ 2 - 100, height / 2 + 100)
-            console.log("Boton de Opciones")
         })
 
         optionsButton.on("pointerout", () => {
             selectSprite.setVisible(false)
-            console.log("Boton de Opciones")
         })
 
         playButton.on('pointerdown', (pointer) => {

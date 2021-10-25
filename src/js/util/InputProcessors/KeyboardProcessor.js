@@ -11,7 +11,7 @@ export class KeyboardProcessor extends InputProcessor {
         //this.context.input.keyboard.on("keydown-"+jumpButton,()=>this.player.jump());
     }
 
-    update(chocarse, jugador){
+    update(bump, playerp){
 
         if (this.left.isDown)//Move left
         {
@@ -31,11 +31,11 @@ export class KeyboardProcessor extends InputProcessor {
         }
         if (this.empujar.isDown)//Move left
         {
-            jugador.selfPush(chocarse);
+            playerp.selfPush(bump);
         }
         if (this.jumpButton.isDown)
         {
-            this.player.jump(chocarse);
+            this.player.jump(bump);
         }
     }
 }
