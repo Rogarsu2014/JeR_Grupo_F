@@ -1,7 +1,8 @@
 import {SweepTransition} from "../util/cameraEffects.js";
 
 export class Door extends Phaser.Physics.Arcade.Sprite {
-    constructor(context, x, y, spriteKey) {
+
+    constructor(context, x, y, spriteKey, timer) {
         super(context, x, y, spriteKey);
         this.context = context;
         this.setOrigin(0, 0)
@@ -10,6 +11,7 @@ export class Door extends Phaser.Physics.Arcade.Sprite {
         this.transition = new SweepTransition(this.context)
         this.transition.addToScene();
         this.context.add.existing(this, true);
+        this.timer=timer;
 
     }
 
@@ -27,9 +29,11 @@ export class Door extends Phaser.Physics.Arcade.Sprite {
         if (++this.playersEnteredCount == 2) {
             //load next level
             console.log("Load next level")
+            this.timer.pauseTimer()
             this.transition.playTransition(() => {
                 console.log("tween completed")
-                this.context.scene.start("CharacterTestScene", null)
+                this.context.startNextLevel()
+
             },1000)
             // this.context.scene.start("CharacterTestScene",null)
         }
