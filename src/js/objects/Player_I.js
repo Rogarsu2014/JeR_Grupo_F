@@ -112,6 +112,6 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
         }
     }
     addPoints(cantidad){
-        this.puntos += cantidad;
+        this.points += cantidad;
     }
 }

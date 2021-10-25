@@ -14,18 +14,23 @@ export class MenuScene extends Phaser.Scene{
 
 
     create(){
+
+        this.game.canvas.width=960
+        this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
+        let width=this.game.canvas.width;
+        let height=this.game.canvas.height;
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
             playButton.off('selected')
             optionsButton.off('selected')
         })
         this.add.image(0, 0, 'sky').setOrigin(0).setDepth(0).setScale(2);
-        this.selectSprite = this.add.image(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2 - 100,'skull')
+        this.selectSprite = this.add.image(width / 2 - 100,height / 2 - 100,'skull')
         this.selectSprite.setVisible(false);
         this.selectSprite.setScale(.2);
 
-        this.add.text(this.game.renderer.width / 3, this.game.renderer.height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
-        let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'LocalGame').setDepth(1);
-        let optionsButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, 'Credits').setDepth(1);
+        this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
+        let playButton = this.add.image(width / 2,height / 2, 'LocalGame').setDepth(1);
+        let optionsButton = this.add.image(width / 2,height / 2 + 100, 'Credits').setDepth(1);
         this.buttons.push(playButton);
         this.buttons.push(optionsButton);
 
@@ -97,15 +102,6 @@ export class MenuScene extends Phaser.Scene{
         // button.emit('selected');
     }
 	
-    
-    update() {  
-		// if (this.cursors.up.isDown) {
-        //     this.selectNextButton(-1)
-		// } else if (this.cursors.down.isDown) {
-        //     this.selectNextButton(1)
-		// } else if (this.cursors.space.isDown) {
-		// 	this.confirmSelection()
-		// }
-    }
+
 
 }

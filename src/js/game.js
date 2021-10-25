@@ -15,7 +15,7 @@ import {Comp2} from "./scenes/Comp2.js";
 window.onload=function (){
 
     const config = {
-        width: 960,//960,//Cambiar el tamaño por escena
+        width: 1408,//960,//Cambiar el tamaño por escena
         height: 640,//448,//640,
         parent: "container",
         type: Phaser.AUTO,
@@ -24,7 +24,7 @@ window.onload=function (){
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
 
-        scene: [ Preloader,JoinScreen,CharacterTestScene,Coop1, Coop3, FinPartida, MenuScene,TimerTestScene, TransitionsScene],
+        scene: [ Preloader,JoinScreen,Coop1,Coop2, Comp1,Comp2,Coop3, FinPartida, MenuScene,TimerTestScene, TransitionsScene],
 
 
         input: {

@@ -32,6 +32,7 @@ export class JoinScreen extends Phaser.Scene {
         // });
         this.input.keyboard.on("keydown-D", () => {
             this.game.canvas.width=(300)
+            this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
         });
         this.input.gamepad.on('down',(gamepad,button, value)=> {
 

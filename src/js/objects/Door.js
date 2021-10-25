@@ -1,4 +1,4 @@
-import {SweepTransition} from "../util/cameraEffects.js";
+import {SweepVerticalTransitionIn} from "../util/cameraEffects.js";
 
 export class Door extends Phaser.Physics.Arcade.Sprite {
 
@@ -8,7 +8,7 @@ export class Door extends Phaser.Physics.Arcade.Sprite {
         this.setOrigin(0, 0)
         this.enabled = false;
         this.playersEnteredCount = 0;
-        this.transition = new SweepTransition(this.context)
+        this.transition = new SweepVerticalTransitionIn(this.context)
         this.transition.addToScene();
         this.context.add.existing(this, true);
         this.timer=timer;

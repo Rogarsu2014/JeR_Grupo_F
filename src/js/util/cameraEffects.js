@@ -18,15 +18,15 @@ export function cameraFadeIn(context, fadeTimeMs, onComplete = null) {
 
 }
 
-export class SweepTransition {
+export class SweepVerticalTransitionIn {
 
 
     constructor(context) {
         this.context=context;
         this.top = undefined;
         this.bottom = undefined;
-        this.gameWidth = context.game.config.width;
-        this.gameHeight = context.game.config.height;
+        this.gameWidth = context.game.canvas.width;
+        this.gameHeight = context.game.canvas.height;
         this.center = [this.gameWidth * .5, this.gameHeight * .5]
     }
 
@@ -72,15 +72,77 @@ export class SweepTransition {
     }
 }
 
-export class SweepTransitionHorizontal {
+export class SweepVerticalTransitionOut {
+
+
+    constructor(context) {
+        this.context=context;
+        this.top = undefined;
+        this.bottom = undefined;
+        this.gameWidth = context.game.canvas.width;
+        this.gameHeight = context.game.canvas.height;
+        this.center = [this.gameWidth * .5, this.gameHeight * .5]
+    }
+
+    loadTransition() {
+        this.context.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
+    }
+
+    addToScene() {
+        let gameWidth = this.gameWidth;
+        let gameHeight = this.gameHeight;
+
+        this.top = this.context.add.image(gameWidth * .5, gameHeight*.5, "BlackBackground")
+        this.top.displayWidth = gameWidth;
+        this.top.displayHeight = gameHeight;
+        this.top.setOrigin(0.5, 1)
+        this.top.depth = 100;
+        //
+        this.bottom = this.context.add.image(gameWidth * .5, gameHeight*.5, "BlackBackground")
+        this.bottom.displayWidth = gameWidth;
+        this.bottom.displayHeight = gameHeight;
+        this.bottom.setOrigin(0.5, 0)
+        this.bottom.depth = 100;
+    }
+
+    playTransition(onComplete=null,completeDelay=0,duration=1000) {
+        var tweenTop = this.context.tweens.add({
+            targets: this.top,
+            y: 0,
+            ease: 'Circ.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: duration,
+            repeat: 0,            // -1: infinity
+            yoyo: false
+        });
+        var tweenBottom = this.context.tweens.add({
+            targets: this.bottom,
+            completeDelay:completeDelay,
+            onComplete:()=>onComplete(),
+            y: this.gameHeight,
+            ease: 'Circ.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: duration,
+            repeat: 0,            // -1: infinity
+            yoyo: false
+        });
+        // tween.play();
+
+    }
+
+    move() {
+        this.top.y++;
+        this.bottom.y--;
+    }
+}
+
+export class SweepTransitionHorizontalOut {
 
 
     constructor(context) {
         this.context=context;
         this.left = undefined;
         this.right = undefined;
-        this.gameWidth = context.game.config.width;
-        this.gameHeight = context.game.config.height;
+        this.gameWidth = context.game.canvas.width;
+        this.gameHeight = context.game.canvas.height;
         this.center = [this.gameWidth * .5, this.gameHeight * .5]
     }
 

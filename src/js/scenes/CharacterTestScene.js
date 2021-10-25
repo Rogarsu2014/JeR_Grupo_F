@@ -39,11 +39,11 @@ export class CharacterTestScene extends Phaser.Scene {
         scores[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].points);
 
         //Creación de todas las skulls
-       skulls.push(new Skull(this, 300, 600, "calavera"));
-       skulls.push(new Skull(this, 350, 600, "calavera"));
-       skulls.push(new Skull(this, 400, 600, "calavera"));
-       skulls.push(new Skull(this, 450, 600, "calavera"));
-       skulls.push(new Skull(this, 500, 600, "calavera"));
+       skulls.push(new Skull(this, 300, 600, "skull"));
+       skulls.push(new Skull(this, 350, 600, "skull"));
+       skulls.push(new Skull(this, 400, 600, "skull"));
+       skulls.push(new Skull(this, 450, 600, "skull"));
+       skulls.push(new Skull(this, 500, 600, "skull"));
        counter = 5;
         
         for(let i = 0; i < skulls.length; i+=1){
