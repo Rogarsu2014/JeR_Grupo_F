@@ -2,6 +2,7 @@ import { Coop1 } from '../scenes/Coop1.js'
 import { Coop2 } from '../scenes/Coop2.js'
 import { Coop3 } from '../scenes/Coop3.js'
 import { Comp1 } from '../scenes/Comp1.js'
+import {loadFont} from "./FontLoader.js";
 
 
 
@@ -15,7 +16,7 @@ export class Preloader extends Phaser.Scene {
 
     preload(){
 
-
+        loadFont('ink-free-normal','/Resources/Typography/ink-free-normal.ttf')
         // transitions
         this.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
 
@@ -48,7 +49,7 @@ export class Preloader extends Phaser.Scene {
     create(){
         console.log("Preload hecho");
       
-        this.scene.start('CharacterTestScene');
+        this.scene.start('JoinScreen');
 
     }
 

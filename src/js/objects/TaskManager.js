@@ -1,7 +1,7 @@
 import {Task} from "./Task.js";
 
 export class TaskManager {
-    constructor(context,taskCount, playersOrder, onAllCompleted,timer, players, onCompletedPoints, pointsCounter) {
+    constructor(context,taskCount, playersOrder, onAllCompleted,timer, players, updatePoints,onCompletedPoints) {
         this.tasks =[];
         this.onAllCompleted=onAllCompleted;
         this.playerCompletedTasksCount= {}
@@ -15,18 +15,20 @@ export class TaskManager {
 
             this.tasks.push(new Task(playersOrder[i],()=>{
                 timer.addSeconds(5000);
-                players[playerIndex].points += onCompletedPoints;
-                pointsCounter[playerIndex].setText( "Jugador"+(playerIndex+1)+ ": "+ players[playerIndex].points)
-                let timerTween=context.tweens.add({
-                    targets: pointsCounter[playerIndex],
-                    paused:true,
-                    scaleX:.9,
-                    ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                    duration: 100,
-                    yoyo:true,
-                    repeat: 0,            // -1: infinity
-                });
-                timerTween.play()
+                updatePoints(context,playerIndex,onCompletedPoints)
+                // players[playerIndex].points += onCompletedPoints;
+                // pointsCounter[playerIndex].setText( "Jugador"+(playerIndex+1)+ ": "+ players[playerIndex].points)
+                //
+                // let timerTween=context.tweens.add({
+                //     targets: pointsCounter[playerIndex],
+                //     paused:true,
+                //     scaleX:.9,
+                //     ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                //     duration: 100,
+                //     yoyo:true,
+                //     repeat: 0,            // -1: infinity
+                // });
+                // timerTween.play()
             }));
         }
 
@@ -40,7 +42,7 @@ export class TaskManager {
         this.taskIndex++
         this.tasks[this.taskIndex].completeTask();
 
-        if(this.taskIndex==this.tasks.length-1){
+        if(this.taskIndex===this.tasks.length-1){
             this.onAllCompleted();
         }
     }
@@ -49,9 +51,17 @@ export class TaskManager {
             this.tasks[i].setOnCompleteTween(onCompleteTween);
         }
     }
+
+
     getPlayerWithMoreTasksCompleted(){
-        if(this.taskIndex!=-1)
-            return this.tasks[this.taskIndex].getPlayer();
-        return "None";
+        if(this.taskIndex===-1)
+            return this.tasks[this.taskIndex + 2].getPlayer();
+        return this.tasks[this.taskIndex].getPlayer();
+    }
+
+    getPlayerWithLessTasksCompleted(){
+        if(this.taskIndex===-1 || this.taskIndex===0)
+            return this.tasks[this.taskIndex + 1].getPlayer();
+        return this.tasks[this.taskIndex - 1].getPlayer();
     }
 }

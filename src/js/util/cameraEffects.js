@@ -51,14 +51,14 @@ export class SweepTransition {
         this.bottom.depth = 100;
     }
 
-    playTransition(onComplete=null,completeDelay=0) {
+    playTransition(onComplete=null,completeDelay=0,duration=1000) {
         var tween = this.context.tweens.add({
             targets: [this.top,this.bottom],
             completeDelay:completeDelay,
             onComplete:()=>onComplete(),
             y: this.center[1],
             ease: 'Circ.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 1000,
+            duration: duration,
             repeat: 0,            // -1: infinity
             yoyo: false
         });
@@ -72,13 +72,68 @@ export class SweepTransition {
     }
 }
 
-export function LoadTransition(context) {
-    context.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
+export class SweepTransitionHorizontal {
+
+
+    constructor(context) {
+        this.context=context;
+        this.left = undefined;
+        this.right = undefined;
+        this.gameWidth = context.game.config.width;
+        this.gameHeight = context.game.config.height;
+        this.center = [this.gameWidth * .5, this.gameHeight * .5]
+    }
+
+    loadTransition() {
+        this.context.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
+    }
+
+    addToScene() {
+        let gameWidth = this.gameWidth;
+        let gameHeight = this.gameHeight;
+
+        this.left = this.context.add.image(gameWidth*.5, gameHeight*.5, "BlackBackground")
+        this.left.displayWidth = gameWidth;
+        this.left.displayHeight = gameHeight;
+        this.left.setOrigin(1, .5)
+        this.left.depth = 100;
+        //
+        this.right = this.context.add.image(gameWidth*.5, gameHeight*.5, "BlackBackground")
+        this.right.displayWidth = gameWidth;
+        this.right.displayHeight = gameHeight;
+        this.right.setOrigin(0, 0.5)
+        this.right.depth = 100;
+    }
+
+    playTransition(onComplete=null,completeDelay=0,duration=1000) {
+
+        var tweenRight = this.context.tweens.add({
+            targets: this.left,
+            completeDelay:completeDelay,
+            onComplete:()=>onComplete(),
+            x: 0,
+            ease: 'Circ.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: duration,
+        });
+        var tweenRight = this.context.tweens.add({
+            targets: this.right,
+            completeDelay:completeDelay,
+            onComplete:()=>onComplete(),
+            x: this.gameWidth,
+            ease: 'Circ.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: duration,
+        });
+        // tween.play();
+
+    }
+
+    move() {
+        this.top.y++;
+        this.bottom.y--;
+    }
 }
 
-export function AddTransition(context) {
-    context.add.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
-}
+
 
 
 function callOnCompleted(context, time, onComplete) {
