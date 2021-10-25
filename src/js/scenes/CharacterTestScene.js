@@ -78,8 +78,7 @@ export class CharacterTestScene extends Phaser.Scene {
         players[1].update(bump, players[0]);
         bump = false;
         if(counter == 0){
-            this.game.scale.resize(960, 640);
-            this.scene.start("Coop1", {jug1:players[0].points, jug2:players[1].points});
+            this.scene.start("Coop3", {jug1:players[0].points, jug2:players[1].points});
         }
     }
 }
