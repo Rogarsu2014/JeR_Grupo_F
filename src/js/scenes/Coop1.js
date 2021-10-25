@@ -87,8 +87,9 @@ export class Coop1 extends Phaser.Scene {
         players[0].disableMovement()
         players[1].disableMovement()
         ///******* players points
-        puntuaciones[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points).setOrigin(.5, .5);
-        puntuaciones[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points).setOrigin(.5, .5);
+        puntuaciones[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        puntuaciones[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points,{fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        puntuaciones[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points,{fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
 
@@ -135,7 +136,7 @@ export class Coop1 extends Phaser.Scene {
         )
 
 
-        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {
+        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setOrigin(0.5, 0.5);
 
@@ -143,7 +144,7 @@ export class Coop1 extends Phaser.Scene {
             targets: this.timerText,
             paused: true,
             scale: 2,
-            y:'-=10',
+            y: '-=10',
             ease: 'Bounce.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
             duration: 125,
             yoyo: true,
