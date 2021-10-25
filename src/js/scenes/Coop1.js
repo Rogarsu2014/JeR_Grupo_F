@@ -7,13 +7,18 @@ import {Button} from "../objects/Button.js";
 import {Platform} from "../objects/Platform.js";
 import {Timer} from "../util/Timer.js";
 import {Door} from "../objects/Door.js";
-import {cameraFadeIn, cameraShake, SweepTransition, SweepTransitionHorizontal} from "../util/cameraEffects.js";
+import {
+    cameraFadeIn,
+    cameraShake,
+    SweepVerticalTransitionIn,
+    SweepTransitionHorizontalOut,
+    SweepVerticalTransitionOut
+} from "../util/cameraEffects.js";
 
 
 var players = [];
-var calaveras = [];
-var chocarse;
-var pointsCounter = [];
+var bump;
+var scores = [];
 var door;
 
 /// Player 1 is upper layer player.
@@ -28,12 +33,12 @@ export class Coop1 extends Phaser.Scene {
 
     init() {
 
-        this.timer = new Timer(this, 5000)
+        this.timer = new Timer(this, 10000)
 
         this.taskManager = new TaskManager(this, 4, [1, 0, 1, 0], () => {
             console.log("All tasks completed");
             door.open()
-        }, this.timer, players, this.updatePoints, 500);
+        }, this.timer, players, this.updatePoints, 50);
 
         this.timer.onComplete(() => {
             console.log(
@@ -47,8 +52,9 @@ export class Coop1 extends Phaser.Scene {
     preload() {
     }
 
-    create(data) {
-
+    create() {
+        this.game.canvas.width = 960;
+        this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
         //*************** tilemap
         const map = this.make.tilemap({key: 'Coop1Map'});
         const tileset = map.addTilesetImage('Tileset', 'tileset');
@@ -57,9 +63,9 @@ export class Coop1 extends Phaser.Scene {
 
         // ************** platforms
         this.platforms = []
-        var platform1 = new Platform(this, 896, 128, 'horizontal4x1', -64 * 4, 0)
+        var platform1 = new Platform(this, 896-64, 128+64, 'horizontal3x1', -64 * 3, 0)
         this.platforms.push(platform1)
-        var platform2 = new Platform(this, 768, 448, 'horizontal4x1', -64 * 4, 0)
+        var platform2 = new Platform(this, 768-64, 448+64, 'horizontal3x1', -64 * 3, 0)
         this.platforms.push(platform2)
         var platform3 = new Platform(this, 192, 256, 'horizontal2x1', -64 * 2, 0)
         this.platforms.push(platform3)
@@ -84,49 +90,53 @@ export class Coop1 extends Phaser.Scene {
         
         players[1] = player2;
 
-        players[0].points = data.jug1;
-        players[1].points = data.jug2;
+        // players[0].points = data.jug1;
+        // players[1].points = data.jug2;
 
         players[0].disableMovement()
         players[1].disableMovement()
         ///******* players points
-        pointsCounter[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
-        pointsCounter[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        scores[0] = this.add.text(75, 32, "Player 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        scores[1] = this.add.text(this.game.canvas.width-150, 32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
         var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
             platform2.enable();
             this.taskManager.taskCompleted();
-            button1_P1.setVisible(false);
-            var button1_P1P = new Button(this, 478, 123, 'botonLP');
+            button1_P1.setTexture('botonLP')
+            // button1_P1.setVisible(false);
+            // var button1_P1P = new Button(this, 478, 123, 'botonLP');
         }, players[0]);
 
         var button2_P1 = new Button(this, 360, 443 + 128, 'botonL', () => {
             platform4.enable();
             this.taskManager.taskCompleted();
-            button2_P1.setVisible(false);
-            var button2_P1P = new Button(this, 358, 443 + 128, 'botonLP');
+            button2_P1.setTexture('botonLP')
+            // button2_P1.setVisible(false);
+            // var button2_P1P = new Button(this, 358, 443 + 128, 'botonLP');
         }, players[0]);
 
         var button1_P2 = new Button(this, 780, 443, 'botonR', () => {
             platform1.enable();
             this.taskManager.taskCompleted();
-            button1_P2.setVisible(false);
-            var button1_P2P = new Button(this, 778, 443, 'botonRP');
+            button1_P2.setTexture('botonRP')
+            // button1_P2.setVisible(false);
+            // var button1_P2P = new Button(this, 778, 443, 'botonRP');
         }, players[1]);
 
         var button2_P2 = new Button(this, 480, 443, 'botonR', () => {
             platform3.enable();
             this.taskManager.taskCompleted();
-            button2_P2.setVisible(false);
-            var button2_P2P = new Button(this, 478, 443, 'botonRP');
+            button2_P2.setTexture('botonRP')
+            // button2_P2.setVisible(false);
+            // var button2_P2P = new Button(this, 478, 443, 'botonRP');
         }, players[1]);
 
         //*************** timer
 
         this.timer.startTimer();
         this.timer.pauseTimer();
-        this.loadTransition = new SweepTransitionHorizontal(this);
+        this.loadTransition = new SweepVerticalTransitionOut(this);
         this.loadTransition.addToScene()
         this.loadTransition.playTransition(() => {
 
@@ -136,7 +146,7 @@ export class Coop1 extends Phaser.Scene {
         )
 
 
-        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {
+        this.timerText = this.add.text(this.game.canvas.width * 0.5, 40, 'test', {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setOrigin(0.5, 0.5);
@@ -161,7 +171,7 @@ export class Coop1 extends Phaser.Scene {
         this.physics.add.collider(players[1], door, () => door.playerEntered(players[1]))
         //***** between players
         this.physics.add.collider(players[0], players[1], function () {
-            chocarse = true;
+            bump = true;
         });
 
         //***** players and floor
@@ -181,7 +191,7 @@ export class Coop1 extends Phaser.Scene {
         this.timerOverUpdatePoints(this, playerWithLessTasksCompleted, -500)
 
         let timeOverTimer = new Timer(this, 1000, () => {
-            let endTransition = new SweepTransition(this);
+            let endTransition = new SweepVerticalTransitionIn(this);
             endTransition.addToScene()
             endTransition.playTransition(() => {
                 this.startNextLevel()
@@ -192,9 +202,9 @@ export class Coop1 extends Phaser.Scene {
     }
 
     update() {
-        players[0].update(chocarse, players[1]);
-        players[1].update(chocarse, players[0]);
-        chocarse = false;
+        players[0].update(bump, players[1]);
+        players[1].update(bump, players[0]);
+        bump = false;
 
         this.timerText.setText(this.timer.getRemainingSeconds(true));
         this.UpdatePlatforms();
@@ -206,10 +216,10 @@ export class Coop1 extends Phaser.Scene {
         } else {
             players[playerIndex].points += points;
         }
-        pointsCounter[playerIndex].setText("Jugador" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween = context.tweens.add({
-            targets: pointsCounter[playerIndex],
+            targets: scores[playerIndex],
             paused: true,
             scaleX: .9,
             ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
@@ -226,12 +236,12 @@ export class Coop1 extends Phaser.Scene {
         } else {
             players[playerIndex].points += points;
         }
-        pointsCounter[playerIndex].setText("Jugador" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween;
         if (points < 0)
             textTween = context.tweens.add({
-                targets: pointsCounter[playerIndex],
+                targets: scores[playerIndex],
                 paused: true,
                 rotation: .5,
                 // scaleX:1.5,
@@ -239,10 +249,10 @@ export class Coop1 extends Phaser.Scene {
                 y: '+=5',
                 ease: 'Sine.easeIn',
                 onStart: () => {
-                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 0, 0));
+                    scores[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 0, 0));
                 },
                 onComplete: (tween) => {
-                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
+                    scores[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
                 },
                 // 'Cubic', 'Elastic', 'Bounce', 'Back'
                 duration: 100,
@@ -251,16 +261,16 @@ export class Coop1 extends Phaser.Scene {
             });
         else
             textTween = context.tweens.add({
-                targets: pointsCounter[playerIndex],
+                targets: scores[playerIndex],
                 paused: true,
                 scaleX: 1.5,
                 y: '+=15',
                 ease: 'Quart.in',
                 onStart: () => {
-                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(0, 255, 255));
+                    scores[playerIndex].setTint(Phaser.Display.Color.GetColor(0, 255, 255));
                 },
                 onComplete: () => {
-                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
+                    scores[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
                 },
                 // 'Cubic', 'Elastic', 'Bounce', 'Back'
                 duration: 200,
@@ -287,7 +297,7 @@ export class Coop1 extends Phaser.Scene {
     }
 
     startNextLevel() {
-        this.scene.start("CharacterTestScene", null)
+        this.scene.start("Comp1", {ply1:players[0].points, ply2:players[1].points})
     }
 
     setPlatformsColliders() {

@@ -27,10 +27,13 @@ export class JoinScreen extends Phaser.Scene {
     create() {
         this.SetKeys(0, player1JoinKeyboardKey, player1LeaveKeyboardKey)
         this.SetKeys(1, player2JoinKeyboardKey, player2LeaveKeyboardKey)
+        // this.input.keyboard.on("keydown-D", () => {
+        //     this.scene.start('Preloader');
+        // });
         this.input.keyboard.on("keydown-D", () => {
-            this.scene.start('Preloader');
+            this.game.canvas.width=(300)
+            this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
         });
-
         this.input.gamepad.on('down',(gamepad,button, value)=> {
 
             if(button.index===playerJoinGamepadButton) {
