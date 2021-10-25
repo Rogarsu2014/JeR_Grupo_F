@@ -1,3 +1,4 @@
+import { cameraShake } from "../util/cameraEffects.js";
 import { Timer } from "../util/Timer.js";
 
 export class Player_I extends Phaser.Physics.Arcade.Sprite {
@@ -48,14 +49,13 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
 
     }
     preload() {
-        //this.context.load.spritesheet(sprite, "./Resources/assets/items/"+sprite+".png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
     }
 
     create() {
     }
 
-    update(chocarse, jugador) {
-        this.playerInput.update(chocarse, jugador);
+    update(bump, playerp) {
+        this.playerInput.update(bump, playerp);
     }
 
     moveLeft() {//Move left
@@ -76,16 +76,17 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
     moveDown() {
         this.setVelocityY(600);
     }
+
     disableMovement(){
         this.body.moves=false
     }
     enableMovement(){
         this.body.moves=true
     }
-    jump(chocarse) {//Jump as long as you are on the floor
+    jump(bump) {//Jump as long as you are on the floor
         if (this.isOnFloor()){
             this.setVelocityY(-550);
-        }else if(chocarse == true){
+        }else if(bump == true){
             if(this.body.touching.down == true){
                 this.setVelocityY(-500);
             }
@@ -94,8 +95,8 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
     isOnFloor() {//Optional go down key
         return this.body.onFloor();
     }
-    serEmpujado(chocarse){
-        if(chocarse == true){
+    selfPush(bump){
+        if(bump == true){
             if(this.body.touching.left == true){
                 this.setAccelerationX(100000);
                 var timer = new Timer(this.context, 50, ()=>this.setAccelerationX(0));
@@ -109,7 +110,7 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
             
         }
     }
-    sumarPuntos(cantidad){
+    addPoints(cantidad){
         this.puntos += cantidad;
     }
 }
