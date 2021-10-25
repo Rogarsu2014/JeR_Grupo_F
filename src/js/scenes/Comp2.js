@@ -6,9 +6,11 @@ import {Platform} from "../objects/Platform.js";
 import {Timer} from "../util/Timer.js";
 
 var players = [];
-var calaveras = [];
-var chocarse;
-var puntuaciones = [];
+var skulls = [];
+var bump;
+var scores = [];
+var traps = [];
+var counter = 0;
 
 export class Comp2 extends Phaser.Scene{
 
@@ -24,6 +26,10 @@ export class Comp2 extends Phaser.Scene{
         }
 
     create(data){
+
+        this.game.canvas.width = (1408);
+        this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height);
+
         const map = this.make.tilemap({ key: 'Comp2Map'});
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
@@ -47,14 +53,14 @@ export class Comp2 extends Phaser.Scene{
         players[1].puntos = data.jug2;
 
         this.physics.add.collider(players[0], players[1], function(){
-            chocarse = true;
+            bump = true;
         });
         
         this.physics.add.collider(players[0], floor);
         this.physics.add.collider(players[1], floor);
 
-        puntuaciones[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
-        puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].puntos);
+        scores[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
+        scores[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].puntos);
 
         this.addStageFloorCollisions(floor);
 
@@ -68,9 +74,9 @@ export class Comp2 extends Phaser.Scene{
     }
 
     update(){
-        players[0].update(chocarse, players[1]);
-        players[1].update(chocarse, players[0]);
-        chocarse = false;
+        players[0].update(bump, players[1]);
+        players[1].update(bump, players[0]);
+        bump = false;
         this.timerText.setText(this.timer.getRemainingSeconds(true));
         //this.UpdatePlatforms();
     }
