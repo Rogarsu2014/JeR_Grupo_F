@@ -28,7 +28,7 @@ export class Trampa extends Phaser.Physics.Arcade.Sprite {
 
     }
     dañar(jugador) {
-        jugador.sumarPuntos(this.puntos);
+        jugador.addPoints(this.puntos);
         this.music.play();
         jugador.setPosition(jugador.position);
         jugador.body.moves = false;

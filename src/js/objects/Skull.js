@@ -27,7 +27,7 @@ export class Skull extends Phaser.Physics.Arcade.Sprite {
     }
     desaparicion(jugador){
         this.music.play();
-        jugador.sumarPuntos(this.puntos);
+        jugador.addPoints(this.puntos);
         this.destroy();
     }
 }
