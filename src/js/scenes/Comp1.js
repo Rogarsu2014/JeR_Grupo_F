@@ -29,6 +29,7 @@ export class Comp1 extends Phaser.Scene {
 
     create(data) {
 
+
         this.game.canvas.width = (1408);
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height);
 
