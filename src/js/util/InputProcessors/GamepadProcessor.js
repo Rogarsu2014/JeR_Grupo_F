@@ -18,6 +18,9 @@ export class GamepadProcessor extends InputProcessor {
     onConnected(event) {
         this.context.input.gamepad.once('connected', event);
     }
+    getPadIndex(){
+        return this.padIndex;
+    }
 
     setJumpButton() {
         this.gamepad.onButtonDown(this.jumpButton, () => this.player.jump())
