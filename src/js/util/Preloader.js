@@ -22,8 +22,6 @@ export class Preloader extends Phaser.Scene {
 
         this.load.image('tileset', '../Resources/assets/level/tileset.png');
         this.load.image('plat', '../Resources/assets/level/escalon.png');
-        this.load.image('tileset2', '../Resources/assets/level/tileset2.png');
-        this.load.image('tileset3', '../Resources/assets/level/tileset3.png');
         //botones de los jugadores
         this.load.image('botonR','../Resources/assets/level/Boton1.png');
         this.load.image('botonRP','../Resources/assets/level/Boton1Puls.png');

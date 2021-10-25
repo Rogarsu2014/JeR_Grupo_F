@@ -28,8 +28,6 @@ export class Coop2 extends Phaser.Scene{
     }
 
     preload(){
-        this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
-        this.load.tilemapTiledJSON('Coop2Map', '../Resources/assets/level/Coop2.json');
         }
 
     create(data){
@@ -92,27 +90,6 @@ export class Coop2 extends Phaser.Scene{
             var button1_P1P = new Button(this, 545, 352, 'botonRP');
         }, players[1]);
         button2_P2.setVisible(false);
-
-        //Create the character animations (current ones are from tutorial)
-        /*this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'turn',
-            frames: [{ key: 'dude', frame: 4 }],
-            frameRate: 20
-        });
-
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });*/
 
         this.addStageFloorCollisions(floor);
 
