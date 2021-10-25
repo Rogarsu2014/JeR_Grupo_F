@@ -74,6 +74,15 @@ export class MenuScene extends Phaser.Scene{
         })
 
        this.selectButton(0);
+
+        var arrowDown=this.input.keyboard.on('keydown-' + 'DOWN', ()=>this.selectNextButton(-1));
+
+        var arrowUp=this.input.keyboard.on('keydown-' + 'UP', ()=>this.selectNextButton(-1));
+
+        var spaceKey =this.input.keyboard.on('keydown-' + 'SPACE',()=>this.confirmSelection());
+
+
+
     }
 
     selectButton(index) {
@@ -102,13 +111,13 @@ export class MenuScene extends Phaser.Scene{
 	
     
     update() {  
-		if (this.cursors.up.isDown) {
-            this.selectNextButton(-1)
-		} else if (this.cursors.down.isDown) {
-            this.selectNextButton(1)
-		} else if (this.cursors.space.isDown) {
-			this.confirmSelection()
-		}
+		// if (this.cursors.up.isDown) {
+        //     this.selectNextButton(-1)
+		// } else if (this.cursors.down.isDown) {
+        //     this.selectNextButton(1)
+		// } else if (this.cursors.space.isDown) {
+		// 	this.confirmSelection()
+		// }
     }
 
 }

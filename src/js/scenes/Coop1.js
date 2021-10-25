@@ -28,7 +28,7 @@ export class Coop1 extends Phaser.Scene {
 
     init() {
 
-        this.timer = new Timer(this, 5000)
+        this.timer = new Timer(this, 200000)
 
         this.taskManager = new TaskManager(this, 4, [1, 0, 1, 0], () => {
             console.log("All tasks completed");

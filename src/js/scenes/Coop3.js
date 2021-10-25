@@ -106,6 +106,7 @@ export class Coop3 extends Phaser.Scene{
             platform3.enable()
             this.taskManager.taskCompleted();
             this.taskManager.taskCompleted();
+
             button1_P2.setVisible(false);
             var button1_P2P = new Button(this, 256, 284, 'botonRP');
             
@@ -118,7 +119,6 @@ export class Coop3 extends Phaser.Scene{
                 var button1_P2 = new Button(this,  460,282, 'botonR', () => {
                     platform2.enable()
                     platform4.enable()
-                    this.taskManager.taskCompleted();
                     this.taskManager.taskCompleted();
                     button1_P2.setVisible(false);
                     var button1_P2P = new Button(this, 256, 284, 'botonRP');
