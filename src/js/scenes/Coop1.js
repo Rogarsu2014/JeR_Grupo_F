@@ -28,12 +28,12 @@ export class Coop1 extends Phaser.Scene {
 
     init() {
 
-        this.timer = new Timer(this, 200000)
+        this.timer = new Timer(this, 10000)
 
         this.taskManager = new TaskManager(this, 4, [1, 0, 1, 0], () => {
             console.log("All tasks completed");
             door.open()
-        }, this.timer, players, this.updatePoints, 500);
+        }, this.timer, players, this.updatePoints, 50);
 
         this.timer.onComplete(() => {
             console.log(
@@ -47,7 +47,7 @@ export class Coop1 extends Phaser.Scene {
     preload() {
     }
 
-    create(data) {
+    create() {
 
         //*************** tilemap
         const map = this.make.tilemap({key: 'Coop1Map'});
@@ -84,8 +84,8 @@ export class Coop1 extends Phaser.Scene {
         
         players[1] = player2;
 
-        players[0].points = data.jug1;
-        players[1].points = data.jug2;
+        // players[0].points = data.jug1;
+        // players[1].points = data.jug2;
 
         players[0].disableMovement()
         players[1].disableMovement()
@@ -291,7 +291,7 @@ export class Coop1 extends Phaser.Scene {
     }
 
     startNextLevel() {
-        this.scene.start("CharacterTestScene", null)
+        this.scene.start("Comp1", {ply1:players[0].points, ply2:players[1].points})
     }
 
     setPlatformsColliders() {

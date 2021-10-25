@@ -42,8 +42,8 @@ export class FinPartida extends Phaser.Scene {
             scores[0] = this.add.text(350, 213, "Jugador 1: " + players[0]);
             scores[1] = this.add.text(350, 233, "Jugador 2: " + players[1]);
 
-            this.add.image(150, 250, "calavera").setScale(0.7);
-            this.add.image(800, 250, "calavera").setScale(0.7);
+            this.add.image(150, 250, "skull").setScale(0.7);
+            this.add.image(800, 250, "skull").setScale(0.7);
         }
 
         playAgainButton.setInteractive();

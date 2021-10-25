@@ -1,3 +1,5 @@
+import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
+
 export class MenuScene extends Phaser.Scene{
     constructor() {
         super("MenuScene");
@@ -10,14 +12,6 @@ export class MenuScene extends Phaser.Scene{
         
     }
 
-    preload () {
-       
-        this.load.image('sky', './Resources/assets/sky.png');
-        this.load.image('star', './Resources/assets/star.png');
-    
-        this.load.image('play_button', './Resources/assets/play_button.png');
-        this.load.image('options_button', './Resources/assets/options_button.png');
-    }    
 
     create(){
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -25,48 +19,22 @@ export class MenuScene extends Phaser.Scene{
             optionsButton.off('selected')
         })
         this.add.image(0, 0, 'sky').setOrigin(0).setDepth(0).setScale(2);
-        this.selectSprite = this.add.image(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2 - 100,'star')
+        this.selectSprite = this.add.image(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2 - 100,'skull')
         this.selectSprite.setVisible(false);
-        this.selectSprite.setScale(2); 
+        this.selectSprite.setScale(.2);
 
         this.add.text(this.game.renderer.width / 3, this.game.renderer.height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
-        let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'play_button').setDepth(1);
-        let optionsButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, 'options_button').setDepth(1);
+        let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'LocalGame').setDepth(1);
+        let optionsButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, 'Credits').setDepth(1);
         this.buttons.push(playButton);
         this.buttons.push(optionsButton);
 
         playButton.setInteractive();
-        playButton.on("pointerover",() => { 
-            this.selectSprite.setVisible(true)
-            this.selectSprite.setPosition(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2)
-        })
-
-        playButton.on("pointerout",() => { 
-            this.selectSprite.setVisible(false);
-        })
 
         optionsButton.setInteractive();
-        optionsButton.on("pointerover",() => { 
-            this.selectSprite.setVisible(true)
-            this.selectSprite.setPosition(this.game.renderer.width / 2 - 100, this.game.renderer.height / 2 + 100)
-        })
-            
-        optionsButton.on("pointerout",() => { 
-            this.selectSprite.setVisible(false)
-        })
 
-        playButton.on('pointerdown', (pointer) => { 
-            if (pointer.leftButtonDown()) {
-                this.scene.start('CharacterTestScene'); 
-            } 
-        });
-        optionsButton.on('pointerdown', (pointer) => { 
-            if (pointer.leftButtonDown()) {
-                console.log("opciones");
-            } 
-        });
         playButton.on('selected', () => {
-            this.scene.start('CharacterTestScene');
+            this.scene.start('Coop1');
         })
     
         optionsButton.on('selected', () => {
@@ -87,6 +55,17 @@ export class MenuScene extends Phaser.Scene{
 
     selectButton(index) {
         const button = this.buttons[index];
+        this.tweens.add({
+            targets: button,
+            scaleX: 1.25,
+            ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 125,
+            yoyo: true,
+            repeat: 0,            // -1: infinity
+        });
+
+        let textureName=button.texture.key + 'Push';
+        button.setTexture(textureName)
         this.selectSprite.x = button.x - button.displayWidth * 0.71
 	    this.selectSprite.y = button.y - 2.7
         this.selectedButtonIndex = index;
@@ -94,6 +73,9 @@ export class MenuScene extends Phaser.Scene{
 	}
 
 	selectNextButton(change = 1) {
+        const button = this.buttons[this.selectedButtonIndex];
+        let textureName=button.texture.key.replace('Push','');
+        button.setTexture(textureName)
 	    let index = this.selectedButtonIndex + change
         if (index >= this.buttons.length) {
             index = 0
@@ -106,7 +88,13 @@ export class MenuScene extends Phaser.Scene{
 
 	confirmSelection() {
         const button = this.buttons[this.selectedButtonIndex];
-        button.emit('selected');
+        cameraFadeOut(this,1000,()=> button.emit('selected'))
+        this.input.keyboard.removeListener('keydown-' + 'DOWN');
+
+        this.input.keyboard.removeListener('keydown-' + 'UP');
+
+        this.input.keyboard.removeListener('keydown-' + 'SPACE');
+        // button.emit('selected');
     }
 	
     
