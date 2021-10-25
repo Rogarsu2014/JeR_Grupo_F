@@ -81,7 +81,7 @@ export class Coop1 extends Phaser.Scene {
         var player2 = new Player_I(this, 820, 384, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
         //player2.setPlayerInput(new GamepadProcessor(this, player2, 0, 0, 1));
-
+        
         players[1] = player2;
 
         players[0].points = data.jug1;
