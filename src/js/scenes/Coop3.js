@@ -7,13 +7,12 @@ import {Button} from "../objects/Button.js";
 import {Platform} from "../objects/Platform.js";
 import {Timer} from "../util/Timer.js";
 import {Door} from "../objects/Door.js";
-import {cameraFadeIn, cameraShake, SweepTransition, SweepTransitionHorizontal} from "../util/cameraEffects.js";
+import {cameraFadeIn, cameraShake, SweepVerticalTransitionIn, SweepTransitionHorizontalOut} from "../util/cameraEffects.js";
 
 
 var players = [];
-var calaveras = [];
-var chocarse;
-var pointsCounter = [];
+var bump;
+var scores = [];
 var door;
 
 /// Player 1 is upper layer player.
@@ -46,6 +45,10 @@ export class Coop3 extends Phaser.Scene{
         }
 
     create(data){
+
+        this.game.canvas.width = 960;
+        this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
+
         const map = this.make.tilemap({ key: 'Coop3Map'});
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
@@ -87,18 +90,18 @@ export class Coop3 extends Phaser.Scene{
         var player1 = new Player_I(this, 100, 100, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
         players[0] = player1;
-        var player2 = new Player_I(this, 200, 100, "dude");
+        var player2 = new Player_I(this, 200, 100, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
 
-        players[0].points = data.jug1;
-        players[1].points = data.jug2;
+        players[0].points = data.ply1;
+        players[1].points = data.ply2;
 
         players[0].disableMovement()
         players[1].disableMovement()
         ///******* players points
-        pointsCounter[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
-        pointsCounter[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        scores[0] = this.add.text(75, 32, "Player 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        scores[1] = this.add.text(this.game.canvas.width-150, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
         var button1_P2 = new Button(this, 256, 282, 'botonR', () => {   //ley de +58
@@ -106,6 +109,7 @@ export class Coop3 extends Phaser.Scene{
             platform3.enable()
             this.taskManager.taskCompleted();
             this.taskManager.taskCompleted();
+
             button1_P2.setVisible(false);
             var button1_P2P = new Button(this, 256, 284, 'botonRP');
             
@@ -118,7 +122,6 @@ export class Coop3 extends Phaser.Scene{
                 var button1_P2 = new Button(this,  460,282, 'botonR', () => {
                     platform2.enable()
                     platform4.enable()
-                    this.taskManager.taskCompleted();
                     this.taskManager.taskCompleted();
                     button1_P2.setVisible(false);
                     var button1_P2P = new Button(this, 256, 284, 'botonRP');
@@ -133,7 +136,7 @@ export class Coop3 extends Phaser.Scene{
 
         this.timer.startTimer();
         this.timer.pauseTimer();
-        this.loadTransition = new SweepTransitionHorizontal(this);
+        this.loadTransition = new SweepTransitionHorizontalOut(this);
         this.loadTransition.addToScene()
         this.loadTransition.playTransition(() => {
 
@@ -167,7 +170,7 @@ export class Coop3 extends Phaser.Scene{
         this.physics.add.collider(players[1], door, () => door.playerEntered(players[1]))
         //***** between players
         this.physics.add.collider(players[0], players[1], function () {
-            chocarse = true;
+            bump = true;
         });
 
         //***** players and floor
@@ -187,7 +190,7 @@ export class Coop3 extends Phaser.Scene{
         this.timerOverUpdatePoints(this, playerWithLessTasksCompleted, -500)
 
         let timeOverTimer = new Timer(this, 1000, () => {
-            let endTransition = new SweepTransition(this);
+            let endTransition = new SweepVerticalTransitionIn(this);
             endTransition.addToScene()
             endTransition.playTransition(() => {
                 this.startNextLevel()
@@ -198,9 +201,9 @@ export class Coop3 extends Phaser.Scene{
     }
 
     update(){
-        players[0].update(chocarse, players[1]);
-        players[1].update(chocarse, players[0]);
-        chocarse = false;
+        players[0].update(bump, players[1]);
+        players[1].update(bump, players[0]);
+        bump = false;
 
         this.timerText.setText(this.timer.getRemainingSeconds(true));
         this.UpdatePlatforms();
@@ -236,10 +239,10 @@ export class Coop3 extends Phaser.Scene{
         } else {
             players[playerIndex].points += points;
         }
-        pointsCounter[playerIndex].setText("Jugador" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween = context.tweens.add({
-            targets: pointsCounter[playerIndex],
+            targets: scores[playerIndex],
             paused: true,
             scaleX: .9,
             ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
@@ -256,12 +259,12 @@ export class Coop3 extends Phaser.Scene{
         } else {
             players[playerIndex].points += points;
         }
-        pointsCounter[playerIndex].setText("Jugador" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween;
         if (points < 0)
             textTween = context.tweens.add({
-                targets: pointsCounter[playerIndex],
+                targets: scores[playerIndex],
                 paused: true,
                 rotation: .5,
                 // scaleX:1.5,
@@ -269,10 +272,10 @@ export class Coop3 extends Phaser.Scene{
                 y: '+=5',
                 ease: 'Sine.easeIn',
                 onStart: () => {
-                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 0, 0));
+                    scores[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 0, 0));
                 },
                 onComplete: (tween) => {
-                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
+                    scores[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
                 },
                 // 'Cubic', 'Elastic', 'Bounce', 'Back'
                 duration: 100,
@@ -281,16 +284,16 @@ export class Coop3 extends Phaser.Scene{
             });
         else
             textTween = context.tweens.add({
-                targets: pointsCounter[playerIndex],
+                targets: scores[playerIndex],
                 paused: true,
                 scaleX: 1.5,
                 y: '+=15',
                 ease: 'Quart.in',
                 onStart: () => {
-                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(0, 255, 255));
+                    scores[playerIndex].setTint(Phaser.Display.Color.GetColor(0, 255, 255));
                 },
                 onComplete: () => {
-                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
+                    scores[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
                 },
                 // 'Cubic', 'Elastic', 'Bounce', 'Back'
                 duration: 200,
@@ -317,7 +320,7 @@ export class Coop3 extends Phaser.Scene{
     }
 
     startNextLevel() {
-        this.scene.start("CharacterTestScene", null)
+        this.scene.start("Comp2",{ply1:players[0].points, ply2:players[1].points})
     }
 
     setPlatformsColliders() {

@@ -1,12 +1,12 @@
 "use strict";
-import {cameraFadeIn, cameraFadeOut, cameraShake, SweepTransition} from '../util/cameraEffects.js'
+import {cameraFadeIn, cameraFadeOut, cameraShake, SweepVerticalTransitionIn} from '../util/cameraEffects.js'
 export class TransitionsScene extends Phaser.Scene{
 
     constructor() {
         super("TimerScene");
     }
     init(){
-        this.transition= new SweepTransition(this);
+        this.transition= new SweepVerticalTransitionIn(this);
     }
     preload(){
         this.transition.loadTransition(this);
