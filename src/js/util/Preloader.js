@@ -40,6 +40,7 @@ export class Preloader extends Phaser.Scene {
 
         //Prueba
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
+        this.load.tilemapTiledJSON('Coop3Map', '../Resources/assets/level/Coop3.json');
         this.load.tilemapTiledJSON('Comp2Map', '../Resources/assets/level/comp2v2.json');
         this.load.image('Comp2Platf','../Resources/assets/level/comp2v2.png')
         this.load.spritesheet("dude","./Resources/assets/items/SPRITE_SHIIIIIITTT.png", { frameWidth: 706, frameHeight: 672 });//Current sprites from tutorial
@@ -58,7 +59,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('JoinScreen');
+        this.scene.start('Coop3');
 
 
     }
