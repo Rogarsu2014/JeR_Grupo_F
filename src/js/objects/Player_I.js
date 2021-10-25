@@ -16,7 +16,8 @@ export class Player_I extends Phaser.Physics.Arcade.Sprite {
         this.context= scene;
         this.spriteKey = spriteKey;
         this.points = points;
-        this.position = (x, y);
+        this.initialPositionX = x;
+        this.initialPositionY = y;
 
 
          //Create the character animations (current ones are from tutorial)

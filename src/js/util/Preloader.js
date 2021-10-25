@@ -34,8 +34,6 @@ export class Preloader extends Phaser.Scene {
         this.load.image('ReturnToMenuPush','../Resources/assets/UI/Buttons/ReturnToMenuPush.png');
 
         this.load.image('sky', './Resources/assets/sky.png');
-        this.load.image('star', './Resources/assets/star.png');
-
 
         //botones de los jugadores
         this.load.image('botonR','../Resources/assets/level/Boton1.png');
@@ -70,6 +68,8 @@ export class Preloader extends Phaser.Scene {
         this.load.image('star', './Resources/assets/star.png');
         this.load.image('play_button', './Resources/assets/play_button.png');
         this.load.image('options_button', './Resources/assets/options_button.png');
+        this.load.image("daia0", "./Resources/assets/items/Daia0.png");//Current sprites from tutorial
+        this.load.image("ibban", "./Resources/assets/items/Ibban.png");//Current sprites from tutorial
 
     }
     create(){

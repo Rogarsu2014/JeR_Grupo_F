@@ -7,7 +7,7 @@ export class Trampa extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         //Particular player object gravity
         this.setGravityY(-300);
-        //this.setScale(0.5);
+        this.setScale(0.075);
         this.setImmovable(1);
         this.setCollideWorldBounds(true);
         this.context = scene;
@@ -30,7 +30,7 @@ export class Trampa extends Phaser.Physics.Arcade.Sprite {
     dañar(jugador) {
         jugador.addPoints(this.puntos);
         this.music.play();
-        jugador.setPosition(jugador.position);
+        jugador.setPosition(jugador.initialPositionX, jugador.initialPositionY);
         jugador.body.moves = false;
         var timer = new Timer(this.context, 2000, () => jugador.body.moves = true);
         timer.startTimer();
