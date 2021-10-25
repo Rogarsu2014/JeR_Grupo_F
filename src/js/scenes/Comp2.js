@@ -2,7 +2,6 @@ import {Player_I} from '../objects/Player_I.js'
 import { Skull } from '../objects/Skull.js'
 import {GamepadProcessor} from "../util/InputProcessors/GamepadProcessor.js";
 import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
-import {Button} from "../objects/Button.js";
 import {Platform} from "../objects/Platform.js";
 import {Timer} from "../util/Timer.js";
 
@@ -11,10 +10,10 @@ var calaveras = [];
 var chocarse;
 var puntuaciones = [];
 
-export class Comp1 extends Phaser.Scene{
+export class Comp2 extends Phaser.Scene{
 
     constructor() {
-        super("Comp1");
+        super("Comp2");
     }
 
     init(){
@@ -23,24 +22,28 @@ export class Comp1 extends Phaser.Scene{
 
     preload(){
         this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
-        this.load.tilemapTiledJSON('Comp1Map', '../Resources/assets/level/comp1v2.json');
+        this.load.tilemapTiledJSON('Comp2Map', '../Resources/assets/level/Comp2.json');
+        this.load.image('Comp2Platf','../Resources/assets/level/Comp2.png')
         }
 
     create(data){
-        const map = this.make.tilemap({ key: 'Comp1Map'});
-        const tileset = map.addTilesetImage('Tileset', 'tileset');
+        const map = this.make.tilemap({ key: 'Comp2Map'});
+        const tileset = map.addTilesetImage('TilesetCompVert', 'tileset3');
 
-        map.createLayer('Backgound', tileset);
-        const floor = map.createLayer('Level', tileset);
+        map.createStaticLayer('Fondo', tileset);
+        const floor = map.createStaticLayer('Level', tileset);
+        
+        this.platforms=[]
+        var platform1= new Platform(this, 0, 0, 'Comp2Platf', 0, 0)
+        this.platforms.push(platform1)
 
         floor.setCollisionByProperty({ collides: true });
 
-
         //Create the character at 0,0 and change its origin
-        var player1 = new Player_I(this, 0, 300, "dude");
+        var player1 = new Player_I(this, 100, 300, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
         players[0] = player1;
-        var player2 = new Player_I(this, 1400, 300, "dude");
+        var player2 = new Player_I(this, 200, 300, "dude");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
         players[0].puntos = data.jug1;
@@ -49,7 +52,6 @@ export class Comp1 extends Phaser.Scene{
         this.physics.add.collider(players[0], players[1], function(){
             chocarse = true;
         });
-
         
         this.physics.add.collider(players[0], floor);
         this.physics.add.collider(players[1], floor);
@@ -59,13 +61,13 @@ export class Comp1 extends Phaser.Scene{
 
         this.addStageFloorCollisions(floor);
 
-        //this.setPlatformsColliders();
+        this.setPlatformsColliders();
 
         this.timer.startTimer();
         this.timerText= this.add.text(this.game.config.width *0.5, 20,'test');
 
 
-        console.log("Escena 2 creada");
+        console.log("Escena comp 2 creada");
     }
 
     update(){
@@ -73,7 +75,7 @@ export class Comp1 extends Phaser.Scene{
         players[1].update(chocarse, players[0]);
         chocarse = false;
         this.timerText.setText(this.timer.getRemainingSeconds(true));
-        //this.UpdatePlatforms();
+        this.UpdatePlatforms();
     }
 
     setPlatformsColliders(){

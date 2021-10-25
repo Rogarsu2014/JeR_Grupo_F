@@ -7,12 +7,14 @@ import  {Preloader} from "./util/Preloader.js"
 import {Coop1} from "./scenes/Coop1.js";
 import {Coop2} from "./scenes/Coop2.js";
 import {Coop3} from "./scenes/Coop3.js";
+import {Comp1} from "./scenes/Comp1.js";
+import {Comp2} from "./scenes/Comp2.js";
 
 window.onload=function (){
 
     const config = {
-        width: 960,//Cambiar el tamaño por escena
-        height: 640,
+        width: 1408,//960,//Cambiar el tamaño por escena
+        height: 640,//448,//640,
         parent: "container",
         type: Phaser.AUTO,
         backgroundColor:"#4488AA",
