@@ -21,6 +21,7 @@ export class Preloader extends Phaser.Scene {
         this.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
 
         this.load.image('tileset', '../Resources/assets/level/tileset.png');
+        this.load.image('plat', '../Resources/assets/level/escalon.png');
         this.load.image('tileset2', '../Resources/assets/level/tileset2.png');
         this.load.image('tileset3', '../Resources/assets/level/tileset3.png');
         //botones de los jugadores
@@ -39,17 +40,27 @@ export class Preloader extends Phaser.Scene {
 
         //Prueba
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
+        this.load.tilemapTiledJSON('Coop3Map', '../Resources/assets/level/Coop3.json');
+        this.load.tilemapTiledJSON('Comp2Map', '../Resources/assets/level/comp2v2.json');
+        this.load.image('Comp2Platf','../Resources/assets/level/comp2v2.png')
         this.load.spritesheet("dude","./Resources/assets/items/SPRITE_SHIIIIIITTT.png", { frameWidth: 706, frameHeight: 672 });//Current sprites from tutorial
+        this.load.spritesheet("dude2","./Resources/assets/items/spriteshit2.png", { frameWidth: 731, frameHeight: 526 });//Current sprites from tutorial
         this.load.image("calavera", "./Resources/assets/items/skull.png");//Current sprites from tutorial
         this.load.audio("puntos+", "./Resources/assets/sounds/points.mp3");//https://www.youtube.com/watch?v=SoeT6x0O-CM
         this.load.audio("dano", "./Resources/assets/sounds/hit.mp3");//https://www.youtube.com/watch?v=dLED_gBGQsk
         this.load.image("trampa", "./Resources/assets/items/itsatrap.png");
 
+        //Cargar cosas Menu
+        this.load.image('sky', './Resources/assets/sky.png');
+        this.load.image('star', './Resources/assets/star.png');
+        this.load.image('play_button', './Resources/assets/play_button.png');
+        this.load.image('options_button', './Resources/assets/options_button.png');
+
     }
     create(){
         console.log("Preload hecho");
-      
-        this.scene.start('Coop1');
+        this.scene.start('Coop3');
+
 
     }
 

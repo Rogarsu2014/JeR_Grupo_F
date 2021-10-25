@@ -47,14 +47,13 @@ export class Coop1 extends Phaser.Scene {
     preload() {
     }
 
+    create(data) {
 
-        //this.physics.world.setFPS(120);
-        
-        const map = this.make.tilemap({ key: 'Coop1Map' });
-
+        //*************** tilemap
+        const map = this.make.tilemap({key: 'Coop1Map'});
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
-        map.createLayer('Background', tileset);
+        map.createStaticLayer('Background', tileset);
 
         // ************** platforms
         this.platforms = []
@@ -78,9 +77,11 @@ export class Coop1 extends Phaser.Scene {
         var player1 = new Player_I(this, 928, 64, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
         players[0] = player1;
+
         var player2 = new Player_I(this, 820, 384, "dude");
-        // player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
-        player2.setPlayerInput(new GamepadProcessor(this, player2, 0, 0, 1));
+        player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
+        //player2.setPlayerInput(new GamepadProcessor(this, player2, 0, 0, 1));
+        
         players[1] = player2;
 
         players[0].points = data.jug1;
@@ -93,7 +94,6 @@ export class Coop1 extends Phaser.Scene {
         pointsCounter[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
-
         var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
             platform2.enable();
             this.taskManager.taskCompleted();
