@@ -21,6 +21,8 @@ export class CharacterTestScene extends Phaser.Scene {
     create() {
         console.log("Character Test Scene created");
 
+        this.game.scale.resize(1480, 640);
+
         //Create the character at 0,0 and change its origin
         var player1 = new Player_I(this, 100, 100, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
@@ -57,13 +59,13 @@ export class CharacterTestScene extends Phaser.Scene {
             });
         }
             
-        var trampa = new Trampa(this, 600, 600, "trampa");
-        this.physics.add.collider(players[0], trampa, function () {
-            trampa.dañar(players[0]);
+        var trap = new Trampa(this, 600, 615, "trap");
+        this.physics.add.collider(players[0], trap, function () {
+            trap.dañar(players[0]);
             scores[0].setText("Jugador 1: "+players[0].points);
         });
-        this.physics.add.collider(players[1], trampa, function () {
-            trampa.dañar(players[1]);
+        this.physics.add.collider(players[1], trap, function () {
+            trap.dañar(players[1]);
             scores[1].setText("Jugador 2: "+players[1].points);
         });
 
