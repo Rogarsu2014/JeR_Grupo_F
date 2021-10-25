@@ -97,29 +97,33 @@ export class Coop1 extends Phaser.Scene {
         var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
             platform2.enable();
             this.taskManager.taskCompleted();
-            button1_P1.setVisible(false);
-            var button1_P1P = new Button(this, 478, 123, 'botonLP');
+            button1_P1.setTexture('botonLP')
+            // button1_P1.setVisible(false);
+            // var button1_P1P = new Button(this, 478, 123, 'botonLP');
         }, players[0]);
 
         var button2_P1 = new Button(this, 360, 443 + 128, 'botonL', () => {
             platform4.enable();
             this.taskManager.taskCompleted();
-            button2_P1.setVisible(false);
-            var button2_P1P = new Button(this, 358, 443 + 128, 'botonLP');
+            button2_P1.setTexture('botonLP')
+            // button2_P1.setVisible(false);
+            // var button2_P1P = new Button(this, 358, 443 + 128, 'botonLP');
         }, players[0]);
 
         var button1_P2 = new Button(this, 780, 443, 'botonR', () => {
             platform1.enable();
             this.taskManager.taskCompleted();
-            button1_P2.setVisible(false);
-            var button1_P2P = new Button(this, 778, 443, 'botonRP');
+            button1_P2.setTexture('botonRP')
+            // button1_P2.setVisible(false);
+            // var button1_P2P = new Button(this, 778, 443, 'botonRP');
         }, players[1]);
 
         var button2_P2 = new Button(this, 480, 443, 'botonR', () => {
             platform3.enable();
             this.taskManager.taskCompleted();
-            button2_P2.setVisible(false);
-            var button2_P2P = new Button(this, 478, 443, 'botonRP');
+            button2_P2.setTexture('botonRP')
+            // button2_P2.setVisible(false);
+            // var button2_P2P = new Button(this, 478, 443, 'botonRP');
         }, players[1]);
 
         //*************** timer
