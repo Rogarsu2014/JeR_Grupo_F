@@ -63,8 +63,6 @@ export class Comp1 extends Phaser.Scene {
 
         this.addStageFloorCollisions(floor);
 
-        //this.setPlatformsColliders();
-
         //Creación de todas las skulls
         skulls.push(new Skull(this, 250, 325, "calavera"));
         skulls.push(new Skull(this, 225, 550, "calavera"));
