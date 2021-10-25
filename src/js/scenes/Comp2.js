@@ -26,9 +26,11 @@ export class Comp2 extends Phaser.Scene{
     create(data){
         const map = this.make.tilemap({ key: 'Comp2Map'});
         const tileset = map.addTilesetImage('Tileset', 'tileset');
+        const platf = map.addTilesetImage('platform', 'plat');
 
         map.createStaticLayer('Background', tileset);
         const floor = map.createStaticLayer('Level', tileset);
+        const platformsTile = map.createStaticLayer('Platform', platf);
         
         //this.platforms=[]
         //var platform1= new Platform(this, 0, 0, 'Comp2Platf', 0, 0)
@@ -52,6 +54,8 @@ export class Comp2 extends Phaser.Scene{
         
         this.physics.add.collider(players[0], floor);
         this.physics.add.collider(players[1], floor);
+        this.physics.add.collider(players[0], platformsTile);
+        this.physics.add.collider(players[1], platformsTile);
 
         puntuaciones[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
         puntuaciones[1] = this.add.text(790, 0, "Jugador 2: "+ players[1].puntos);

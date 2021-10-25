@@ -1,9 +1,23 @@
-import {Player_I} from '../objects/Player_I.js'
+import {Player_I} from '../objects/Player_I.js';
+import {Skull} from '../objects/Skull.js';
 import {GamepadProcessor} from "../util/InputProcessors/GamepadProcessor.js";
 import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
+import {TaskManager} from "../objects/TaskManager.js";
+import {Button} from "../objects/Button.js";
+import {Platform} from "../objects/Platform.js";
+import {Timer} from "../util/Timer.js";
+import {Door} from "../objects/Door.js";
+import {cameraFadeIn, cameraShake, SweepTransition, SweepTransitionHorizontal} from "../util/cameraEffects.js";
+
 
 var players = [];
+var calaveras = [];
 var chocarse;
+var pointsCounter = [];
+var door;
+
+/// Player 1 is upper layer player.
+/// Player 2 is down layer player
 
 export class Coop3 extends Phaser.Scene{
 
@@ -11,38 +25,65 @@ export class Coop3 extends Phaser.Scene{
         super("Coop3");
     }
 
+    init(){
+        this.timer = new Timer(this, 2099000)
+
+        this.taskManager = new TaskManager(this, 4, [0, 1, 0, 1], () => {
+            console.log("All tasks completed");
+            door.open()
+        }, this.timer, players, this.updatePoints, 500);
+
+        this.timer.onComplete(() => {
+            console.log(
+                this.taskManager.getPlayerWithMoreTasksCompleted()
+            );
+            this.timeOver()
+            this.timer.pauseTimer();
+        })
+    }
+
     preload(){
-        this.load.spritesheet("dude","./Resources/assets/items/dude.png", { frameWidth: 32, frameHeight: 48 });//Current sprites from tutorial
-        this.load.tilemapTiledJSON('Coop3Map', '../Resources/assets/level/Coop3.json');
         }
 
-    create(){
+    create(data){
         const map = this.make.tilemap({ key: 'Coop3Map'});
         const tileset = map.addTilesetImage('Tileset', 'tileset');
 
         map.createStaticLayer('Background', tileset);
-        const floor = map.createStaticLayer('Level', tileset);
 
-        floor.setCollisionByProperty({ collides: true });
+        // ************** platforms
+        this.platforms = []
+        var platform1 = new Platform(this, 320, 224, '1x1', 0, -64)
+        this.platforms.push(platform1)
+        var platform2 = new Platform(this, -64, 0, 'vertical1x4-5', 192, 0)
+        this.platforms.push(platform2)
+        var platform3 = new Platform(this, 448, 640, 'horizontal4x1', 0, -192)
+        this.platforms.push(platform3)
+        var platform4 = new Platform(this, 704, 352,'vertical1x1-5', 0, 96)
+        this.platforms.push(platform4)
 
-        let plat;
-        let door;
-
-        let platArr1 =  this.physics.add.staticGroup();
+        /*let platArr1 =  this.physics.add.staticGroup();
         platArr1.create(320,224,'1x1').setOrigin(0,0);
         let platArr2 =  this.physics.add.staticGroup();
         platArr2.create(768,288,'horizontal3x1').setOrigin(0,0);
         let platAbj =  this.physics.add.staticGroup();
         platAbj.create(704,352,'vertical1x1-5').setOrigin(0,0);
         let butIniArr = this.add.image(256,224,'botonR').setOrigin(0,0);
-        let butIniAbj = this.add.image(320,448,'botonL').setOrigin(0,0);
+        let butIniAbj = this.add.image(320,448,'botonL').setOrigin(0,0);*/
+        
+        const floor = map.createStaticLayer('Level', tileset);
+        floor.setCollisionByProperty({ collides: true });
+
+        //**************** door
+        door = new Door(this, 896,448, 'door', this.timer)
+
 
         //faltan colisiones con el pj, son estilo;
         // this.physics.add.collider(player, obj);
 
         //let butIniArriba = this.add.image(384,384,'botonR').setOrigin(0,0);       
 
-        //Create the character at 0,0 and change its origin
+        ///************** players
         var player1 = new Player_I(this, 100, 100, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
         players[0] = player1;
@@ -50,38 +91,119 @@ export class Coop3 extends Phaser.Scene{
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
 
-        this.physics.add.collider(players[0], players[1], function(){
+        players[0].points = data.jug1;
+        players[1].points = data.jug2;
+
+        players[0].disableMovement()
+        players[1].disableMovement()
+        ///******* players points
+        pointsCounter[0] = this.add.text(75, 32, "Jugador 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        pointsCounter[1] = this.add.text(790 + 60 + 30, 32, "Jugador 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+
+        //*************** buttons
+        var button1_P2 = new Button(this, 256, 282, 'botonR', () => {   //ley de +58
+            platform2.enable()
+            platform3.enable()
+            this.taskManager.taskCompleted();
+            this.taskManager.taskCompleted();
+            button1_P2.setVisible(false);
+            var button1_P2P = new Button(this, 256, 284, 'botonRP');
+            
+            var button1_P1 = new Button(this, 320,506, 'botonL', () => {
+                platform1.enable();
+                this.taskManager.taskCompleted();
+                button1_P1.setVisible(false);
+                var button1_P1P = new Button(this, 320,508, 'botonLP');
+
+                var button1_P2 = new Button(this,  460,282, 'botonR', () => {
+                    platform2.enable()
+                    platform4.enable()
+                    this.taskManager.taskCompleted();
+                    this.taskManager.taskCompleted();
+                    button1_P2.setVisible(false);
+                    var button1_P2P = new Button(this, 256, 284, 'botonRP');
+                }, players[1]);
+
+            }, players[0]);
+
+        }, players[1]);
+
+
+        //*************** timer
+
+        this.timer.startTimer();
+        this.timer.pauseTimer();
+        this.loadTransition = new SweepTransitionHorizontal(this);
+        this.loadTransition.addToScene()
+        this.loadTransition.playTransition(() => {
+
+                this.timer.resumeTimer();
+                this.enableAllPlayersMovement()
+            }, 500, 500
+        )
+
+        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {
+            fontFamily: 'ink-free-normal',
+            fontSize: '40px'
+        }).setOrigin(0.5, 0.5);
+
+        let timerTween = this.tweens.add({
+            targets: this.timerText,
+            paused: true,
+            scale: 2,
+            y: '-=10',
+            ease: 'Bounce.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 125,
+            yoyo: true,
+            repeat: 0,            // -1: infinity
+        });
+
+
+        this.taskManager.setOnTaskCompletedTween(timerTween)
+
+        ///************** collisions
+        //***** door and players
+        this.physics.add.collider(players[0], door, () => door.playerEntered(players[0]))
+        this.physics.add.collider(players[1], door, () => door.playerEntered(players[1]))
+        //***** between players
+        this.physics.add.collider(players[0], players[1], function () {
             chocarse = true;
         });
 
-        //Create the character animations (current ones are from tutorial)
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
+        //***** players and floor
+        this.addStageFloorCollisions(floor);
+        //**** players and platforms
+        this.setPlatformsColliders();
 
-        this.anims.create({
-            key: 'turn',
-            frames: [{ key: 'dude', frame: 4 }],
-            frameRate: 20
-        });
+        console.log("Escena 3 creada");
+    }
 
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
-        
-        console.log("Escena 2 creada");
+    timeOver() {
+
+        let playerIndexWithMoreTasksCompleted = this.taskManager.getPlayerWithMoreTasksCompleted();
+        this.timerOverUpdatePoints(this, playerIndexWithMoreTasksCompleted, 500)
+
+        let playerWithLessTasksCompleted = this.taskManager.getPlayerWithLessTasksCompleted();
+        this.timerOverUpdatePoints(this, playerWithLessTasksCompleted, -500)
+
+        let timeOverTimer = new Timer(this, 1000, () => {
+            let endTransition = new SweepTransition(this);
+            endTransition.addToScene()
+            endTransition.playTransition(() => {
+                this.startNextLevel()
+            }, 1000, 2000)
+        })
+        timeOverTimer.startTimer()
+
     }
 
     update(){
         players[0].update(chocarse, players[1]);
         players[1].update(chocarse, players[0]);
         chocarse = false;
+
+        this.timerText.setText(this.timer.getRemainingSeconds(true));
+        this.UpdatePlatforms();
     //Añadir colisiones con los botones, lo que va debajo es lo que genera cada boton
             //Botón de arriba pulsado
         /*butIniArr.setVisible(false);
@@ -106,5 +228,121 @@ export class Coop3 extends Phaser.Scene{
 
         //la puerta apareceria al tocar la llave
         //this.door = this.add.image(896,448,'door').setOrigin(0,0);
+    }
+    
+    updatePoints(context, playerIndex, points) {
+        if ((players[playerIndex].points + points) <= 0) {
+            players[playerIndex].points = 0;
+        } else {
+            players[playerIndex].points += points;
+        }
+        pointsCounter[playerIndex].setText("Jugador" + (playerIndex + 1) + ": " + players[playerIndex].points);
+
+        let textTween = context.tweens.add({
+            targets: pointsCounter[playerIndex],
+            paused: true,
+            scaleX: .9,
+            ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 100,
+            yoyo: true,
+            repeat: 0,            // -1: infinity
+        });
+        textTween.play()
+    }
+
+    timerOverUpdatePoints(context, playerIndex, points) {
+        if ((players[playerIndex].points + points) <= 0) {
+            players[playerIndex].points = 0;
+        } else {
+            players[playerIndex].points += points;
+        }
+        pointsCounter[playerIndex].setText("Jugador" + (playerIndex + 1) + ": " + players[playerIndex].points);
+
+        let textTween;
+        if (points < 0)
+            textTween = context.tweens.add({
+                targets: pointsCounter[playerIndex],
+                paused: true,
+                rotation: .5,
+                // scaleX:1.5,
+                scaleY: 1.2,
+                y: '+=5',
+                ease: 'Sine.easeIn',
+                onStart: () => {
+                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 0, 0));
+                },
+                onComplete: (tween) => {
+                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
+                },
+                // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 100,
+                yoyo: true,
+                repeat: 1,            // -1: infinity
+            });
+        else
+            textTween = context.tweens.add({
+                targets: pointsCounter[playerIndex],
+                paused: true,
+                scaleX: 1.5,
+                y: '+=15',
+                ease: 'Quart.in',
+                onStart: () => {
+                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(0, 255, 255));
+                },
+                onComplete: () => {
+                    pointsCounter[playerIndex].setTint(Phaser.Display.Color.GetColor(255, 255, 255));
+                },
+                // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 200,
+                yoyo: true,
+                repeat: 0,            // -1: infinity
+            });
+        textTween.play()
+    }
+
+    enableAllPlayersMovement() {
+        for (let i = 0; i < players.length; i++) {
+            players[i].enableMovement()
+        }
+    }
+
+    disableAllPlayersMovement() {
+        for (let i = 0; i < players.length; i++) {
+            players[i].disableMovement()
+        }
+    }
+
+    addPointsToPlayer(playerIndex, points) {
+        players[0].puntos += points;
+    }
+
+    startNextLevel() {
+        this.scene.start("CharacterTestScene", null)
+    }
+
+    setPlatformsColliders() {
+
+        for (let i = 0; i < this.platforms.length; i++) {
+            this.physics.add.collider(players[0], this.platforms[i], () => console.log("over platform"))
+            this.physics.add.collider(players[1], this.platforms[i], () => console.log("over platform"))
+        }
+    }
+
+    setPlayerDoorInteraction() {
+        for (let i = 0; i < players.length; i++) {
+            this.physics.add.collider(players[i], door.playerEntered(players[i]))
+        }
+    }
+
+    addStageFloorCollisions(floor) {
+        this.physics.add.collider(players[0], floor);
+        this.physics.add.collider(players[1], floor);
+    }
+
+
+    UpdatePlatforms() {
+        for (let i = 0; i < this.platforms.length; i++) {
+            this.platforms[i].movePlatform()
+        }
     }
 }
