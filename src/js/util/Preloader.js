@@ -21,6 +21,7 @@ export class Preloader extends Phaser.Scene {
         this.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
 
         this.load.image('tileset', '../Resources/assets/level/tileset.png');
+
         this.load.image('plat', '../Resources/assets/level/escalon.png');
 
         // buttons main menu
@@ -48,6 +49,10 @@ export class Preloader extends Phaser.Scene {
         this.load.image('vertical1x1-5','../Resources/assets/level/blocker7 1x1-5.png');
         this.load.image('vertical1x4-5','../Resources/assets/level/blocker8 1x4-5.png');
         this.load.image('door','../Resources/assets/level/Door.png');
+        //platagormas estáticas
+        this.load.image('platS','../Resources/assets/level/escalonplano.png');
+        this.load.image('platM','../Resources/assets/level/escalonplano2.png');
+        this.load.image('platL','../Resources/assets/level/escalonplano3.png');
 
         //Prueba
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
@@ -55,7 +60,7 @@ export class Preloader extends Phaser.Scene {
         this.load.tilemapTiledJSON('Coop3Map', '../Resources/assets/level/Coop3.json');
         this.load.tilemapTiledJSON('Comp1Map', '../Resources/assets/level/comp1v2.json');
         this.load.tilemapTiledJSON('Comp2Map', '../Resources/assets/level/comp2v2.json');
-        this.load.image('Comp2Platf','../Resources/assets/level/comp2v2.png')
+        this.load.tilemapTiledJSON('Comp3Map', '../Resources/assets/level/Comp3.json');
         this.load.spritesheet("dude","./Resources/assets/items/SPRITE_SHIIIIIITTT.png", { frameWidth: 706, frameHeight: 672 });//Current sprites from tutorial
         this.load.spritesheet("dude2","./Resources/assets/items/spriteshit2.png", { frameWidth: 731, frameHeight: 526 });//Current sprites from tutorial
         this.load.image("skull", "./Resources/assets/items/skull.png");//Current sprites from tutorial
@@ -74,8 +79,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('FinPartida');
-
+        this.scene.start('MenuScene');
 
     }
 
