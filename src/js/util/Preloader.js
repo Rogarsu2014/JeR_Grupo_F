@@ -24,15 +24,28 @@ export class Preloader extends Phaser.Scene {
 
         this.load.image('plat', '../Resources/assets/level/escalon.png');
 
-        // buttons main menu
+        //**** main menu
+
+        //buttons
         this.load.image('Credits','../Resources/assets/UI/Buttons/Credits.png');
         this.load.image('CreditsPush','../Resources/assets/UI/Buttons/CreditsPush.png');
         this.load.image('LocalGame','../Resources/assets/UI/Buttons/LocalGame.png');
         this.load.image('LocalGamePush','../Resources/assets/UI/Buttons/LocalGamePush.png');
+        this.load.image('OnlineGame','../Resources/assets/UI/Buttons/OnlineGame.png');
+        this.load.image('OnlineGamePush','../Resources/assets/UI/Buttons/OnlineGamePush.png');
+        this.load.image('Options','../Resources/assets/UI/Buttons/Options.png');
+        this.load.image('OptionsPush','../Resources/assets/UI/Buttons/OptionsPush.png');
+        this.load.image('Tutorial','../Resources/assets/UI/Buttons/Tutorial.png');
+        this.load.image('TutorialPush','../Resources/assets/UI/Buttons/TutorialPush.png');
+
+
         this.load.image('PlayAgain','../Resources/assets/UI/Buttons/PlayAgain.png');
         this.load.image('PlayAgainPush','../Resources/assets/UI/Buttons/PlayAgainPush.png');
         this.load.image('ReturnToMenu','../Resources/assets/UI/Buttons/ReturnToMenu.png');
         this.load.image('ReturnToMenuPush','../Resources/assets/UI/Buttons/ReturnToMenuPush.png');
+        // Menu
+        this.load.image('menuImage','../Resources/assets/UI/MainMenu/MenuImage.png');
+        this.load.image('gameTittle','../Resources/assets/UI/MainMenu/GameTittle.png');
 
         this.load.image('sky', './Resources/assets/sky.png');
 
@@ -89,7 +102,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('Coop3');
+        this.scene.start('MenuScene');
 
     }
 

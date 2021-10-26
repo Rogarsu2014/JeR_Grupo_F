@@ -22,35 +22,50 @@ export class MenuScene extends Phaser.Scene{
         let height=this.game.canvas.height;
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
             playButton.off('selected')
-            optionsButton.off('selected')
+            tutorial.off('selected');
+            credits.off('selected');
         })
-        this.add.image(0, 0, 'sky').setOrigin(0).setDepth(0).setScale(2);
+        this.add.image(0, 0, 'menuImage').setOrigin(0).setDepth(0).setScale(1);
+
+        this.add.image(this.game.canvas.width*.5, 10, 'gameTittle').setOrigin(0.5,0).setDepth(10).setScale(.25);
 
         this.selectSprite = new Skull(this, width / 2 - 100, height / 2 - 100, "skull",6)
         this.selectSprite.setVisible(false);
-        this.selectSprite.setScale(.2);
+        this.selectSprite.setScale(.1);
 
-        this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
-        let playButton = this.add.image(width / 2,height / 2, 'LocalGame').setDepth(1);
-        let optionsButton = this.add.image(width / 2,height / 2 + 100, 'Credits').setDepth(1);
+        // this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
+        let playButton = this.add.image(width / 2,height / 2-25, 'LocalGame').setDepth(1).setScale(.8);
+        let onlineGame = this.add.image(width / 2,height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
+        let tutorial = this.add.image(width / 2,height / 2 + 125, 'Tutorial').setDepth(1).setScale(.8);
+        let options = this.add.image(width / 2,height / 2 + 200, 'Options').setDepth(1).setScale(.8);
+        let credits = this.add.image(width / 2,height / 2 + 275, 'Credits').setDepth(1).setScale(.8);
+
+
+        // *fase2* settings
+        options.alpha=0.4;
+        onlineGame.alpha=0.4;
         this.buttons.push(playButton);
-        this.buttons.push(optionsButton);
+        this.buttons.push(tutorial);
+        this.buttons.push(credits);
 
         playButton.setInteractive();
-
-        optionsButton.setInteractive();
+        tutorial.setInteractive();
+        credits.setInteractive();
 
         playButton.on('selected', () => {
             this.scene.start('Coop1');
         })
-    
-        optionsButton.on('selected', () => {
-            console.log('opciones')
+        tutorial.on('selected', () => {
+            console.log('tutorial')
         })
+        credits.on('selected', () => {
+            console.log('creditos')
+        })
+
 
        this.selectButton(0);
 
-        var arrowDown=this.input.keyboard.on('keydown-' + 'DOWN', ()=>this.selectNextButton(-1));
+        var arrowDown=this.input.keyboard.on('keydown-' + 'DOWN', ()=>this.selectNextButton(1));
 
         var arrowUp=this.input.keyboard.on('keydown-' + 'UP', ()=>this.selectNextButton(-1));
 
@@ -66,7 +81,7 @@ export class MenuScene extends Phaser.Scene{
             targets: button,
             scaleX: 1.25,
             ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 125,
+            duration: 100,
             yoyo: true,
             repeat: 0,            // -1: infinity
         });
