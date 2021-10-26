@@ -101,7 +101,7 @@ export class Coop3 extends Phaser.Scene{
         players[1].disableMovement()
         ///******* players points
         scores[0] = this.add.text(75, 32, "Player 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
-        scores[1] = this.add.text(this.game.canvas.width-150, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        scores[1] = this.add.text(this.game.canvas.width-75,32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
         var button1_P2 = new Button(this, 256, 282, 'botonR', () => {   //ley de +58
@@ -145,7 +145,7 @@ export class Coop3 extends Phaser.Scene{
             }, 500, 500
         )
 
-        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {
+        this.timerText = this.add.text(this.game.canvas.width * 0.5, 40, 'test', {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setOrigin(0.5, 0.5);
