@@ -116,17 +116,16 @@ export class Coop2 extends Phaser.Scene {
         // }, players[1]);
         //
         // button2_P2.setVisible(false);
-        var button1_P2 = new Button(this, 416, 443, 'botonL', () => {
+        var button1_P2 = new Button(this, 416, 448, 'botonL', () => {
             this.taskManager.taskCompleted();
             button1_P2.setTexture('botonLP')
 
-            let button1_P1 = new Button(this, 416, 570, 'botonR', () => {
+            let button1_P1 = new Button(this, 416, 575, 'botonR', () => {
                 platform1.enable();
                 this.taskManager.taskCompleted();
-                // button1_P1.setVisible(false);
                 button1_P1.setTexture('botonRP')
 
-                let button2_P2 = new Button(this, 545, 379, 'botonL', () => {
+                let button2_P2 = new Button(this, 545, 384, 'botonL', () => {
                     this.taskManager.taskCompleted();
                     // button2_P2.setVisible(false);
                     button2_P2.setTexture('botonLP')

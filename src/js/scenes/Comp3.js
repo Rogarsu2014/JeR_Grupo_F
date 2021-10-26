@@ -34,10 +34,11 @@ export class Comp3 extends Phaser.Scene{
 
     create(data){
 
+
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 
-        this.game.canvas.width = (960);
+        this.game.canvas.width = (1280);
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height);
 
         const map = this.make.tilemap({ key: 'Comp3Map'});
@@ -65,10 +66,10 @@ export class Comp3 extends Phaser.Scene{
 
         floor.setCollisionByProperty({ collides: true });
 
-        var player1 = new Player_I(this, 0, 192, "dude");
+        var player1 = new Player_I(this, 30, 192, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
         players[0] = player1;
-        var player2 = new Player_I(this, 0, 192, "dude2");
+        var player2 = new Player_I(this, this.game.canvas.width-30, 192, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
         players[0].puntos = data.jug1;
@@ -82,7 +83,7 @@ export class Comp3 extends Phaser.Scene{
         this.physics.add.collider(players[1], floor);
 
         //Creación de todas las skulls
-        skulls.push(new Skull(this, 200, 165, "skull"));
+        // skulls.push(new Skull(this, 200, 165, "skull"));
         skulls.push(new Skull(this, 290, 325, "skull"));
         skulls.push(new Skull(this, 330, 430, "skull"));
         skulls.push(new Skull(this, 450, 300, "skull"));

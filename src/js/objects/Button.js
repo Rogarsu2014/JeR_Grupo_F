@@ -4,7 +4,7 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
         this.context= context;
         this.context.add.existing(this,true);
         this.context.physics.add.existing(this,true);
-
+        this.setOrigin(.5,1)
         this.isPressed = false;
         this.onPressed = onPressedCallback;
         this.context.physics.add.collider(this, targetPlayer,()=> this.Press());
