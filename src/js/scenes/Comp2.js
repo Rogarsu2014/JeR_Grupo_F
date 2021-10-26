@@ -159,7 +159,7 @@ export class Comp2 extends Phaser.Scene{
             }, 500, 500
         )
 
-        this.timerText= this.add.text(this.game.canvas.width * 0.5, 20,'test', {
+        this.timerText= this.add.text(this.game.canvas.width * 0.5, 40,'test', {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setOrigin(0.5, 0.5);
