@@ -16,6 +16,9 @@ var bump;
 var scores = [];
 var counter = 0;
 
+var music;
+const backgroundMusicKey= 'compStageMusic';
+
 export class Comp3 extends Phaser.Scene{
 
     constructor() {
@@ -30,6 +33,9 @@ export class Comp3 extends Phaser.Scene{
         }
 
     create(data){
+
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
 
         this.game.canvas.width = (960);
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height);
@@ -92,7 +98,7 @@ export class Comp3 extends Phaser.Scene{
         counter = 10;
 
         for (let i = 0; i < skulls.length; i += 1) {
-            this.physics.add.collider(players[0], skulls[i], function () {
+            this.physics.add.collider(players[0], skulls[i],  ()=> {
                 skulls[i].desaparicion(players[0]);
                 scores[0].setText("Player 1: " + players[0].points);
                 counter--;
@@ -100,7 +106,7 @@ export class Comp3 extends Phaser.Scene{
                     this.startNextLevel();
                 }
             });
-            this.physics.add.collider(players[1], skulls[i], function () {
+            this.physics.add.collider(players[1], skulls[i], ()=> {
                 skulls[i].desaparicion(players[1]);
                 scores[1].setText("Player 2: " + players[1].points);
                 counter--;
@@ -148,7 +154,7 @@ export class Comp3 extends Phaser.Scene{
             }, 500, 500
         )
 
-        this.timerText= this.add.text(this.game.canvas.width * 0.5, 20,'test', {
+        this.timerText= this.add.text(this.game.canvas.width * 0.5, 40,'test', {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setOrigin(0.5, 0.5);
@@ -188,10 +194,13 @@ export class Comp3 extends Phaser.Scene{
     startNextLevel(){
         this.timer.pauseTimer();
         this.disableAllPlayersMovement()
-        cameraFadeOut(this, 1000, () => this.scene.start(nextLevelKey, {
-            ply1: players[0].points,
-            ply2: players[1].points
-        }))
+        cameraFadeOut(this, 1000, () => {
+            music.stop()
+            this.scene.start(nextLevelKey, {
+                    ply1: players[0].points,
+                    ply2: players[1].points
+                }
+            )})
     }
 
     enableAllPlayersMovement() {
@@ -208,5 +217,15 @@ export class Comp3 extends Phaser.Scene{
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }
+    }
+
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
     }
 }

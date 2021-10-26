@@ -14,6 +14,8 @@ var bump;
 var scores = [];
 var door;
 
+var music;
+const backgroundMusicKey= 'coopStageMusic';
 export class Coop2 extends Phaser.Scene {
 
     constructor() {
@@ -42,6 +44,10 @@ export class Coop2 extends Phaser.Scene {
     }
 
     create(data) {
+
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
+
         this.game.canvas.width = 960;
         this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
 
@@ -59,7 +65,7 @@ export class Coop2 extends Phaser.Scene {
         floor.setCollisionByProperty({collides: true});
 
         //**************** door
-        door = new Door(this, 64, 448, 'door', this.timer)
+        door = new Door(this, 64, 448,  this.timer)
 
         //Creacion de pjs
         var player1 = new Player_I(this, 100, 500, "dude");
@@ -89,26 +95,46 @@ export class Coop2 extends Phaser.Scene {
 //FALTA DETECCIÓN DE LO DE ALTURA
 //this.taskManager.taskCompleted();
 
+        // var button1_P2 = new Button(this, 416, 443, 'botonL', () => {
+        //     this.taskManager.taskCompleted();
+        //     button1_P2.setTexture('botonLP')
+        //     button1_P1.setVisible(true);
+        // }, players[1]);
+        //
+        // let button1_P1 = new Button(this, 416, 570, 'botonR', () => {
+        //     platform1.enable();
+        //     this.taskManager.taskCompleted();
+        //     button1_P1.setTexture('botonRP')
+        //
+        //     button2_P2.setVisible(true);
+        // }, players[0]);
+        // button1_P1.setVisible(false);
+        //
+        // let button2_P2 = new Button(this, 545, 379, 'botonL', () => {
+        //     this.taskManager.taskCompleted();
+        //     button2_P2.setTexture('botonLP')
+        // }, players[1]);
+        //
+        // button2_P2.setVisible(false);
         var button1_P2 = new Button(this, 416, 443, 'botonL', () => {
             this.taskManager.taskCompleted();
             button1_P2.setTexture('botonLP')
-            button1_P1.setVisible(true);
+
+            let button1_P1 = new Button(this, 416, 570, 'botonR', () => {
+                platform1.enable();
+                this.taskManager.taskCompleted();
+                // button1_P1.setVisible(false);
+                button1_P1.setTexture('botonRP')
+
+                let button2_P2 = new Button(this, 545, 379, 'botonL', () => {
+                    this.taskManager.taskCompleted();
+                    // button2_P2.setVisible(false);
+                    button2_P2.setTexture('botonLP')
+                }, players[1]);
+
+            }, players[0]);
+
         }, players[1]);
-
-        let button1_P1 = new Button(this, 416, 570, 'botonR', () => {
-            platform1.enable();
-            this.taskManager.taskCompleted();
-            button1_P1.setTexture('botonRP')
-            button2_P2.setVisible(true);
-        }, players[0]);
-        button1_P1.setVisible(false);
-
-        let button2_P2 = new Button(this, 545, 379, 'botonL', () => {
-            this.taskManager.taskCompleted();
-            button2_P2.setTexture('botonLP')
-        }, players[1]);
-        button2_P2.setVisible(false);
-
         this.timer.startTimer();
         this.timer.pauseTimer();
 
@@ -269,6 +295,7 @@ export class Coop2 extends Phaser.Scene {
     }
 
     startNextLevel() {
+        music.stop()
         this.scene.start(nextLevelKey, {ply1:players[0].points, ply2:players[1].points})
     }
 
@@ -296,5 +323,15 @@ export class Coop2 extends Phaser.Scene {
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }
+    }
+
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
     }
 }

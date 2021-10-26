@@ -48,7 +48,11 @@ export class Preloader extends Phaser.Scene {
         this.load.image('horizontal4x1','../Resources/assets/level/blocker6 4x1.png');
         this.load.image('vertical1x1-5','../Resources/assets/level/blocker7 1x1-5.png');
         this.load.image('vertical1x4-5','../Resources/assets/level/blocker8 1x4-5.png');
+        // door
         this.load.image('door','../Resources/assets/level/Door.png');
+        this.load.image('doorOpened','../Resources/assets/level/DoorOpened.png');
+        this.load.audio("doorOpenedSfx",'../Resources/assets/sounds/doorOpenedSfx.mp3');
+
         //platagormas estáticas
         this.load.image('platS','../Resources/assets/level/escalonplano.png');
         this.load.image('platM','../Resources/assets/level/escalonplano2.png');
@@ -69,6 +73,11 @@ export class Preloader extends Phaser.Scene {
         this.load.audio("hit", "./Resources/assets/sounds/hit.mp3");//https://www.youtube.com/watch?v=dLED_gBGQsk
         this.load.image("trap", "./Resources/assets/items/itsatrap.png");
 
+        this.load.audio("buttonClick", "./Resources/assets/sounds/buttonClick.mp3"); //https://creatorassets.com/a/button-sound-effects
+        this.load.audio("coopStageMusic", "./Resources/assets/Music/coopStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
+        this.load.audio("compStageMusic", "./Resources/assets/Music/compStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
+
+
         //Cargar cosas Menu
         this.load.image('sky', './Resources/assets/sky.png');
         this.load.image('star', './Resources/assets/star.png');
@@ -80,7 +89,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('Coop3');
+        this.scene.start('Coop2');
 
     }
 

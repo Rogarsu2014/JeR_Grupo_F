@@ -21,6 +21,8 @@ var traps = [];
 var bump;
 var scores = [];
 var counter = 0;
+var music;
+const backgroundMusicKey= 'compStageMusic';
 
 export class Comp1 extends Phaser.Scene {
 
@@ -37,7 +39,8 @@ export class Comp1 extends Phaser.Scene {
     }
 
     create(data) {
-
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
 
         this.game.canvas.width = 1408;
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height)
@@ -145,7 +148,7 @@ export class Comp1 extends Phaser.Scene {
             }, 500, 500
         )
 
-        this.timerText = this.add.text(this.game.config.width * 0.5, 20, 'test', {
+        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setOrigin(0.5, 0.5);
@@ -177,10 +180,14 @@ export class Comp1 extends Phaser.Scene {
     startNextLevel(){
         this.timer.pauseTimer();
         this.disableAllPlayersMovement()
-        cameraFadeOut(this, 1000, () => this.scene.start(nextLevelKey, {
-            ply1: players[0].points,
-            ply2: players[1].points
-        }))
+
+        cameraFadeOut(this, 1000, () => {
+            music.stop()
+            this.scene.start(nextLevelKey, {
+                ply1: players[0].points,
+                ply2: players[1].points
+            }
+        )})
     }
 
     addStageFloorCollisions(floor) {
@@ -203,5 +210,15 @@ export class Comp1 extends Phaser.Scene {
         for (let i = 0; i < players.length; i++) {
             players[i].disableMovement()
         }
+    }
+
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
     }
 }
