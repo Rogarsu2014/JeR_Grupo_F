@@ -16,6 +16,7 @@ import {
 } from "../util/cameraEffects.js";
 
 
+const nextLevelKey = "Comp1"
 var players = [];
 var bump;
 var scores = [];
@@ -293,7 +294,7 @@ export class Coop1 extends Phaser.Scene {
     }
 
     startNextLevel() {
-        this.scene.start("Comp1", {ply1:players[0].points, ply2:players[1].points})
+        this.scene.start(nextLevelKey, {ply1:players[0].points, ply2:players[1].points})
     }
 
     setPlatformsColliders() {
