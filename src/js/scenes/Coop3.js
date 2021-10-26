@@ -16,6 +16,8 @@ var bump;
 var scores = [];
 var door;
 
+var music;
+const backgroundMusicKey= 'coopStageMusic';
 /// Player 1 is upper layer player.
 /// Player 2 is down layer player
 
@@ -46,6 +48,9 @@ export class Coop3 extends Phaser.Scene{
         }
 
     create(data){
+
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
 
         this.game.canvas.width = 960;
         this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
@@ -79,7 +84,7 @@ export class Coop3 extends Phaser.Scene{
         floor.setCollisionByProperty({ collides: true });
 
         //**************** door
-        door = new Door(this, 896,448, 'door', this.timer)
+        door = new Door(this, 896,448,this.timer)
 
 
         //faltan colisiones con el pj, son estilo;
@@ -319,6 +324,7 @@ export class Coop3 extends Phaser.Scene{
     }
 
     startNextLevel() {
+        music.stop()
         this.scene.start(nextLevelKey,{ply1:players[0].points, ply2:players[1].points})
     }
 
@@ -346,5 +352,14 @@ export class Coop3 extends Phaser.Scene{
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }
+    }
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
     }
 }

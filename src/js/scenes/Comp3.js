@@ -16,6 +16,9 @@ var bump;
 var scores = [];
 var counter = 0;
 
+var music;
+const backgroundMusicKey= 'compStageMusic';
+
 export class Comp3 extends Phaser.Scene{
 
     constructor() {
@@ -30,6 +33,9 @@ export class Comp3 extends Phaser.Scene{
         }
 
     create(data){
+
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
 
         this.game.canvas.width = (960);
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height);
@@ -188,10 +194,13 @@ export class Comp3 extends Phaser.Scene{
     startNextLevel(){
         this.timer.pauseTimer();
         this.disableAllPlayersMovement()
-        cameraFadeOut(this, 1000, () => this.scene.start(nextLevelKey, {
-            ply1: players[0].points,
-            ply2: players[1].points
-        }))
+        cameraFadeOut(this, 1000, () => {
+            music.stop()
+            this.scene.start(nextLevelKey, {
+                    ply1: players[0].points,
+                    ply2: players[1].points
+                }
+            )})
     }
 
     enableAllPlayersMovement() {
@@ -208,5 +217,15 @@ export class Comp3 extends Phaser.Scene{
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }
+    }
+
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
     }
 }

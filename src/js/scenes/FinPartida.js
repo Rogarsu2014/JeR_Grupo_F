@@ -27,8 +27,8 @@ export class FinPartida extends Phaser.Scene {
         var width = this.game.canvas.width;
         var height = this.game.canvas.height;
 
-        players[0] = data.jug1;
-        players[1] = data.jug2;
+        players[0] = data.ply1;
+        players[1] = data.ply2;
 
         this.selectSprite = this.add.image(width / 2 - 100, height / 2 - 100, 'skull')
         this.selectSprite.setVisible(false)
@@ -40,18 +40,18 @@ export class FinPartida extends Phaser.Scene {
         this.buttons.push(mainMenuButton);
 
         if (players[0] > players[1]) {
-            this.add.text(320, 20, "¡El jugador 1 ha ganado!")
-            scores[0] = this.add.text(350, 213, "Jugador 1: " + players[0]);
-            scores[1] = this.add.text(350, 233, "Jugador 2: " + players[1]);
+            this.add.text(320, 20, "Player 1 wins!")
+            scores[0] = this.add.text(350, 213, "Player 1: " + players[0]);
+            scores[1] = this.add.text(350, 233, "Player 2: " + players[1]);
 
         } else if (players[0] < players[1]) {
-            this.add.text(320, 20, "¡El jugador 2 ha ganado!")
-            scores[0] = this.add.text(350, 213, "Jugador 1: " + players[1]);
-            scores[1] = this.add.text(350, 233, "Jugador 2: " + players[0]);
+            this.add.text(320, 20, "Player 2 wins!")
+            scores[0] = this.add.text(350, 213, "Player 1: " + players[1]);
+            scores[1] = this.add.text(350, 233, "Player 2: " + players[0]);
         } else {
-            this.add.text(320, 20, "¡Se ha producido un empate!")
-            scores[0] = this.add.text(350, 213, "Jugador 1: " + players[0]);
-            scores[1] = this.add.text(350, 233, "Jugador 2: " + players[1]);
+            this.add.text(320, 20, "Draw!")
+            scores[0] = this.add.text(350, 213, "Player 1: " + players[0]);
+            scores[1] = this.add.text(350, 233, "Player 2: " + players[1]);
         }
 
         this.add.image(150, 250, "daia0").setScale(0.3);
