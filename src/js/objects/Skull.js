@@ -11,7 +11,16 @@ export class Skull extends Phaser.Physics.Arcade.Sprite {
         this.context= scene;
         this.spriteKey = spriteKey;
         this.puntos = 100;
-        this.music = this.context.sound.add("puntos+", this.context.game.config.musicConfig);
+        this.music = this.context.sound.add("points+", this.context.game.config.musicConfig);
+         //Create the character animations (current ones are from tutorial)
+        this.context.anims.create({
+            key: 'idle' + this.spriteKey,
+            frames: this.anims.generateFrameNumbers(this.spriteKey, { start: 0, end: 4 }),
+            frameRate: 2,
+            repeat: -1,
+            yoyo: true
+        });
+        this.anims.play('idle'+ this.spriteKey, true);
     }
     init() {
 

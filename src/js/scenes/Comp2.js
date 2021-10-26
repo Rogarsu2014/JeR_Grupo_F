@@ -102,9 +102,9 @@ export class Comp2 extends Phaser.Scene{
         skulls.push(new Skull(this, 95, 415, "skull"));
         skulls.push(new Skull(this, 290, 325, "skull"));
 
-        skulls.push(new Skull(this, 345, 40, "skull"));
+        skulls.push(new Skull(this, 345, 30, "skull"));
         skulls.push(new Skull(this, 500, 225, "skull"));
-        skulls.push(new Skull(this, 620, 40, "skull"));
+        skulls.push(new Skull(this, 620, 30, "skull"));
 
         skulls.push(new Skull(this, 610, 415, "skull"));
         skulls.push(new Skull(this, 800, 325, "skull"));

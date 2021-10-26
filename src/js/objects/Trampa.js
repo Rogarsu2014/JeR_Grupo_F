@@ -7,13 +7,13 @@ export class Trampa extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         //Particular player object gravity
         this.setGravityY(-300);
-        this.setScale(0.075);
+        this.setScale(0.7);
         this.setImmovable(1);
         this.setCollideWorldBounds(true);
         this.context = scene;
         this.spriteKey = spriteKey;
         this.puntos = -50;
-        this.music = this.context.sound.add("dano", this.context.game.config.musicConfig);
+        this.music = this.context.sound.add("hit", this.context.game.config.musicConfig);
     }
     init() {
 
