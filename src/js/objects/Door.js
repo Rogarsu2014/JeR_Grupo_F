@@ -5,7 +5,7 @@ const doorOpenedSpriteKey='doorOpened'
 const doorOpenedSfx= 'doorOpenedSfx'
 export class Door extends Phaser.Physics.Arcade.Sprite {
 
-    constructor(context, x, y, timer) {
+    constructor(context, x, y, timer, flipped=false) {
         super(context, x, y, doorSpriteKey);
         this.context = context;
         this.setOrigin(0, 0)
@@ -13,6 +13,8 @@ export class Door extends Phaser.Physics.Arcade.Sprite {
         this.playersEnteredCount = 0;
         this.transition = new SweepVerticalTransitionIn(this.context)
         this.transition.addToScene();
+        if(flipped)
+            this.flipX=flipped
         this.context.add.existing(this, true);
         this.sfx = this.context.sound.add("doorOpenedSfx",{volume: 1});
         this.timer=timer;

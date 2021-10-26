@@ -71,6 +71,9 @@ export class Coop3 extends Phaser.Scene{
         var platform4 = new Platform(this, 704, 352,'vertical1x1-5', 0, 96)
         this.platforms.push(platform4)
 
+        var platform5 = new Platform(this, 64 * 12, 64 * 4.5,'horizontal3x1', 64*3,0)
+        this.platforms.push(platform5)
+
         /*let platArr1 =  this.physics.add.staticGroup();
         platArr1.create(320,224,'1x1').setOrigin(0,0);
         let platArr2 =  this.physics.add.staticGroup();
@@ -84,7 +87,7 @@ export class Coop3 extends Phaser.Scene{
         floor.setCollisionByProperty({ collides: true });
 
         //**************** door
-        door = new Door(this, 896,448,this.timer)
+        door = new Door(this, 896,448,this.timer,false)
 
 
         //faltan colisiones con el pj, son estilo;
@@ -110,23 +113,24 @@ export class Coop3 extends Phaser.Scene{
         scores[1] = this.add.text(this.game.canvas.width-75,32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
-        var button1_P2 = new Button(this, 256, 282, 'botonL', () => {   //ley de +58
+        var button1_P2 = new Button(this, 256, 287, 'botonL', () => {   //ley de +58
             platform2.enable()
             platform3.enable()
             this.taskManager.taskCompleted();
             this.taskManager.taskCompleted();
 
             button1_P2.setVisible(false);
-            var button1_P2P = new Button(this, 256, 284, 'botonLP');
+            var button1_P2P = new Button(this, 256, 289, 'botonLP');
             
-            var button1_P1 = new Button(this, 320,506, 'botonR', () => {
+            var button1_P1 = new Button(this, 320,511, 'botonR', () => {
                 platform1.enable();
                 this.taskManager.taskCompleted();
                 button1_P1.setTexture('botonRP')
 
-                var button1_P2 = new Button(this,  460,282, 'botonL', () => {
+                var button1_P2 = new Button(this,  460,287, 'botonL', () => {
                     platform2.enable()
                     platform4.enable()
+                    platform5.enable()
                     this.taskManager.taskCompleted();
                     button1_P2.setTexture('botonLP')
                 }, players[1]);
