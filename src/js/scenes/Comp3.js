@@ -92,7 +92,7 @@ export class Comp3 extends Phaser.Scene{
         counter = 10;
 
         for (let i = 0; i < skulls.length; i += 1) {
-            this.physics.add.collider(players[0], skulls[i], function () {
+            this.physics.add.collider(players[0], skulls[i],  ()=> {
                 skulls[i].desaparicion(players[0]);
                 scores[0].setText("Player 1: " + players[0].points);
                 counter--;
@@ -100,7 +100,7 @@ export class Comp3 extends Phaser.Scene{
                     this.startNextLevel();
                 }
             });
-            this.physics.add.collider(players[1], skulls[i], function () {
+            this.physics.add.collider(players[1], skulls[i], ()=> {
                 skulls[i].desaparicion(players[1]);
                 scores[1].setText("Player 2: " + players[1].points);
                 counter--;
