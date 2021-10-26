@@ -72,8 +72,8 @@ export class Comp3 extends Phaser.Scene{
         var player2 = new Player_I(this, this.game.canvas.width-30, 192, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
-        players[0].puntos = data.jug1;
-        players[1].puntos = data.jug2;
+        players[0].puntos = data.ply1;
+        players[1].puntos = data.ply2;
 
         this.physics.add.collider(players[0], players[1], function(){
             bump = true;
@@ -96,7 +96,7 @@ export class Comp3 extends Phaser.Scene{
         skulls.push(new Skull(this, 930, 165, "skull"));
         skulls.push(new Skull(this, 930, 420, "skull"));
 
-        counter = 10;
+        counter = skulls.length;
 
         for (let i = 0; i < skulls.length; i += 1) {
             this.physics.add.collider(players[0], skulls[i],  ()=> {

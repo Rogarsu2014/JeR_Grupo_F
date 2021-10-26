@@ -37,8 +37,7 @@ window.onload=function (){
             arcade: {
                 gravity: {
                     y: 300,
-                },
-               debug: true
+                }
             },
         },
     }
