@@ -8,6 +8,7 @@ import {Timer} from "../util/Timer.js";
 import {Door} from "../objects/Door.js";
 import {SweepVerticalTransitionIn, SweepVerticalTransitionOut} from "../util/cameraEffects.js";
 
+const nextLevelKey = "Comp2"
 var players = [];
 var bump;
 var scores = [];
@@ -20,18 +21,10 @@ export class Coop2 extends Phaser.Scene {
     }
 
     init() {
-        // this.timer = new Timer(this, 20000, () => console.log("completed"))
-        //
-        // this.taskManager = new TaskManager(4, ["J1", "J2", "J1", "J2"], [
-        //     () => this.timer.addSeconds(5000),
-        //     () => this.timer.addSeconds(5000),
-        //     () => this.timer.addSeconds(5000),
-        //     () => this.timer.addSeconds(5000)
-        // ], () => console.log("All tasks completed"));
 
         this.timer = new Timer(this, 20000)
 
-        this.taskManager = new TaskManager(this, 4, [0, 1, 0, 1], () => {
+        this.taskManager = new TaskManager(this, 3, [0, 1, 0, 1], () => {
             console.log("All tasks completed");
             door.open()
         }, this.timer, players, this.updatePoints, 50);
@@ -96,23 +89,23 @@ export class Coop2 extends Phaser.Scene {
 //FALTA DETECCIÓN DE LO DE ALTURA
 //this.taskManager.taskCompleted();
 
-        var button1_P2 = new Button(this, 416, 443, 'botonR', () => {
+        var button1_P2 = new Button(this, 416, 443, 'botonL', () => {
             this.taskManager.taskCompleted();
-            button1_P2.setTexture('botonRP')
-
+            button1_P2.setTexture('botonLP')
+            button1_P1.setVisible(true);
         }, players[1]);
 
-        let button1_P1 = new Button(this, 416, 570, 'botonL', () => {
+        let button1_P1 = new Button(this, 416, 570, 'botonR', () => {
             platform1.enable();
             this.taskManager.taskCompleted();
-            button1_P1.setTexture('botonLP')
-
+            button1_P1.setTexture('botonRP')
+            button2_P2.setVisible(true);
         }, players[0]);
         button1_P1.setVisible(false);
 
-        let button2_P2 = new Button(this, 545, 379, 'botonR', () => {
+        let button2_P2 = new Button(this, 545, 379, 'botonL', () => {
             this.taskManager.taskCompleted();
-            button2_P2.setTexture('botonRP')
+            button2_P2.setTexture('botonLP')
         }, players[1]);
         button2_P2.setVisible(false);
 
@@ -276,7 +269,7 @@ export class Coop2 extends Phaser.Scene {
     }
 
     startNextLevel() {
-        this.scene.start("2", {ply1:players[0].points, ply2:players[1].points})
+        this.scene.start(nextLevelKey, {ply1:players[0].points, ply2:players[1].points})
     }
 
     setPlatformsColliders() {

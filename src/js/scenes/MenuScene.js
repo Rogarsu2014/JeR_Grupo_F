@@ -1,4 +1,5 @@
 import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
+import {Skull} from "../objects/Skull.js";
 
 export class MenuScene extends Phaser.Scene{
     constructor() {
@@ -24,7 +25,8 @@ export class MenuScene extends Phaser.Scene{
             optionsButton.off('selected')
         })
         this.add.image(0, 0, 'sky').setOrigin(0).setDepth(0).setScale(2);
-        this.selectSprite = this.add.image(width / 2 - 100,height / 2 - 100,'skull')
+
+        this.selectSprite = new Skull(this, width / 2 - 100, height / 2 - 100, "skull",6)
         this.selectSprite.setVisible(false);
         this.selectSprite.setScale(.2);
 
@@ -72,7 +74,17 @@ export class MenuScene extends Phaser.Scene{
         let textureName=button.texture.key + 'Push';
         button.setTexture(textureName)
         this.selectSprite.x = button.x - button.displayWidth * 0.71
-	    this.selectSprite.y = button.y - 2.7
+	    this.selectSprite.y = button.y - 2.7;
+
+        this.tweens.add({
+            targets: this.selectSprite,
+            scaleY: .08,
+            ease: 'Expo.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 60,
+            yoyo: true,
+            repeat: 0,            // -1: infinity
+        });
+
         this.selectedButtonIndex = index;
         this.selectSprite.setVisible(true);
 	}
