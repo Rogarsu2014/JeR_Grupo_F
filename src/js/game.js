@@ -38,7 +38,7 @@ window.onload=function (){
                 gravity: {
                     y: 300,
                 },
-                debug: true
+               // debug: true
             },
         },
     }

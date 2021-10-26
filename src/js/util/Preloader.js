@@ -61,12 +61,13 @@ export class Preloader extends Phaser.Scene {
         this.load.tilemapTiledJSON('Comp1Map', '../Resources/assets/level/comp1v2.json');
         this.load.tilemapTiledJSON('Comp2Map', '../Resources/assets/level/comp2v2.json');
         this.load.tilemapTiledJSON('Comp3Map', '../Resources/assets/level/Comp3.json');
-        this.load.spritesheet("dude","./Resources/assets/items/SPRITE_SHIIIIIITTT.png", { frameWidth: 706, frameHeight: 672 });//Current sprites from tutorial
-        this.load.spritesheet("dude2","./Resources/assets/items/spriteshit2.png", { frameWidth: 731, frameHeight: 526 });//Current sprites from tutorial
-        this.load.image("skull", "./Resources/assets/items/skull.png");//Current sprites from tutorial
-        this.load.audio("puntos+", "./Resources/assets/sounds/points.mp3");//https://www.youtube.com/watch?v=SoeT6x0O-CM
-        this.load.audio("dano", "./Resources/assets/sounds/hit.mp3");//https://www.youtube.com/watch?v=dLED_gBGQsk
-        this.load.image("trampa", "./Resources/assets/items/itsatrap.png");
+        this.load.spritesheet("dude","./Resources/assets/items/SPRITE_SHIIIIIITTT.png", { frameWidth: 706, frameHeight: 672 });
+        this.load.spritesheet("dude2","./Resources/assets/items/spriteshit2.png", { frameWidth: 731, frameHeight: 526 });
+        this.load.spritesheet("skull","./Resources/assets/items/SpriteSkulls.png", { frameWidth: 522, frameHeight: 518 });
+        //this.load.image("skull", "./Resources/assets/items/skull.png");//Current sprites from tutorial
+        this.load.audio("points+", "./Resources/assets/sounds/points.mp3");//https://www.youtube.com/watch?v=SoeT6x0O-CM
+        this.load.audio("hit", "./Resources/assets/sounds/hit.mp3");//https://www.youtube.com/watch?v=dLED_gBGQsk
+        this.load.image("trap", "./Resources/assets/items/itsatrap.png");
 
         //Cargar cosas Menu
         this.load.image('sky', './Resources/assets/sky.png');
@@ -79,7 +80,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('MenuScene');
+        this.scene.start('Comp3');
 
     }
 
