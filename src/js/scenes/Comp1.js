@@ -73,8 +73,8 @@ export class Comp1 extends Phaser.Scene {
         // scores[0] = this.add.text(30, 0, "Jugador 1: " + players[0].points);
         // scores[1] = this.add.text(1175, 0, "Jugador 2: " + players[1].points);
 
-        scores[0] = this.add.text(30, 32, "Player 1: " + players[0].points, {fontFamily: 'ink-free-normal'});
-        scores[1] = this.add.text(this.game.canvas.width - 150, 32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'});
+        scores[0] = this.add.text(75, 32, "Player 1: " + players[0].points, {fontFamily: 'ink-free-normal'});
+        scores[1] = this.add.text(this.game.canvas.width - 75, 32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'});
         this.addStageFloorCollisions(floor);
 
         //Creación de todas las skulls
@@ -101,7 +101,7 @@ export class Comp1 extends Phaser.Scene {
                 if (counter == 0) {
 
                     this.disableAllPlayersMovement()
-                    cameraFadeOut(this, 1000, () => this.scene.start("Coop3", {
+                    cameraFadeOut(this, 1000, () => this.scene.start("Coop2", {
                         ply1: players[0].points,
                         ply2: players[1].points
                     }))
@@ -115,7 +115,7 @@ export class Comp1 extends Phaser.Scene {
                 if (counter == 0) {
 
                     this.disableAllPlayersMovement()
-                    cameraFadeOut(this, 1000, () => this.scene.start("Coop3", {
+                    cameraFadeOut(this, 1000, () => this.scene.start("Coop2", {
                         ply1: players[0].points,
                         ply2: players[1].points
                     }))

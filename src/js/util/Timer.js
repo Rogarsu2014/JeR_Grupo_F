@@ -26,7 +26,7 @@ export class Timer extends Phaser.Time.TimerEvent{
     }
 
     getRemainingSeconds(rounded=false){
-        if(rounded)
+         if(rounded)
             return Math.round(this.event.getRemainingSeconds())
         return this.event.getRemainingSeconds()
     }
