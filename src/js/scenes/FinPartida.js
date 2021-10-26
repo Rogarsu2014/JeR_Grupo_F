@@ -1,5 +1,6 @@
 import {Player_I} from '../objects/Player_I.js'
 import {cameraFadeOut} from "../util/cameraEffects.js";
+import {Skull} from "../objects/Skull.js";
 
 var players = [];
 var scores = [];
@@ -30,9 +31,11 @@ export class FinPartida extends Phaser.Scene {
         players[0] = data.ply1;
         players[1] = data.ply2;
 
-        this.selectSprite = this.add.image(width / 2 - 100, height / 2 - 100, 'skull')
-        this.selectSprite.setVisible(false)
-        this.selectSprite.setScale(.2);
+        this.add.image(0, 0, 'victoryImage').setOrigin(0).setDepth(0).setScale(1);
+
+        this.selectSprite = new Skull(this, width / 2 - 100, height / 2 - 100, "skull",6)
+        this.selectSprite.setVisible(false);
+        this.selectSprite.setScale(.1);
 
         let playAgainButton = this.add.image(width / 2 - 35, height - 180, 'PlayAgain').setDepth(1);
         let mainMenuButton = this.add.image(width / 2 - 35, height - 80, 'ReturnToMenu').setDepth(1);
@@ -51,7 +54,7 @@ export class FinPartida extends Phaser.Scene {
         } else {
             this.add.text(320, 20, "Draw!")
             scores[0] = this.add.text(350, 213, "Player 1: " + players[0]);
-            scores[1] = this.add.text(350, 233, "Player 2: " + players[1]);
+            scores[1] = this.add.text(350, 233, "Player  2: " + players[1]);
         }
 
         this.add.image(150, 250, "daia0").setScale(0.3);

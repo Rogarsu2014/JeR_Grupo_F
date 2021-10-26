@@ -1,6 +1,8 @@
 import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 
+var music;
+const backgroundMusicKey= 'mainMenuMusic';
 export class MenuScene extends Phaser.Scene{
     constructor() {
         super("MenuScene");
@@ -15,6 +17,9 @@ export class MenuScene extends Phaser.Scene{
 
 
     create(){
+
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
 
         this.game.canvas.width=960
         this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
@@ -53,6 +58,7 @@ export class MenuScene extends Phaser.Scene{
         credits.setInteractive();
 
         playButton.on('selected', () => {
+            this.stopBackgroundMusic()
             this.scene.start('Coop1');
         })
         tutorial.on('selected', () => {
@@ -128,7 +134,15 @@ export class MenuScene extends Phaser.Scene{
         this.input.keyboard.removeListener('keydown-' + 'SPACE');
         // button.emit('selected');
     }
-	
 
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
+    }
 
 }

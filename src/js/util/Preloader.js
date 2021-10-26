@@ -38,13 +38,14 @@ export class Preloader extends Phaser.Scene {
         this.load.image('Tutorial','../Resources/assets/UI/Buttons/Tutorial.png');
         this.load.image('TutorialPush','../Resources/assets/UI/Buttons/TutorialPush.png');
 
-
         this.load.image('PlayAgain','../Resources/assets/UI/Buttons/PlayAgain.png');
         this.load.image('PlayAgainPush','../Resources/assets/UI/Buttons/PlayAgainPush.png');
         this.load.image('ReturnToMenu','../Resources/assets/UI/Buttons/ReturnToMenu.png');
         this.load.image('ReturnToMenuPush','../Resources/assets/UI/Buttons/ReturnToMenuPush.png');
+
         // Menu
         this.load.image('menuImage','../Resources/assets/UI/MainMenu/MenuImage.png');
+        this.load.image('victoryImage','../Resources/assets/UI/VictoryImage.png');
         this.load.image('gameTittle','../Resources/assets/UI/MainMenu/GameTittle.png');
 
         this.load.image('sky', './Resources/assets/sky.png');
@@ -89,6 +90,7 @@ export class Preloader extends Phaser.Scene {
         this.load.audio("buttonClick", "./Resources/assets/sounds/buttonClick.mp3"); //https://creatorassets.com/a/button-sound-effects
         this.load.audio("coopStageMusic", "./Resources/assets/Music/coopStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
         this.load.audio("compStageMusic", "./Resources/assets/Music/compStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
+        this.load.audio("mainMenuMusic", "./Resources/assets/Music/MainMenuMusic.mp3"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
 
 
         //Cargar cosas Menu

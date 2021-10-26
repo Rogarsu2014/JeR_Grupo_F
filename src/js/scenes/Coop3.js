@@ -113,21 +113,21 @@ export class Coop3 extends Phaser.Scene{
         scores[1] = this.add.text(this.game.canvas.width-75,32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
-        var button1_P2 = new Button(this, 256, 287, 'botonL', () => {   //ley de +58
+        var button1_P2 = new Button(this, 256, 288, 'botonL', () => {   //ley de +58
             platform2.enable()
             platform3.enable()
             this.taskManager.taskCompleted();
             this.taskManager.taskCompleted();
 
             button1_P2.setVisible(false);
-            var button1_P2P = new Button(this, 256, 289, 'botonLP');
+            var button1_P2P = new Button(this, 256, 290, 'botonLP');
             
-            var button1_P1 = new Button(this, 320,511, 'botonR', () => {
+            var button1_P1 = new Button(this, 320,512, 'botonR', () => {
                 platform1.enable();
                 this.taskManager.taskCompleted();
                 button1_P1.setTexture('botonRP')
 
-                var button1_P2 = new Button(this,  460,287, 'botonL', () => {
+                var button1_P2 = new Button(this,  460,288, 'botonL', () => {
                     platform2.enable()
                     platform4.enable()
                     platform5.enable()
