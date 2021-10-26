@@ -8,6 +8,7 @@ import {Timer} from "../util/Timer.js";
 
 var players = [];
 var skulls = [];
+var traps = [];
 var bump;
 var scores = [];
 var counter = 0;
@@ -72,21 +73,20 @@ export class Comp3 extends Phaser.Scene{
         this.physics.add.collider(players[1], floor);
 
         //Creación de todas las skulls
-        /*skulls.push(new Skull(this, 30, 50, "calavera"));
-        skulls.push(new Skull(this, 30, 165, "calavera"));
-        skulls.push(new Skull(this, 95, 415, "calavera"));
-        skulls.push(new Skull(this, 290, 325, "calavera"));
+        skulls.push(new Skull(this, 200, 165, "skull"));
+        skulls.push(new Skull(this, 290, 325, "skull"));
+        skulls.push(new Skull(this, 330, 430, "skull"));
+        skulls.push(new Skull(this, 450, 300, "skull"));
 
-        skulls.push(new Skull(this, 345, 40, "calavera"));
-        skulls.push(new Skull(this, 500, 225, "calavera"));
-        skulls.push(new Skull(this, 620, 40, "calavera"));
+        skulls.push(new Skull(this, 580, 180, "skull"));
+        skulls.push(new Skull(this, 600, 300, "skull"));
+        skulls.push(new Skull(this, 630, 430, "skull"));
 
-        skulls.push(new Skull(this, 610, 415, "calavera"));
-        skulls.push(new Skull(this, 800, 325, "calavera"));
-        skulls.push(new Skull(this, 930, 165, "calavera"));
-        skulls.push(new Skull(this, 930, 50, "calavera"));
+        skulls.push(new Skull(this, 930, 300, "skull"));
+        skulls.push(new Skull(this, 930, 165, "skull"));
+        skulls.push(new Skull(this, 930, 420, "skull"));
 
-        counter = 11;
+        counter = 10;
 
         for (let i = 0; i < skulls.length; i += 1) {
             this.physics.add.collider(players[0], skulls[i], function () {
@@ -99,7 +99,26 @@ export class Comp3 extends Phaser.Scene{
                 scores[1].setText("Jugador 2: " + players[1].points);
                 counter--;
             });
-        }*/
+        }
+
+        traps.push(new Trampa(this, 150, 426, "trap"));
+        traps.push(new Trampa(this, 300, 554, "trap"));
+        traps.push(new Trampa(this, 350, 554, "trap"));
+        traps.push(new Trampa(this, 615, 554, "trap"));
+        traps.push(new Trampa(this, 665, 554, "trap"));
+        traps.push(new Trampa(this, 930, 554, "trap"));
+
+        for (let i = 0; i < traps.length; i += 1) {
+            this.physics.add.collider(players[0], traps[i], function () {
+                traps[i].dañar(players[0]);
+                scores[0].setText("Jugador 1: " + players[0].points);
+            });
+            this.physics.add.collider(players[1], traps[i], function () {
+                traps[i].dañar(players[1]);
+
+                scores[1].setText("Jugador 2: " + players[1].points);
+            });
+        }
 
         scores[0] = this.add.text(30, 0, "Jugador 1: "+ players[0].puntos);
         scores[1] = this.add.text(735, 0, "Jugador 2: "+ players[1].puntos);
@@ -121,9 +140,9 @@ export class Comp3 extends Phaser.Scene{
         bump = false;
         this.timerText.setText(this.timer.getRemainingSeconds(true));
         this.UpdatePlatforms();
-        /*if (counter == 0) {
-            this.scene.start("Coop1", { jug1: players[0].points, jug2: players[1].points });
-        }*/
+        if (counter == 0) {
+            this.scene.start("FinPartida+", { jug1: players[0].points, jug2: players[1].points });
+        }
     }
 
     setPlatformsColliders(){
