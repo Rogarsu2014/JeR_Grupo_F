@@ -165,18 +165,6 @@ El control de movimiento se realiza con el teclado. El desplazamiento lateral se
 El empuje será realizado con la tecla F, empujando y desplazando al jugador rival hacia donde el jugador que empuja está mirando. En teclado, el segundo jugador se moverá con H y K a izquierda y derecha, saltará con la U, descenderá con la J y empujará con la L
 
 ![tut1](GDDImagenes/Tutorial/players4.png)
-
-Por otro lado, las calaveras podrán ser tocadas por los jugadores para ser obtenidas. Una vez obtenidas, desaparecerán.
-
-## Controles 
-El control de movimiento se realiza con el teclado. El desplazamiento lateral se realizará con las teclas A y D para moverse a izquierda y derecha respectivamente. El movimiento de salto se realizará con la tecla W. Se encuentra la opción de acelerar la caída usando el botón S.
-
-El empuje será realizado con la tecla F, empujando y desplazando al jugador rival hacia donde el jugador que empuja está mirando. En teclado, el segundo jugador se moverá con H y K a izquierda y derecha, saltará con la U, descenderá con la J y empujará con la L.
-
-![teclas jugadores](GDDImagenes/Tutorial/players4.png)
-
-
-
 ![teclas jugadores](GDDImagenes/Tutorial/A-press2.png) 
 ![teclas jugadores](GDDImagenes/Tutorial/D-press2.png)
 ![teclas jugadores](GDDImagenes/Tutorial/W-press2.png)
