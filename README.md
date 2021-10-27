@@ -72,6 +72,8 @@ El estilo visual de Dual Interest es simplificado y colorido, siendo el nivel il
 *Imagen de fondo del menú principal*
 
 ![Calavera](GDDImagenes/Personajes/SpriteSkulls.png)
+![Calavera gif](GDDImagenes/Personajes/skull.gif)
+
 *SpriteSheet de la calavera*
 
 
