@@ -96,6 +96,10 @@ export class Preloader extends Phaser.Scene {
         this.load.audio("mainMenuMusic", "./Resources/assets/Music/MainMenuMusic.mp3"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
 
 
+        //Tutorial
+        this.load.image('leftMovementKeyboard', './Resources/assets/Tutorial/leftMovementKeyboard.png');
+        this.load.image('leftMovement1', './Resources/assets/Tutorial/leftMovement1.png');
+
         //Cargar cosas Menu
         this.load.image('sky', './Resources/assets/sky.png');
         this.load.image('star', './Resources/assets/star.png');
@@ -107,7 +111,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('MenuScene');
+        this.scene.start('Tutorial');
 
     }
 
