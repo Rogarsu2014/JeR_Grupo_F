@@ -8,7 +8,9 @@ export class InputProcessor {
         this.player=player;
         this.jumpButton=jumpButton;
         this.dashButton=dashButton;
+
     }
+
 
     setJumpButton(){
 

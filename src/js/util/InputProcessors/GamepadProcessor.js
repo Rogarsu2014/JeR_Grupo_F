@@ -21,7 +21,9 @@ export class GamepadProcessor extends InputProcessor {
     getPadIndex(){
         return this.padIndex;
     }
-
+    setPlayer(player){
+        this.player=player;
+    }
     setJumpButton() {
         this.gamepad.onButtonDown(this.jumpButton, () => this.player.jump())
     }
