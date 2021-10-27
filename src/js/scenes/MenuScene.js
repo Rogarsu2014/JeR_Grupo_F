@@ -62,7 +62,8 @@ export class MenuScene extends Phaser.Scene{
             this.scene.start('Coop1');
         })
         tutorial.on('selected', () => {
-
+            this.stopBackgroundMusic();
+            this.scene.start('Tutorial')
         })
         credits.on('selected', () => {
             this.stopBackgroundMusic();

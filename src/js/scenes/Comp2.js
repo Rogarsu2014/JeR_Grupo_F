@@ -25,7 +25,7 @@ export class Comp2 extends Phaser.Scene{
     }
 
     init(){
-        this.timer= new Timer(this,60000,()=>this.startNextLevel())
+        this.timer= new Timer(this,30000,()=>this.startNextLevel())
     }
 
     preload(){

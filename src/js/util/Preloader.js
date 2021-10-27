@@ -65,7 +65,7 @@ export class Preloader extends Phaser.Scene {
         // door
         this.load.image('door','../Resources/assets/level/Door.png');
         this.load.image('doorOpened','../Resources/assets/level/DoorOpened.png');
-        this.load.audio("doorOpenedSfx",'../Resources/assets/sounds/doorOpenedSfx.mp3');
+        this.load.audio("doorOpenedSfx",'../Resources/assets/sounds/doorOpenedSfx.mp3'); http://www.theallsounds.com/2018/04/door-opening-sound-effects-all-sounds.html
 
         //platagormas estáticas
         this.load.image('platS','../Resources/assets/level/escalonplano.png');
@@ -96,6 +96,10 @@ export class Preloader extends Phaser.Scene {
         this.load.audio("mainMenuMusic", "./Resources/assets/Music/MainMenuMusic.mp3"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
 
 
+        //Tutorial
+        this.load.image('leftMovementKeyboard', './Resources/assets/Tutorial/leftMovementKeyboard.png');
+        this.load.image('leftMovement1', './Resources/assets/Tutorial/leftMovement1.png');
+
         //Cargar cosas Menu
         this.load.image('sky', './Resources/assets/sky.png');
         this.load.image('star', './Resources/assets/star.png');
@@ -103,6 +107,28 @@ export class Preloader extends Phaser.Scene {
         this.load.image('options_button', './Resources/assets/options_button.png');
         this.load.image("daia0", "./Resources/assets/items/Daia0.png");//Current sprites from tutorial
         this.load.image("ibban", "./Resources/assets/items/Ibban.png");//Current sprites from tutorial
+
+        //Tutorial
+        this.load.image("startMovement", "./Resources/assets/Tutorial/startMovement.png");
+        this.load.image("A-press2", "./Resources/assets/Tutorial/A-press2.png");
+        this.load.image("aMove1", "./Resources/assets/Tutorial/aMove1.png");
+        this.load.image("aMove2", "./Resources/assets/Tutorial/aMove2.png");
+
+        this.load.image("D-press2", "./Resources/assets/Tutorial/D-press2.png");
+        this.load.image("dMove1", "./Resources/assets/Tutorial/dMove1.png");
+        this.load.image("dMove2", "./Resources/assets/Tutorial/dMove2.png");
+        this.load.image("F-press2", "./Resources/assets/Tutorial/F-press2.png");
+        this.load.image("fPush0", "./Resources/assets/Tutorial/fPush0.png");
+        this.load.image("fPush1", "./Resources/assets/Tutorial/fPush1.png");
+        this.load.image("fPush2", "./Resources/assets/Tutorial/fPush2.png");
+        this.load.image("players4", "./Resources/assets/Tutorial/players4.png");
+
+        this.load.image("W-press2", "./Resources/assets/Tutorial/W-press2.png");
+        this.load.image("wJump1", "./Resources/assets/Tutorial/wJump1.png");
+        this.load.image("wJump2", "./Resources/assets/Tutorial/wJump2.png");
+
+
+
 
     }
     create(){
