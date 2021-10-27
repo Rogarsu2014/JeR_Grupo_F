@@ -2,7 +2,7 @@
 
 ## Nombre_del_Juego
 Dual Interest
-
+![Titulo](GDDImagenes/Botones/GameTittle.png)
 ## Descripcion_del_Juego
 *Te interesa colaborar con el enemigo para poder ganar.*
 
