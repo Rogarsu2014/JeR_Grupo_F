@@ -240,3 +240,70 @@ Descripción de los tutoriales y créditos
 
 * **Tutorial:** Una simple muestra de imágenes en sucesión en la que se informa de los controles a los jugadores relacionando las teclas con imágenes mostrando lo que pasa.
 
+#### Pantalla de resultados
+
+![ggez](GDDImagenes/BocetosUI/FindeNivel2.jpg)
+
+![ggez](GDDImagenes/ggez.png)
+
+Descripción de la pantalla de fin de nivel:
+
+* **Ganador:** Dice claramente quien es el ganador de la partida.
+* **Personajes:** Muestra a los personajes de cada jugador.
+* **Puntuaciones:** Muestra las puntuaciones de los jugadores
+* **Jugar de nuevo:**  Al ser pulsado inicia una nueva partida.
+* **Volver al menú principal:** Al ser pulsado te lleva al menú principal.
+
+## Arte
+
+_Dual Interest_ tendrá estilo 2D con un carácter visual intenso, simple y con cierta inocencia irónica, ilustrado con colores vivos que resalten a los personajes y escenarios. Estos últimos serán poco detallados con el fin de que el jugador centre su atención en los niveles y la jugabilidad.
+
+### Audio
+
+La música en _Dual Interest_ trata de amplificar la idea de la competitividad poniendo una música de acción en la fase de competición y una más tranquila en la fase de colaboración. El juego dispone de diversos sonidos cuando se interactúa con el entorno, además de música durante los menús.
+
+* Suma de Puntos: https://www.youtube.com/watch?v=SoeT6x0O-CM
+* Tocar una trampa: https://www.youtube.com/watch?v=dLED_gBGQsk
+* Hacer un click: https://creatorassets.com/a/button-sound-effects
+* Fase de cooperación: https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
+* Fase de colaboración: https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
+* Música del menú: https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
+* Puerta abriendose: http://www.theallsounds.com/2018/04/door-opening-sound-effects-all-sounds.html
+
+### Diseño de niveles
+
+Los niveles de cooperación en Dual Interest tienen diversos elementos: suelo y pared estático(1), suelo y pared que desaparece al pulsar un botón(2) suelo y pared que aparece al pulsar un botón (3), botones (4) y puerta (5);
+
+En este boceto de nivel se pueden apreciar todos estos elementos. Los personajes aparecen en los Spawns
+
+![ggez](GDDImagenes/BocetoNivel1.jpg)
+
+![ggez](GDDImagenes/Coop1.png)
+Versión final del nivel bocetado arriba
+
+
+![ggez](GDDImagenes/Comp1.gif)
+
+
+![ggez](GDDImagenes/Comp3.gif)
+ y esta
+![ggez](GDDImagenes/Coop2.png)
+
+![ggez](GDDImagenes/emoujon.gif)
+
+![ggez](GDDImagenes/Coop3.png)
+
+### Hoja de ruta del desarrollo
+
+**Plataformas**: Web
+
+**Audiencia:** Edad/género/intereses.
+
+**Hito 1:** Desarrollo de juego en local - 27/10/2021
+
+**Hito 2:** Extensión del juego incluyendo un back-end que utilice tecnología REST - 24/11/2021
+
+**Hito 3:** Extensión del juego utilizando REST y WebSockets -  21/12/2021
+
+**Hito 4:** Beta testing / Mejoras finales. - Sin definir
+
