@@ -49,8 +49,8 @@ export class FinPartida extends Phaser.Scene {
 
         } else if (players[0] < players[1]) {
             this.add.text(width*.5, 60, "Player 2 wins!",{fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5);
-            scores[0] = this.add.text(width * .5, 213, "Player 1: " + players[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
-            scores[1] = this.add.text(width * .5, 233, "Player 2: " + players[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            scores[0] = this.add.text(width * .5, 233, "Player 1: " + players[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            scores[1] = this.add.text(width * .5, 213, "Player 2: " + players[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
         } else {
             this.add.text(width * .5, 60, "Draw!", {fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5);
             scores[0] = this.add.text(width * .5, 213, "Player 1: " + players[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
