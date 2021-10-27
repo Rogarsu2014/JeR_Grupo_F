@@ -33,7 +33,8 @@ Este es el documento de diseño de juego de *Dual Interest*.Aquí expondremos la
 *Dual Interests* es un videojuego multijugador de plataformas 2D de dos personas con un estilo simplificado en el que cada jugador controla a un personaje y combinando fases cooperativas de puzzles y fases de duelo compiten por la superioridad en una serie de niveles en los que deberán recolectar calaveras que les darán puntos para poder ganar.
 
 *Te interesa colaborar con el enemigo para poder ganar.*
-
+![puerta nivel coop1](GDDImagenes/Puerta_abriendose.gif)
+![nivel competitivo 1](GDDImagenes/Comp1.gif)
 ## Características principales 
 El juego se centra en los siguientes puntos:
 
