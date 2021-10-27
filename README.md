@@ -24,6 +24,31 @@ Dual Interests es un videojuego multijugador de plataformas 2D de dos personas c
 
 
 ___
+# Introducción
+
+Este es el documento de diseño de juego de *Dual Interest*.Aquí expondremos la idea original del juego de plataformas y competición que está en desarrollo. 
+
+
+## Concepto del juego  
+*Dual Interests* es un videojuego multijugador de plataformas 2D de dos personas con un estilo simplificado en el que cada jugador controla a un personaje y combinando fases cooperativas de puzzles y fases de duelo compiten por la superioridad en una serie de niveles en los que deberán recolectar calaveras que les darán puntos para poder ganar.
+
+*Te interesa colaborar con el enemigo para poder ganar.*
+
+## Características principales 
+El juego se centra en los siguientes puntos:
+
+* #### Competitividad: 
+El objetivo del juego es ganar al otro jugador, aunque para ello se tenga que colaborar con este, por lo que siempre se debe tener un ojo avizor a lo que hace el oponente.
+* #### Colaboración: 
+Interesa colaborar con el enemigo durante la fase de colaboración ya que esta recompensa esta acción dando puntos, cuya finalidad es dar unas oportunidades más durante la fase de competición (las trampas restan puntos).
+* #### Fácil de entender: 
+El hecho de no tener trama narrativa hace que el juego posea una gran facilidad para entender sus mecánicas y su estructura. 
+* ##### Frenético: 
+Al ser una carrera contra el tiempo las acciones tomadas por los jugadores han de ser rápidas y eficientes, transmitiendo ansiedad e intensidad.
+
+## Género
+*Dual Interest* es un juego de plataformas, acción y puzzles. Ofrece en profundidad  mecánicas similares a los juegos de plataformas, ya que están pulidas y desarrolladas y está centrada en libertad de movimiento y desplazamiento. También se incluyen los puzzles en las fases de colaboración. En cuanto a la acción se refiere a lo que sucede durante la fase de competición en la que la mecánica de empuje provocará situaciones muy intensas y frenéticas.
+
 ## Propósito y público objetivo
 
 El objetivo de este juego es crear un ambiente divertido en el que los jugadores tengan una experiencia intensa, al mezclar cooperación e interés, donde participen en niveles rápidos con amigos.
