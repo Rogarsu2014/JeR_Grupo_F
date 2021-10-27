@@ -21,7 +21,7 @@ window.onload=function (){
         height: 640,//448,//640,
         parent: "container",
         type: Phaser.AUTO,
-        backgroundColor:"#4488AA",
+        backgroundColor:"#000000",
 
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
