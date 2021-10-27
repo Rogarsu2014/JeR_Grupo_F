@@ -72,6 +72,9 @@ export class Preloader extends Phaser.Scene {
         this.load.image('platM','../Resources/assets/level/escalonplano2.png');
         this.load.image('platL','../Resources/assets/level/escalonplano3.png');
 
+        //Tutorial
+        this.load.image('creditsImage','../Resources/assets/Credits/CreditsImage.png');
+
         //Prueba
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
         this.load.tilemapTiledJSON('Coop2Map', '../Resources/assets/level/Coop2.json');
@@ -104,7 +107,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('Credits');
+        this.scene.start('MenuScene');
 
     }
 
