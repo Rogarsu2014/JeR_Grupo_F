@@ -14,6 +14,8 @@ let playersInput = []
 let joinedPlayers = []
 let inputDictionary={}
 
+const playerScale=0.3
+
 export class JoinScreen extends Phaser.Scene {
 
 
@@ -25,15 +27,23 @@ export class JoinScreen extends Phaser.Scene {
     }
 
     create() {
+
+        //*** size setting
+        this.game.canvas.width = 960;
+
+        //***** players image
+        // Player 1
+        this.daiaImg = this.add.image(150, 250, "daia0").setScale(0.3);
+        // Player 2
+        this.ibbanImg = this.add.image(800, 250, "ibban").setScale(0.3);
+
+        this.hidePlayer(this.daiaImg)
+        this.hidePlayer(this.ibbanImg)
+
+
         this.SetKeys(0, player1JoinKeyboardKey, player1LeaveKeyboardKey)
         this.SetKeys(1, player2JoinKeyboardKey, player2LeaveKeyboardKey)
-        // this.input.keyboard.on("keydown-D", () => {
-        //     this.scene.start('Preloader');
-        // });
-        this.input.keyboard.on("keydown-D", () => {
-            this.game.canvas.width=(300)
-            this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
-        });
+
         this.input.gamepad.on('down',(gamepad,button, value)=> {
 
             if(button.index===playerJoinGamepadButton) {
@@ -64,6 +74,30 @@ export class JoinScreen extends Phaser.Scene {
 
     update() {
 
+    }
+
+    joinPlayer(){
+
+    }
+
+    hidePlayer(playerImg){
+        this.tweens.add({
+            targets: playerImg,
+            scale:0,
+            ease: 'Expo.out',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 250,
+            repeat: 0,            // -1: infinity
+        });
+    }
+
+    showPlayer(playerImg){
+        this.tweens.add({
+            targets: playerImg,
+            scale:playerScale,
+            ease: 'Expo.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 250,
+            repeat: 0,            // -1: infinity
+        });
     }
 
     checkIfGamePadIsConnected(){
