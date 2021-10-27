@@ -22,8 +22,6 @@ export class Preloader extends Phaser.Scene {
 
         this.load.image('tileset', '../Resources/assets/level/tileset.png');
 
-        this.load.image('plat', '../Resources/assets/level/escalon.png');
-
         //**** main menu
 
         //buttons
@@ -50,12 +48,12 @@ export class Preloader extends Phaser.Scene {
 
         this.load.image('sky', './Resources/assets/sky.png');
 
-        //botones de los jugadores
+        //Player buttons
         this.load.image('botonR','../Resources/assets/level/Boton1.png');
         this.load.image('botonRP','../Resources/assets/level/Boton1Puls.png');
         this.load.image('botonL','../Resources/assets/level/Boton2.png');
         this.load.image('botonLP','../Resources/assets/level/Boton2Puls.png');
-        //plataformas móviles
+        //Mobile platforms
         this.load.image('1x1','../Resources/assets/level/blocker1 1x1.png');
         this.load.image('horizontal2x1','../Resources/assets/level/blocker2 2x1.png');
         this.load.image('horizontal3x1','../Resources/assets/level/blocker3 3x1.png');
@@ -67,15 +65,15 @@ export class Preloader extends Phaser.Scene {
         this.load.image('doorOpened','../Resources/assets/level/DoorOpened.png');
         this.load.audio("doorOpenedSfx",'../Resources/assets/sounds/doorOpenedSfx.mp3'); http://www.theallsounds.com/2018/04/door-opening-sound-effects-all-sounds.html
 
-        //platagormas estáticas
+        //static platforms
         this.load.image('platS','../Resources/assets/level/escalonplano.png');
         this.load.image('platM','../Resources/assets/level/escalonplano2.png');
         this.load.image('platL','../Resources/assets/level/escalonplano3.png');
 
-        //Tutorial
+        //Credits
         this.load.image('creditsImage','../Resources/assets/Credits/CreditsImage.png');
 
-        //Prueba
+        //Test
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
         this.load.tilemapTiledJSON('Coop2Map', '../Resources/assets/level/Coop2.json');
         this.load.tilemapTiledJSON('Coop3Map', '../Resources/assets/level/Coop3.json');
@@ -96,11 +94,8 @@ export class Preloader extends Phaser.Scene {
         this.load.audio("mainMenuMusic", "./Resources/assets/Music/MainMenuMusic.mp3"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
 
 
-        //Tutorial
-        this.load.image('leftMovementKeyboard', './Resources/assets/Tutorial/leftMovementKeyboard.png');
-        this.load.image('leftMovement1', './Resources/assets/Tutorial/leftMovement1.png');
 
-        //Cargar cosas Menu
+        //Load menu
         this.load.image('sky', './Resources/assets/sky.png');
         this.load.image('star', './Resources/assets/star.png');
         this.load.image('play_button', './Resources/assets/play_button.png');
