@@ -33,7 +33,7 @@ export class Coop3 extends Phaser.Scene{
         this.taskManager = new TaskManager(this, 4, [0, 1, 0, 1], () => {
             console.log("All tasks completed");
             door.open()
-        }, this.timer, players, this.updatePoints, 500);
+        }, this.timer, players, this.updatePoints, 50);
 
         this.timer.onComplete(() => {
             console.log(
@@ -247,7 +247,7 @@ export class Coop3 extends Phaser.Scene{
         } else {
             players[playerIndex].points += points;
         }
-        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween = context.tweens.add({
             targets: scores[playerIndex],
@@ -267,7 +267,7 @@ export class Coop3 extends Phaser.Scene{
         } else {
             players[playerIndex].points += points;
         }
-        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween;
         if (points < 0)
