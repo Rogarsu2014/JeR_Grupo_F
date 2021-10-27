@@ -11,6 +11,7 @@ import {Coop3} from "./scenes/Coop3.js";
 import {Comp1} from "./scenes/Comp1.js";
 import {Comp2} from "./scenes/Comp2.js";
 import {Comp3} from "./scenes/Comp3.js";
+import {Credits} from "./scenes/Credits.js";
 
 
 window.onload=function (){
@@ -25,7 +26,7 @@ window.onload=function (){
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
 
-        scene: [Preloader,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, FinPartida, MenuScene,TimerTestScene, TransitionsScene, Comp1, Comp2, Comp3],
+        scene: [Preloader,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, FinPartida, MenuScene,TimerTestScene, TransitionsScene, Comp1, Comp2, Comp3, Credits],
 
 
         input: {
