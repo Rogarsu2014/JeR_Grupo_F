@@ -165,10 +165,10 @@ El control de movimiento se realiza con el teclado. El desplazamiento lateral se
 El empuje será realizado con la tecla F, empujando y desplazando al jugador rival hacia donde el jugador que empuja está mirando. En teclado, el segundo jugador se moverá con H y K a izquierda y derecha, saltará con la U, descenderá con la J y empujará con la L
 
 ![tut1](GDDImagenes/Tutorial/players4.png)
-![teclas jugadores](GDDImagenes/Tutorial/A-press2.png) 
-![teclas jugadores](GDDImagenes/Tutorial/D-press2.png)
-![teclas jugadores](GDDImagenes/Tutorial/W-press2.png)
-![teclas jugadores](GDDImagenes/Tutorial/F-press2.png)
+![teclas jugadores](GDDImagenes/Tutorial/Versiones_completas/A-press2.png) 
+![teclas jugadores](GDDImagenes/Tutorial/Versiones_completas/D-press2.png)
+![teclas jugadores](GDDImagenes/Tutorial/Versiones_completas/W-press2.png)
+![teclas jugadores](GDDImagenes/Tutorial/Versiones_completas/F-press2.png)
 
 
 
@@ -229,7 +229,7 @@ Descripción de la selección de personaje
 
 
 ## Tutorial y Créditos
-![creditos](GDDImagenes/creditos.gif)
+![creditos](GDDImagenes/Creditos.gif)
 ![tutorial](GDDImagenes/Aprende_a_jugar.gif)
 
 
