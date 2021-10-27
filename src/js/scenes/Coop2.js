@@ -24,7 +24,7 @@ export class Coop2 extends Phaser.Scene {
 
     init() {
 
-        this.timer = new Timer(this, 20000)
+        this.timer = new Timer(this, 10000)
 
         this.taskManager = new TaskManager(this, 3, [0, 1, 0, 1], () => {
             console.log("All tasks completed");
@@ -182,10 +182,10 @@ export class Coop2 extends Phaser.Scene {
     timeOver() {
 
         let playerIndexWithMoreTasksCompleted = this.taskManager.getPlayerWithMoreTasksCompleted();
-        this.timerOverUpdatePoints(this, playerIndexWithMoreTasksCompleted, 500)
+        this.timerOverUpdatePoints(this, playerIndexWithMoreTasksCompleted, 100)
 
         let playerWithLessTasksCompleted = this.taskManager.getPlayerWithLessTasksCompleted();
-        this.timerOverUpdatePoints(this, playerWithLessTasksCompleted, -500)
+        this.timerOverUpdatePoints(this, playerWithLessTasksCompleted, -100)
 
         let timeOverTimer = new Timer(this, 1000, () => {
             let endTransition = new SweepVerticalTransitionIn(this);

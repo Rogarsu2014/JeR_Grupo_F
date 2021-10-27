@@ -31,7 +31,7 @@ export class Comp1 extends Phaser.Scene {
     }
 
     init() {
-        this.timer = new Timer(this, 60000, () => this.startNextLevel())
+        this.timer = new Timer(this, 30000, () => this.startNextLevel())
 
     }
 
@@ -56,10 +56,10 @@ export class Comp1 extends Phaser.Scene {
 
 
         //Create the character at 0,0 and change its origin
-        var player1 = new Player_I(this, 20, 300, "dude");
+        var player1 = new Player_I(this, 30, 300, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
         players[0] = player1;
-        var player2 = new Player_I(this, 1400, 300, "dude2");
+        var player2 = new Player_I(this, this.game.canvas.width-30, 300, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
         players[1] = player2;
         players[0].points = data.ply1;

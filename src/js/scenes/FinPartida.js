@@ -33,32 +33,32 @@ export class FinPartida extends Phaser.Scene {
 
         this.add.image(0, 0, 'victoryImage').setOrigin(0).setDepth(0).setScale(1);
 
-        this.selectSprite = new Skull(this, width / 2 - 100, height / 2 - 100, "skull",6)
+        this.selectSprite = new Skull(this, width / 2 - 100, height / 2 - 100, "skull", 6)
         this.selectSprite.setVisible(false);
         this.selectSprite.setScale(.1);
 
-        let playAgainButton = this.add.image(width / 2 - 35, height - 180, 'PlayAgain').setDepth(1);
-        let mainMenuButton = this.add.image(width / 2 - 35, height - 80, 'ReturnToMenu').setDepth(1);
+        let playAgainButton = this.add.image(width *.5, height - 180, 'PlayAgain').setDepth(1);
+        let mainMenuButton = this.add.image(width *.5, height - 80, 'ReturnToMenu').setDepth(1);
         this.buttons.push(playAgainButton);
         this.buttons.push(mainMenuButton);
 
         if (players[0] > players[1]) {
-            this.add.text(320, 20, "Player 1 wins!")
-            scores[0] = this.add.text(350, 213, "Player 1: " + players[0]);
-            scores[1] = this.add.text(350, 233, "Player 2: " + players[1]);
+            this.add.text(width * .5, 60, "Player 1 wins!",{fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5)
+            scores[0] = this.add.text(width * .5, 213, "Player 1: " + players[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            scores[1] = this.add.text(width * .5, 233, "Player 2: " + players[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
 
         } else if (players[0] < players[1]) {
-            this.add.text(320, 20, "Player 2 wins!")
-            scores[0] = this.add.text(350, 213, "Player 1: " + players[1]);
-            scores[1] = this.add.text(350, 233, "Player 2: " + players[0]);
+            this.add.text(width*.5, 60, "Player 2 wins!",{fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5);
+            scores[0] = this.add.text(width * .5, 213, "Player 1: " + players[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            scores[1] = this.add.text(width * .5, 233, "Player 2: " + players[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
         } else {
-            this.add.text(320, 20, "Draw!")
-            scores[0] = this.add.text(350, 213, "Player 1: " + players[0]);
-            scores[1] = this.add.text(350, 233, "Player  2: " + players[1]);
+            this.add.text(width * .5, 60, "Draw!", {fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5);
+            scores[0] = this.add.text(width * .5, 213, "Player 1: " + players[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            scores[1] = this.add.text(width * .5, 233, "Player  2: " + players[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
         }
 
         this.add.image(150, 250, "daia0").setScale(0.3);
-        this.add.image(800, 250, "ibban").setScale(0.3);
+        this.add.image(800, 250, "ibban").setScale(0.3).flipX=true;
 
         playAgainButton.setInteractive();
 
