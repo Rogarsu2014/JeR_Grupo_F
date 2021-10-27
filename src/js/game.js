@@ -4,13 +4,14 @@ import {TimerTestScene} from "./scenes/TimerTestScene.js";
 import {MenuScene} from "./scenes/MenuScene.js";
 import {FinPartida} from "./scenes/FinPartida.js";
 import  {Preloader} from "./util/Preloader.js"
-import {JoinScreen} from "./scenes/JoinScene.js";
+import {JoinScreen} from "./scenes/JoinScreen.js";
 import {Coop1} from "./scenes/Coop1.js";
 import {Coop2} from "./scenes/Coop2.js";
 import {Coop3} from "./scenes/Coop3.js";
 import {Comp1} from "./scenes/Comp1.js";
 import {Comp2} from "./scenes/Comp2.js";
 import {Comp3} from "./scenes/Comp3.js";
+import {Credits} from "./scenes/Credits.js";
 
 
 window.onload=function (){
@@ -20,12 +21,12 @@ window.onload=function (){
         height: 640,//448,//640,
         parent: "container",
         type: Phaser.AUTO,
-        backgroundColor:"#4488AA",
+        backgroundColor:"#000000",
 
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
 
-        scene: [Preloader,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, FinPartida, MenuScene,TimerTestScene, TransitionsScene, Comp1, Comp2, Comp3],
+        scene: [Preloader,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, FinPartida, MenuScene,TimerTestScene, TransitionsScene, Comp1, Comp2, Comp3, Credits],
 
 
         input: {
@@ -37,8 +38,7 @@ window.onload=function (){
             arcade: {
                 gravity: {
                     y: 300,
-                },
-               // debug: true
+                }
             },
         },
     }

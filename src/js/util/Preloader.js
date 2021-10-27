@@ -24,15 +24,29 @@ export class Preloader extends Phaser.Scene {
 
         this.load.image('plat', '../Resources/assets/level/escalon.png');
 
-        // buttons main menu
+        //**** main menu
+
+        //buttons
         this.load.image('Credits','../Resources/assets/UI/Buttons/Credits.png');
         this.load.image('CreditsPush','../Resources/assets/UI/Buttons/CreditsPush.png');
         this.load.image('LocalGame','../Resources/assets/UI/Buttons/LocalGame.png');
         this.load.image('LocalGamePush','../Resources/assets/UI/Buttons/LocalGamePush.png');
+        this.load.image('OnlineGame','../Resources/assets/UI/Buttons/OnlineGame.png');
+        this.load.image('OnlineGamePush','../Resources/assets/UI/Buttons/OnlineGamePush.png');
+        this.load.image('Options','../Resources/assets/UI/Buttons/Options.png');
+        this.load.image('OptionsPush','../Resources/assets/UI/Buttons/OptionsPush.png');
+        this.load.image('Tutorial','../Resources/assets/UI/Buttons/Tutorial.png');
+        this.load.image('TutorialPush','../Resources/assets/UI/Buttons/TutorialPush.png');
+
         this.load.image('PlayAgain','../Resources/assets/UI/Buttons/PlayAgain.png');
         this.load.image('PlayAgainPush','../Resources/assets/UI/Buttons/PlayAgainPush.png');
         this.load.image('ReturnToMenu','../Resources/assets/UI/Buttons/ReturnToMenu.png');
         this.load.image('ReturnToMenuPush','../Resources/assets/UI/Buttons/ReturnToMenuPush.png');
+
+        // Menu
+        this.load.image('menuImage','../Resources/assets/UI/MainMenu/MenuImage.png');
+        this.load.image('victoryImage','../Resources/assets/UI/VictoryImage.png');
+        this.load.image('gameTittle','../Resources/assets/UI/MainMenu/GameTittle.png');
 
         this.load.image('sky', './Resources/assets/sky.png');
 
@@ -48,11 +62,18 @@ export class Preloader extends Phaser.Scene {
         this.load.image('horizontal4x1','../Resources/assets/level/blocker6 4x1.png');
         this.load.image('vertical1x1-5','../Resources/assets/level/blocker7 1x1-5.png');
         this.load.image('vertical1x4-5','../Resources/assets/level/blocker8 1x4-5.png');
+        // door
         this.load.image('door','../Resources/assets/level/Door.png');
+        this.load.image('doorOpened','../Resources/assets/level/DoorOpened.png');
+        this.load.audio("doorOpenedSfx",'../Resources/assets/sounds/doorOpenedSfx.mp3');
+
         //platagormas estáticas
         this.load.image('platS','../Resources/assets/level/escalonplano.png');
         this.load.image('platM','../Resources/assets/level/escalonplano2.png');
         this.load.image('platL','../Resources/assets/level/escalonplano3.png');
+
+        //Tutorial
+        this.load.image('creditsImage','../Resources/assets/Credits/CreditsImage.png');
 
         //Prueba
         this.load.tilemapTiledJSON('Coop1Map', '../Resources/assets/level/Coop1.json');
@@ -69,6 +90,12 @@ export class Preloader extends Phaser.Scene {
         this.load.audio("hit", "./Resources/assets/sounds/hit.mp3");//https://www.youtube.com/watch?v=dLED_gBGQsk
         this.load.image("trap", "./Resources/assets/items/itsatrap.png");
 
+        this.load.audio("buttonClick", "./Resources/assets/sounds/buttonClick.mp3"); //https://creatorassets.com/a/button-sound-effects
+        this.load.audio("coopStageMusic", "./Resources/assets/Music/coopStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
+        this.load.audio("compStageMusic", "./Resources/assets/Music/compStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
+        this.load.audio("mainMenuMusic", "./Resources/assets/Music/MainMenuMusic.mp3"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
+
+
         //Cargar cosas Menu
         this.load.image('sky', './Resources/assets/sky.png');
         this.load.image('star', './Resources/assets/star.png');
@@ -80,7 +107,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('Comp3');
+        this.scene.start('MenuScene');
 
     }
 

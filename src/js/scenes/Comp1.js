@@ -12,12 +12,17 @@ import {
     SweepVerticalTransitionOut, cameraFadeOut, cameraFadeIn
 } from "../util/cameraEffects.js";
 
+
+const nextLevelKey = "Coop2"
+
 var players = [];
 var skulls = [];
 var traps = [];
 var bump;
 var scores = [];
 var counter = 0;
+var music;
+const backgroundMusicKey= 'compStageMusic';
 
 export class Comp1 extends Phaser.Scene {
 
@@ -26,7 +31,7 @@ export class Comp1 extends Phaser.Scene {
     }
 
     init() {
-        this.timer = new Timer(this, 60000, () => console.log("completed"))
+        this.timer = new Timer(this, 60000, () => this.startNextLevel())
 
     }
 
@@ -34,7 +39,8 @@ export class Comp1 extends Phaser.Scene {
     }
 
     create(data) {
-
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
 
         this.game.canvas.width = 1408;
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height)
@@ -73,8 +79,8 @@ export class Comp1 extends Phaser.Scene {
         // scores[0] = this.add.text(30, 0, "Jugador 1: " + players[0].points);
         // scores[1] = this.add.text(1175, 0, "Jugador 2: " + players[1].points);
 
-        scores[0] = this.add.text(75, 32, "Player 1: " + players[0].points, {fontFamily: 'ink-free-normal'});
-        scores[1] = this.add.text(this.game.canvas.width - 75, 32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'});
+        scores[0] = this.add.text(75, 32, "Player 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        scores[1] = this.add.text(this.game.canvas.width - 75, 32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
         this.addStageFloorCollisions(floor);
 
         //Creación de todas las skulls
@@ -96,30 +102,20 @@ export class Comp1 extends Phaser.Scene {
         for (let i = 0; i < skulls.length; i += 1) {
             this.physics.add.collider(players[0], skulls[i], () => {
                 skulls[i].desaparicion(players[0]);
-                scores[0].setText("Jugador 1: " + players[0].points);
+                scores[0].setText("Player 1: " + players[0].points);
                 counter--;
                 if (counter == 0) {
 
-                    this.disableAllPlayersMovement()
-                    cameraFadeOut(this, 1000, () => this.scene.start("Coop2", {
-                        ply1: players[0].points,
-                        ply2: players[1].points
-                    }))
+                    this.startNextLevel();
 
                 }
             });
             this.physics.add.collider(players[1], skulls[i], () => {
                 skulls[i].desaparicion(players[1]);
-                scores[1].setText("Jugador 2: " + players[1].points);
+                scores[1].setText("Player 2: " + players[1].points);
                 counter--;
                 if (counter == 0) {
-
-                    this.disableAllPlayersMovement()
-                    cameraFadeOut(this, 1000, () => this.scene.start("Coop2", {
-                        ply1: players[0].points,
-                        ply2: players[1].points
-                    }))
-
+                    this.startNextLevel();
                 }
             });
         }
@@ -152,10 +148,10 @@ export class Comp1 extends Phaser.Scene {
             }, 500, 500
         )
 
-        this.timerText = this.add.text(this.game.config.width * 0.5, 20, 'test', {
+        this.timerText = this.add.text(this.game.config.width * 0.5, 40, 'test', {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
-        });
+        }).setOrigin(0.5, 0.5);
 
 
         console.log("Escena 2 creada");
@@ -170,11 +166,7 @@ export class Comp1 extends Phaser.Scene {
 
     }
 
-    disableAllPlayersMovement() {
-        for (let i = 0; i < players.length; i++) {
-            players[i].disableMovement()
-        }
-    }
+
 
     setPlatformsColliders() {
 
@@ -182,6 +174,20 @@ export class Comp1 extends Phaser.Scene {
             this.physics.add.collider(players[0], this.platforms[i], () => console.log("over platform"))
             this.physics.add.collider(players[1], this.platforms[i], () => console.log("over platform"))
         }
+    }
+
+
+    startNextLevel(){
+        this.timer.pauseTimer();
+        this.disableAllPlayersMovement()
+
+        cameraFadeOut(this, 1000, () => {
+            music.stop()
+            this.scene.start(nextLevelKey, {
+                ply1: players[0].points,
+                ply2: players[1].points
+            }
+        )})
     }
 
     addStageFloorCollisions(floor) {
@@ -199,5 +205,20 @@ export class Comp1 extends Phaser.Scene {
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }
+    }
+    disableAllPlayersMovement() {
+        for (let i = 0; i < players.length; i++) {
+            players[i].disableMovement()
+        }
+    }
+
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
     }
 }

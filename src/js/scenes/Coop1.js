@@ -16,11 +16,13 @@ import {
 } from "../util/cameraEffects.js";
 
 
+const nextLevelKey = "Comp1"
 var players = [];
 var bump;
 var scores = [];
 var door;
-
+var music;
+const backgroundMusicKey= 'coopStageMusic';
 /// Player 1 is upper layer player.
 /// Player 2 is down layer player
 
@@ -52,7 +54,11 @@ export class Coop1 extends Phaser.Scene {
     preload() {
     }
 
-    create() {
+    create(data) {
+
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
+
         this.game.canvas.width = 960;
         this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
         //*************** tilemap
@@ -77,10 +83,12 @@ export class Coop1 extends Phaser.Scene {
         floor.setCollisionByProperty({collides: true});
 
         //**************** door
-        door = new Door(this, 64, 448, 'door', this.timer)
+        door = new Door(this, 64, 448,  this.timer)
 
         ///************** players
         var player1 = new Player_I(this, 928, 64, "dude");
+        // data.input1.setPlayer(player1)
+        // player1.setPlayerInput(data.input1);
         player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
         players[0] = player1;
 
@@ -100,30 +108,28 @@ export class Coop1 extends Phaser.Scene {
         scores[1] = this.add.text(this.game.canvas.width-75, 32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
-        var button1_P1 = new Button(this, 480, 123, 'botonL', () => {
+        var button1_P1 = new Button(this, 480, 128, 'botonR', () => {
             platform2.enable();
             this.taskManager.taskCompleted();
-            button1_P1.setTexture('botonLP')
+            button1_P1.setTexture('botonRP')
         }, players[0]);
 
-        var button2_P1 = new Button(this, 360, 443 + 128, 'botonL', () => {
+        var button2_P1 = new Button(this, 360, 443 + 128+5, 'botonR', () => {
             platform4.enable();
             this.taskManager.taskCompleted()
-            button2_P1.setTexture('botonLP')
+            button2_P1.setTexture('botonRP')
         }, players[0]);
 
-        var button1_P2 = new Button(this, 780, 443, 'botonR', () => {
+        var button1_P2 = new Button(this, 780, 448, 'botonL', () => {
             platform1.enable();
             this.taskManager.taskCompleted();
-            button1_P2.setTexture('botonRP')
-            // button1_P2.setVisible(false);
-            // var button1_P2P = new Button(this, 778, 443, 'botonRP');
+            button1_P2.setTexture('botonLP')
         }, players[1]);
 
-        var button2_P2 = new Button(this, 480, 443, 'botonR', () => {
+        var button2_P2 = new Button(this, 480, 448, 'botonL', () => {
             platform3.enable();
             this.taskManager.taskCompleted();
-            button2_P2.setTexture('botonRP')
+            button2_P2.setTexture('botonLP')
 
         }, players[1]);
 
@@ -212,7 +218,7 @@ export class Coop1 extends Phaser.Scene {
         } else {
             players[playerIndex].points += points;
         }
-        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween = context.tweens.add({
             targets: scores[playerIndex],
@@ -232,7 +238,7 @@ export class Coop1 extends Phaser.Scene {
         } else {
             players[playerIndex].points += points;
         }
-        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween;
         if (points < 0)
@@ -293,7 +299,8 @@ export class Coop1 extends Phaser.Scene {
     }
 
     startNextLevel() {
-        this.scene.start("Comp1", {ply1:players[0].points, ply2:players[1].points})
+        music.stop()
+        this.scene.start(nextLevelKey, {ply1:players[0].points, ply2:players[1].points})
     }
 
     setPlatformsColliders() {
@@ -315,10 +322,20 @@ export class Coop1 extends Phaser.Scene {
         this.physics.add.collider(players[1], floor);
     }
 
-
     UpdatePlatforms() {
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }
+    }
+
+
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
     }
 }

@@ -5,12 +5,18 @@ import {GamepadProcessor} from "../util/InputProcessors/GamepadProcessor.js";
 import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
 import {Platform} from "../objects/Platform.js";
 import {Timer} from "../util/Timer.js";
+import {cameraFadeOut, SweepVerticalTransitionOut} from "../util/cameraEffects.js";
+
+const nextLevelKey = "Coop3"
 
 var players = [];
 var skulls = [];
 var bump;
 var scores = [];
 var counter = 0;
+
+var music;
+const backgroundMusicKey= 'compStageMusic';
 
 export class Comp2 extends Phaser.Scene{
 
@@ -19,13 +25,16 @@ export class Comp2 extends Phaser.Scene{
     }
 
     init(){
-        this.timer= new Timer(this,60000,()=>console.log("completed"))
+        this.timer= new Timer(this,60000,()=>this.startNextLevel())
     }
 
     preload(){
         }
 
     create(data){
+
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
 
         this.game.canvas.width = (960);
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height);
@@ -35,7 +44,9 @@ export class Comp2 extends Phaser.Scene{
 
         map.createStaticLayer('Background', tileset);
         const floor = map.createStaticLayer('Level', tileset);
-        
+
+        floor.setCollisionByProperty({ collides: true });
+
         this.platforms=[]
         var platform1= new Platform(this, 64 * 3, 64*5, 'platS', 0, 0)
         this.platforms.push(platform1)
@@ -78,7 +89,6 @@ export class Comp2 extends Phaser.Scene{
         //const platformsTile = map.createStaticLayer('Platform', platf);
 
 
-        floor.setCollisionByProperty({ collides: true });
 
         var player1 = new Player_I(this, 300, 500, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this,player1,'W',0,'A','D', 'S', 'F'));
@@ -86,8 +96,11 @@ export class Comp2 extends Phaser.Scene{
         var player2 = new Player_I(this, 800, 500, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
-        players[0].puntos = data.ply1;
-        players[1].puntos = data.ply2;
+        players[0].points = data.ply1;
+        players[1].points = data.ply2;
+
+        players[0].disableMovement()
+        players[1].disableMovement()
 
         this.physics.add.collider(players[0], players[1], function(){
             bump = true;
@@ -114,33 +127,50 @@ export class Comp2 extends Phaser.Scene{
         counter = 11;
 
         for (let i = 0; i < skulls.length; i += 1) {
-            this.physics.add.collider(players[0], skulls[i], function () {
+            this.physics.add.collider(players[0], skulls[i],  ()=> {
                 skulls[i].desaparicion(players[0]);
                 scores[0].setText("Player 1: " + players[0].points);
                 counter--;
+                if (counter == 0) {
+                    this.startNextLevel();
+                }
             });
-            this.physics.add.collider(players[1], skulls[i], function () {
+            this.physics.add.collider(players[1], skulls[i], ()=> {
                 skulls[i].desaparicion(players[1]);
                 scores[1].setText("Player 2: " + players[1].points);
                 counter--;
+                if (counter == 0) {
+                    this.startNextLevel();
+                }
             });
         }
 
-        scores[0] = this.add.text(30, 0, "Player 1: "+ players[0].puntos, {
+        scores[0] = this.add.text(75, 32, "Player 1: "+ players[0].points, {
             fontFamily: 'ink-free-normal'
-        });
-        scores[1] = this.add.text(this.game.canvas.width-150, 0, "Player 2: "+ players[1].puntos, {
+        }).setOrigin(.5, .5);;
+        scores[1] = this.add.text(this.game.canvas.width-75, 32, "Player 2: "+ players[1].points, {
             fontFamily: 'ink-free-normal'
-        });
+        }).setOrigin(.5, .5);;
 
-        this.addStageFloorCollisions(floor);
+        //************** Initial transition
 
         this.timer.startTimer();
-        this.timerText= this.add.text(this.game.canvas.width * 0.5, 20,'test', {
+        this.timer.pauseTimer();
+        this.loadTransition = new SweepVerticalTransitionOut(this);
+        this.loadTransition.addToScene()
+        this.loadTransition.playTransition(() => {
+
+                this.timer.resumeTimer();
+                this.enableAllPlayersMovement()
+            }, 500, 500
+        )
+
+        this.timerText= this.add.text(this.game.canvas.width * 0.5, 40,'test', {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
-        });
+        }).setOrigin(0.5, 0.5);
 
+        this.addStageFloorCollisions(floor);
         this.setPlatformsColliders();
 
         console.log("Escena comp 2 creada");
@@ -152,10 +182,9 @@ export class Comp2 extends Phaser.Scene{
         bump = false;
         this.timerText.setText(this.timer.getRemainingSeconds(true));
         this.UpdatePlatforms();
-        if (counter == 0) {
-            this.scene.start("Coop1", { jug1: players[0].points, jug2: players[1].points });
-        }
     }
+
+
 
     setPlatformsColliders(){
 
@@ -176,5 +205,37 @@ export class Comp2 extends Phaser.Scene{
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }
+    }
+
+    startNextLevel(){
+        this.timer.pauseTimer();
+        this.disableAllPlayersMovement()
+        cameraFadeOut(this, 1000, () => {
+            music.stop()
+            this.scene.start(nextLevelKey, {
+                    ply1: players[0].points,
+                    ply2: players[1].points
+                }
+            )})
+    }
+    enableAllPlayersMovement() {
+        for (let i = 0; i < players.length; i++) {
+            players[i].enableMovement()
+        }
+    }
+    disableAllPlayersMovement() {
+        for (let i = 0; i < players.length; i++) {
+            players[i].disableMovement()
+        }
+    }
+
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
     }
 }

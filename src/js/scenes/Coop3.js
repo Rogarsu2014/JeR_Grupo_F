@@ -9,12 +9,15 @@ import {Timer} from "../util/Timer.js";
 import {Door} from "../objects/Door.js";
 import {cameraFadeIn, cameraShake, SweepVerticalTransitionIn, SweepTransitionHorizontalOut} from "../util/cameraEffects.js";
 
+const nextLevelKey = "Comp3"
 
 var players = [];
 var bump;
 var scores = [];
 var door;
 
+var music;
+const backgroundMusicKey= 'coopStageMusic';
 /// Player 1 is upper layer player.
 /// Player 2 is down layer player
 
@@ -25,12 +28,12 @@ export class Coop3 extends Phaser.Scene{
     }
 
     init(){
-        this.timer = new Timer(this, 2099000)
+        this.timer = new Timer(this, 20000)
 
         this.taskManager = new TaskManager(this, 4, [0, 1, 0, 1], () => {
             console.log("All tasks completed");
             door.open()
-        }, this.timer, players, this.updatePoints, 500);
+        }, this.timer, players, this.updatePoints, 50);
 
         this.timer.onComplete(() => {
             console.log(
@@ -45,6 +48,9 @@ export class Coop3 extends Phaser.Scene{
         }
 
     create(data){
+
+        this.loadBackgroundMusic()
+        this.playBackgroundMusic()
 
         this.game.canvas.width = 960;
         this.physics.world.setBounds(0,0,this.game.canvas.width, this.game.canvas.height)
@@ -65,6 +71,9 @@ export class Coop3 extends Phaser.Scene{
         var platform4 = new Platform(this, 704, 352,'vertical1x1-5', 0, 96)
         this.platforms.push(platform4)
 
+        var platform5 = new Platform(this, 64 * 12, 64 * 4.5,'horizontal3x1', 64*3,0)
+        this.platforms.push(platform5)
+
         /*let platArr1 =  this.physics.add.staticGroup();
         platArr1.create(320,224,'1x1').setOrigin(0,0);
         let platArr2 =  this.physics.add.staticGroup();
@@ -78,7 +87,7 @@ export class Coop3 extends Phaser.Scene{
         floor.setCollisionByProperty({ collides: true });
 
         //**************** door
-        door = new Door(this, 896,448, 'door', this.timer)
+        door = new Door(this, 896,448,this.timer,false)
 
 
         //faltan colisiones con el pj, son estilo;
@@ -104,27 +113,26 @@ export class Coop3 extends Phaser.Scene{
         scores[1] = this.add.text(this.game.canvas.width-75,32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
-        var button1_P2 = new Button(this, 256, 282, 'botonR', () => {   //ley de +58
+        var button1_P2 = new Button(this, 256, 288, 'botonL', () => {   //ley de +58
             platform2.enable()
             platform3.enable()
             this.taskManager.taskCompleted();
             this.taskManager.taskCompleted();
 
             button1_P2.setVisible(false);
-            var button1_P2P = new Button(this, 256, 284, 'botonRP');
+            var button1_P2P = new Button(this, 256, 290, 'botonLP');
             
-            var button1_P1 = new Button(this, 320,506, 'botonL', () => {
+            var button1_P1 = new Button(this, 320,512, 'botonR', () => {
                 platform1.enable();
                 this.taskManager.taskCompleted();
-                button1_P1.setVisible(false);
-                var button1_P1P = new Button(this, 320,508, 'botonLP');
+                button1_P1.setTexture('botonRP')
 
-                var button1_P2 = new Button(this,  460,282, 'botonR', () => {
+                var button1_P2 = new Button(this,  460,288, 'botonL', () => {
                     platform2.enable()
                     platform4.enable()
+                    platform5.enable()
                     this.taskManager.taskCompleted();
-                    button1_P2.setVisible(false);
-                    var button1_P2P = new Button(this, 256, 284, 'botonRP');
+                    button1_P2.setTexture('botonLP')
                 }, players[1]);
 
             }, players[0]);
@@ -239,7 +247,7 @@ export class Coop3 extends Phaser.Scene{
         } else {
             players[playerIndex].points += points;
         }
-        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween = context.tweens.add({
             targets: scores[playerIndex],
@@ -259,7 +267,7 @@ export class Coop3 extends Phaser.Scene{
         } else {
             players[playerIndex].points += points;
         }
-        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween;
         if (points < 0)
@@ -320,7 +328,8 @@ export class Coop3 extends Phaser.Scene{
     }
 
     startNextLevel() {
-        this.scene.start("Comp2",{ply1:players[0].points, ply2:players[1].points})
+        music.stop()
+        this.scene.start(nextLevelKey,{ply1:players[0].points, ply2:players[1].points})
     }
 
     setPlatformsColliders() {
@@ -347,5 +356,14 @@ export class Coop3 extends Phaser.Scene{
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }
+    }
+    playBackgroundMusic(){
+        music.play();
+    }
+    loadBackgroundMusic(){
+        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+    }
+    stopBackgroundMusic(){
+        music.stop()
     }
 }
