@@ -26,7 +26,7 @@ export class Comp3 extends Phaser.Scene{
     }
 
     init(){
-        this.timer= new Timer(this,60000,()=>this.startNextLevel())
+        this.timer= new Timer(this,30000,()=>this.startNextLevel())
     }
 
     preload(){
@@ -124,6 +124,8 @@ export class Comp3 extends Phaser.Scene{
         traps.push(new Trampa(this, 615, 554, "trap"));
         traps.push(new Trampa(this, 665, 554, "trap"));
         traps.push(new Trampa(this, 930, 554, "trap"));
+        traps.push(new Trampa(this, 980, 554, "trap"));
+        traps.push(new Trampa(this, 980+150, 426, "trap"));
 
         for (let i = 0; i < traps.length; i += 1) {
             this.physics.add.collider(players[0], traps[i], function () {
