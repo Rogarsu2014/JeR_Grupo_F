@@ -103,7 +103,7 @@ export class Comp3 extends Phaser.Scene{
                 skulls[i].desaparicion(players[0]);
                 scores[0].setText("Player 1: " + players[0].points);
                 counter--;
-                if (counter == 0) {
+                if (counter <= 0) {
                     this.startNextLevel();
                 }
             });
@@ -112,7 +112,7 @@ export class Comp3 extends Phaser.Scene{
                 scores[1].setText("Player 2: " + players[1].points);
                 counter--;
 
-                if (counter == 0) {
+                if (counter <= 0) {
                     this.startNextLevel();
                 }
             });

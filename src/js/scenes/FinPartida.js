@@ -63,7 +63,7 @@ export class FinPartida extends Phaser.Scene {
         playAgainButton.setInteractive();
 
         playAgainButton.on('selected', () => {
-            this.scene.start('Coop2');
+            this.scene.start('Coop1');
         })
 
         mainMenuButton.on('selected', () => {
