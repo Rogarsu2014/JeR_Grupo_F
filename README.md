@@ -165,3 +165,89 @@ El control de movimiento se realiza con el teclado. El desplazamiento lateral se
 El empuje será realizado con la tecla F, empujando y desplazando al jugador rival hacia donde el jugador que empuja está mirando. En teclado, el segundo jugador se moverá con H y K a izquierda y derecha, saltará con la U, descenderá con la J y empujará con la L
 
 ![tut1](GDDImagenes/Tutorial/players4.png)
+
+Por otro lado, las calaveras podrán ser tocadas por los jugadores para ser obtenidas. Una vez obtenidas, desaparecerán.
+
+## Controles 
+El control de movimiento se realiza con el teclado. El desplazamiento lateral se realizará con las teclas A y D para moverse a izquierda y derecha respectivamente. El movimiento de salto se realizará con la tecla W. Se encuentra la opción de acelerar la caída usando el botón S.
+
+El empuje será realizado con la tecla F, empujando y desplazando al jugador rival hacia donde el jugador que empuja está mirando. En teclado, el segundo jugador se moverá con H y K a izquierda y derecha, saltará con la U, descenderá con la J y empujará con la L.
+
+![teclas jugadores](GDDImagenes/Tutorial/players4.png)
+
+
+
+![teclas jugadores](GDDImagenes/Tutorial/A-press2.png) 
+![teclas jugadores](GDDImagenes/Tutorial/D-press2.png)
+![teclas jugadores](GDDImagenes/Tutorial/W-press2.png)
+![teclas jugadores](GDDImagenes/Tutorial/F-press2.png)
+
+
+
+En caso de usar control por mando, la palanca izquierda permite mover al jugador, al pulsar el botón inferior derecho se produciría el salto y los botones R2 y L2 permitirían los movimientos de empuje.
+
+
+# Interfaz 
+## Diagrama de flujo
+
+Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo de *gameplay*, *game-loop*.
+
+## **Transición de escenas**
+![menu boceto](GDDImagenes/Diagramas/Untitled_Diagram.png)
+
+
+##  **Flujo de gameplay**
+![menu boceto](GDDImagenes/Diagramas/Juego_diagrama.png)
+
+## **Game-loop**
+![menu boceto](GDDImagenes/Diagramas/game_loop.png)
+
+
+
+## **Menú principal**
+![menu boceto](GDDImagenes/BocetosUI/Menu.jpg)
+___
+![menu principal](GDDImagenes/Menu_principal.gif)
+
+Descripción del menú principal:
+
+* **Botón juego local:** Al ser pulsado entra en la pantalla de selección de personaje.
+
+* **Botón juego online:** Al ser pulsado entra en el modo online ( por definir ).
+
+* **Botón tutorial:** Al ser pulsado entra en un nivel especial de tutorial.
+
+* **Botón opciones:** Al ser pulsado abre la personalización de los ajustes del juego.
+
+* **Botón créditos:** Al ser pulsado nos lleva a la pantalla de créditos.
+
+
+## Selección de Personajes (NO IMPLEMENTADA)
+
+![boceto sleección de personaje](GDDImagenes/BocetosUI/Seleccion_de_personaje.jpg)
+___
+
+Descripción de la selección de personaje
+
+* Botón empezar partida: Al ser pulsado entra en la pantalla de carga del juego.
+
+* Botón salir al menú principal: Al ser pulsado sale al menú principal.
+
+* Flechas de dirección (al lado de los personajes): Al ser pulsadas selecciona diferentes modelos de personaje.
+
+
+
+
+
+
+## Tutorial y Créditos
+![creditos](GDDImagenes/creditos.gif)
+![tutorial](GDDImagenes/Aprende_a_jugar.gif)
+
+
+Descripción de los tutoriales y créditos
+
+* **Créditos:** Una slide de los créditos en los que se muestran los nombres de los componentes del grupo, el nombre del juego y el nombre del grupo, además de un agradecimiento por jugar.
+
+* **Tutorial:** Una simple muestra de imágenes en sucesión en la que se informa de los controles a los jugadores relacionando las teclas con imágenes mostrando lo que pasa.
+
