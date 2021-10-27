@@ -96,8 +96,8 @@ export class Comp2 extends Phaser.Scene{
         var player2 = new Player_I(this, 800, 500, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this,player2,'U',0,'H','K', 'J', 'L'));
         players[1] = player2;
-        players[0].puntos = data.ply1;
-        players[1].puntos = data.ply2;
+        players[0].points = data.ply1;
+        players[1].points = data.ply2;
 
         players[0].disableMovement()
         players[1].disableMovement()
@@ -145,12 +145,12 @@ export class Comp2 extends Phaser.Scene{
             });
         }
 
-        scores[0] = this.add.text(75, 32, "Player 1: "+ players[0].puntos, {
+        scores[0] = this.add.text(75, 32, "Player 1: "+ players[0].points, {
             fontFamily: 'ink-free-normal'
-        });
-        scores[1] = this.add.text(this.game.canvas.width-75, 32, "Player 2: "+ players[1].puntos, {
+        }).setOrigin(.5, .5);;
+        scores[1] = this.add.text(this.game.canvas.width-75, 32, "Player 2: "+ players[1].points, {
             fontFamily: 'ink-free-normal'
-        });
+        }).setOrigin(.5, .5);;
 
         //************** Initial transition
 

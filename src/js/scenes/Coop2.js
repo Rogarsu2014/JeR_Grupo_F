@@ -213,7 +213,7 @@ export class Coop2 extends Phaser.Scene {
         } else {
             players[playerIndex].points += points;
         }
-        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween = context.tweens.add({
             targets: scores[playerIndex],
@@ -233,7 +233,7 @@ export class Coop2 extends Phaser.Scene {
         } else {
             players[playerIndex].points += points;
         }
-        scores[playerIndex].setText("Player" + (playerIndex + 1) + ": " + players[playerIndex].points);
+        scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + players[playerIndex].points);
 
         let textTween;
         if (points < 0)
