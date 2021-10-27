@@ -10,6 +10,10 @@ export class KeyboardProcessor extends InputProcessor {
         this.jumpButton=this.context.input.keyboard.addKey(jumpButton);
         //this.context.input.keyboard.on("keydown-"+jumpButton,()=>this.player.jump());
     }
+    setPlayer(player){
+        this.player=player;
+    }
+
 
     update(bump, playerp){
 

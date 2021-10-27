@@ -54,7 +54,7 @@ export class Coop1 extends Phaser.Scene {
     preload() {
     }
 
-    create() {
+    create(data) {
 
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
@@ -87,11 +87,13 @@ export class Coop1 extends Phaser.Scene {
 
         ///************** players
         var player1 = new Player_I(this, 928, 64, "dude");
-        player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
+        data.input1.setPlayer(player1)
+        player1.setPlayerInput(data.input1);
         players[0] = player1;
 
         var player2 = new Player_I(this, 820, 384, "dude2");
-        player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
+        data.input2.setPlayer(player2)
+        player2.setPlayerInput(data.input2);
         //player2.setPlayerInput(new GamepadProcessor(this, player2, 0, 0, 1));
         
         players[1] = player2;
