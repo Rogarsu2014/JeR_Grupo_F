@@ -128,7 +128,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('MenuScene');
+        this.scene.start('Coop1');
 
     }
 
