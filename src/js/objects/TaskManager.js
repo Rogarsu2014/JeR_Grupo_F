@@ -16,19 +16,7 @@ export class TaskManager {
             this.tasks.push(new Task(playersOrder[i],()=>{
                 timer.addSeconds(5000);
                 updatePoints(context,playerIndex,onCompletedPoints)
-                // players[playerIndex].points += onCompletedPoints;
-                // pointsCounter[playerIndex].setText( "Jugador"+(playerIndex+1)+ ": "+ players[playerIndex].points)
-                //
-                // let timerTween=context.tweens.add({
-                //     targets: pointsCounter[playerIndex],
-                //     paused:true,
-                //     scaleX:.9,
-                //     ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                //     duration: 100,
-                //     yoyo:true,
-                //     repeat: 0,            // -1: infinity
-                // });
-                // timerTween.play()
+
             }));
         }
 

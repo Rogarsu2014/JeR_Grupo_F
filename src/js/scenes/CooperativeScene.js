@@ -1,7 +1,7 @@
 import {Timer} from "../util/Timer.js";
 import {Player_I} from "../objects/Player_I.js";
 import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
-import {SweepVerticalTransitionOut} from "../util/cameraEffects.js";
+import {SweepVerticalTransitionIn, SweepVerticalTransitionOut} from "../util/cameraEffects.js";
 import {Door} from "../objects/Door.js";
 
 export class CooperativeScene extends Phaser.Scene {
@@ -31,24 +31,25 @@ export class CooperativeScene extends Phaser.Scene {
 
     }
 
-    create(data) {
+    create(data,tilemapKey) {
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 
         this.setCanvasWidth(960)
 
-        let floor = this.createFloor('Coop1Map');
+        let floor = this.createFloor(tilemapKey);
 
         this.door = new Door(this, 0, 0,  this.timer)
 
         this.players[0]  = new Player_I(this, 0, 0, "dude");
         // data.input1.setPlayer(player1)
         // player1.setPlayerInput(data.input1);
-        this.players[0]  .setPlayerInput(new KeyboardProcessor(this, this.players[0] , 'W', 0, 'A', 'D', 'S', 'F'));
+        this.players[0].setPlayerInput(new KeyboardProcessor(this, this.players[0] , 'W', 0, 'A', 'D', 'S', 'F'));
 
         this.players[1] = new Player_I(this, 0, 0, "dude2");
         this.players[1].setPlayerInput(new KeyboardProcessor(this, this.players[1] , 'U', 0, 'H', 'K', 'J', 'L'));
-        //player2.setPlayerInput(new GamepadProcessor(this, player2, 0, 0, 1));
+
+        this.setPlayersData(data)
         this.disableAllPlayersMovement()
 
         this.scores[0] = this.add.text(75, 32, "Player 1: " + this.players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
@@ -106,6 +107,15 @@ export class CooperativeScene extends Phaser.Scene {
         this.UpdatePlatforms();
     }
 
+    setPlayersData(data){
+        if(Object.keys(data).length!==0){  // if object has information
+            for (let i = 0; i < this.players.length; i++) {
+                this.players[i].points=data.playerPoints[i];
+            }
+        }
+
+
+    }
     setPlayerPosition(playerIndex,x,y){
         this.players[playerIndex].setPosition(x,y);
     }
@@ -121,26 +131,27 @@ export class CooperativeScene extends Phaser.Scene {
 
     createFloor(tilemapKey) {
         //*************** tilemap
-        const map = this.make.tilemap({key: tilemapKey});
-        const tileset = map.addTilesetImage('Tileset', 'tileset');
+        let map = this.make.tilemap({key: tilemapKey});
+        let tileset = map.addTilesetImage('Tileset', 'tileset');
 
         ///************** floor
-        const floor = map.createLayer('Level', tileset);
-        map.createStaticLayer('Background', tileset);
+        let floor = map.createLayer('Level', tileset);
+        map.createLayer('Background', tileset);
         floor.setCollisionByProperty({collides: true});
+        floor.depth=2
         return floor;
     }
 
     updatePoints(context, playerIndex, points) {
-        if ((this.players[playerIndex].points + points) <= 0) {
-            this.players[playerIndex].points = 0;
+        if ((context.players[playerIndex].points + points) <= 0) {
+            context.players[playerIndex].points = 0;
         } else {
-            this.players[playerIndex].points += points;
+            context.players[playerIndex].points += points;
         }
-        this.scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + this.players[playerIndex].points);
+        context.scores[playerIndex].setText("Player " + (playerIndex + 1) + ": " + context.players[playerIndex].points);
 
         let textTween = context.tweens.add({
-            targets: this.scores[playerIndex],
+            targets: context.scores[playerIndex],
             paused: true,
             scaleX: .9,
             ease: 'Sine.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
@@ -150,7 +161,24 @@ export class CooperativeScene extends Phaser.Scene {
         });
         textTween.play()
     }
+    timeOver() {
 
+        let playerIndexWithMoreTasksCompleted = this.taskManager.getPlayerWithMoreTasksCompleted();
+        this.timerOverUpdatePoints(this, playerIndexWithMoreTasksCompleted, 100)
+
+        let playerWithLessTasksCompleted = this.taskManager.getPlayerWithLessTasksCompleted();
+        this.timerOverUpdatePoints(this, playerWithLessTasksCompleted, -100)
+
+        let timeOverTimer = new Timer(this, 1000, () => {
+            let endTransition = new SweepVerticalTransitionIn(this);
+            endTransition.addToScene()
+            endTransition.playTransition(() => {
+                this.startNextLevel()
+            }, 1000, 2000)
+        })
+        timeOverTimer.startTimer()
+
+    }
     timerOverUpdatePoints(context, playerIndex, points) {
         if ((this.players[playerIndex].points + points) <= 0) {
             this.players[playerIndex].points = 0;
@@ -219,7 +247,7 @@ export class CooperativeScene extends Phaser.Scene {
 
     startNextLevel() {
         this.music.stop()
-        this.scene.start(this.nextLevelKey, {ply1: this.players[0].points, ply2: this.players[1].points})
+        this.scene.start(this.nextLevelKey, {playerPoints: [this.players[0].points, this.players[1].points]})
     }
 
     setPlatformsColliders() {

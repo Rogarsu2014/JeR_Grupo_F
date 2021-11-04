@@ -28,17 +28,15 @@ export class Coop1 extends CooperativeScene {
         this.taskManager = new TaskManager(this, 4, [1, 0, 1, 0], () => {
             console.log("All tasks completed");
             this.door.open()
-        }, this.timer, this.players, super.updatePoints, 50);
+        }, this.timer, this.players, this.updatePoints, 50);
 
     }
 
 
-
     create(data) {
 
-        super.create(data)
+        super.create(data, 'Coop1Map')
         this.setCanvasWidth(960)
-
 
         // ************** platforms
         this.platforms = []
@@ -53,32 +51,12 @@ export class Coop1 extends CooperativeScene {
 
 
         //**************** door
-        // door = new Door(this, 64, 448,  this.timer)
         this.setDoorPosition(64,448)
 
         ///************** players
         this.setPlayerPosition(0,928,64)
-        // var player1 = new Player_I(this, 928, 64, "dude");
-        // // data.input1.setPlayer(player1)
-        // // player1.setPlayerInput(data.input1);
-        // player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
-        // players[0] = player1;
 
-        // var player2 = new Player_I(this, 820, 384, "dude2");
-        // player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
-        // //player2.setPlayerInput(new GamepadProcessor(this, player2, 0, 0, 1));
-        //
-        // players[1] = player2;
         this.setPlayerPosition(1,820,384)
-
-        // players[0].points = data.jug1;
-        // players[1].points = data.jug2;
-
-        // this.disableAllPlayersMovement()
-
-        ///******* players points
-        // scores[0] = this.add.text(75, 32, "Player 1: " + players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
-        // scores[1] = this.add.text(this.game.canvas.width-75, 32, "Player 2: " + players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         //*************** buttons
         var button1_P1 = new Button(this, 480, 128, 'botonR', () => {
@@ -106,67 +84,12 @@ export class Coop1 extends CooperativeScene {
 
         }, this.players[1]);
 
-        //*************** timer
-        //
-        // this.timer.startTimer();
-        // this.timer.pauseTimer();
-        // this.loadTransition = new SweepVerticalTransitionOut(this);
-        // this.loadTransition.addToScene()
-        // this.loadTransition.playTransition(() => {
-        //
-        //         this.timer.resumeTimer();
-        //         this.enableAllPlayersMovement()
-        //     }, 500, 500
-        // )
 
-
-        // this.timerText = this.add.text(this.game.canvas.width * 0.5, 40, 'test', {
-        //     fontFamily: 'ink-free-normal',
-        //     fontSize: '40px'
-        // }).setOrigin(0.5, 0.5);
-        //
-        //
-        // let timerTween = this.tweens.add({
-        //     targets: this.timerText,
-        //     paused: true,
-        //     scale: 2,
-        //     y: '-=10',
-        //     ease: 'Bounce.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-        //     duration: 125,
-        //     yoyo: true,
-        //     repeat: 0,            // -1: infinity
-        // });
-
-
-        // this.taskManager.setOnTaskCompletedTween(timerTween)
-
-        ///************** collisions
-        //***** door and players
-        // this.physics.add.collider(players[0], door, () => door.playerEntered(players[0]))
-        // this.physics.add.collider(players[1], door, () => door.playerEntered(players[1]))
-        // //***** between players
-        // this.physics.add.collider(players[0], players[1], function () {
-        //     bump = true;
-        // });
-
-        //***** players and floor
-        // this.addStageFloorCollisions(floor);
-        //**** players and platforms
-        // this.setPlatformsColliders();
         this.setPlatformsColliders();
-        console.log("Escena 1 creada");
+
     }
 
 
-
-    // update() {
-    //     players[0].update(bump, players[1]);
-    //     players[1].update(bump, players[0]);
-    //     bump = false;
-    //
-    //     this.timerText.setText(this.timer.getRemainingSeconds(true));
-    //     this.UpdatePlatforms();
-    // }
 
 
 }
