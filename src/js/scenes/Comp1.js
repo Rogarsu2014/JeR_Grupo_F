@@ -22,7 +22,7 @@ var bump;
 var scores = [];
 var counter = 0;
 var music;
-const backgroundMusicKey= 'compStageMusic';
+const backgroundMusicKey = 'compStageMusic';
 
 export class Comp1 extends Phaser.Scene {
 
@@ -59,7 +59,7 @@ export class Comp1 extends Phaser.Scene {
         var player1 = new Player_I(this, 30, 300, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
         players[0] = player1;
-        var player2 = new Player_I(this, this.game.canvas.width-30, 300, "dude2");
+        var player2 = new Player_I(this, this.game.canvas.width - 30, 300, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
         players[1] = player2;
         players[0].points = data.ply1;
@@ -167,7 +167,6 @@ export class Comp1 extends Phaser.Scene {
     }
 
 
-
     setPlatformsColliders() {
 
         for (let i = 0; i < this.platforms.length; i++) {
@@ -177,17 +176,18 @@ export class Comp1 extends Phaser.Scene {
     }
 
 
-    startNextLevel(){
+    startNextLevel() {
         this.timer.pauseTimer();
         this.disableAllPlayersMovement()
 
         cameraFadeOut(this, 1000, () => {
             music.stop()
             this.scene.start(nextLevelKey, {
-                ply1: players[0].points,
-                ply2: players[1].points
-            }
-        )})
+                    playerPoints:[players[0].points,
+                        players[1].points]
+                }
+            )
+        })
     }
 
     addStageFloorCollisions(floor) {
@@ -206,19 +206,22 @@ export class Comp1 extends Phaser.Scene {
             this.platforms[i].movePlatform()
         }
     }
+
     disableAllPlayersMovement() {
         for (let i = 0; i < players.length; i++) {
             players[i].disableMovement()
         }
     }
 
-    playBackgroundMusic(){
+    playBackgroundMusic() {
         music.play();
     }
-    loadBackgroundMusic(){
-        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+
+    loadBackgroundMusic() {
+        music = this.sound.add(backgroundMusicKey, {volume: 0.18});
     }
-    stopBackgroundMusic(){
+
+    stopBackgroundMusic() {
         music.stop()
     }
 }
