@@ -1,9 +1,9 @@
 
-import {TaskManager} from "../objects/TaskManager.js";
-import {Button} from "../objects/Button.js";
-import {Platform} from "../objects/Platform.js";
+import {TaskManager} from "../../../objects/TaskManager.js";
+import {Button} from "../../../objects/Button.js";
+import {Platform} from "../../../objects/Platform.js";
 
-import {CooperativeScene} from "./CooperativeScene.js";
+import {CooperativeScene} from "./Base/CooperativeScene.js";
 
 
 /// Player 1 is upper layer player.

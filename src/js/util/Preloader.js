@@ -1,7 +1,4 @@
-import { Coop1 } from '../scenes/Coop1.js'
-import { Coop2 } from '../scenes/Coop2.js'
-import { Coop3 } from '../scenes/Coop3.js'
-import { Comp1 } from '../scenes/Comp1.js'
+
 import {loadFont} from "./FontLoader.js";
 
 
@@ -128,7 +125,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('Coop1');
+        this.scene.start('MenuScene');
 
     }
 

@@ -1,5 +1,5 @@
-import {Trampa} from '../objects/Trampa.js'
-import {Platform} from "../objects/Platform.js";
+import {Trap} from '../../../objects/Trap.js'
+import {Platform} from "../../../objects/Platform.js";
 import {CompetitiveScene} from "./CompetitiveScene.js";
 
 var traps = [];
@@ -8,7 +8,7 @@ var traps = [];
 export class Comp3 extends CompetitiveScene {
 
     constructor() {
-        super("Comp3", "FinPartida", 30000, 'Comp3Map',1280);
+        super("Comp3", "GameCompletedScene", 30000, 'Comp3Map',1280);
     }
 
 
@@ -34,14 +34,14 @@ export class Comp3 extends CompetitiveScene {
         this.platforms.push(platform7)
 
 
-        traps.push(new Trampa(this, 150, 426, "trap"));
-        traps.push(new Trampa(this, 300, 554, "trap"));
-        traps.push(new Trampa(this, 350, 554, "trap"));
-        traps.push(new Trampa(this, 615, 554, "trap"));
-        traps.push(new Trampa(this, 665, 554, "trap"));
-        traps.push(new Trampa(this, 930, 554, "trap"));
-        traps.push(new Trampa(this, 980, 554, "trap"));
-        traps.push(new Trampa(this, 980 + 150, 426, "trap"));
+        traps.push(new Trap(this, 150, 426, "trap"));
+        traps.push(new Trap(this, 300, 554, "trap"));
+        traps.push(new Trap(this, 350, 554, "trap"));
+        traps.push(new Trap(this, 615, 554, "trap"));
+        traps.push(new Trap(this, 665, 554, "trap"));
+        traps.push(new Trap(this, 930, 554, "trap"));
+        traps.push(new Trap(this, 980, 554, "trap"));
+        traps.push(new Trap(this, 980 + 150, 426, "trap"));
 
         for (let i = 0; i < traps.length; i += 1) {
             this.physics.add.collider(this.players[0], traps[i],  ()=> {

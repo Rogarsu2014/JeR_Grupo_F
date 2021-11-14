@@ -1,9 +1,9 @@
-import {Timer} from "../util/Timer.js";
-import {Player_I} from "../objects/Player_I.js";
-import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
-import {SweepVerticalTransitionIn, SweepVerticalTransitionOut} from "../util/cameraEffects.js";
-import {Door} from "../objects/Door.js";
-import {GameStage} from "./GameStage.js";
+import {Timer} from "../../../../util/Timer.js";
+import {Player} from "../../../../objects/Player.js";
+import {KeyboardProcessor} from "../../../../util/InputProcessors/KeyboardProcessor.js";
+import {SweepVerticalTransitionIn, SweepVerticalTransitionOut} from "../../../../util/cameraEffects.js";
+import {Door} from "../../../../objects/Door.js";
+import {GameStage} from "../../Base/GameStage.js";
 
 export class CooperativeScene extends GameStage {
 

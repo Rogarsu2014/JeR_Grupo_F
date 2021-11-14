@@ -1,6 +1,6 @@
-import {GameStage} from "./GameStage.js";
-import {cameraFadeOut} from "../util/cameraEffects.js";
-import {Skull} from "../objects/Skull.js";
+import {GameStage} from "../Base/GameStage.js";
+import {cameraFadeOut} from "../../../util/cameraEffects.js";
+import {Skull} from "../../../objects/Skull.js";
 
 export class CompetitiveScene extends GameStage{
 

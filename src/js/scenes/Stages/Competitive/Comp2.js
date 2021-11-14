@@ -1,5 +1,5 @@
 
-import {Platform} from "../objects/Platform.js";
+import {Platform} from "../../../objects/Platform.js";
 
 import {CompetitiveScene} from "./CompetitiveScene.js";
 

@@ -1,8 +1,8 @@
-﻿import {Timer} from "../util/Timer.js";
-import {Player_I} from "../objects/Player_I.js";
-import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
-import {SweepVerticalTransitionIn, SweepVerticalTransitionOut} from "../util/cameraEffects.js";
-import {Door} from "../objects/Door.js";
+﻿import {Timer} from "../../../util/Timer.js";
+import {Player} from "../../../objects/Player.js";
+import {KeyboardProcessor} from "../../../util/InputProcessors/KeyboardProcessor.js";
+import {SweepVerticalTransitionIn, SweepVerticalTransitionOut} from "../../../util/cameraEffects.js";
+import {Door} from "../../../objects/Door.js";
 
 export class GameStage extends Phaser.Scene {
 
@@ -39,12 +39,12 @@ export class GameStage extends Phaser.Scene {
 
 
 
-        this.players[0]  = new Player_I(this, 0, 0, "dude");
+        this.players[0]  = new Player(this, 0, 0, "dude");
         // data.input1.setPlayer(player1)
         // player1.setPlayerInput(data.input1);
         this.players[0].setPlayerInput(new KeyboardProcessor(this, this.players[0] , 'W', 0, 'A', 'D', 'S', 'F'));
 
-        this.players[1] = new Player_I(this, 0, 0, "dude2");
+        this.players[1] = new Player(this, 0, 0, "dude2");
         this.players[1].setPlayerInput(new KeyboardProcessor(this, this.players[1] , 'U', 0, 'H', 'K', 'J', 'L'));
         this.players[0].depth=2
         this.players[1].depth=2

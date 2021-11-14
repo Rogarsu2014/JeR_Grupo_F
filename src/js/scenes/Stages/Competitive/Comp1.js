@@ -1,5 +1,5 @@
 
-import {Trampa} from '../objects/Trampa.js'
+import {Trap} from '../../../objects/Trap.js'
 
 import {CompetitiveScene} from "./CompetitiveScene.js";
 
@@ -21,10 +21,10 @@ export class Comp1 extends CompetitiveScene {
         //Creación de todas las skulls
 
 
-        traps.push(new Trampa(this, 150, 426, "trap"));
-        traps.push(new Trampa(this, 350, 490, "trap"));
-        traps.push(new Trampa(this, 1000, 298, "trap"));
-        traps.push(new Trampa(this, 1000, 490, "trap"));
+        traps.push(new Trap(this, 150, 426, "trap"));
+        traps.push(new Trap(this, 350, 490, "trap"));
+        traps.push(new Trap(this, 1000, 298, "trap"));
+        traps.push(new Trap(this, 1000, 490, "trap"));
 
         for (let i = 0; i < traps.length; i += 1) {
             this.physics.add.collider(this.players[0], traps[i],  ()=> {
