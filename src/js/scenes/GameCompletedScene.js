@@ -1,13 +1,13 @@
-import {Player_I} from '../objects/Player_I.js'
+import {Player} from '../objects/Player.js'
 import {cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 
 var players = [];
 var scores = [];
 
-export class FinPartida extends Phaser.Scene {
+export class GameCompletedScene extends Phaser.Scene {
     constructor() {
-        super("FinPartida");
+        super("GameCompletedScene");
     }
 
     init() {

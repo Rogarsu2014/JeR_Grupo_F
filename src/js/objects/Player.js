@@ -1,7 +1,7 @@
 import {cameraShake} from "../util/cameraEffects.js";
 import {Timer} from "../util/Timer.js";
 
-export class Player_I extends Phaser.Physics.Arcade.Sprite {
+export class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, spriteKey, points = 0) {
         super(scene, x, y, spriteKey);
         scene.add.existing(this);
