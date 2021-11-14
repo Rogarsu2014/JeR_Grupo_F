@@ -1,6 +1,6 @@
-import { Player_I } from '../objects/Player_I.js'
+import { Player } from '../objects/Player.js'
 import { Skull } from '../objects/Skull.js'
-import { Trampa } from '../objects/Trampa.js'
+import { Trap } from '../objects/Trap.js'
 import { GamepadProcessor } from "../util/InputProcessors/GamepadProcessor.js";
 import { KeyboardProcessor } from "../util/InputProcessors/KeyboardProcessor.js";
 
@@ -24,10 +24,10 @@ export class CharacterTestScene extends Phaser.Scene {
         this.game.scale.resize(1480, 640);
 
         //Create the character at 0,0 and change its origin
-        var player1 = new Player_I(this, 100, 100, "dude");
+        var player1 = new Player(this, 100, 100, "dude");
         player1.setPlayerInput(new KeyboardProcessor(this, player1, 'W', 0, 'A', 'D', 'S', 'F'));
         players[0] = player1;
-        var player2 = new Player_I(this, 200, 100, "dude2");
+        var player2 = new Player(this, 200, 100, "dude2");
         player2.setPlayerInput(new KeyboardProcessor(this, player2, 'U', 0, 'H', 'K', 'J', 'L'));
         players[1] = player2;
         this.physics.add.collider(players[0], players[1], function () {
@@ -59,13 +59,13 @@ export class CharacterTestScene extends Phaser.Scene {
             });
         }
             
-        var trap = new Trampa(this, 600, 615, "trap");
+        var trap = new Trap(this, 600, 615, "trap");
         this.physics.add.collider(players[0], trap, function () {
-            trap.dañar(players[0]);
+            trap.harm(players[0]);
             scores[0].setText("Jugador 1: "+players[0].points);
         });
         this.physics.add.collider(players[1], trap, function () {
-            trap.dañar(players[1]);
+            trap.harm(players[1]);
             scores[1].setText("Jugador 2: "+players[1].points);
         });
 
