@@ -7,7 +7,7 @@ import {Door} from "../objects/Door.js";
 export class GameStage extends Phaser.Scene {
 
 
-    constructor(sceneKey, nextLevelKey, timerTime,sceneWidth) {
+    constructor(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth) {
         super(sceneKey);
         this.nextLevelKey = nextLevelKey
         this.players = [];
@@ -18,6 +18,7 @@ export class GameStage extends Phaser.Scene {
         this.sceneWidth=sceneWidth;
         this.backgroundMusicKey = 'coopStageMusic';
 
+        this.tilemapKey=tilemapKey;
         this.timer = new Timer(this, timerTime)
         this.timer.onComplete(() => {
             this.timeOver()
@@ -28,13 +29,13 @@ export class GameStage extends Phaser.Scene {
 
     }
 
-    create(data,tilemapKey) {
+    create(data) {
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 
         this.setCanvasWidth(this.sceneWidth)
 
-        let floor = this.createFloor(tilemapKey);
+        let floor = this.createFloor(this.tilemapKey);
 
 
 
@@ -45,7 +46,9 @@ export class GameStage extends Phaser.Scene {
 
         this.players[1] = new Player_I(this, 0, 0, "dude2");
         this.players[1].setPlayerInput(new KeyboardProcessor(this, this.players[1] , 'U', 0, 'H', 'K', 'J', 'L'));
-
+        this.players[0].depth=2
+        this.players[1].depth=2
+        this.definePlayersPosition();
         this.setPlayersData(data)
         this.disableAllPlayersMovement()
 
@@ -190,5 +193,12 @@ export class GameStage extends Phaser.Scene {
 
     stopBackgroundMusic() {
         this.music.stop()
+    }
+
+    definePlayersPosition(){
+     throw new Error("Players position must be set")
+    }
+    stageCompleted(){
+     throw new Error("Players position must be set")
     }
 }

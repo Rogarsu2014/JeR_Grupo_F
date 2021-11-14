@@ -23,13 +23,13 @@ export class FinPartida extends Phaser.Scene {
     }
 
     create(data) {
-        console.log("Fin Partida Scene created");
+
         this.game.canvas.width = 960;
         var width = this.game.canvas.width;
         var height = this.game.canvas.height;
 
-        players[0] = data.ply1;
-        players[1] = data.ply2;
+        players[0] = data.playerPoints[0];
+        players[1] = data.playerPoints[1];
 
         this.add.image(0, 0, 'victoryImage').setOrigin(0).setDepth(0).setScale(1);
 

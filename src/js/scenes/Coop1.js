@@ -2,14 +2,7 @@
 import {TaskManager} from "../objects/TaskManager.js";
 import {Button} from "../objects/Button.js";
 import {Platform} from "../objects/Platform.js";
-import {Timer} from "../util/Timer.js";
-import {
-    cameraFadeIn,
-    cameraShake,
-    SweepVerticalTransitionIn,
-    SweepTransitionHorizontalOut,
-    SweepVerticalTransitionOut
-} from "../util/cameraEffects.js";
+
 import {CooperativeScene} from "./CooperativeScene.js";
 
 
@@ -20,7 +13,7 @@ export class Coop1 extends CooperativeScene {
 
 
     constructor() {
-        super("Coop1","Comp1",15000);
+        super("Coop1","Comp1", 15000,'Coop1Map');
     }
 
     init() {
@@ -35,7 +28,7 @@ export class Coop1 extends CooperativeScene {
 
     create(data) {
 
-        super.create(data, 'Coop1Map')
+        super.create(data)
 
         // ************** platforms
         this.platforms = []
@@ -53,9 +46,7 @@ export class Coop1 extends CooperativeScene {
         this.setDoorPosition(64,448)
         
         ///************** players
-        this.setPlayerPosition(0,928,64)
 
-        this.setPlayerPosition(1,820,384)
 
         //*************** buttons
         var button1_P1 = new Button(this, 480, 128, 'botonR', () => {
@@ -88,7 +79,10 @@ export class Coop1 extends CooperativeScene {
 
     }
 
-
+    definePlayersPosition() {
+        this.setPlayerPosition(0,928,64)
+        this.setPlayerPosition(1,820,384)
+    }
 
 
 }

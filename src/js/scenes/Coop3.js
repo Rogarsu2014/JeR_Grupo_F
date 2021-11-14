@@ -1,18 +1,8 @@
-import {Player_I} from '../objects/Player_I.js';
-import {Skull} from '../objects/Skull.js';
-import {GamepadProcessor} from "../util/InputProcessors/GamepadProcessor.js";
-import {KeyboardProcessor} from "../util/InputProcessors/KeyboardProcessor.js";
+
 import {TaskManager} from "../objects/TaskManager.js";
 import {Button} from "../objects/Button.js";
 import {Platform} from "../objects/Platform.js";
-import {Timer} from "../util/Timer.js";
-import {Door} from "../objects/Door.js";
-import {
-    cameraFadeIn,
-    cameraShake,
-    SweepVerticalTransitionIn,
-    SweepTransitionHorizontalOut
-} from "../util/cameraEffects.js";
+
 import {CooperativeScene} from "./CooperativeScene.js";
 
 
@@ -22,7 +12,7 @@ import {CooperativeScene} from "./CooperativeScene.js";
 export class Coop3 extends CooperativeScene {
 
     constructor() {
-        super("Coop3", "Comp3", 5000);
+        super("Coop3", "Comp3", 5000,'Coop3Map');
     }
 
     init() {
@@ -39,7 +29,7 @@ export class Coop3 extends CooperativeScene {
 
     create(data) {
 
-        super.create(data, 'Coop3Map')
+        super.create(data)
         this.setCanvasWidth(960)
 
 
@@ -61,11 +51,9 @@ export class Coop3 extends CooperativeScene {
         //**************** door
         this.setDoorPosition(896, 448)
 
-        //faltan colisiones con el pj, son estilo;
 
         ///************** players
-        this.setPlayerPosition(0,100,100)
-        this.setPlayerPosition(1,200,100)
+
 
         ///******* players points
 
@@ -105,5 +93,9 @@ export class Coop3 extends CooperativeScene {
 
     }
 
+    definePlayersPosition() {
+        this.setPlayerPosition(0,100,100)
+        this.setPlayerPosition(1,200,100)
+    }
 
 }

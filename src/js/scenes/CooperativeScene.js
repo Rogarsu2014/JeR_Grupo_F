@@ -8,20 +8,18 @@ import {GameStage} from "./GameStage.js";
 export class CooperativeScene extends GameStage {
 
 
-    constructor(sceneKey, nextLevelKey, timerTime) {
-        super(sceneKey, nextLevelKey, timerTime,960);
+    constructor(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth=960) {
+        super(sceneKey, nextLevelKey, timerTime,tilemapKey,960);
         
         this.backgroundMusicKey = 'coopStageMusic';
 
 
     }
 
-    init() {
 
-    }
+    create(data) {
 
-    create(data,tilemapKey) {
-        super.create(data,tilemapKey)
+        super.create(data)
 
         /// only coop
         let timerTween = this.tweens.add({
@@ -35,11 +33,13 @@ export class CooperativeScene extends GameStage {
             repeat: 0,            // -1: infinity
         });
         this.door = new Door(this, 0, 0,  this.timer)
+        this.door.depth=1
+
         this.taskManager.setOnTaskCompletedTween(timerTween)
 
         this.physics.add.collider(this.players[0], this.door, () => this.door.playerEntered(this.players[0]))
         this.physics.add.collider(this.players[1], this.door, () => this.door.playerEntered(this.players[1]))
-        
+
 
         //**** players and platforms
         // this.setPlatformsColliders();
@@ -94,7 +94,18 @@ export class CooperativeScene extends GameStage {
         timeOverTimer.startTimer()
 
     }
-    
+    stageCompleted() {
+        this.timer.pauseTimer();
+        let timeOverTimer = new Timer(this, 1000, () => {
+            let endTransition = new SweepVerticalTransitionIn(this);
+            endTransition.addToScene()
+            endTransition.playTransition(() => {
+                this.startNextLevel()
+            }, 1000)
+        })
+        timeOverTimer.startTimer()
+    }
+
     timerOverUpdatePoints(context, playerIndex, points) {
         if ((this.players[playerIndex].points + points) <= 0) {
             this.players[playerIndex].points = 0;

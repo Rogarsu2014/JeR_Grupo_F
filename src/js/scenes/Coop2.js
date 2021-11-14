@@ -10,7 +10,7 @@ import {CooperativeScene} from "./CooperativeScene.js";
 export class Coop2 extends CooperativeScene {
 
     constructor() {
-        super("Coop2","Comp2",10000);
+        super("Coop2","Comp2",10000,'Coop2Map');
     }
 
     init() {
@@ -28,7 +28,7 @@ export class Coop2 extends CooperativeScene {
 
     create(data) {
 
-        super.create(data,'Coop2Map')
+        super.create(data)
 
         this.setCanvasWidth(960)
 
@@ -42,11 +42,6 @@ export class Coop2 extends CooperativeScene {
 
         //**************** door
         this.setDoorPosition(64,448)
-
-        //Players PositionDefinition
-        this.setPlayerPosition(0,100,500)
-
-        this.setPlayerPosition(1,200,500)
 
 
         var button1_P2 = new Button(this, 416, 448, 'botonL', () => {
@@ -71,6 +66,12 @@ export class Coop2 extends CooperativeScene {
 
         this.setPlatformsColliders();
 
+    }
+
+    definePlayersPosition() {
+        this.setPlayerPosition(0,100,500)
+
+        this.setPlayerPosition(1,200,500)
     }
 
 }
