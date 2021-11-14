@@ -12,7 +12,7 @@ export class Trampa extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true);
         this.context = scene;
         this.spriteKey = spriteKey;
-        this.puntos = -50;
+        this.pointsRemoved = -50;
         this.music = this.context.sound.add("hit", this.context.game.config.musicConfig);
     }
     init() {
@@ -27,12 +27,12 @@ export class Trampa extends Phaser.Physics.Arcade.Sprite {
     update() {
 
     }
-    dañar(jugador) {
-        jugador.addPoints(this.puntos);
+    harm(player) {
+        player.addPoints(this.pointsRemoved);
         this.music.play();
-        jugador.setPosition(jugador.initialPositionX, jugador.initialPositionY);
-        jugador.body.moves = false;
-        var timer = new Timer(this.context, 2000, () => jugador.body.moves = true);
+        player.setPosition(player.initialPositionX, player.initialPositionY);
+        player.body.moves = false;
+        var timer = new Timer(this.context, 2000, () => player.body.moves = true);
         timer.startTimer();
     }
 }

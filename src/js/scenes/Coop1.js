@@ -36,7 +36,6 @@ export class Coop1 extends CooperativeScene {
     create(data) {
 
         super.create(data, 'Coop1Map')
-        this.setCanvasWidth(960)
 
         // ************** platforms
         this.platforms = []
@@ -52,7 +51,7 @@ export class Coop1 extends CooperativeScene {
 
         //**************** door
         this.setDoorPosition(64,448)
-
+        
         ///************** players
         this.setPlayerPosition(0,928,64)
 

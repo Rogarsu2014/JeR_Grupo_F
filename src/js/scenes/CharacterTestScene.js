@@ -61,11 +61,11 @@ export class CharacterTestScene extends Phaser.Scene {
             
         var trap = new Trampa(this, 600, 615, "trap");
         this.physics.add.collider(players[0], trap, function () {
-            trap.dañar(players[0]);
+            trap.harm(players[0]);
             scores[0].setText("Jugador 1: "+players[0].points);
         });
         this.physics.add.collider(players[1], trap, function () {
-            trap.dañar(players[1]);
+            trap.harm(players[1]);
             scores[1].setText("Jugador 2: "+players[1].points);
         });
 
