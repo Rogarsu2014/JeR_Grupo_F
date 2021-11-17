@@ -73,7 +73,7 @@ export class GameStage extends Phaser.Scene {
         }).setOrigin(0.5, 0.5);
 
         //***** between players
-        this.physics.add.collider(this.players[0], this.players[1], function () {
+        this.physics.add.collider(this.players[0], this.players[1], ()=> {
             this.bump = true;
         });
         //***** between players and floor
