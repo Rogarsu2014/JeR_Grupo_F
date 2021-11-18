@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @SpringBootApplication
+@RestController
+@RequestMapping("/book")
 public class Application {
 
 	public static void main(String[] args) {

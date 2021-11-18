@@ -11,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book {
+    
     @Id
     @GeneratedValue
     private int id;
