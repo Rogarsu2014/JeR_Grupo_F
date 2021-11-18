@@ -24,8 +24,7 @@ export class GameCompletedScene extends Phaser.Scene {
 
     create(data) {
         
-        this.game.scale.pageAlignHorizontally = true;
-        this.game.scale.pageAlignVertically = true;
+
         this.game.canvas.width = 960;
         var width = this.game.canvas.width;
         var height = this.game.canvas.height;

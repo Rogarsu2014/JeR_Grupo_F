@@ -17,8 +17,7 @@ export class MenuScene extends Phaser.Scene{
 
 
     create(){
-        this.game.scale.pageAlignHorizontally = true;
-        this.game.scale.pageAlignVertically = true;
+
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 
