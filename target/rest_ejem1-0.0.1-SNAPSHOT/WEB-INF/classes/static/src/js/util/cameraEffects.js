@@ -31,7 +31,6 @@ export class SweepVerticalTransitionIn {
     }
 
     loadTransition() {
-        this.context.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
     }
 
     addToScene() {
@@ -85,7 +84,6 @@ export class SweepVerticalTransitionOut {
     }
 
     loadTransition() {
-        this.context.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
     }
 
     addToScene() {
@@ -147,7 +145,6 @@ export class SweepTransitionHorizontalOut {
     }
 
     loadTransition() {
-        this.context.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
     }
 
     addToScene() {

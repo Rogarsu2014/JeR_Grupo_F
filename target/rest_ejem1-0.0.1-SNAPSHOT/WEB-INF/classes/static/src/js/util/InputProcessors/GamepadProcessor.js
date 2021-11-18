@@ -8,11 +8,9 @@ export class GamepadProcessor extends InputProcessor {
 
         this.padIndex = padIndex;
         this.gamepad = new Gamepad(context, padIndex);
-
-        this.gamepad.onConnected(() => {
-            this.gamepad.setPad();
-            this.setJumpButton();
-        })
+        this.player=player
+        this.gamepad.setPad();
+        this.setJumpButton();
     }
 
     onConnected(event) {
@@ -21,9 +19,7 @@ export class GamepadProcessor extends InputProcessor {
     getPadIndex(){
         return this.padIndex;
     }
-    setPlayer(player){
-        this.player=player;
-    }
+
     setJumpButton() {
         this.gamepad.onButtonDown(this.jumpButton, () => this.player.jump())
     }

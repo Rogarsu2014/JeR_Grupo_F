@@ -1,7 +1,7 @@
 
 import {Trap} from '../../../objects/Trap.js'
 
-import {CompetitiveScene} from "./Base/CompetitiveScene.js";
+import {CompetitiveScene} from "./CompetitiveScene.js";
 
 
 var traps = [];
