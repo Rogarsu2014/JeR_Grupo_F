@@ -11,6 +11,7 @@ export class Tutorial extends Phaser.Scene {
     }
 
     create() {
+        
         this.game.canvas.width = 960;
         let width = this.game.canvas.width;
         let height = this.game.canvas.height;

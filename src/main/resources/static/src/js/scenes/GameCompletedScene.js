@@ -23,6 +23,7 @@ export class GameCompletedScene extends Phaser.Scene {
     }
 
     create(data) {
+        
 
         this.game.canvas.width = 960;
         var width = this.game.canvas.width;

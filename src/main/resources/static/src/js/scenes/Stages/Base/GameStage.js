@@ -30,11 +30,13 @@ export class GameStage extends Phaser.Scene {
     }
 
     create(data) {
+        
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 
         this.setCanvasWidth(this.sceneWidth)
-
+        this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignVertically = true;
         let floor = this.createFloor(this.tilemapKey);
 
 
