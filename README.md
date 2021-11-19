@@ -2,7 +2,7 @@
 
 ## Nombre_del_Juego
 Dual Interest
-![Titulo](GDDImagenes/Botones_y_Creditos/GameTittle.png)
+![Titulo](doc/GDDImagenes/Botones_y_Creditos/GameTittle.png)
 ## Descripcion_del_Juego
 *Te interesa colaborar con el enemigo para poder ganar.*
 
@@ -33,8 +33,8 @@ Este es el documento de diseño de juego de *Dual Interest*.Aquí expondremos la
 *Dual Interests* es un videojuego multijugador de plataformas 2D de dos personas con un estilo simplificado en el que cada jugador controla a un personaje y combinando fases cooperativas de puzzles y fases de duelo compiten por la superioridad en una serie de niveles en los que deberán recolectar calaveras que les darán puntos para poder ganar.
 
 *Te interesa colaborar con el enemigo para poder ganar.*
-![puerta nivel coop1](GDDImagenes/Puerta_abriendose.gif)
-![nivel competitivo 1](GDDImagenes/Comp1.gif)
+![puerta nivel coop1](doc/GDDImagenes/Puerta_abriendose.gif)
+![nivel competitivo 1](doc/GDDImagenes/Comp1.gif)
 ## Características principales 
 El juego se centra en los siguientes puntos:
 
@@ -69,10 +69,10 @@ El escenario del juego será de estética minimalista y colorida.
 ## Estilo visual
 El estilo visual de Dual Interest es simplificado y colorido, siendo el nivel ilustrado con colores planos y una estética simple y estilizada. Los personajes son seres geométricos, coloridos con estética similar al escenario.
 
-![Menu](GDDImagenes/MenuImage.png)
+![Menu](doc/GDDImagenes/MenuImage.png)
 *Imagen de fondo del menú principal*
 
-![Calavera](GDDImagenes/Personajes/SpriteSkulls.png)
+![Calavera](doc/GDDImagenes/Personajes/SpriteSkulls.png)
 
 *SpriteSheet de la calavera*
 
@@ -122,7 +122,7 @@ La mecánica del salto está pensada de forma que de juego a un desplazamiento e
 
 ## Empuje
 El empuje está diseñado como una mecánica de competición, cuyo propósito es el impedimento o la obstaculización de las acciones del oponente. Sin embargo esta acción estará disponible también en la fase de cooperación, con el fin de que si lo ven necesario los jugadores hagan uso de ella. Al igual que con el salto, el empuje desplazará al oponente una distancia determinada y constante.
-![Empuje](GDDImagenes/emoujon.gif)
+![Empuje](doc/GDDImagenes/emoujon.gif)
 
 ## Desplazamiento lateral
 El jugador podrá desplazarse en un solo plano, pudiendo moverse a lo ancho (eje horizontal) y a lo alto (eje vertical) mediante el uso de las mecánicas de movimiento previamente definidas y elementos del escenario.
@@ -130,7 +130,7 @@ El jugador podrá desplazarse en un solo plano, pudiendo moverse a lo ancho (eje
 ## Trampas 
 Las trampas son mecanismos presentes en el escenario que dificultan el avance  a los jugadores durante la fase de competición. Las trampas actuales están representadas mediante unos pinchos rocosos que salen del suelo. Estas trampas al caer sobre ellas hacen que el jugador reaparezca en la posición inicial del nivel y se le restan 50 puntos. Además el jugador se queda inmovilizado durante 2 segundos como penalización.
 
-![trampa](GDDImagenes/Nivel/Trampa3.png)
+![trampa](doc/GDDImagenes/Nivel/Trampa3.png)
 
 *Sprite de la trampa*
 
@@ -141,11 +141,11 @@ Los jugadores tendrán un límite de tiempo para completar los diferentes objeti
 Los personajes presentes en el juego son controlados por los jugadores, sin NPC’s al ser el juego exclusivamente multijugador. Dichos personajes tienen una complexión pequeña y ágil acorde con el espíritu frenético del juego, además de que un tamaño grande sería una molestia a la hora de desplazarse. 
 
 En cuanto al aspecto físico se distinguen dos personajes geométricos diferenciables. Ambos con formas distintas y brazos, piernas y ojos.
-![ibban](GDDImagenes/Personajes/Ibban.png)![daia](GDDImagenes/Personajes/Daia0.png)
+![ibban](doc/GDDImagenes/Personajes/Ibban.png)![daia](doc/GDDImagenes/Personajes/Daia0.png)
 
 *Primeros Diseños de personaje*
-![daia2](GDDImagenes/Personajes/SPRITE_SHIIIIIITTT.png)
-![daia2](GDDImagenes/Personajes/spriteshit2.png)
+![daia2](doc/GDDImagenes/Personajes/SPRITE_SHIIIIIITTT.png)
+![daia2](doc/GDDImagenes/Personajes/spriteshit2.png)
 *Hojas de Sprite de los personajes*
 
 # Movimiento y físicas 
@@ -166,11 +166,11 @@ Por otro lado, las calaveras podrán ser tocadas por los jugadores para ser obte
 El control de movimiento se realiza con el teclado. El desplazamiento lateral se realizará con las teclas A y D para moverse a izquierda y derecha respectivamente. El movimiento de salto se realizará con la tecla W. Se encuentra la opción de acelerar la caída usando el botón S.
 El empuje será realizado con la tecla F, empujando y desplazando al jugador rival hacia donde el jugador que empuja está mirando. En teclado, el segundo jugador se moverá con H y K a izquierda y derecha, saltará con la U, descenderá con la J y empujará con la L
 
-![tut1](GDDImagenes/Tutorial/players4.png)
-![teclas jugadores](GDDImagenes/Tutorial/Versiones_completas/A-press2.png) 
-![teclas jugadores](GDDImagenes/Tutorial/Versiones_completas/D-press2.png)
-![teclas jugadores](GDDImagenes/Tutorial/Versiones_completas/W-press2.png)
-![teclas jugadores](GDDImagenes/Tutorial/Versiones_completas/F-press2.png)
+![tut1](doc/GDDImagenes/Tutorial/players4.png)
+![teclas jugadores](doc/GDDImagenes/Tutorial/Versiones_completas/A-press2.png) 
+![teclas jugadores](doc/GDDImagenes/Tutorial/Versiones_completas/D-press2.png)
+![teclas jugadores](doc/GDDImagenes/Tutorial/Versiones_completas/W-press2.png)
+![teclas jugadores](doc/GDDImagenes/Tutorial/Versiones_completas/F-press2.png)
 
 
 
@@ -183,21 +183,21 @@ En caso de usar control por mando, la palanca izquierda permite mover al jugador
 Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo de *gameplay*, *game-loop*.
 
 ## **Transición de escenas**
-![menu boceto](GDDImagenes/Diagramas/Untitled_Diagram.png)
+![menu boceto](doc/GDDImagenes/Diagramas/Untitled_Diagram.png)
 
 
 ##  **Flujo de gameplay**
-![menu boceto](GDDImagenes/Diagramas/Juego_diagrama.png)
+![menu boceto](doc/GDDImagenes/Diagramas/Juego_diagrama.png)
 
 ## **Game-loop**
-![menu boceto](GDDImagenes/Diagramas/game_loop.png)
+![menu boceto](doc/GDDImagenes/Diagramas/game_loop.png)
 
 
 
 ## **Menú principal**
-![menu boceto](GDDImagenes/BocetosUI/Menu.jpg)
+![menu boceto](doc/GDDImagenes/BocetosUI/Menu.jpg)
 ___
-![menu principal](GDDImagenes/Menu_principal.gif)
+![menu principal](doc/GDDImagenes/Menu_principal.gif)
 
 Descripción del menú principal:
 
@@ -214,7 +214,7 @@ Descripción del menú principal:
 
 ## Selección de Personajes (NO IMPLEMENTADA)
 
-![boceto sleección de personaje](GDDImagenes/BocetosUI/Seleccion_de_personaje.jpg)
+![boceto sleección de personaje](doc/GDDImagenes/BocetosUI/Seleccion_de_personaje.jpg)
 ___
 
 Descripción de la selección de personaje
@@ -231,8 +231,8 @@ Descripción de la selección de personaje
 
 
 ## Tutorial y Créditos
-![creditos](GDDImagenes/Creditos.gif)
-![tutorial](GDDImagenes/Aprende_a_jugar.gif)
+![creditos](doc/GDDImagenes/Creditos.gif)
+![tutorial](doc/GDDImagenes/Aprende_a_jugar.gif)
 
 
 Descripción de los tutoriales y créditos
@@ -243,9 +243,9 @@ Descripción de los tutoriales y créditos
 
 #### Pantalla de resultados
 
-![ggez](GDDImagenes/BocetosUI/FindeNivel2.jpg)
+![ggez](doc/GDDImagenes/BocetosUI/FindeNivel2.jpg)
 
-![ggez](GDDImagenes/ggez.png)
+![ggez](doc/GDDImagenes/ggez.png)
 
 Descripción de la pantalla de fin de nivel:
 
@@ -277,22 +277,22 @@ Los niveles de cooperación en Dual Interest tienen diversos elementos: suelo y 
 
 En este boceto de nivel se pueden apreciar todos estos elementos. Los personajes aparecen en los Spawns
 
-![ggez](GDDImagenes/BocetoNivel1.jpg)
+![ggez](doc/GDDImagenes/BocetoNivel1.jpg)
 
-![ggez](GDDImagenes/Coop1.png)
+![ggez](doc/GDDImagenes/Coop1.png)
 Versión final del nivel bocetado arriba
 
 
-![ggez](GDDImagenes/Comp1.gif)
+![ggez](doc/GDDImagenes/Comp1.gif)
 
 
-![ggez](GDDImagenes/Comp3.gif)
+![ggez](doc/GDDImagenes/Comp3.gif)
  y esta
-![ggez](GDDImagenes/Coop2.png)
+![ggez](doc/GDDImagenes/Coop2.png)
 
-![ggez](GDDImagenes/emoujon.gif)
+![ggez](doc/GDDImagenes/emoujon.gif)
 
-![ggez](GDDImagenes/Coop3.png)
+![ggez](doc/GDDImagenes/Coop3.png)
 
 ### Hoja de ruta del desarrollo
 
