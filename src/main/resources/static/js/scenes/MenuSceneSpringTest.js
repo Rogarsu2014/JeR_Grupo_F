@@ -1,6 +1,6 @@
 import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
-
+let text;
 export class MenuSceneSpringTest extends Phaser.Scene {
     constructor() {
         super("MenuSceneSpringTest");
@@ -16,7 +16,7 @@ export class MenuSceneSpringTest extends Phaser.Scene {
 
         let getMessageText = this.add.text(0, 0, 'Get messages').setOrigin(0).setDepth(0).setScale(1);
         let postMessageText = this.add.text(0, 50, 'post message').setOrigin(0).setDepth(0).setScale(1);
-        
+        text = this.add.text(0, 100, '').setOrigin(0).setDepth(0).setScale(1);
         // let width=this.game.canvas.width;
         // let height=this.game.canvas.height;
 
@@ -46,21 +46,32 @@ export class MenuSceneSpringTest extends Phaser.Scene {
     }
 
     postMessage() {
-        let content = this.getTextAreaValue("usernameTextInput")
+        let newContent = this.getTextAreaValue("usernameTextInput")
         $.ajax({
             method: "POST",
             dataType:'json',
             url: 'http://localhost:8080/message',
             data: JSON.stringify({
                 "username": "test",
-                "content": content
+                "content": newContent
             }),
             processData: false,
             headers: {
                 "Content-Type": "application/json"
             },
+            success: (item)=> {
+                console.log("Message sent")
+                console.log((item))
+                console.log((item)['username'])
+                console.log((item)['content'])
+                text.text+=((item)['content']+"\n")
+            },
             fail: ()=>console.log("Failed")
         }).done(function (item) {
+            
+            // añadir al final del texto
+            // text.text+=(JSON.stringify(item).toString()+"\n")
+
             console.log('Messages pushed: ' + JSON.stringify(item));
         })
     }

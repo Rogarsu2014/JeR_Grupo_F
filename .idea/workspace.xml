@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b95c75b7-7903-44dc-82c0-2072bdec179b" name="Changes" comment="test insctruccion ajax">
+    <list default="true" id="b95c75b7-7903-44dc-82c0-2072bdec179b" name="Changes" comment="error de post arreglado: cambio de estrategia a la generación de valores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/chat/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/chat/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuScene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/util/Preloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/Preloader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/chat/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/chat/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuScene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuSceneSpringTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuSceneSpringTest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/Preloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/util/Preloader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/rest_ejem1-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/rest_ejem1-0.0.1-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -176,7 +168,7 @@
       <workItem from="1637261406795" duration="3849000" />
       <workItem from="1637596719021" duration="1895000" />
       <workItem from="1637601583297" duration="100000" />
-      <workItem from="1637601714608" duration="15583000" />
+      <workItem from="1637601714608" duration="17748000" />
     </task>
     <task id="LOCAL-00001" summary="Proyecto funcional en Spring">
       <created>1637225711274</created>
@@ -220,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637610984267</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="error de post arreglado: cambio de estrategia a la generación de valores">
+      <created>1637621944930</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1637621944930</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +259,8 @@
     <MESSAGE value="Cambio de dirección del sprite añadido" />
     <MESSAGE value="Controladores y clases Player y chat añadidos" />
     <MESSAGE value="test insctruccion ajax" />
-    <option name="LAST_COMMIT_MESSAGE" value="test insctruccion ajax" />
+    <MESSAGE value="error de post arreglado: cambio de estrategia a la generación de valores" />
+    <option name="LAST_COMMIT_MESSAGE" value="error de post arreglado: cambio de estrategia a la generación de valores" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -290,7 +290,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>69</line>
+          <line>77</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
