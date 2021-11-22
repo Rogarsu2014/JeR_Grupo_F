@@ -66,7 +66,12 @@ export class MenuSceneSpringTest extends Phaser.Scene {
                 console.log((item)['content'])
                 text.text+=((item)['content']+"\n")
             },
-            fail: ()=>console.log("Failed")
+            fail: ()=> {
+                text.text += "Failed to send message" + "\n"
+            },
+            error:()=>{
+                text.text += "Error while sending message" + "\n"
+            }
         }).done(function (item) {
             
             // añadir al final del texto
