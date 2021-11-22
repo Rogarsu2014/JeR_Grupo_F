@@ -58,16 +58,22 @@ export class MenuScene extends Phaser.Scene{
         credits.setInteractive();
 
         playButton.on('selected', () => {
+            cameraFadeOut(this,1000)
             this.stopBackgroundMusic()
             this.scene.start('Coop1');
+            this.disableListeners();
         })
         tutorial.on('selected', () => {
+            cameraFadeOut(this,1000)
             this.stopBackgroundMusic();
             this.scene.start('Tutorial')
+            this.disableListeners();
         })
         credits.on('selected', () => {
+            cameraFadeOut(this,1000)
             this.stopBackgroundMusic();
             this.scene.start('Credits')
+            this.disableListeners();
         })
 
 
@@ -128,15 +134,22 @@ export class MenuScene extends Phaser.Scene{
 
 	confirmSelection() {
         const button = this.buttons[this.selectedButtonIndex];
-        cameraFadeOut(this,1000,()=> button.emit('selected'))
+        button.emit('selected')
+        // this.input.keyboard.removeListener('keydown-' + 'DOWN');
+        //
+        // this.input.keyboard.removeListener('keydown-' + 'UP');
+        //
+        // this.input.keyboard.removeListener('keydown-' + 'SPACE');
+        // button.emit('selected');
+    }
+        
+    disableListeners(){
         this.input.keyboard.removeListener('keydown-' + 'DOWN');
 
         this.input.keyboard.removeListener('keydown-' + 'UP');
 
         this.input.keyboard.removeListener('keydown-' + 'SPACE');
-        // button.emit('selected');
     }
-
     playBackgroundMusic(){
         music.play();
     }

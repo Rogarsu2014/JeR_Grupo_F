@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Messages")
@@ -15,8 +13,10 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message {
-    
+
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    int id;
     String username;
     String content;
 }

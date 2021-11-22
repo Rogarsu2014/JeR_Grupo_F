@@ -4,195 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b95c75b7-7903-44dc-82c0-2072bdec179b" name="Changes" comment="Cambio de dirección del sprite añadido">
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/chat/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/chat/MessageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/chat/MessageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/player/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/player/PlayerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/player/PlayerRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/game.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/objects/Button.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/objects/Door.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/objects/Platform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/objects/Player.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/objects/Skull.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/objects/Task.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/objects/TaskManager.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/objects/Trap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/phaser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/CharacterTestScene.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Credits.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/GameCompletedScene.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/JoinScreen.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuScene.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Stages/Base/GameStage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Stages/Competitive/Comp1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Stages/Competitive/Comp2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Stages/Competitive/Comp3.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Stages/Competitive/CompetitiveScene.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Stages/Cooperative/Base/CooperativeScene.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Stages/Cooperative/Coop1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Stages/Cooperative/Coop2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Stages/Cooperative/Coop3.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/Tutorial.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/FontLoader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/Gamepad.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/InputProcessors/GamepadProcessor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/InputProcessors/InputProcessor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/InputProcessors/KeyboardProcessor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/Preloader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/Timer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/cameraEffects.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/JeR_Grupo_F.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_4_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_javax_transaction_api_1_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_9_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_11_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_dom4j_dom4j_2_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_4_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_3_7_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_13_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_23_1_GA.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_5_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_25.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_devtools_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_2_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_1_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest_ejem1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="b95c75b7-7903-44dc-82c0-2072bdec179b" name="Changes" comment="test insctruccion ajax">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/chat/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/chat/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/game.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/objects/Button.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/objects/Door.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/objects/Platform.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/objects/Player.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/objects/Skull.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/objects/Task.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/objects/TaskManager.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/objects/Trap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/phaser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/CharacterTestScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Credits.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/GameCompletedScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/JoinScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/MenuScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Stages/Base/GameStage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Stages/Competitive/Comp1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Stages/Competitive/Comp2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Stages/Competitive/Comp3.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Stages/Competitive/CompetitiveScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Stages/Cooperative/Base/CooperativeScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Stages/Cooperative/Coop1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Stages/Cooperative/Coop2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Stages/Cooperative/Coop3.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/scenes/Tutorial.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/util/FontLoader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/util/Gamepad.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/util/InputProcessors/GamepadProcessor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/util/InputProcessors/InputProcessor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/util/InputProcessors/KeyboardProcessor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/util/Preloader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/util/Timer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/src/js/util/cameraEffects.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/Book.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/Book.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuScene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/util/Preloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/util/Preloader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/chat/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/chat/Message.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/game.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/objects/Button.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/objects/Door.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/objects/Platform.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/objects/Player.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/objects/Skull.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/objects/Task.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/objects/TaskManager.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/objects/Trap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/phaser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/CharacterTestScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Credits.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/GameCompletedScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/JoinScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/MenuScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Stages/Base/GameStage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Stages/Competitive/Comp1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Stages/Competitive/Comp2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Stages/Competitive/Comp3.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Stages/Competitive/CompetitiveScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Stages/Cooperative/Base/CooperativeScene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Stages/Cooperative/Coop1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Stages/Cooperative/Coop2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Stages/Cooperative/Coop3.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/scenes/Tutorial.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/util/FontLoader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/util/Gamepad.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/util/InputProcessors/GamepadProcessor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/util/InputProcessors/InputProcessor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/util/InputProcessors/KeyboardProcessor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/util/Preloader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/util/Timer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/src/js/util/cameraEffects.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuScene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuSceneSpringTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuSceneSpringTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/Preloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/util/Preloader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/rest_ejem1-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/rest_ejem1-0.0.1-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -209,6 +32,26 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
@@ -333,7 +176,7 @@
       <workItem from="1637261406795" duration="3849000" />
       <workItem from="1637596719021" duration="1895000" />
       <workItem from="1637601583297" duration="100000" />
-      <workItem from="1637601714608" duration="7949000" />
+      <workItem from="1637601714608" duration="15583000" />
     </task>
     <task id="LOCAL-00001" summary="Proyecto funcional en Spring">
       <created>1637225711274</created>
@@ -370,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637266645230</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Controladores y clases Player y chat añadidos">
+      <created>1637610984267</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1637610984267</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,7 +237,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Cambioa_a_Spring" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -408,23 +258,41 @@
     <MESSAGE value="Juego centrado a la página web" />
     <MESSAGE value="packaging cambiado a jar" />
     <MESSAGE value="Cambio de dirección del sprite añadido" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambio de dirección del sprite añadido" />
+    <MESSAGE value="Controladores y clases Player y chat añadidos" />
+    <MESSAGE value="test insctruccion ajax" />
+    <option name="LAST_COMMIT_MESSAGE" value="test insctruccion ajax" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/es/urjc/code/daw/Application.java</url>
-          <line>38</line>
-          <properties class="es.urjc.code.daw.Application" method="findBook">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/src/js/util/Preloader.js</url>
           <line>90</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
+          <line>34</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
+          <line>48</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
+          <line>16</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
+          <line>69</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/es/urjc/code/daw/player/PlayerController.java</url>
