@@ -21,12 +21,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
 
         //Create the character animations (current ones are from tutorial)
-        this.context.anims.create({
-            key: 'left' + this.spriteKey,
-            frames: this.anims.generateFrameNumbers(this.spriteKey, {start: 0, end: 6}),
-            frameRate: 10,
-            repeat: -1
-        });
+        // this.context.anims.create({
+        //     key: 'left' + this.spriteKey,
+        //     frames: this.anims.generateFrameNumbers(this.spriteKey, {start: 0, end: 6}),
+        //     frameRate: 10,
+        //     repeat: -1
+        // });
 
         this.context.anims.create({
             key: 'turn' + this.spriteKey,
@@ -35,7 +35,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         });
 
         this.context.anims.create({
-            key: 'right' + this.spriteKey,
+            key: 'movement' + this.spriteKey,
             frames: this.anims.generateFrameNumbers(this.spriteKey, {start: 8, end: 14}),
             frameRate: 10,
             repeat: -1
@@ -59,8 +59,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     moveLeft() {//Move left
         this.setVelocityX(-300);
-
-        this.anims.play('left' + this.spriteKey, true);
+        this.flipX=true;
+        this.anims.play('movement' + this.spriteKey, true);
     }
 
     idle() {//Stay still
@@ -71,8 +71,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     moveRight() {//Move right
         this.setVelocityX(300);
-
-        this.anims.play('right' + this.spriteKey, true);
+        this.flipX=false;
+        this.anims.play('movement' + this.spriteKey, true);
     }
 
     moveDown() {
