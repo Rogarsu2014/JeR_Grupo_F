@@ -62,10 +62,12 @@ export class MenuSceneSpringTest extends Phaser.Scene {
                 });
                 lastMessageId = messages[messages.length - 1]['id']
                 console.log(lastMessageId)
+                setTimeout(()=>this.getLastMessages(),1000);
             }
 
-        }).done(function (items) {
-            console.log('Messages loaded: ' + JSON.stringify(items));
+        }).done( (items)=> {
+            //console.log('Messages loaded: ' + JSON.stringify(items));
+            //setTimeout(()=>this.getLastMessages(),500);
         })
     }
 
@@ -88,9 +90,9 @@ export class MenuSceneSpringTest extends Phaser.Scene {
                 console.log((item))
                 console.log((item)['username'])
                 console.log((item)['content'])
-                this.printMessageLn(text,item)
+                //this.printMessageLn(text,item)
                 // text.text += `<${(item)['username']}>: ${(item)['content']}\n`
-                lastMessageId=item['id']
+                //lastMessageId=item['id']
                 // ((item)['content']+"\n")
             },
             fail: () => {
