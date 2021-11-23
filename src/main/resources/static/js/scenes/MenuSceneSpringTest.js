@@ -1,5 +1,6 @@
-
 let text;
+let lastMessageId = 0
+
 export class MenuSceneSpringTest extends Phaser.Scene {
     constructor() {
         super("MenuSceneSpringTest");
@@ -29,16 +30,16 @@ export class MenuSceneSpringTest extends Phaser.Scene {
 
         getMessageText.on('pointerdown', () => {
             console.log("pointer down")
-            this.getMessages();
+            this.getLastMessages();
         })
 
         postMessageText.on('pointerdown', () => {
             this.postMessage()
-        }) 
+        })
         playerMessageText.on('pointerdown', () => {
             this.getPlayerByUsernamePassword()
         })
-        
+        this.getLastMessages()
     }
 
     getMessages() {
@@ -49,11 +50,30 @@ export class MenuSceneSpringTest extends Phaser.Scene {
         })
     }
 
+    getLastMessages() {
+        $.ajax({
+            url: 'http://localhost:8080/message',
+            success: (messages) => {
+                let lastMessages = messages.forEach(message => {
+                    if (message['id'] > lastMessageId) {
+                        this.printMessageLn(text,message)
+                        // text.text += `<${(message)['username']}>: ${(message)['content']}\n`
+                    }
+                });
+                lastMessageId = messages[messages.length - 1]['id']
+                console.log(lastMessageId)
+            }
+
+        }).done(function (items) {
+            console.log('Messages loaded: ' + JSON.stringify(items));
+        })
+    }
+
     postMessage() {
         let newContent = this.getTextAreaValue("messageTextInput")
         $.ajax({
             method: "POST",
-            dataType:'json',
+            dataType: 'json',
             url: 'http://localhost:8080/message',
             data: JSON.stringify({
                 "username": "Undefined User",
@@ -63,40 +83,46 @@ export class MenuSceneSpringTest extends Phaser.Scene {
             headers: {
                 "Content-Type": "application/json"
             },
-            success: (item)=> {
+            success: (item) => {
                 console.log("Message sent")
                 console.log((item))
                 console.log((item)['username'])
                 console.log((item)['content'])
-                text.text+= `<${(item)['username']}>: ${(item)['content']}`
+                this.printMessageLn(text,item)
+                // text.text += `<${(item)['username']}>: ${(item)['content']}\n`
+                lastMessageId=item['id']
                 // ((item)['content']+"\n")
             },
-            fail: ()=> {
+            fail: () => {
                 text.text += "Failed to send message" + "\n"
             },
-            error:()=>{
+            error: () => {
                 text.text += "Error while sending message" + "\n"
-                    // `Hello, ${name}`
+                // `Hello, ${name}`
             }
         }).done(function (item) {
-            
+
             // añadir al final del texto
             // text.text+=(JSON.stringify(item).toString()+"\n")
 
             console.log('Messages pushed: ' + JSON.stringify(item));
         })
     }
+    
+    printMessageLn(text, message){
+        text.text += `<${(message)['username']}>: ${(message)['content']}\n`
+    }
     getPlayerByUsernamePassword() {
-        let username= this.getTextAreaValue("usernameTextInput")
-        let password= this.getTextAreaValue("passwordTextInput")
+        let username = this.getTextAreaValue("usernameTextInput")
+        let password = this.getTextAreaValue("passwordTextInput")
         console.log(`Username: ${username}`)
         console.log(`Password: ${password}`)
         $.ajax({
             method: "GET",
-            url: 'http://localhost:8080/player/'+username+'/'+password,
-            failed:()=>console.log("Incorrect username or password"),
-            statusCode:{
-                500:()=>console.log("Incorrect username or password")
+            url: 'http://localhost:8080/player/' + username + '/' + password,
+            failed: () => console.log("Incorrect username or password"),
+            statusCode: {
+                500: () => console.log("Incorrect username or password")
             }
         }).done(function (items) {
             console.log('Player loaded: ' + JSON.stringify(items));

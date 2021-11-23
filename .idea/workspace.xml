@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b95c75b7-7903-44dc-82c0-2072bdec179b" name="Changes" comment="Mostrar texto con forma &quot;&quot;&lt;usuario&gt;: contenido&quot; implementado">
+    <list default="true" id="b95c75b7-7903-44dc-82c0-2072bdec179b" name="Changes" comment="Log in por usuario y contraseña creado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuSceneSpringTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuSceneSpringTest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/rest_ejem1-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/rest_ejem1-0.0.1-SNAPSHOT.jar" afterDir="false" />
     </list>
@@ -170,7 +170,7 @@
       <workItem from="1637596719021" duration="1895000" />
       <workItem from="1637601583297" duration="100000" />
       <workItem from="1637601714608" duration="18451000" />
-      <workItem from="1637650086915" duration="1682000" />
+      <workItem from="1637650086915" duration="3343000" />
     </task>
     <task id="LOCAL-00001" summary="Proyecto funcional en Spring">
       <created>1637225711274</created>
@@ -242,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637651282489</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Log in por usuario y contraseña creado">
+      <created>1637652156304</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1637652156304</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,7 +293,8 @@
     <MESSAGE value="etest como acceder a cierto valor del objeto recibido" />
     <MESSAGE value="Integrado detección de errores a la hora de mandar mensajes" />
     <MESSAGE value="Mostrar texto con forma &quot;&quot;&lt;usuario&gt;: contenido&quot; implementado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mostrar texto con forma &quot;&quot;&lt;usuario&gt;: contenido&quot; implementado" />
+    <MESSAGE value="Log in por usuario y contraseña creado" />
+    <option name="LAST_COMMIT_MESSAGE" value="Log in por usuario y contraseña creado" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -298,27 +306,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>35</line>
+          <line>36</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>52</line>
+          <line>71</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>15</line>
+          <line>16</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>106</line>
+          <line>127</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>43</line>
+          <line>44</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
