@@ -1,19 +1,21 @@
 import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
+import {MessagesJQuery} from "../server/messagesJQuery.js";
 
 var music;
-const backgroundMusicKey= 'mainMenuMusic';
-export class MenuScene extends Phaser.Scene{
+const backgroundMusicKey = 'mainMenuMusic';
+
+export class MenuScene extends Phaser.Scene {
     constructor() {
         super("MenuScene");
     }
+
     init() {
         this.buttons = Phaser.GameObjects.Image = []
         this.selectedButtonIndex = 0
-        this.cursors = this.input.keyboard.createCursorKeys();
         this.selectSprite = null
-        
+
     }
 
 
@@ -48,6 +50,9 @@ export class MenuScene extends Phaser.Scene{
         let credits = this.add.image(width / 3, height / 2 + 275, 'Credits').setDepth(1).setScale(.8);
 
 
+        // chatText.setWordWrapWidth(778 * .5 - 20)
+        // chatText.setWordWrapHeight(960 *.5 - 20)
+
         // *fase2* settings
         options.alpha = 0.4;
         onlineGame.alpha = 0.4;
@@ -59,17 +64,17 @@ export class MenuScene extends Phaser.Scene{
         tutorial.setInteractive();
         credits.setInteractive();
 
-        playButton.on('selected', () => {
+        playButton.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic()
             this.scene.start('Coop1');
         })
-        tutorial.on('selected', () => {
+        tutorial.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic();
             this.scene.start('Tutorial')
         })
-        credits.on('selected', () => {
+        credits.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic();
             this.scene.start('Credits')
@@ -80,16 +85,23 @@ export class MenuScene extends Phaser.Scene{
             rows: 11,
             cols: 11
         });
-        //this.formUtil.showNumbers();
+        this.formUtil.showNumbers();
         this.formUtil.scaleToGameW("myText", .2);
         this.formUtil.placeElementAt(97, 'myText', true);
 
         this.formUtil.scaleToGameW("btnSend", .04);
         this.formUtil.placeElementAt(98, "btnSend");
-        this.formUtil.addClickCallback("btnSend", this.sendForm());
+        this.formUtil.addClickCallback("btnSend", () => this.sendMessage());
 
         this.formUtil.hideElement("myText");
         this.formUtil.hideElement("btnSend");
+
+        //**** 778x960
+        this.chatText = this.add.text(128 * 8 + 5, 58 * 1.3, '', {
+            fontSize: '8px', color: '#fff', backgroundColor: '#000', fixedWidth: 128 * 3.25,
+            fixedHeight: 58 * 8.2
+        }).setDepth(1).setScale(.8).setVisible(false);
+        this.chatText.depth = 100;
 
         let chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
         this.buttons.push(chatButton);
@@ -105,8 +117,8 @@ export class MenuScene extends Phaser.Scene{
         var chatVisible = false;
 
 
-        chatButton.on('selected', () => {
-            if(chatVisible === false) {
+        chatButton.on('pointerdown', () => {
+            if (chatVisible === false) {
                 chatScreen.setVisible(1);
                 xButton.setVisible(1);
                 this.buttons.pop();
@@ -115,11 +127,13 @@ export class MenuScene extends Phaser.Scene{
                 this.formUtil.showElement("btnSend");
                 this.formUtil.placeElementAt(97, 'myText', true);
                 this.formUtil.placeElementAt(98, "btnSend");
+                this.chatText.setVisible(true);
                 chatVisible = true;
+                MessagesJQuery.receiveMessages(this.chatText)
             }
         })
-        xButton.on('selected', () => {
-            if(chatVisible === true) {
+        xButton.on('pointerdown', () => {
+            if (chatVisible === true) {
                 chatScreen.setVisible(0);
                 xButton.setVisible(0);
                 this.buttons.pop();
@@ -127,6 +141,8 @@ export class MenuScene extends Phaser.Scene{
                 this.formUtil.hideElement("myText");
                 this.formUtil.hideElement("btnSend");
                 chatVisible = false;
+                this.chatText.setVisible(false);
+                MessagesJQuery.stopReceivingLastMessages()
             }
         })
 
@@ -137,11 +153,14 @@ export class MenuScene extends Phaser.Scene{
 
         var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
 
-        var spaceKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
+        // var enterKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
     }
 
-    sendForm() {
+    sendMessage() {
         console.log("sendForm");
+        let content = this.formUtil.getTextAreaValue("myText");
+        console.log(content)
+        MessagesJQuery.postMessage('Undefined User', content);
     }
 
     selectButton(index) {
@@ -155,10 +174,10 @@ export class MenuScene extends Phaser.Scene{
             repeat: 0,            // -1: infinity
         });
 
-        let textureName=button.texture.key + 'Push';
+        let textureName = button.texture.key + 'Push';
         button.setTexture(textureName)
         this.selectSprite.x = button.x - button.displayWidth * 0.71
-	    this.selectSprite.y = button.y - 2.7;
+        this.selectSprite.y = button.y - 2.7;
 
         this.tweens.add({
             targets: this.selectSprite,
@@ -171,29 +190,29 @@ export class MenuScene extends Phaser.Scene{
 
         this.selectedButtonIndex = index;
         this.selectSprite.setVisible(true);
-	}
+    }
 
-	selectNextButton(change = 1) {
+    selectNextButton(change = 1) {
         const button = this.buttons[this.selectedButtonIndex];
-        let textureName=button.texture.key.replace('Push','');
+        let textureName = button.texture.key.replace('Push', '');
         button.setTexture(textureName)
-	    let index = this.selectedButtonIndex + change
+        let index = this.selectedButtonIndex + change
         if (index >= this.buttons.length) {
             index = 0
         } else if (index < 0) {
             index = this.buttons.length - 1
         }
 
-	    this.selectButton(index)
-	}
+        this.selectButton(index)
+    }
 
-	confirmSelection() {
+    confirmSelection() {
         const button = this.buttons[this.selectedButtonIndex];
         button.emit('selected');
     }
 
-    disableListeners(){
-        cameraFadeOut(this,1000);
+    disableListeners() {
+        cameraFadeOut(this, 1000);
 
         this.input.keyboard.removeListener('keydown-' + 'DOWN');
 
@@ -202,13 +221,15 @@ export class MenuScene extends Phaser.Scene{
         this.input.keyboard.removeListener('keydown-' + 'ENTER');
     }
 
-    playBackgroundMusic(){
+    playBackgroundMusic() {
         music.play();
     }
-    loadBackgroundMusic(){
-        music = this.sound.add(backgroundMusicKey,{volume:0.18});
+
+    loadBackgroundMusic() {
+        music = this.sound.add(backgroundMusicKey, {volume: 0.18});
     }
-    stopBackgroundMusic(){
+
+    stopBackgroundMusic() {
         music.stop()
     }
 

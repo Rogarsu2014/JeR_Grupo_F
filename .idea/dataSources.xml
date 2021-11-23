@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Dual ineterst databse" uuid="055855b0-3cb4-4356-be73-e06244a2b142">
+    <data-source source="LOCAL" name="Dual interest DB" uuid="857ae2b6-fad8-4c0f-8aff-793873c9cd52">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://dual-interest-db.clcczifx5uvi.eu-west-3.rds.amazonaws.com:3306/dualinterest</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>

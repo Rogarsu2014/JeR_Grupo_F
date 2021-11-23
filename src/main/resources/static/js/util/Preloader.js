@@ -130,7 +130,7 @@ export class Preloader extends Phaser.Scene {
     }
     create(){
         console.log("Preload hecho");
-        this.scene.start('MenuSceneSpringTest');
+        this.scene.start('MenuScene');
 
     }
 

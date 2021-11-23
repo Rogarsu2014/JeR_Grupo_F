@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7d7d3137-ecb2-44ce-b070-5980612bbeb9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/rest_ejem1_war.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/rest_ejem1_war_exploded.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_javax_transaction_api_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_9_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_11_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_dom4j_dom4j_2_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_4_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_3_7_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_13_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_23_1_GA.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_5_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_devtools_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_2_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rest_ejem1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/player/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/es/urjc/code/daw/player/PlayerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/Anuncio.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/AnuncioController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/Book.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/BookRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/chat/Message.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/chat/MessageController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/chat/MessageRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/player/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/player/PlayerController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/urjc/code/daw/player/PlayerRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/Typography/ink-free-normal.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Credits/CreditsImage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Music/MainMenuMusic.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Music/compStageMusic.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Music/coopStageMusic.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/A-press2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/D-press2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/F-press2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/W-press2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/aMove1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/aMove2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/dMove1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/dMove2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/fPush0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/fPush1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/fPush2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/players.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/players4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/startMovement.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/wJump1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/Tutorial/wJump2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/ChatButton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/ChatButtonPush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/Credits.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/CreditsPush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/LocalGame.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/LocalGamePush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/OnlineGame.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/OnlineGamePush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/Options.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/OptionsPush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/PlayAgain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/PlayAgainPush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/ReturnToMenu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/ReturnToMenuPush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/Tutorial.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/TutorialPush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/XButton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/Buttons/XButtonPush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/MainMenu/ChatScreen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/MainMenu/GameTittle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/MainMenu/MenuImage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/UI/VictoryImage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/background/BlackPixel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/items/Daia0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/items/Ibban.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/items/SPRITE_SHIIIIIITTT.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/items/SpriteSkulls.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/items/dude.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/items/itsatrap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/items/skull.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/items/spriteshit2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/Boton1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/Boton1Puls.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/Boton2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/Boton2Puls.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/Comp3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/Coop1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/Coop2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/Coop3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/Door.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/DoorOpened.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/blocker1 1x1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/blocker2 2x1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/blocker3 3x1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/blocker4 1x2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/blocker5 1x3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/blocker6 4x1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/blocker7 1x1-5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/blocker8 1x4-5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/comp1v2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/comp2v2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/escalonplano.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/escalonplano2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/escalonplano3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/level/tileset.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/options_button.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/play_button.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/sky.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/sounds/buttonClick.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/sounds/doorOpenedSfx.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/sounds/hit.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/sounds/points.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/assets/typography/ink-free-normal.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/Resources/txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/game.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/objects/Button.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/objects/Door.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/objects/Platform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/objects/Player.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/objects/Skull.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/objects/Task.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/objects/TaskManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/objects/Trap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/phaser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/CharacterTestScene.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Credits.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/GameCompletedScene.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/JoinScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuScene.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuSceneSpringTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Stages/Base/GameStage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Stages/Competitive/Comp1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Stages/Competitive/Comp2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Stages/Competitive/Comp3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Stages/Competitive/CompetitiveScene.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Stages/Cooperative/Base/CooperativeScene.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Stages/Cooperative/Coop1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Stages/Cooperative/Coop2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Stages/Cooperative/Coop3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/Tutorial.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/AlignGrid.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/FontLoader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/FormUtil.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/Gamepad.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/InputProcessors/GamepadProcessor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/InputProcessors/InputProcessor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/InputProcessors/KeyboardProcessor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/Preloader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/Timer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/UIBlock.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/util/cameraEffects.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/rest_ejem1-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="21KrO2kUb6vCQbq47Dbg7nIxW5H" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1637700591353</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1637700591353</updated>
+      <workItem from="1637700593126" duration="17000" />
+    </task>
+    <servers />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
