@@ -1,5 +1,4 @@
-import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
-import {Skull} from "../objects/Skull.js";
+
 let text;
 export class MenuSceneSpringTest extends Phaser.Scene {
     constructor() {
@@ -17,6 +16,7 @@ export class MenuSceneSpringTest extends Phaser.Scene {
         let getMessageText = this.add.text(0, 0, 'Get messages').setOrigin(0).setDepth(0).setScale(1);
         let postMessageText = this.add.text(0, 50, 'post message').setOrigin(0).setDepth(0).setScale(1);
         text = this.add.text(0, 100, '').setOrigin(0).setDepth(0).setScale(1);
+        let playerMessageText = this.add.text(0, 200, 'Log in').setOrigin(0).setDepth(0).setScale(1);
         // let width=this.game.canvas.width;
         // let height=this.game.canvas.height;
 
@@ -25,6 +25,7 @@ export class MenuSceneSpringTest extends Phaser.Scene {
 
         getMessageText.setInteractive();
         postMessageText.setInteractive();
+        playerMessageText.setInteractive();
 
         getMessageText.on('pointerdown', () => {
             console.log("pointer down")
@@ -33,8 +34,11 @@ export class MenuSceneSpringTest extends Phaser.Scene {
 
         postMessageText.on('pointerdown', () => {
             this.postMessage()
+        }) 
+        playerMessageText.on('pointerdown', () => {
+            this.getPlayerByUsernamePassword()
         })
-
+        
     }
 
     getMessages() {
@@ -46,13 +50,13 @@ export class MenuSceneSpringTest extends Phaser.Scene {
     }
 
     postMessage() {
-        let newContent = this.getTextAreaValue("usernameTextInput")
+        let newContent = this.getTextAreaValue("messageTextInput")
         $.ajax({
             method: "POST",
             dataType:'json',
             url: 'http://localhost:8080/message',
             data: JSON.stringify({
-                "username": "test",
+                "username": "Undefined User",
                 "content": newContent
             }),
             processData: false,
@@ -64,13 +68,15 @@ export class MenuSceneSpringTest extends Phaser.Scene {
                 console.log((item))
                 console.log((item)['username'])
                 console.log((item)['content'])
-                text.text+=((item)['content']+"\n")
+                text.text+= `<${(item)['username']}>: ${(item)['content']}`
+                // ((item)['content']+"\n")
             },
             fail: ()=> {
                 text.text += "Failed to send message" + "\n"
             },
             error:()=>{
                 text.text += "Error while sending message" + "\n"
+                    // `Hello, ${name}`
             }
         }).done(function (item) {
             
@@ -80,7 +86,22 @@ export class MenuSceneSpringTest extends Phaser.Scene {
             console.log('Messages pushed: ' + JSON.stringify(item));
         })
     }
-
+    getPlayerByUsernamePassword() {
+        let username= this.getTextAreaValue("usernameTextInput")
+        let password= this.getTextAreaValue("passwordTextInput")
+        console.log(`Username: ${username}`)
+        console.log(`Password: ${password}`)
+        $.ajax({
+            method: "GET",
+            url: 'http://localhost:8080/player/'+username+'/'+password,
+            failed:()=>console.log("Incorrect username or password"),
+            statusCode:{
+                500:()=>console.log("Incorrect username or password")
+            }
+        }).done(function (items) {
+            console.log('Player loaded: ' + JSON.stringify(items));
+        })
+    }
 
     getTextAreaValue(elementId) {
         let element = document.getElementById(elementId);
