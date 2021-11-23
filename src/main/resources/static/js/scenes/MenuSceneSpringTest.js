@@ -63,13 +63,15 @@ export class MenuSceneSpringTest extends Phaser.Scene {
                 console.log((item))
                 console.log((item)['username'])
                 console.log((item)['content'])
-                text.text+=((item)['content']+"\n")
+                text.text+= `<${(item)['username']}>: ${(item)['content']}`
+                // ((item)['content']+"\n")
             },
             fail: ()=> {
                 text.text += "Failed to send message" + "\n"
             },
             error:()=>{
                 text.text += "Error while sending message" + "\n"
+                    // `Hello, ${name}`
             }
         }).done(function (item) {
             

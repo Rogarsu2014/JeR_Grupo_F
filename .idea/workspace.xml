@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b95c75b7-7903-44dc-82c0-2072bdec179b" name="Changes" comment="etest como acceder a cierto valor del objeto recibido">
+    <list default="true" id="b95c75b7-7903-44dc-82c0-2072bdec179b" name="Changes" comment="Integrado detección de errores a la hora de mandar mensajes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuSceneSpringTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/scenes/MenuSceneSpringTest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/rest_ejem1-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/rest_ejem1-0.0.1-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,7 +167,8 @@
       <workItem from="1637261406795" duration="3849000" />
       <workItem from="1637596719021" duration="1895000" />
       <workItem from="1637601583297" duration="100000" />
-      <workItem from="1637601714608" duration="18389000" />
+      <workItem from="1637601714608" duration="18451000" />
+      <workItem from="1637650086915" duration="837000" />
     </task>
     <task id="LOCAL-00001" summary="Proyecto funcional en Spring">
       <created>1637225711274</created>
@@ -226,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637624156903</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Integrado detección de errores a la hora de mandar mensajes">
+      <created>1637624710770</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1637624710770</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,7 +275,8 @@
     <MESSAGE value="test insctruccion ajax" />
     <MESSAGE value="error de post arreglado: cambio de estrategia a la generación de valores" />
     <MESSAGE value="etest como acceder a cierto valor del objeto recibido" />
-    <option name="LAST_COMMIT_MESSAGE" value="etest como acceder a cierto valor del objeto recibido" />
+    <MESSAGE value="Integrado detección de errores a la hora de mandar mensajes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrado detección de errores a la hora de mandar mensajes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -280,26 +288,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>34</line>
-          <properties lambdaOrdinal="-1" />
+          <line>33</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>48</line>
-          <properties lambdaOrdinal="-1" />
+          <line>47</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>16</line>
-          <properties lambdaOrdinal="-1" />
+          <line>15</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/js/scenes/MenuSceneSpringTest.js</url>
-          <line>85</line>
-          <properties lambdaOrdinal="-1" />
+          <line>86</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
