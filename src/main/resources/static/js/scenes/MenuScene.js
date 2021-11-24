@@ -96,24 +96,30 @@ export class MenuScene extends Phaser.Scene {
 
         this.formUtil.hideElement("myText");
         this.formUtil.hideElement("btnSend");
+        
+        //Chat screen
+        let chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
+
+        let xButton = this.add.image(width - 375, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
+        //this.buttons.push(xButton);
+        xButton.setInteractive();
 
         //**** 778x960
         this.chatText = this.add.text(128 * 8 + 5, 58 * 1.3, '', {
             fontSize: '8px', color: '#fff', backgroundColor: '#000', fixedWidth: 128 * 3.25,
             fixedHeight: 58 * 8.2
         }).setDepth(1).setScale(.8).setVisible(false);
-        this.chatText.depth = 100;
+        this.chatText.depth = 1;
+        
+        this.chatErrorText = this.add.text(128 * 8 + 60, 58 * 8, '', {
+            fontSize: '16px', color: '#f00'
+        }).setDepth(1).setScale(.8).setVisible(false)
 
         let chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
         this.buttons.push(chatButton);
         chatButton.setInteractive();
 
 
-        let chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
-
-        let xButton = this.add.image(width - 375, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
-        //this.buttons.push(xButton);
-        xButton.setInteractive();
 
         var chatVisible = false;
 
@@ -129,6 +135,7 @@ export class MenuScene extends Phaser.Scene {
                 this.formUtil.placeElementAt(97, 'myText', true);
                 this.formUtil.placeElementAt(98, "btnSend");
                 this.chatText.setVisible(true);
+                this.chatErrorText.setVisible(true);
                 chatVisible = true;
                 MessagesJQuery.receiveMessages(this.chatText)
             }
@@ -143,6 +150,7 @@ export class MenuScene extends Phaser.Scene {
                 this.formUtil.hideElement("btnSend");
                 chatVisible = false;
                 this.chatText.setVisible(false);
+                this.chatErrorText.setVisible(false);
                 MessagesJQuery.stopReceivingLastMessages()
             }
         })
@@ -162,7 +170,11 @@ export class MenuScene extends Phaser.Scene {
         console.log("sendForm");
         let content = this.formUtil.getTextAreaValue("myText");
         console.log(content)
-        MessagesJQuery.postMessage('Undefined User', content);
+        MessagesJQuery.postMessage('Undefined User', content,()=> {
+                this.formUtil.clearTextAreaValue("myText");
+                this.chatErrorText.text='';
+                },()=>this.chatErrorText.text='Failed to sent message'
+            ,()=>this.chatErrorText.text='Error while sending message');
     }
 
     selectButton(index) {

@@ -53,7 +53,7 @@ export class MessagesJQuery {
         }
     }
 
-    static postMessage(user='Undefined User',message) {
+    static postMessage(user='Undefined User',message,onSuccess,onFailed=null,onError=null) {
         $.ajax({
             method: "POST",
             dataType: 'json',
@@ -71,6 +71,9 @@ export class MessagesJQuery {
                 console.log((item))
                 console.log((item)['username'])
                 console.log((item)['content'])
+                if (onSuccess!==null){
+                    onSuccess();
+                }
                 //this.printMessageLn(text,item)
                 // text.text += `<${(item)['username']}>: ${(item)['content']}\n`
                 //lastMessageId=item['id']
@@ -78,9 +81,15 @@ export class MessagesJQuery {
             },
             fail: () => {
                 // text.text += "Failed to send message" + "\n"
+                if (onFailed!==null){
+                    onFailed();
+                }
             },
             error: () => {
                 // text.text += "Error while sending message" + "\n"
+                if (onError!==null){
+                    onError();
+                }
             }
         }).done(function (item) {
 

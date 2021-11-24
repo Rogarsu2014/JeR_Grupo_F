@@ -83,6 +83,10 @@ export class FormUtil {
         var el = document.getElementById(elName);
         return el.value;
     }
+    clearTextAreaValue(elName) {
+        var el = document.getElementById(elName);
+        el.value='';
+    }
     getTextValue(elName) {
         var el = document.getElementById(elName);
         return el.innerText;
