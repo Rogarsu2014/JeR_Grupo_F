@@ -63,9 +63,16 @@ export class MenuSceneSpringTest extends Phaser.Scene {
                 lastMessageId = messages[messages.length - 1]['id']
                 console.log(lastMessageId)
                 setTimeout(()=>this.getLastMessages(),1000);
+            },
+            complete: function (data){
+                console.log("entra en complete")
+                console.log("Navigator is online?" + navigator.onLine);
             }
 
+
         }).done( (items)=> {
+            console.log("entra en done")
+            console.log("Navigator is online?" + navigator.onLine);
             //console.log('Messages loaded: ' + JSON.stringify(items));
             //setTimeout(()=>this.getLastMessages(),500);
         })
