@@ -27,6 +27,7 @@ export class MessagesJQuery {
                 },1000);
             },
             error:()=> {
+                console.log('Error en getLastMessages');
                 messagesTimeout = setTimeout(() => {
                     if (!stopReceivingMessages)
                         this.getLastMessages(messagesBox)
