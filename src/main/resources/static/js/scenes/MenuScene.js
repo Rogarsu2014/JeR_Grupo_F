@@ -105,13 +105,13 @@ export class MenuScene extends Phaser.Scene {
         xButton.setInteractive();
 
         //**** 778x960
-        this.chatText = this.add.text(128 * 8 + 5, 58 * 1.3, '', {
+        this.chatText = this.add.text(128 * 8 + 5, 58 * 1.3, '', {fontFamily: 'ink-free-normal',
             fontSize: '8px', color: '#fff', backgroundColor: '#000', fixedWidth: 128 * 3.25,
             fixedHeight: 58 * 8.2
         }).setDepth(1).setScale(.8).setVisible(false);
         this.chatText.depth = 1;
         
-        this.chatErrorText = this.add.text(128 * 8 + 60, 58 * 8, '', {
+        this.chatErrorText = this.add.text(128 * 8 + 60, 58 * 8, '', {fontFamily: 'ink-free-normal',
             fontSize: '16px', color: '#f00'
         }).setDepth(1).setScale(.8).setVisible(false)
 
