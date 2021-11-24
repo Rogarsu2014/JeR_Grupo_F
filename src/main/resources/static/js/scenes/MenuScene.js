@@ -2,6 +2,7 @@ import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
 import {MessagesJQuery} from "../server/messagesJQuery.js";
+import {ServerPing} from "../server/ServerPing.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -154,6 +155,7 @@ export class MenuScene extends Phaser.Scene {
         var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
 
         // var enterKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
+        this.defineNetworkAvailabilityFunctionalities();
     }
 
     sendMessage() {
@@ -190,6 +192,14 @@ export class MenuScene extends Phaser.Scene {
 
         this.selectedButtonIndex = index;
         this.selectSprite.setVisible(true);
+    }
+    
+    defineNetworkAvailabilityFunctionalities(){
+        let width = this.game.canvas.width;
+        let height = this.game.canvas.height;
+        let networkSymbol = this.add.image(width - 100-128, height - 50, 'networkSymbol').setDepth(1).setScale(.15);
+        ServerPing.CheckNetworkConnection(()=>{networkSymbol.setTexture("networkSymbolSuccess")},
+            ()=>{networkSymbol.setTexture("networkSymbolError")})
     }
 
     selectNextButton(change = 1) {

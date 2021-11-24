@@ -25,6 +25,12 @@ export class MessagesJQuery {
                     if (!stopReceivingMessages)
                         this.getLastMessages(messagesBox)
                 },1000);
+            },
+            error:()=> {
+                messagesTimeout = setTimeout(() => {
+                    if (!stopReceivingMessages)
+                        this.getLastMessages(messagesBox)
+                }, 1000);
             }
 
         }).done( (items)=> {
@@ -74,7 +80,6 @@ export class MessagesJQuery {
             },
             error: () => {
                 // text.text += "Error while sending message" + "\n"
-                // `Hello, ${name}`
             }
         }).done(function (item) {
 

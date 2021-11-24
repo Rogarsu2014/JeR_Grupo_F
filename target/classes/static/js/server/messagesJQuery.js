@@ -74,7 +74,6 @@ export class MessagesJQuery {
             },
             error: () => {
                 // text.text += "Error while sending message" + "\n"
-                // `Hello, ${name}`
             }
         }).done(function (item) {
 

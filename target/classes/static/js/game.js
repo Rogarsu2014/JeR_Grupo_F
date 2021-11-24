@@ -11,6 +11,7 @@ import {Comp2} from "./scenes/Stages/Competitive/Comp2.js";
 import {Comp3} from "./scenes/Stages/Competitive/Comp3.js";
 import {Credits} from "./scenes/Credits.js";
 import {Tutorial} from "./scenes/Tutorial.js";
+import {MenuSceneSpringTest} from "./scenes/MenuSceneSpringTest.js";
 
 
 window.onload=function (){
@@ -26,7 +27,7 @@ window.onload=function (){
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
 
-        scene: [Preloader,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, GameCompletedScene, MenuScene, Comp1, Comp2, Comp3, Credits,Tutorial],
+        scene: [Preloader,MenuSceneSpringTest,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, GameCompletedScene, MenuScene, Comp1, Comp2, Comp3, Credits,Tutorial],
 
 
         input: {
