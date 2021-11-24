@@ -40,6 +40,8 @@ export class MenuSceneSpringTest extends Phaser.Scene {
             this.getPlayerByUsernamePassword()
         })
         this.getLastMessages()
+        
+        this.ping()
     }
 
     getMessages() {
@@ -54,23 +56,57 @@ export class MenuSceneSpringTest extends Phaser.Scene {
         $.ajax({
             url: 'http://localhost:8080/message',
             success: (messages) => {
-                let lastMessages = messages.forEach(message => {
-                    if (message['id'] > lastMessageId) {
-                        this.printMessageLn(text,message)
-                        // text.text += `<${(message)['username']}>: ${(message)['content']}\n`
-                    }
-                });
-                lastMessageId = messages[messages.length - 1]['id']
-                console.log(lastMessageId)
+                try {
+                    let lastMessages = messages.forEach(message => {
+                        if (message['id'] > lastMessageId) {
+                            this.printMessageLn(text, message)
+                            // text.text += `<${(message)['username']}>: ${(message)['content']}\n`
+                        }
+                    });
+                    lastMessageId = messages[messages.length - 1]['id']
+                    console.log(lastMessageId)
+                }catch (e){
+                    console.log("No database defined yet")
+                }
                 setTimeout(()=>this.getLastMessages(),1000);
+            },
+            error:  (data)=>{
+                console.log("entra en error")
+                // this.checkIfOnline();
+                // setTimeout(()=>this.getLastMessages(),1000);
             }
-
+            
         }).done( (items)=> {
+            console.log("entra en done")
+            // this.checkIfOnline();
             //console.log('Messages loaded: ' + JSON.stringify(items));
             //setTimeout(()=>this.getLastMessages(),500);
         })
     }
+    ping(){
+        $.ajax({
+            url: 'http://localhost:8080/message',
+            timeout:3000,
+            success: () => {
+                console.log("Hay conexion: entra en success")
+                setTimeout(()=>this.ping(),1000);
+            },
+            error:  (XMLHttpRequest, textStatus,errorThrown)=>{
+                console.log("NO hay conexion: entra en error")
+                console.log("XMLHttpRequest: " +XMLHttpRequest)
+                console.log("textStatus: " +textStatus)
+                console.log("errorThrown: " +errorThrown)
+                
+                setTimeout(()=>this.ping(),1000);
+                // this.checkIfOnline();
+                // setTimeout(()=>this.getLastMessages(),1000);
+            }
 
+        })
+    }
+    checkIfOnline(){
+        console.log("Navigator is online?" + navigator.onLine);
+    }
     postMessage() {
         let newContent = this.getTextAreaValue("messageTextInput")
         $.ajax({

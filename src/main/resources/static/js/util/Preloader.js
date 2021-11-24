@@ -124,7 +124,10 @@ export class Preloader extends Phaser.Scene {
         this.load.image("wJump1", "./Resources/assets/Tutorial/wJump1.png");
         this.load.image("wJump2", "./Resources/assets/Tutorial/wJump2.png");
 
-
+        //Network symbols
+        this.load.image("networkSymbol", "./Resources/assets/Network/NetworkSymbol.png");
+        this.load.image("networkSymbolSuccess", "./Resources/assets/Network/NetworkSymbolSuccess.png");
+        this.load.image("networkSymbolError", "./Resources/assets/Network/NetworkSymbolError.png");
 
 
     }
