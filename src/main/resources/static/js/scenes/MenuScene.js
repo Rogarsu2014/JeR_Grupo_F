@@ -3,6 +3,7 @@ import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
 import {MessagesJQuery} from "../server/messagesJQuery.js";
 import {ServerPing} from "../server/ServerPing.js";
+import {UserRegistration} from "../util/UserRegistration.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -164,6 +165,10 @@ export class MenuScene extends Phaser.Scene {
 
         // var enterKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
         this.defineNetworkAvailabilityFunctionalities();
+        this.defineUserRegistration();
+        ServerPing.ConnectUser()
+        ServerPing.GetClientsCount()
+        
     }
 
     sendMessage() {
@@ -213,7 +218,24 @@ export class MenuScene extends Phaser.Scene {
         ServerPing.CheckNetworkConnection(()=>{networkSymbol.setTexture("networkSymbolSuccess")},
             ()=>{networkSymbol.setTexture("networkSymbolError")})
     }
-
+    
+    defineUserRegistration(){
+        this.userRegistration = new UserRegistration();
+        this.formUtil.addClickCallback("signUpBtn", () => this.signUpPlayer());
+        this.formUtil.addClickCallback("logInBtn", () => this.logInPlayer());
+    }
+    
+    logInPlayer(){
+        let username=this.formUtil.getTextAreaValue("usernameText");
+        let password=this.formUtil.getTextAreaValue("passwordText");
+        this.userRegistration.logIn(username,password)
+    }
+    signUpPlayer(){
+        let username=this.formUtil.getTextAreaValue("usernameText");
+        let password=this.formUtil.getTextAreaValue("passwordText");
+        let confirmPassword=this.formUtil.getTextAreaValue("confirmPasswordText");
+        this.userRegistration.trySignUp(username,password,confirmPassword)
+    }
     selectNextButton(change = 1) {
         const button = this.buttons[this.selectedButtonIndex];
         let textureName = button.texture.key.replace('Push', '');

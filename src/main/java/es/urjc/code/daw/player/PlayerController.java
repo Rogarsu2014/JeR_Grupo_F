@@ -17,8 +17,15 @@ public class PlayerController {
     }
 
     @PostMapping
-    public Player savePlayer(@RequestBody Player player) {
-        return playerRepository.save(player);
+    public Player signUp(@RequestBody Player player) {
+        boolean usernameAlreadyExits=playerRepository.findById(player.getUsername().trim()).isPresent();
+        if(!usernameAlreadyExits) {
+            System.out.println("New player with username '"+player.getUsername().trim());
+            return playerRepository.save(player);
+        } else {
+            System.out.println("Player with username '"+player.getUsername().trim()+"' already exists.");
+            return null;
+        }
     }
 
     @GetMapping
@@ -28,7 +35,7 @@ public class PlayerController {
 
     @SneakyThrows
     @GetMapping("/{username}/{password}")
-    public Player findPlayer(@PathVariable String username,@PathVariable String password) {
+    public Player logIn(@PathVariable String username,@PathVariable String password) {
         
         Player player = playerRepository.findById(username).filter((player1 -> player1.getPassword().equals(password))).orElseThrow(() -> new Exception("Player not available"));
         return player;
