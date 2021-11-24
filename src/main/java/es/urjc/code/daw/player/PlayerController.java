@@ -1,6 +1,7 @@
 package es.urjc.code.daw.player;
 import lombok.SneakyThrows;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 @RestController
 public class PlayerController {
 
-
+    @Autowired
     private final PlayerRepository playerRepository;
 
     public PlayerController(PlayerRepository playerRepository) {
@@ -24,7 +25,6 @@ public class PlayerController {
     public List<Player> findPlayers() {
         return playerRepository.findAll();
     }
-
 
     @SneakyThrows
     @GetMapping("/{username}/{password}")

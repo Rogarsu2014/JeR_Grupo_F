@@ -209,7 +209,7 @@ export class MenuScene extends Phaser.Scene {
     defineNetworkAvailabilityFunctionalities(){
         let width = this.game.canvas.width;
         let height = this.game.canvas.height;
-        let networkSymbol = this.add.image(width - 100-128, height - 50, 'networkSymbol').setDepth(1).setScale(.15);
+        let networkSymbol = this.add.image(width - 100-128, height - 50, 'networkSymbol').setDepth(1).setScale(.5);
         ServerPing.CheckNetworkConnection(()=>{networkSymbol.setTexture("networkSymbolSuccess")},
             ()=>{networkSymbol.setTexture("networkSymbolError")})
     }

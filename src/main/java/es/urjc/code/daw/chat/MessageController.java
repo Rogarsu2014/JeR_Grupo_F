@@ -7,9 +7,9 @@ import java.util.List;
 @RequestMapping("/message")
 @RestController
 public class MessageController {
-    
-    final
-    MessageRepository  messageRepository;
+
+    @Autowired
+    private final  MessageRepository  messageRepository;
 
     public MessageController(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;

@@ -16,7 +16,7 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
-    String username;
-    String content;
+    private int id;
+    private String username;
+    private String content;
 }
