@@ -7,15 +7,15 @@ export class ServerPing {
             url: 'http://localhost:8080/ping',
             timeout:3000,
             success: () => {
-                console.log("Hay conexion: entra en success")
+                // console.log("Hay conexion: entra en success")
                 setTimeout(()=>this.CheckNetworkConnection(onSuccess,onError),1000);
                 onSuccess();
             },
             error:  (XMLHttpRequest, textStatus,errorThrown)=>{
-                console.log("NO hay conexion: entra en error")
-                console.log("XMLHttpRequest: " +XMLHttpRequest)
-                console.log("textStatus: " +textStatus)
-                console.log("errorThrown: " +errorThrown)
+                // console.log("NO hay conexion: entra en error")
+                // console.log("XMLHttpRequest: " +XMLHttpRequest)
+                // console.log("textStatus: " +textStatus)
+                // console.log("errorThrown: " +errorThrown)
                 onError();
                 setTimeout(()=>this.CheckNetworkConnection(onSuccess,onError),1000);
                 // this.checkIfOnline();
@@ -47,13 +47,14 @@ export class ServerPing {
                 'id':this.clientId
             },
             success:()=>{
-                if (connected===false) {
-                    this.ConnectUser()
-                }
+                // if (connected===false) {
+                //     this.ConnectUser()
+                // }
                 setTimeout(() => this.UpdateConnection(), 2000)
             },
             error:()=>{
-                connected=false;
+                this.ConnectUser()
+                // connected=false;
                 setTimeout(()=>this.UpdateConnection(),2000)
             }
         })
@@ -63,7 +64,7 @@ export class ServerPing {
         $.ajax({
             url: 'http://localhost:8080/ping/clientsCount',
             success: (clientsCount)=> {
-                console.log("Clientes conectados: " + clientsCount);
+                // console.log("Clientes conectados: " + clientsCount);
                 setTimeout(()=>this.GetClientsCount(),2000)
             },error:()=>{
                 setTimeout(()=>this.GetClientsCount(),2000)

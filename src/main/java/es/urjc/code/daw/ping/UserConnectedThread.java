@@ -12,7 +12,7 @@ public class UserConnectedThread extends Thread{
     private String playerId;
     Timer timer;
     public UserConnectedThread(int checkTime, PingController pingController,String playerId) {
-        System.out.println("Thread created for client:" +playerId);
+//        System.out.println("Thread created for client:" +playerId);
         this.checkTime = checkTime;
         this.pingController = pingController;
         this.playerId = playerId;
@@ -23,7 +23,7 @@ public class UserConnectedThread extends Thread{
             public void run() {
                 checkClientState();        
             }
-        }, 3000, 3000);
+        }, 2000, 2000);
     }
     
 
@@ -38,7 +38,7 @@ public class UserConnectedThread extends Thread{
 //    }
     
     private void checkClientState(){
-        System.out.println("Thread for player: "+playerId+" runned");
+//        System.out.println("Thread for player: "+playerId+" runned");
         if(!pingController.isUserConnected(playerId)){
             timer.cancel(); 
             interrupt();

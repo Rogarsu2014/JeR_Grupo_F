@@ -19,4 +19,9 @@ public class Message {
     private int id;
     private String username;
     private String content;
+
+    public Message(String username, String content) {
+        this.username = username;
+        this.content = content;
+    }
 }
