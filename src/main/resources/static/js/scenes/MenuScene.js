@@ -103,18 +103,24 @@ export class MenuScene extends Phaser.Scene {
         }).setDepth(1).setScale(.8).setVisible(false);
         this.chatText.depth = 100;
 
+        let loginButton = this.add.image(width - 205,height - 50, 'loginButton').setDepth(1).setScale(.1);
         let chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
         this.buttons.push(chatButton);
+        this.buttons.push(loginButton);
         chatButton.setInteractive();
+        loginButton.setInteractive();
 
 
         let chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
+        let loginScreen = this.add.image(width - 200, 300, 'loginScreen').setDepth(1).setScale(.5).setVisible(0);
 
         let xButton = this.add.image(width - 375, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
+        let xButton2 = this.add.image(width - 355, 185, 'XButton').setDepth(1).setScale(.3).setVisible(0);
         //this.buttons.push(xButton);
         xButton.setInteractive();
-
+        xButton2.setInteractive();
         var chatVisible = false;
+        var loginVisible = false;
 
 
         chatButton.on('pointerdown', () => {
@@ -144,9 +150,39 @@ export class MenuScene extends Phaser.Scene {
                 this.chatText.setVisible(false);
                 MessagesJQuery.stopReceivingLastMessages()
             }
+            /*
+            * Si usamos el if de abajo funciona bien el cerrar y abrir de forma INDIVIDUAL cada ventana
+            * pero cuando abres las dos al mismo tiempo y le das a la X se cierran ambas
+            */
+            /*if (loginVisible === true) {
+                loginScreen.setVisible(0);
+                xButton.setVisible(0);
+                loginVisible = false;
+            }*/
         })
-
-
+        loginButton.on('pointerdown', () => {
+            if (loginVisible === false) {
+                loginScreen.setVisible(1);
+                console.log("Click");
+                xButton2.setVisible(1);
+                this.buttons.pop();
+                this.buttons.push(xButton2);
+                /*this.formUtil.showElement("myText");
+                this.formUtil.showElement("btnSend");
+                this.formUtil.placeElementAt(97, 'myText', true);
+                this.formUtil.placeElementAt(98, "btnSend");*/
+                //this.chatText.setVisible(true);
+                loginVisible = true;
+                //MessagesJQuery.receiveMessages(this.chatText)
+            }
+        })
+        xButton2.on('pointerdown', () => {
+            if (loginVisible === true) {
+                loginScreen.setVisible(0);
+                xButton2.setVisible(0);
+                loginVisible = false;
+            }
+        })
         this.selectButton(0);
 
         var arrowDown = this.input.keyboard.on('keydown-' + 'DOWN', () => this.selectNextButton(1));
