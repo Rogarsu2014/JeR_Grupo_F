@@ -1,7 +1,9 @@
 let connected=false;
 export class ServerPing {
     static clientId= '_'+Math.random().toString(36).substr(2,9);
-    
+    static setClientId(id){
+        this.clientId=id;
+    }
     static CheckNetworkConnection(onSuccess,onError){
         $.ajax({
             url: 'http://localhost:8080/ping',

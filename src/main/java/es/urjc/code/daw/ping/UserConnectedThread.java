@@ -23,7 +23,7 @@ public class UserConnectedThread extends Thread{
             public void run() {
                 checkClientState();        
             }
-        }, 2000, 2000);
+        }, 3000, 3000);
     }
     
 

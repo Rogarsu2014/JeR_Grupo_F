@@ -17,7 +17,7 @@ export class MenuScene extends Phaser.Scene {
         this.buttons = Phaser.GameObjects.Image = []
         this.selectedButtonIndex = 0
         this.selectSprite = null
-
+        this.user = null;
     }
 
 
@@ -116,16 +116,16 @@ export class MenuScene extends Phaser.Scene {
             fontSize: '16px', color: '#f00'
         }).setDepth(1).setScale(.8).setVisible(false)
 
-        let chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
-        this.buttons.push(chatButton);
-        chatButton.setInteractive();
+        this.chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
+        this.buttons.push(this.chatButton);
+        this.disableChatButton();
 
 
 
         var chatVisible = false;
 
 
-        chatButton.on('pointerdown', () => {
+        this.chatButton.on('pointerdown', () => {
             if (chatVisible === false) {
                 chatScreen.setVisible(1);
                 xButton.setVisible(1);
@@ -166,7 +166,7 @@ export class MenuScene extends Phaser.Scene {
         // var enterKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
         this.defineNetworkAvailabilityFunctionalities();
         this.defineUserRegistration();
-        ServerPing.ConnectUser()
+        // ServerPing.ConnectUser()
         ServerPing.GetClientsCount()
         
     }
@@ -175,7 +175,7 @@ export class MenuScene extends Phaser.Scene {
         console.log("sendForm");
         let content = this.formUtil.getTextAreaValue("myText");
         console.log(content)
-        MessagesJQuery.postMessage('Undefined User', content,()=> {
+        MessagesJQuery.postMessage(this.user['username'], content,()=> {
                 this.formUtil.clearTextAreaValue("myText");
                 this.chatErrorText.text='';
                 },()=>this.chatErrorText.text='Failed to sent message'
@@ -228,14 +228,32 @@ export class MenuScene extends Phaser.Scene {
     logInPlayer(){
         let username=this.formUtil.getTextAreaValue("usernameText");
         let password=this.formUtil.getTextAreaValue("passwordText");
-        this.userRegistration.logIn(username,password)
+        this.userRegistration.logIn(username,password,(user)=>this.Registered(user))
     }
     signUpPlayer(){
         let username=this.formUtil.getTextAreaValue("usernameText");
         let password=this.formUtil.getTextAreaValue("passwordText");
         let confirmPassword=this.formUtil.getTextAreaValue("confirmPasswordText");
-        this.userRegistration.trySignUp(username,password,confirmPassword)
+        this.userRegistration.trySignUp(username,password,confirmPassword,(user)=>this.Registered(user))
     }
+    
+    Registered(user){
+        this.user = user;
+        console.log("username obtained "+ user['username'])
+        this.enableChatButton();
+        ServerPing.setClientId(user['username'])
+        ServerPing.ConnectUser();
+    }
+    
+    
+    
+    enableChatButton(){
+        this.chatButton.setInteractive();
+    }
+    disableChatButton(){
+        this.chatButton.disableInteractive();
+    }
+    
     selectNextButton(change = 1) {
         const button = this.buttons[this.selectedButtonIndex];
         let textureName = button.texture.key.replace('Push', '');

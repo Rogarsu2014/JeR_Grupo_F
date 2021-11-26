@@ -7,11 +7,11 @@ export class UserRegistration {
         this.playersJquery = new PlayersJQuery();
     }
 
-    trySignUp(username,password,confirmPassword){
-        this.playersJquery.signUp(username,password,confirmPassword);
+    trySignUp(username,password,confirmPassword,onSuccess){
+       return this.playersJquery.signUp(username,password,confirmPassword,(user)=>onSuccess(user));
     }
-    logIn(username,password){
-        this.playersJquery.logIn(username,password);
+    logIn(username,password,onSuccess){
+        this.playersJquery.logIn(username,password,(user)=>onSuccess(user));
     }
     
     
