@@ -2,6 +2,8 @@ import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
 import {MessagesJQuery} from "../server/messagesJQuery.js";
+import {ServerPing} from "../server/ServerPing.js";
+import {UserRegistration} from "../util/UserRegistration.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -118,13 +120,14 @@ export class MenuScene extends Phaser.Scene {
         const COLOR_DARK = 0x260e04;
 
         this.textArea = this.rexUI.add.textArea({
+            
             x: 1210,
             y: 275,
             width: 350,
             height: 400,
 
             // text: this.add.text(),
-            text: this.rexUI.add.BBCodeText(),
+            text: this.rexUI.add.BBCodeText().setFontFamily('ink-free-normal'),
             // textMask: false,
 
             slider: {

@@ -100,6 +100,10 @@ export class MessagesJQuery {
         })
     }
     static printMessageLn(text, message){
-        text.appendText(`<${(message)['username']}>: ${(message)['content']}\n`)
+        if(message['username']==='Server'){
+            text.appendText(`[color=green]<${(message)['username']}>: ${(message)['content']}\n[/color]`)
+        } else{
+            text.appendText(`<${(message)['username']}>: ${(message)['content']}\n`)   
+        }
     }
 }

@@ -2,6 +2,8 @@ import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
 import {MessagesJQuery} from "../server/messagesJQuery.js";
+import {ServerPing} from "../server/ServerPing.js";
+import {UserRegistration} from "../util/UserRegistration.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -101,32 +103,31 @@ export class MenuScene extends Phaser.Scene {
         this.formUtil.hideElement("btnSend");
 
         //**** 778x960
-        /*
         this.chatText = this.add.text(128 * 8 + 5, 58 * 1.3, '', {
             fontSize: '8px', color: '#fff', backgroundColor: '#000', fixedWidth: 128 * 3.25,
             fixedHeight: 58 * 8.2
         }).setDepth(1).setScale(.8).setVisible(false);
         this.chatText.depth = 100;
-         */
 
-        this.chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
+        let chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
         this.buttons.push(chatButton);
         chatButton.setInteractive();
-        this.disableChatButton();
-        
+
+
         let chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
 
         const COLOR_LIGHT = 0x7b5e57;
         const COLOR_DARK = 0x260e04;
 
         this.textArea = this.rexUI.add.textArea({
+            
             x: 1210,
             y: 275,
             width: 350,
             height: 400,
 
             // text: this.add.text(),
-            text: this.rexUI.add.BBCodeText(),
+            text: this.rexUI.add.BBCodeText().setFontFamily('ink-free-normal'),
             // textMask: false,
 
             slider: {
@@ -153,20 +154,25 @@ export class MenuScene extends Phaser.Scene {
                 focus: false,
                 speed: 0.1
             },
-            content: "si",
+            content: "",
         })
             .layout()
             //.drawBounds(this.add.graphics(), 0xff0000)
         this.textArea.setDepth(200).setVisible(false);
 
         //textArea.setText(CreateContent(10000));
-        this.chatErrorText = this.add.text(128 * 8 + 60, 58 * 8, '', {fontFamily: 'ink-free-normal',
-            fontSize: '16px', color: '#f00'
-        }).setDepth(1).setScale(.8).setVisible(false)
+
         let xButton = this.add.image(width - 375, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
         //this.buttons.push(xButton);
         xButton.setInteractive();
+        this.chatErrorText = this.add.text(128 * 8 + 60, 58 * 8, '', {fontFamily: 'ink-free-normal',
+            fontSize: '16px', color: '#f00'
+        }).setDepth(1).setScale(.8).setVisible(false)
 
+        this.chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
+
+        this.buttons.push(this.chatButton);
+        this.disableChatButton();
         var chatVisible = false;
 
 
@@ -180,9 +186,9 @@ export class MenuScene extends Phaser.Scene {
                 this.formUtil.showElement("btnSend");
                 this.formUtil.placeElementAt(97, 'myText', true);
                 this.formUtil.placeElementAt(98, "btnSend");
-                this.chatText.setVisible(true);
-                this.chatErrorText.setVisible(true);
                 this.textArea.setVisible(true);
+                // this.chatText.setVisible(true);
+                this.chatErrorText.setVisible(true);
                 chatVisible = true;
                 MessagesJQuery.receiveMessages(this.textArea)
             }
@@ -196,7 +202,7 @@ export class MenuScene extends Phaser.Scene {
                 this.formUtil.hideElement("myText");
                 this.formUtil.hideElement("btnSend");
                 chatVisible = false;
-                this.chatText.setVisible(false);
+                // this.chatText.setVisible(false);
                 this.chatErrorText.setVisible(false);
                 this.textArea.setVisible(false);
                 MessagesJQuery.stopReceivingLastMessages()
