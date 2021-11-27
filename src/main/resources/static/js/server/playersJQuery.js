@@ -32,10 +32,15 @@ export class PlayersJQuery {
             method: "GET",
             url:'http://localhost:8080/player/'+username+'/'+password,
             success:(user)=> {
-                console.log("User connetced: " + JSON.stringify(user))
-                if (onSuccess!==undefined)
-                    onSuccess(user)
-            }
+                if (!user){
+                 console.log("Null user -> an user with that id has already log in")   
+                }else{
+                    console.log("User connetced: " + JSON.stringify(user))
+                    if (onSuccess !== undefined)
+                        onSuccess(user)
+                }
+            },
+            error:()=>{ console.log("User already logged in")}
         })
     }
 }

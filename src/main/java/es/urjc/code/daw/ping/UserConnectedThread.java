@@ -1,20 +1,18 @@
 package es.urjc.code.daw.ping;
 
-import lombok.SneakyThrows;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class UserConnectedThread extends Thread{
     
     private int checkTime;
-    private PingController pingController;
+    private ConnectionController connectionController;
     private String playerId;
     Timer timer;
-    public UserConnectedThread(int checkTime, PingController pingController,String playerId) {
+    public UserConnectedThread(int checkTime, ConnectionController connectionController, String playerId) {
 //        System.out.println("Thread created for client:" +playerId);
         this.checkTime = checkTime;
-        this.pingController = pingController;
+        this.connectionController = connectionController;
         this.playerId = playerId;
         
         timer= new Timer();
@@ -39,7 +37,7 @@ public class UserConnectedThread extends Thread{
     
     private void checkClientState(){
 //        System.out.println("Thread for player: "+playerId+" runned");
-        if(!pingController.isUserConnected(playerId)){
+        if(!connectionController.isUserConnected(playerId)){
             timer.cancel(); 
             interrupt();
         }

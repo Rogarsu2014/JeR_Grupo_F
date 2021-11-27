@@ -12,16 +12,24 @@ import java.util.Hashtable;
 
 @RequestMapping("/ping")
 @RestController
-public class PingController {
+public class ConnectionController {
+
+    private static ConnectionController instance;
+
+    public static synchronized ConnectionController getInstance() {
+        if(instance==null)
+            instance= new ConnectionController();
+        return instance;
+    }
 
     @Autowired
     MessageRepository messageRepository;
     
     private int usersCount=0;
     // Table with each id and a value to define if the client is connected or not
-    private  Dictionary<String,Boolean> idsTable;
+    private  Hashtable<String,Boolean> idsTable;
 
-    public PingController() {
+    public ConnectionController() {
         this.idsTable = new Hashtable<>();
     }
 
@@ -58,6 +66,10 @@ public class PingController {
 //            System.out.println("Users connected count: " + (idsTable.size()));
             return false;
         }
+    }
+    
+    public boolean isUserLogIn(String username){
+        return idsTable.containsKey(username);
     }
     
     public void removeUser(String id){

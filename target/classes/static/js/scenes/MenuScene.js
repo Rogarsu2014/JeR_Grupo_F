@@ -117,6 +117,7 @@ export class MenuScene extends Phaser.Scene {
         }).setDepth(1).setScale(.8).setVisible(false)
 
         this.chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
+        
         this.buttons.push(this.chatButton);
         this.disableChatButton();
 
@@ -167,7 +168,7 @@ export class MenuScene extends Phaser.Scene {
         this.defineNetworkAvailabilityFunctionalities();
         this.defineUserRegistration();
         // ServerPing.ConnectUser()
-        ServerPing.GetClientsCount()
+        // ServerPing.GetClientsCount()
         
     }
 
@@ -215,6 +216,10 @@ export class MenuScene extends Phaser.Scene {
         let width = this.game.canvas.width;
         let height = this.game.canvas.height;
         let networkSymbol = this.add.image(width - 100-128, height - 50, 'networkSymbol').setDepth(1).setScale(.5);
+        this.usersConnectedWindow = this.add.image(width - 100-128*2, height - 50, 'usersConnected').setDepth(1).setScale(.8);
+        this.usersConnectedCountText = this.add.text(width - 105-128*2, height - 70, '',{fontFamily: 'ink-free-normal',
+            fontSize: '40px'}).setDepth(1);
+        ServerPing.GetClientsCount((clientsCount)=>this.usersConnectedCountText.setText(clientsCount));
         ServerPing.CheckNetworkConnection(()=>{networkSymbol.setTexture("networkSymbolSuccess")},
             ()=>{networkSymbol.setTexture("networkSymbolError")})
     }
@@ -238,19 +243,25 @@ export class MenuScene extends Phaser.Scene {
     }
     
     Registered(user){
-        this.user = user;
-        console.log("username obtained "+ user['username'])
-        this.enableChatButton();
-        ServerPing.setClientId(user['username'])
-        ServerPing.ConnectUser();
+        if (user!==null) {
+            this.user = user;
+            console.log("username obtained " + user['username'])
+            this.enableChatButton();
+            ServerPing.setClientId(user['username'])
+            ServerPing.ConnectUser();
+        }else{
+            console.log("User undefined")
+        }
     }
     
     
     
     enableChatButton(){
+        this.chatButton.alpha=1;
         this.chatButton.setInteractive();
     }
     disableChatButton(){
+        this.chatButton.alpha=.5;
         this.chatButton.disableInteractive();
     }
     

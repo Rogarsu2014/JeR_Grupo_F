@@ -62,14 +62,15 @@ export class ServerPing {
         })
     }
     
-    static GetClientsCount(){
+    static GetClientsCount(onSuccess){
         $.ajax({
             url: 'http://localhost:8080/ping/clientsCount',
             success: (clientsCount)=> {
+                onSuccess(clientsCount);
                 // console.log("Clientes conectados: " + clientsCount);
-                setTimeout(()=>this.GetClientsCount(),2000)
+                setTimeout(()=>this.GetClientsCount(onSuccess),2000)
             },error:()=>{
-                setTimeout(()=>this.GetClientsCount(),2000)
+                setTimeout(()=>this.GetClientsCount(onSuccess),2000)
             }
         })
     }
