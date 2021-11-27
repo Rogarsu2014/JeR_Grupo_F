@@ -20,7 +20,7 @@ window.onload=function (){
         width: 1408,//960,//Cambiar el tamaÃ±o por escena
         height: 640,//448,//640,
         parent: "container",
-        autoCenter:Phaser.Scale.CENTER_BOTH,
+        // autoCenter:Phaser.Scale.CENTER_BOTH,
         type: Phaser.AUTO,
         backgroundColor:"#000000",
 

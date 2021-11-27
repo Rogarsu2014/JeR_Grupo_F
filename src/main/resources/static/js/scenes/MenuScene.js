@@ -20,7 +20,7 @@ export class MenuScene extends Phaser.Scene {
         this.user = null;
     }
 
-    preload(){
+    preload() {
         this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
         this.load.plugin('rexroundrectangleplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexroundrectangleplugin.min.js', true);
     }
@@ -121,7 +121,7 @@ export class MenuScene extends Phaser.Scene {
         }).setDepth(1).setScale(.8).setVisible(false);
         this.chatText.depth = 100;
 
-        let loginButton = this.add.image(width - 205,height - 50, 'loginButton').setDepth(1).setScale(.1);
+        let loginButton = this.add.image(50, 50, 'loginButton').setDepth(1).setScale(.1);
         let chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
         this.buttons.push(chatButton);
         this.buttons.push(loginButton);
@@ -129,16 +129,19 @@ export class MenuScene extends Phaser.Scene {
         loginButton.setInteractive();
 
 
-        let chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
-        let loginScreen = this.add.image(195, 150, 'loginScreen').setDepth(1).setScale(.5).setVisible(0);
-
+        this.chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
+        this.loginScreen = this.add.image(168, 110, 'registerScreen').setDepth(1).setScale(.4).setVisible(0);
+        this.logInButton = this.add.image(94, 170, 'LogIn').setDepth(1).setScale(.4).setVisible(0);
+        this.registerButton = this.add.image(240, 170, 'registerButton').setDepth(1).setScale(.4).setVisible(0);
+        this.disableResgisterScreen();
+        
         let xButton = this.add.image(width - 390, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
         let xButton2 = this.add.image(50, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
         const COLOR_LIGHT = 0x7b5e57;
         const COLOR_DARK = 0x260e04;
 
         this.textArea = this.rexUI.add.textArea({
-            
+
             x: 1210,
             y: 275,
             width: 350,
@@ -149,8 +152,8 @@ export class MenuScene extends Phaser.Scene {
             // textMask: false,
 
             slider: {
-                track: this.rexUI.add.roundRectangle(0,0, 0, 0, 10, COLOR_DARK),
-                thumb: this.rexUI.add.roundRectangle(0,0, 0, 0, 13, COLOR_LIGHT),
+                track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
 
             space: {
@@ -175,15 +178,16 @@ export class MenuScene extends Phaser.Scene {
             content: "",
         })
             .layout()
-            //.drawBounds(this.add.graphics(), 0xff0000)
+        //.drawBounds(this.add.graphics(), 0xff0000)
         this.textArea.setDepth(200).setVisible(false);
 
         //textArea.setText(CreateContent(10000));
-        
+
         //this.buttons.push(xButton);
         xButton.setInteractive();
         xButton2.setInteractive();
-        this.chatErrorText = this.add.text(128 * 8 + 60, 58 * 8, '', {fontFamily: 'ink-free-normal',
+        this.chatErrorText = this.add.text(128 * 8 + 60, 58 * 8, '', {
+            fontFamily: 'ink-free-normal',
             fontSize: '16px', color: '#f00'
         }).setDepth(1).setScale(.8).setVisible(false)
 
@@ -197,7 +201,7 @@ export class MenuScene extends Phaser.Scene {
 
         this.chatButton.on('pointerdown', () => {
             if (chatVisible === false) {
-                chatScreen.setVisible(1);
+                this.chatScreen.setVisible(1);
                 xButton.setVisible(1);
                 this.buttons.pop();
                 this.buttons.push(xButton);
@@ -214,7 +218,7 @@ export class MenuScene extends Phaser.Scene {
         })
         xButton.on('pointerdown', () => {
             if (chatVisible === true) {
-                chatScreen.setVisible(0);
+                this.chatScreen.setVisible(0);
                 xButton.setVisible(0);
                 this.buttons.pop();
                 this.buttons.push(this.chatButton);
@@ -238,7 +242,8 @@ export class MenuScene extends Phaser.Scene {
         })
         loginButton.on('pointerdown', () => {
             if (loginVisible === false) {
-                loginScreen.setVisible(1);
+                this.enableResgisterScreen()
+                // loginScreen.setVisible(1);
                 console.log("Click");
                 xButton2.setVisible(1);
                 this.buttons.pop();
@@ -255,7 +260,8 @@ export class MenuScene extends Phaser.Scene {
         })
         xButton2.on('pointerdown', () => {
             if (loginVisible === true) {
-                loginScreen.setVisible(0);
+                this.disableResgisterScreen()
+                // loginScreen.setVisible(0);
                 xButton2.setVisible(0);
                 this.formUtil.hideElement("myUser");
                 this.formUtil.hideElement("myPass");
@@ -275,20 +281,20 @@ export class MenuScene extends Phaser.Scene {
         this.defineUserRegistration();
         // ServerPing.ConnectUser()
         // ServerPing.GetClientsCount()
-        
+
     }
 
     sendMessage() {
         console.log("sendForm");
         let content = this.formUtil.getTextAreaValue("myText");
         console.log(content)
-        MessagesJQuery.postMessage(this.user['username'], content,()=> {
+        MessagesJQuery.postMessage(this.user['username'], content, () => {
                 this.formUtil.clearTextAreaValue("myText");
-                this.chatErrorText.text='';
-                },()=>this.chatErrorText.text='Failed to sent message'
-            ,()=>this.chatErrorText.text='Error while sending message');
+                this.chatErrorText.text = '';
+            }, () => this.chatErrorText.text = 'Failed to sent message'
+            , () => this.chatErrorText.text = 'Error while sending message');
     }
-
+    
     selectButton(index) {
         const button = this.buttons[index];
         this.tweens.add({
@@ -317,60 +323,79 @@ export class MenuScene extends Phaser.Scene {
         this.selectedButtonIndex = index;
         this.selectSprite.setVisible(true);
     }
-    
-    defineNetworkAvailabilityFunctionalities(){
+
+    defineNetworkAvailabilityFunctionalities() {
         let width = this.game.canvas.width;
         let height = this.game.canvas.height;
-        let networkSymbol = this.add.image(width - 100-128, height - 50, 'networkSymbol').setDepth(1).setScale(.5);
-        this.usersConnectedWindow = this.add.image(width - 100-128*2, height - 50, 'usersConnected').setDepth(1).setScale(.8);
-        this.usersConnectedCountText = this.add.text(width - 105-128*2, height - 70, '',{fontFamily: 'ink-free-normal',
-            fontSize: '40px'}).setDepth(1);
-        ServerPing.GetClientsCount((clientsCount)=>this.usersConnectedCountText.setText(clientsCount));
-        ServerPing.CheckNetworkConnection(()=>{networkSymbol.setTexture("networkSymbolSuccess")},
-            ()=>{networkSymbol.setTexture("networkSymbolError")})
+        let networkSymbol = this.add.image(width - 100 - 128, height - 50, 'networkSymbol').setDepth(1).setScale(.5);
+        this.usersConnectedWindow = this.add.image(width - 100 - 128 * 2, height - 50, 'usersConnected').setDepth(1).setScale(.8);
+        this.usersConnectedCountText = this.add.text(width - 105 - 128 * 2, height - 70, '', {
+            fontFamily: 'ink-free-normal',
+            fontSize: '40px'
+        }).setDepth(1);
+        ServerPing.GetClientsCount((clientsCount) => this.usersConnectedCountText.setText(clientsCount));
+        ServerPing.CheckNetworkConnection(() => {
+                networkSymbol.setTexture("networkSymbolSuccess")
+            },
+            () => {
+                networkSymbol.setTexture("networkSymbolError")
+            })
     }
-    
-    defineUserRegistration(){
+
+    defineUserRegistration() {
         this.userRegistration = new UserRegistration();
-        this.formUtil.addClickCallback("signUpBtn", () => this.signUpPlayer());
-        this.formUtil.addClickCallback("logInBtn", () => this.logInPlayer());
+        // this.formUtil.addClickCallback("signUpBtn", () => this.signUpPlayer());
+        // this.formUtil.addClickCallback("logInBtn", () => this.logInPlayer());
     }
-    
-    logInPlayer(){
-        let username=this.formUtil.getTextAreaValue("usernameText");
-        let password=this.formUtil.getTextAreaValue("passwordText");
-        this.userRegistration.logIn(username,password,(user)=>this.Registered(user))
+
+    logInPlayer() {
+        let username = this.formUtil.getTextAreaValue("usernameText");
+        let password = this.formUtil.getTextAreaValue("passwordText");
+        this.userRegistration.logIn(username, password, (user) => this.Registered(user))
     }
-    signUpPlayer(){
-        let username=this.formUtil.getTextAreaValue("usernameText");
-        let password=this.formUtil.getTextAreaValue("passwordText");
-        let confirmPassword=this.formUtil.getTextAreaValue("confirmPasswordText");
-        this.userRegistration.trySignUp(username,password,confirmPassword,(user)=>this.Registered(user))
+
+    signUpPlayer() {
+        let username = this.formUtil.getTextAreaValue("usernameText");
+        let password = this.formUtil.getTextAreaValue("passwordText");
+        let confirmPassword = this.formUtil.getTextAreaValue("confirmPasswordText");
+        this.userRegistration.trySignUp(username, password, confirmPassword, (user) => this.Registered(user))
     }
-    
-    Registered(user){
-        if (user!==null) {
+
+    Registered(user) {
+        if (user !== null) {
             this.user = user;
             console.log("username obtained " + user['username'])
             this.enableChatButton();
             ServerPing.setClientId(user['username'])
             ServerPing.ConnectUser();
-        }else{
+        } else {
             console.log("User undefined")
         }
     }
-    
-    
-    
-    enableChatButton(){
-        this.chatButton.alpha=1;
+
+
+    enableChatButton() {
+        this.chatButton.alpha = 1;
         this.chatButton.setInteractive();
     }
-    disableChatButton(){
-        this.chatButton.alpha=.5;
+    
+    enableResgisterScreen() {
+        
+        this.loginScreen.setVisible(1);
+        this.logInButton.setVisible(1);
+        this.registerButton.setVisible(1);
+    }
+    disableResgisterScreen() {
+
+        this.loginScreen.setVisible(0);
+        this.logInButton.setVisible(0);
+        this.registerButton.setVisible(0);
+    }
+    disableChatButton() {
+        this.chatButton.alpha = .5;
         this.chatButton.disableInteractive();
     }
-    
+
     selectNextButton(change = 1) {
         const button = this.buttons[this.selectedButtonIndex];
         let textureName = button.texture.key.replace('Push', '');
@@ -412,4 +437,7 @@ export class MenuScene extends Phaser.Scene {
         music.stop()
     }
 
+    update() {
+        console.log("")
+    }
 }

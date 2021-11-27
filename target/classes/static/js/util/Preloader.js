@@ -38,8 +38,6 @@ export class Preloader extends Phaser.Scene {
         this.load.image('XButtonPush','./Resources/assets/UI/Buttons/XButtonPush.png');
         this.load.image('ChatButtonPush','./Resources/assets/UI/Buttons/ChatButtonPush.png');
 
-        this.load.image('loginButton','./Resources/assets/UI/Buttons/LoginIcon.png');
-        this.load.image('loginScreen','./Resources/assets/UI/Buttons/LoginScreen.png');
 
         this.load.image('PlayAgain','./Resources/assets/UI/Buttons/PlayAgain.png');
         this.load.image('PlayAgainPush','./Resources/assets/UI/Buttons/PlayAgainPush.png');
@@ -133,7 +131,14 @@ export class Preloader extends Phaser.Scene {
         this.load.image("networkSymbolError", "./Resources/assets/Network/NetworkSymbolError.png");
         this.load.image("usersConnected", "./Resources/assets/Network/User_Connected.png");
 
-
+        // Register and LogIn
+        this.load.image("registerButton", "./Resources/assets/Register/RegisterButton.png");
+        this.load.image("registerScreen", "./Resources/assets/Register/RegisterScreen.png");
+        this.load.image('loginButton','./Resources/assets/UI/Buttons/LoginIcon.png');
+        this.load.image('loginScreen','./Resources/assets/UI/Buttons/LoginScreen.png');
+        
+        this.load.image("LogIn", "./Resources/assets/LogIn/LoginButton.png");
+        
     }
     create(){
         console.log("Preload hecho");
