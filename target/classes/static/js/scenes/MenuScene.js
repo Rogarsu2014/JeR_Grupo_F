@@ -114,8 +114,8 @@ export class MenuScene extends Phaser.Scene {
         let chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
         let loginScreen = this.add.image(width - 200, 300, 'loginScreen').setDepth(1).setScale(.5).setVisible(0);
 
-        let xButton = this.add.image(width - 375, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
-        let xButton2 = this.add.image(width - 355, 185, 'XButton').setDepth(1).setScale(.3).setVisible(0);
+        let xButton = this.add.image(width - 390, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
+        let xButton2 = this.add.image(width - 345, 185, 'XButton').setDepth(1).setScale(.3).setVisible(0);
         //this.buttons.push(xButton);
         xButton.setInteractive();
         xButton2.setInteractive();
