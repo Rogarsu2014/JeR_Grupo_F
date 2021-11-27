@@ -10,7 +10,7 @@ import java.util.List;
 public class MessageController {
 
     int messageCount=0;
-    @Autowired
+    
     private final  MessageRepository  messageRepository;
 
     public MessageController(MessageRepository messageRepository) {

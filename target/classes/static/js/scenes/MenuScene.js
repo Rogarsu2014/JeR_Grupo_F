@@ -147,7 +147,7 @@ export class MenuScene extends Phaser.Scene {
                 chatScreen.setVisible(0);
                 xButton.setVisible(0);
                 this.buttons.pop();
-                this.buttons.push(chatButton);
+                this.buttons.push(this.chatButton);
                 this.formUtil.hideElement("myText");
                 this.formUtil.hideElement("btnSend");
                 chatVisible = false;

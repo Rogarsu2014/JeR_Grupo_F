@@ -13,11 +13,15 @@ public class PlayerController {
     @Autowired
     private final PlayerRepository playerRepository;
     
-    @Autowired
-    ConnectionController connectionController;
+//    private final ConnectionController connectionController;
     
+//    public PlayerController(PlayerRepository playerRepository, ConnectionController connectionController) {
+//        this.playerRepository = playerRepository;
+////        this.connectionController = connectionController;
+//    }   
     public PlayerController(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
+//        this.connectionController = connectionController;
     }
 
 //    @SneakyThrows
@@ -41,7 +45,7 @@ public class PlayerController {
     @SneakyThrows
     @GetMapping("/{username}/{password}")
     public Player logIn(@PathVariable String username,@PathVariable String password) {
-        if(!connectionController.isUserLogIn(username)) {
+        if(!ConnectionController.getInstance().isUserLogIn(username)) {
             Player player = playerRepository.findById(username).filter((player1 -> player1.getPassword().equals(password))).orElseThrow(() -> new Exception("Player not available"));
             return player;
         }
