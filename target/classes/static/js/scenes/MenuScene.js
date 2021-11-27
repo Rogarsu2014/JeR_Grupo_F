@@ -93,8 +93,20 @@ export class MenuScene extends Phaser.Scene {
         this.formUtil.placeElementAt(98, "btnSend");
         this.formUtil.addClickCallback("btnSend", () => this.sendMessage());
 
+
+        this.formUtil.showNumbers();
+        this.formUtil.scaleToGameW("myUser", .15);
+        this.formUtil.placeElementAt(23, 'myUser', true);
+
+
+        this.formUtil.showNumbers();
+        this.formUtil.scaleToGameW("myPass", .15);
+        this.formUtil.placeElementAt(34, 'myPass', true);
+
         this.formUtil.hideElement("myText");
         this.formUtil.hideElement("btnSend");
+        this.formUtil.hideElement("myUser");
+        this.formUtil.hideElement("myPass");
 
         //**** 778x960
         this.chatText = this.add.text(128 * 8 + 5, 58 * 1.3, '', {
@@ -112,10 +124,10 @@ export class MenuScene extends Phaser.Scene {
 
 
         let chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
-        let loginScreen = this.add.image(width - 200, 300, 'loginScreen').setDepth(1).setScale(.5).setVisible(0);
+        let loginScreen = this.add.image(195, 150, 'loginScreen').setDepth(1).setScale(.5).setVisible(0);
 
         let xButton = this.add.image(width - 390, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
-        let xButton2 = this.add.image(width - 345, 185, 'XButton').setDepth(1).setScale(.3).setVisible(0);
+        let xButton2 = this.add.image(50, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
         //this.buttons.push(xButton);
         xButton.setInteractive();
         xButton2.setInteractive();
@@ -167,10 +179,11 @@ export class MenuScene extends Phaser.Scene {
                 xButton2.setVisible(1);
                 this.buttons.pop();
                 this.buttons.push(xButton2);
-                /*this.formUtil.showElement("myText");
-                this.formUtil.showElement("btnSend");
-                this.formUtil.placeElementAt(97, 'myText', true);
-                this.formUtil.placeElementAt(98, "btnSend");*/
+                this.formUtil.showElement("myUser");
+                this.formUtil.showElement("myPass");
+                this.formUtil.placeElementAt(23, 'myText', true);
+                this.formUtil.placeElementAt(34, 'myPass', true);
+                //this.formUtil.placeElementAt(98, "btnSend");
                 //this.chatText.setVisible(true);
                 loginVisible = true;
                 //MessagesJQuery.receiveMessages(this.chatText)
@@ -180,7 +193,11 @@ export class MenuScene extends Phaser.Scene {
             if (loginVisible === true) {
                 loginScreen.setVisible(0);
                 xButton2.setVisible(0);
+                this.formUtil.hideElement("myUser");
+                this.formUtil.hideElement("myPass");
+                //this.formUtil.hideElement("btnSend");
                 loginVisible = false;
+                //this.chatText.setVisible(false);
             }
         })
         this.selectButton(0);
@@ -267,6 +284,10 @@ export class MenuScene extends Phaser.Scene {
 
     stopBackgroundMusic() {
         music.stop()
+    }
+
+    update(){
+        console.log('');
     }
 
 }
