@@ -85,6 +85,6 @@ export class MessagesJQuery {
         })
     }
     static printMessageLn(text, message){
-        text.text += `<${(message)['username']}>: ${(message)['content']}\n`
+        text.appendText(`<${(message)['username']}>: ${(message)['content']}\n`)
     }
 }
