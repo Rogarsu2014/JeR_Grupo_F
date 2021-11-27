@@ -99,8 +99,20 @@ export class MenuScene extends Phaser.Scene {
         this.formUtil.placeElementAt(98, "btnSend");
         this.formUtil.addClickCallback("btnSend", () => this.sendMessage());
 
+
+        this.formUtil.showNumbers();
+        this.formUtil.scaleToGameW("myUser", .15);
+        this.formUtil.placeElementAt(23, 'myUser', true);
+
+
+        this.formUtil.showNumbers();
+        this.formUtil.scaleToGameW("myPass", .15);
+        this.formUtil.placeElementAt(34, 'myPass', true);
+
         this.formUtil.hideElement("myText");
         this.formUtil.hideElement("btnSend");
+        this.formUtil.hideElement("myUser");
+        this.formUtil.hideElement("myPass");
 
         //**** 778x960
         this.chatText = this.add.text(128 * 8 + 5, 58 * 1.3, '', {
@@ -109,13 +121,19 @@ export class MenuScene extends Phaser.Scene {
         }).setDepth(1).setScale(.8).setVisible(false);
         this.chatText.depth = 100;
 
+        let loginButton = this.add.image(width - 205,height - 50, 'loginButton').setDepth(1).setScale(.1);
         let chatButton = this.add.image(width - 100, height - 50, 'ChatButton').setDepth(1).setScale(.3);
         this.buttons.push(chatButton);
+        this.buttons.push(loginButton);
         chatButton.setInteractive();
+        loginButton.setInteractive();
 
 
         let chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
+        let loginScreen = this.add.image(195, 150, 'loginScreen').setDepth(1).setScale(.5).setVisible(0);
 
+        let xButton = this.add.image(width - 390, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
+        let xButton2 = this.add.image(50, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
         const COLOR_LIGHT = 0x7b5e57;
         const COLOR_DARK = 0x260e04;
 
@@ -161,10 +179,10 @@ export class MenuScene extends Phaser.Scene {
         this.textArea.setDepth(200).setVisible(false);
 
         //textArea.setText(CreateContent(10000));
-
-        let xButton = this.add.image(width - 375, 50, 'XButton').setDepth(1).setScale(.3).setVisible(0);
+        
         //this.buttons.push(xButton);
         xButton.setInteractive();
+        xButton2.setInteractive();
         this.chatErrorText = this.add.text(128 * 8 + 60, 58 * 8, '', {fontFamily: 'ink-free-normal',
             fontSize: '16px', color: '#f00'
         }).setDepth(1).setScale(.8).setVisible(false)
@@ -174,6 +192,7 @@ export class MenuScene extends Phaser.Scene {
         this.buttons.push(this.chatButton);
         this.disableChatButton();
         var chatVisible = false;
+        var loginVisible = false;
 
 
         this.chatButton.on('pointerdown', () => {
@@ -207,9 +226,44 @@ export class MenuScene extends Phaser.Scene {
                 this.textArea.setVisible(false);
                 MessagesJQuery.stopReceivingLastMessages()
             }
+            /*
+            * Si usamos el if de abajo funciona bien el cerrar y abrir de forma INDIVIDUAL cada ventana
+            * pero cuando abres las dos al mismo tiempo y le das a la X se cierran ambas
+            */
+            /*if (loginVisible === true) {
+                loginScreen.setVisible(0);
+                xButton.setVisible(0);
+                loginVisible = false;
+            }*/
         })
-
-
+        loginButton.on('pointerdown', () => {
+            if (loginVisible === false) {
+                loginScreen.setVisible(1);
+                console.log("Click");
+                xButton2.setVisible(1);
+                this.buttons.pop();
+                this.buttons.push(xButton2);
+                this.formUtil.showElement("myUser");
+                this.formUtil.showElement("myPass");
+                this.formUtil.placeElementAt(23, 'myText', true);
+                this.formUtil.placeElementAt(34, 'myPass', true);
+                //this.formUtil.placeElementAt(98, "btnSend");
+                //this.chatText.setVisible(true);
+                loginVisible = true;
+                //MessagesJQuery.receiveMessages(this.chatText)
+            }
+        })
+        xButton2.on('pointerdown', () => {
+            if (loginVisible === true) {
+                loginScreen.setVisible(0);
+                xButton2.setVisible(0);
+                this.formUtil.hideElement("myUser");
+                this.formUtil.hideElement("myPass");
+                //this.formUtil.hideElement("btnSend");
+                loginVisible = false;
+                //this.chatText.setVisible(false);
+            }
+        })
         this.selectButton(0);
 
         var arrowDown = this.input.keyboard.on('keydown-' + 'DOWN', () => this.selectNextButton(1));
