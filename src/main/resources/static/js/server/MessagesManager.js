@@ -1,7 +1,10 @@
+import {ServerConnectionManager} from "./ServerConnectionManager.js";
+
 let lastMessageId = 0
-let messagesTimeout=null;
-let stopReceivingMessages=false;
-export class MessagesJQuery {
+let messagesTimeout = null;
+let stopReceivingMessages = false;
+
+export class MessagesManager {
     static getMessages() {
         $.ajax({
             url: 'http://localhost:8080/message'
@@ -9,24 +12,25 @@ export class MessagesJQuery {
             console.log('Messages loaded: ' + JSON.stringify(items));
         })
     }
+
     static getLastMessages(messagesBox) {
         $.ajax({
             url: 'http://localhost:8080/message',
             success: (messages) => {
                 let lastMessages = messages.forEach(message => {
                     if (message['id'] > lastMessageId) {
-                        this.printMessageLn(messagesBox,message)
+                        this.printMessageLn(messagesBox, message)
                         // text.text += `<${(message)['username']}>: ${(message)['content']}\n`
                     }
                 });
                 lastMessageId = messages[messages.length - 1]['id']
                 console.log(lastMessageId)
-                messagesTimeout = setTimeout(()=> {
+                messagesTimeout = setTimeout(() => {
                     if (!stopReceivingMessages)
                         this.getLastMessages(messagesBox)
-                },1000);
+                }, 1000);
             },
-            error:()=> {
+            error: () => {
                 console.log('Error en getLastMessages');
                 messagesTimeout = setTimeout(() => {
                     if (!stopReceivingMessages)
@@ -34,26 +38,28 @@ export class MessagesJQuery {
                 }, 1000);
             }
 
-        }).done( (items)=> {
+        }).done((items) => {
             //console.log('Messages loaded: ' + JSON.stringify(items));
             //setTimeout(()=>this.getLastMessages(),500);
         })
     }
-    static receiveMessages(messageBox){
-        stopReceivingMessages=false
+
+    static receiveMessages(messageBox) {
+        stopReceivingMessages = false
         this.getLastMessages(messageBox)
-        
+
     }
-    static stopReceivingLastMessages(){
-        if (messagesTimeout!==null){
+
+    static stopReceivingLastMessages() {
+        if (messagesTimeout !== null) {
             {
                 clearTimeout(messagesTimeout)
-                stopReceivingMessages=true;
+                stopReceivingMessages = true;
             }
         }
     }
 
-    static postMessage(user='Undefined User',message,onSuccess,onFailed=null,onError=null) {
+    static postMessage(user = 'Undefined User', message, onSuccess, onFailed = null, onError = null) {
         $.ajax({
             method: "POST",
             dataType: 'json',
@@ -71,7 +77,7 @@ export class MessagesJQuery {
                 console.log((item))
                 console.log((item)['username'])
                 console.log((item)['content'])
-                if (onSuccess!==null){
+                if (onSuccess !== null) {
                     onSuccess();
                 }
                 //this.printMessageLn(text,item)
@@ -81,13 +87,13 @@ export class MessagesJQuery {
             },
             fail: () => {
                 // text.text += "Failed to send message" + "\n"
-                if (onFailed!==null){
+                if (onFailed !== null) {
                     onFailed();
                 }
             },
             error: () => {
                 // text.text += "Error while sending message" + "\n"
-                if (onError!==null){
+                if (onError !== null) {
                     onError();
                 }
             }
@@ -99,11 +105,17 @@ export class MessagesJQuery {
             console.log('Messages pushed: ' + JSON.stringify(item));
         })
     }
-    static printMessageLn(text, message){
-        if(message['username']==='Server'){
-            text.appendText(`[color=green]<${(message)['username']}>: ${(message)['content']}\n[/color]`)
-        } else{
-            text.appendText(`<${(message)['username']}>: ${(message)['content']}\n`)   
+
+    static printMessageLn(text, message) {
+        if (message['username'] === 'Server') {
+            if (message['content'].includes("disconnected")) {
+                text.appendText(`[align=center][color=red]<${(message)['username']}>: ${(message)['content']}[/color][/align]\n`)
+            } else {
+                text.appendText(`[b][align=center][color=green]<${(message)['username']}>: ${(message)['content']}[/color][/align][/b]\n`)
+            }
+        } else {
+            text.appendText(`[stroke=black]<${(message)['username']}>: ${(message)['content']}[/stroke]\n`)
         }
+        text.scrollToBottom();
     }
 }

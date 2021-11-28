@@ -2,6 +2,7 @@ package es.urjc.code.daw.player;
 import es.urjc.code.daw.ping.ConnectionController;
 import lombok.SneakyThrows;
 
+import org.hibernate.validator.internal.metadata.aggregated.rule.ReturnValueMayOnlyBeMarkedOnceAsCascadedPerHierarchyLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,5 +51,14 @@ public class PlayerController {
             return player;
         }
         return null;
+    }
+    
+    @SneakyThrows
+    @PostMapping("/{username}/{iconIndex}")
+    Player updatePlayerIcon(@PathVariable String username, @PathVariable int iconIndex){
+        Player player = playerRepository.findById(username).orElseThrow(() -> new Exception("Player not available"));
+        player.setIconIndex(iconIndex);
+        playerRepository.save(player);
+        return player;
     }
 }

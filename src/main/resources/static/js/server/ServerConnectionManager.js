@@ -1,5 +1,5 @@
 let connected=false;
-export class ServerPing {
+export class ServerConnectionManager {
     static clientId= '_'+Math.random().toString(36).substr(2,9);
     static setClientId(id){
         this.clientId=id;
