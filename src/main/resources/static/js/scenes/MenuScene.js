@@ -362,12 +362,24 @@ export class MenuScene extends Phaser.Scene {
             ServerPing.GetClientsCount((clientsCount) => this.usersConnectedCountText.setText(clientsCount));
             ServerPing.CheckNetworkConnection(() => {
                     networkSymbol.setTexture("networkSymbolSuccess")
+                    this.enableClientsCountBox()
+                    this.enableChatButton()
                 },
                 () => {
                     networkSymbol.setTexture("networkSymbolError")
+                    this.disableClientsCountBox();
+                    this.disableChatButton()
                 })
         }
 
+        disableClientsCountBox(){
+            this.usersConnectedCountText.setVisible(false);
+            this.usersConnectedWindow.setVisible(false);
+        }
+        enableClientsCountBox(){
+            this.usersConnectedCountText.setVisible(true);
+            this.usersConnectedWindow.setVisible(true);
+        }
         defineUserRegistration()
         {
             this.userRegistration = new UserRegistration();
