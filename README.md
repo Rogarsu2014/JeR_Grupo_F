@@ -22,20 +22,25 @@ Dual Interests es un videojuego multijugador de plataformas 2D de dos personas c
 
 **https://trello.com/b/JyMPz9K5/improvisation-productions**
 
+## Nota
 
+**A la hora de trabajar, se realizan commits enstando todos los integrantes en trabajando en equipo y sumando los archivos y código del resto en un odenaro**
 ___
 # <p align="center">GDD</div>
 
 ## Índice
-- [Introducción](#introduccin)
+
+*Los acentos no están disponibles en el índice por el sistema de Markdown*
+
+- [Introducción](#introduccion)
   - [Concepto del juego](#concepto-del-juego)
-  - [Características principales](#caractersticas-principales)
-  - [Género](#gnero)
-  - [Propósito y público objetivo](#propsito-y-pblico-objetivo)
+  - [Características principales](#caracteristicas-principales)
+  - [Género](#genero)
+  - [Propósito y público objetivo](#proposito-y-publico-objetivo)
   - [Jugabilidad](#jugabilidad)
   - [Estilo visual](#estilo-visual)
   - [Alcance](#alcance)
-- [Mecánicas de juego](#mecnicas-de-juego)
+- [Mecánicas de juego](#mecanicas-de-juego)
   - [Jugabilidad](#jugabilidad)
   - [Puntos](#puntos)
   - [Salto](#salto)
@@ -44,28 +49,28 @@ ___
   - [Trampas](#trampas)
   - [Tiempos](#tiempos)
   - [Personaje](#personaje)
-- [Movimiento y físicas](#movimiento-y-fsicas)
+- [Movimiento y físicas](#movimiento-y-fisicas)
   - [Colisiones](#colisiones)
   - [Controles](#controles)
 - [Interfaz](#interfaz)
   - [**Diagrama de flujo**](#diagrama-de-flujo)
-  - [<span style="color:lightgreen">**Transición de escenas** </span>](#transicin-de-escenas)
+  - [<span style="color:lightgreen">**Transición de escenas** </span>](#transicion-de-escenas)
   - [Flujo de gameplay](#flujo-de-gameplay)
   - [Game-loop](#game-loop)
-  - [Menú principal](#men-principal)
-  - [Selección de Personajes (NO IMPLEMENTADA)](#seleccin-de-personajes-no-implementada)
-  - [Tutorial y Créditos](#tutorial-y-crditos)
+  - [Menú principal](#menu-principal)
+  - [Selección de Personajes (NO IMPLEMENTADA)](#seleccion-de-personajes-no-implementada)
+  - [Tutorial y Créditos](#tutorial-y-creditos)
 - [Arte](#arte)
   - [Audio](#audio)
 - [Diseño de niveles](#Diseño-de-niveles)
-- [<span style="color:lightgreen">**Implementación de Servidor con API REST y diagrama de clases**</span>](#implementacin-de-servidor-con-api-rest-y-diagrama-de-clases)
+- [<span style="color:lightgreen">**Implementación de Servidor con API REST y diagrama de clases**</span>](#implementacion-de-servidor-con-api-rest-y-diagrama-de-clases)
   - [<span style="color:lightgreen">**Datos (*Data*)**</span>](#datos-data)
   - [<span style="color:lightgreen">**Modelo (*Model*)**</span>](#modelo-model)
   - [<span style="color:lightgreen">**Vista (*View*)**</span>](#vista-view)
 
  
 
-# Introducción
+# Introduccion
 
 Este es el documento de diseño de juego de *Dual Interest*.Aquí expondremos la idea original del juego de plataformas y competición que está en desarrollo. 
 
@@ -76,22 +81,22 @@ Este es el documento de diseño de juego de *Dual Interest*.Aquí expondremos la
 *Te interesa colaborar con el enemigo para poder ganar.*
 ![puerta nivel coop1](doc/GDDImagenes/Puerta_abriendose.gif)
 ![nivel competitivo 1](doc/GDDImagenes/Comp1.gif)
-## Características principales 
+## Caracteristicas principales 
 El juego se centra en los siguientes puntos:
 
 * #### Competitividad: 
 El objetivo del juego es ganar al otro jugador, aunque para ello se tenga que colaborar con este, por lo que siempre se debe tener un ojo avizor a lo que hace el oponente.
-* #### Colaboración: 
+* #### Colaboracion: 
 Interesa colaborar con el enemigo durante la fase de colaboración ya que esta recompensa esta acción dando puntos, cuya finalidad es dar unas oportunidades más durante la fase de competición (las trampas restan puntos).
 * #### Fácil de entender: 
 El hecho de no tener trama narrativa hace que el juego posea una gran facilidad para entender sus mecánicas y su estructura. 
 * ##### Frenético: 
 Al ser una carrera contra el tiempo las acciones tomadas por los jugadores han de ser rápidas y eficientes, transmitiendo ansiedad e intensidad.
 
-## Género
+## Genero
 *Dual Interest* es un juego de plataformas, acción y puzzles. Ofrece en profundidad  mecánicas similares a los juegos de plataformas, ya que están pulidas y desarrolladas y está centrada en libertad de movimiento y desplazamiento. También se incluyen los puzzles en las fases de colaboración. En cuanto a la acción se refiere a lo que sucede durante la fase de competición en la que la mecánica de empuje provocará situaciones muy intensas y frenéticas.
 
-## Propósito y público objetivo
+## Proposito y publico objetivo
 
 El objetivo de este juego es crear un ambiente divertido en el que los jugadores tengan una experiencia intensa, al mezclar cooperación e interés, donde participen en niveles rápidos con amigos.
 
@@ -122,7 +127,7 @@ El estilo visual de Dual Interest es simplificado y colorido, siendo el nivel il
 La prioridad se centrará en ofrecer al jugador suficiente variedad de mapas y de objetos en la versión base para que la experiencia sea lo más innovadora posible. 
 De cara al futuro se añadirán nuevos mapas y objetos, ofreciendo así variedad al jugador y mecánicas (agarrar, agacharse, entre otras) para que los nuevos contenidos y los previos puedan experimentarse de diferentes maneras.
 
-# Mecánicas de juego 
+# Mecanicas de juego 
 Aquí se hablará más en profundidad de las mecánicas y funcionamiento de las mismas en Dual Interest. Principalmente nos centraremos en ampliar los conceptos que ya han sido introducidos previamente y expandirlos con el fin de que se comprenda mejor su estructura. 
 
 ## Jugabilidad
@@ -189,7 +194,7 @@ En cuanto al aspecto físico se distinguen dos personajes geométricos diferenci
 ![daia2](doc/GDDImagenes/Personajes/spriteshit2.png)
 *Hojas de Sprite de los personajes*
 
-# Movimiento y físicas 
+# Movimiento y fisicas 
 ## Colisiones
 
 Las colisiones producidas son:
@@ -223,11 +228,11 @@ En caso de usar control por mando, la palanca izquierda permite mover al jugador
 
 Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo de *gameplay*, *game-loop*.
 
-## **Transición de escenas**
+## **Transicion de escenas**
 
 ![menu boceto](doc/GDDImagenes/Diagramas/Untitled_Diagram.png)
 
-### Navegación Fase 3 Menú principal y juego
+### Navegación Fase 3 Menu principal y juego
 ![navegacion_fase_3](doc/GDDImagenes/Diagramas/Tareas_Fase_3.png)
 
 
@@ -239,7 +244,7 @@ Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo d
 
 
 
-## **Menú principal**
+## **Menu principal**
 ![menu boceto](doc/GDDImagenes/BocetosUI/Menu.jpg)
 ___
 ![menu principal](doc/GDDImagenes/Menu_principal.gif)
@@ -259,7 +264,7 @@ Descripción del menú principal:
 * **Botón créditos:** Al ser pulsado nos lleva a la pantalla de créditos.
 
 
-## Selección de Personajes (NO IMPLEMENTADA)
+## Seleccion de Personajes (NO IMPLEMENTADA)
 
 ![boceto sleección de personaje](doc/GDDImagenes/BocetosUI/Seleccion_de_personaje.jpg)
 ___
@@ -300,14 +305,14 @@ ___
 Una vez se inicie la aplicación, se mostrará el primer icono de conexión, indicando que aún no ha comprobado el estado de la conexión con el servidor. Una vez se haya comprobado el estado de la conexión, cambiará al segundo o tercer icono dependiendo del estado de la conexión.
 Es decir, su propósito es mostrar cuando el usuario se conecta o desconecta del servidor.
 
-## Tutorial y Créditos
+## Tutorial y Creditos
 ![creditos](doc/GDDImagenes/Creditos.gif)
 ![tutorial](doc/GDDImagenes/Aprende_a_jugar.gif)
 
 
 Descripción de los tutoriales y créditos
 
-* **Créditos:** Una slide de los créditos en los que se muestran los nombres de los componentes del grupo, el nombre del juego y el nombre del grupo, además de un agradecimiento por jugar.
+* **Creditos:** Una slide de los créditos en los que se muestran los nombres de los componentes del grupo, el nombre del juego y el nombre del grupo, además de un agradecimiento por jugar.
 
 * **Tutorial:** Una simple muestra de imágenes en sucesión en la que se informa de los controles a los jugadores relacionando las teclas con imágenes mostrando lo que pasa.
 
@@ -365,7 +370,7 @@ Versión final del nivel bocetado arriba
 ![ggez](doc/GDDImagenes/Coop3.png)
 
 
-# Implementación de Servidor con API REST y diagrama de clases
+# Implementacion de Servidor con API REST y diagrama de clases
 
 Siguiendo una arquitectura MVC (Model View Data), el diagrama de la aplicación tiene la siguiente forma:
 
