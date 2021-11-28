@@ -199,7 +199,7 @@ Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo d
 ___
 ![menu principal](doc/GDDImagenes/Menu_principal.gif)
 ___
-![menu principal2](doc/GDDImagenes/MenuPrincipalActualizado.png)
+![menu principal2](doc/GDDImagenes/MenuPrincipalActualizado.png)            <-- Aquí poner captura del menú principal que aparezcan todos los botones
 
 Descripción del menú principal:
 
@@ -229,9 +229,9 @@ Descripción de la selección de personaje
 
 ## **Sistema de Log In**
 ![ButtonLogin](doc/GDDImagenes/Botones_y_Creditos/ButtonLogin.png)
-![LoginScreen](doc/GDDImagenes/UI/LoginScreen.png)
+![LoginScreen](doc/GDDImagenes/UI/LoginScreen.png)                               <-- aquí poner captura del menú principal que aparezca el login
 ___
-![UserScreen](doc/GDDImagenes/UI/PlayerScreen.png)
+![UserScreen](doc/GDDImagenes/UI/PlayerScreen.png)                               <-- aquí poner captura del menú principal que aparezca registrado
 ![DaiaProfile](doc/GDDImagenes/UI/DaiaIcon.png)
 ![IbbanProfile](doc/GDDImagenes/UI/IbbanIcon.png)
 
@@ -241,6 +241,7 @@ Un usuario tras iniciar sesión podrá ver cuantas partidas ha ganado haciendo c
 Para cerrar la ventana de Inicio de sesión, bastará con darle al botón X que aparece arriba a la izquierda de esta.
 
 ## **Chat**
+                                                                                   <-- Aquí captura del menú principal que aparezca el chat activo
 ___
 Para acceder al chat se debe pulsar el botón con el icono de bocadillo de texto y tres puntitos. Siempre y cuando el usuario esté registrado y con la sesión iniciada,  podrá enviar mensajes. Para enviar mensajes, se deberá escribir el mensaje en la caja de texto y darle al botón de enviar. El chat se cerrará al darle al botón X que aparece arriba a la izquierda de este.
 
@@ -251,7 +252,8 @@ ___
 ![Net2](doc/GDDImagenes/Botones_y_Creditos/NetworkSymbolError.png)
 ![Net3](doc/GDDImagenes/Botones_y_Creditos/NetworkSymbolSuccess.png)
 
-Una vez se inicie la aplicación, se mostrará el primer icono de conexión, indicando que aún no ha comprobado el estado de la conexión con el servidor. Una vez se haya comprobado el estado de la conexión, cambiará al segundo o tercer icono dependiendo del estado de la conexión
+Una vez se inicie la aplicación, se mostrará el primer icono de conexión, indicando que aún no ha comprobado el estado de la conexión con el servidor. Una vez se haya comprobado el estado de la conexión, cambiará al segundo o tercer icono dependiendo del estado de la conexión.
+Es decir, su propósito es mostrar cuando el usuario se conecta o desconecta del servidor.
 
 ## Tutorial y Créditos
 ![creditos](doc/GDDImagenes/Creditos.gif)
