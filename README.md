@@ -1,5 +1,4 @@
-
-# <div style="text-align: center">JeR_Grupo_F</div>
+# <p align="center">JeR_Grupo_F</div>
 
 ## Nombre_del_Juego
 Dual Interest
@@ -25,7 +24,7 @@ Dual Interests es un videojuego multijugador de plataformas 2D de dos personas c
 
 
 ___
-# <div style="text-align: center">GDD</div>
+# <p align="center">GDD</div>
 
 ## Índice
 - [Introducción](#introduccin)
