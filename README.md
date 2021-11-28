@@ -469,8 +469,14 @@ Además, es necesario especificar el manifiesto del propio .jar, para que trás 
 
 Para ejecutar la aplicación, es necesario tener Java instalado. La aplicación está desarrollada con el JDK 1.8.
 
-Una vez creado el .jar si se quiere ejecutar se puede hacer desde la consola de comandos, navegando hasta la carpeta en la que el archivo se encuentre y ejecutando el comando ***java -jar Dual_Interest-0.0.3*** . 
+Una vez creado el .jar si se quiere ejecutar se puede hacer desde la consola de comandos, navegando hasta la carpeta en la que el archivo se encuentre y ejecutando el comando:
 
+
+´´´
+
+     java -jar Dual_Interest-0.0.3.jar
+    
+´´´
 
 Finalmente la URL necesaria para poder jugar al juego debería de ser *** localhost:8080 ***
 
