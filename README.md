@@ -24,7 +24,7 @@ Dual Interests es un videojuego multijugador de plataformas 2D de dos personas c
 
 ## Nota
 
-**A la hora de trabajar, se realizan commits enstando todos los integrantes en trabajando en equipo y sumando los archivos y código del resto en un odenaro**
+**A la hora de trabajar, se realizan commits enstando todos los integrantes en trabajando en equipo y sumando los archivos y código del resto en un ordenador.**
 
 
 ___
