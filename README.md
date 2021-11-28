@@ -225,8 +225,17 @@ Descripción de la selección de personaje
 
 * Flechas de dirección (al lado de los personajes): Al ser pulsadas selecciona diferentes modelos de personaje.
 
+## **Sistema de Log In**
+___
 
+El sistema de Log In se encuentra en la esquina superior izquierda del menú principal. Al hacer click al botón, aparecerá un menú que permitirá al usuario introducir su nombre de usuario y contraseña para iniciar sesión, esto lo realizará introduciendo su usuario y contraseña en las secciones correspondientes y haciendo click al botón de Log In. 
+En caso de querer registrarse, el usuario deberá rellenar los mismos campos que para iniciar sesión, pero deberá introducir su contraseña dos veces y darle al botón de Register.
+Un usuario tras iniciar sesión podrá ver cuantas partidas ha ganado haciendo click en *poner donde* y hablar por el chat.
+Para cerrar la ventana de Inicio de sesión, bastará con darle al obtón X que aparece arriba a la izquierda de esta.
 
+## **Chat**
+___
+Para acceder al chat se debe pulsar el botón con el icono de bocadillo de texto y tres puntitos. Siempre y cuando el usuario esté registrado y con la sesión iniciada,  podrá enviar mensajes. Para enviar mensajes, se deberá escribir el mensaje en la caja de texto y darle al botón de enviar. El chat se cerrará al darle al botón X que aparece arriba a la izquierda de este.
 
 
 
