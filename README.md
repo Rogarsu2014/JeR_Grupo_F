@@ -32,11 +32,19 @@ ___
 
 ### Puntos fase 3
 
+#### Navegación:
+
 - [***Diagrama de flujo***](#diagrama-de-flujo)
+ 
+#### Diagrama de clases y API REST:
+
 - [***Implementación de Servidor con API REST y diagrama de clases***](#implementacion-de-servidor-con-api-rest-y-diagrama-de-clases)
   - [***Datos (*Data*)***](#datos-data)
   - [***Modelo (*Model*)***](#modelo-model)
   - [***Vista (*View*)***](#vista-view)
+
+#### Instrucciones precisas para ejecutar la aplicación:
+
 - [***Instrucciones precisas para ejecutar la aplicación***</span>](#instrucciones-precisas-para-ejecutar-la-aplicacion)
 
 ## Índice
