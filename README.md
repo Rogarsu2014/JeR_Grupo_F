@@ -25,8 +25,19 @@ Dual Interests es un videojuego multijugador de plataformas 2D de dos personas c
 ## Nota
 
 **A la hora de trabajar, se realizan commits enstando todos los integrantes en trabajando en equipo y sumando los archivos y código del resto en un odenaro**
+
+
 ___
 # <p align="center">GDD</div>
+
+### Puntos fase 3
+
+- [***Diagrama de flujo***](#diagrama-de-flujo)
+- [***Implementación de Servidor con API REST y diagrama de clases***](#implementacion-de-servidor-con-api-rest-y-diagrama-de-clases)
+  - [***Datos (*Data*)***](#datos-data)
+  - [***Modelo (*Model*)***](#modelo-model)
+  - [***Vista (*View*)***](#vista-view)
+- [***Instrucciones precisas para ejecutar la aplicación***</span>](#instrucciones-precisas-para-ejecutar-la-aplicacion)
 
 ## Índice
 
@@ -53,8 +64,8 @@ ___
   - [Colisiones](#colisiones)
   - [Controles](#controles)
 - [Interfaz](#interfaz)
-  - [**Diagrama de flujo**](#diagrama-de-flujo)
-  - [<span style="color:lightgreen">**Transición de escenas** </span>](#transicion-de-escenas)
+  - [***Diagrama de flujo***](#diagrama-de-flujo)
+  - [<span style="color:lightgreen">***Transición de escenas*** </span>](#transicion-de-escenas)
   - [Flujo de gameplay](#flujo-de-gameplay)
   - [Game-loop](#game-loop)
   - [Menú principal](#menu-principal)
@@ -63,10 +74,12 @@ ___
 - [Arte](#arte)
   - [Audio](#audio)
 - [Diseño de niveles](#Diseño-de-niveles)
-- [<span style="color:lightgreen">**Implementación de Servidor con API REST y diagrama de clases**</span>](#implementacion-de-servidor-con-api-rest-y-diagrama-de-clases)
-  - [<span style="color:lightgreen">**Datos (*Data*)**</span>](#datos-data)
-  - [<span style="color:lightgreen">**Modelo (*Model*)**</span>](#modelo-model)
-  - [<span style="color:lightgreen">**Vista (*View*)**</span>](#vista-view)
+- [***Implementación de Servidor con API REST y diagrama de clases***](#implementacion-de-servidor-con-api-rest-y-diagrama-de-clases)
+  - [***Datos (*Data*)***](#datos-data)
+  - [***Modelo (*Model*)***](#modelo-model)
+  - [***Vista (*View*)***](#vista-view)
+- [***Instrucciones precisas para ejecutar la aplicación***</span>](#instrucciones-precisas-para-ejecutar-la-aplicacion)
+- [Hoja de ruta del desarrollo](#hoja-de-ruta-del-desarrollo)
 
  
 
@@ -249,7 +262,7 @@ Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo d
 ___
 ![menu principal](doc/GDDImagenes/Menu_principal.gif)
 ___
-![menu principal2](doc/GDDImagenes/MenuPrincipalActualizado.png)
+![menu principal2](doc/GDDImagenes/MenuPrincipalActualizado.png)            <-- Aquí poner captura del menú principal que aparezcan todos los botones
 
 Descripción del menú principal:
 
@@ -279,9 +292,9 @@ Descripción de la selección de personaje
 
 ## **Sistema de Log In**
 ![ButtonLogin](doc/GDDImagenes/Botones_y_Creditos/ButtonLogin.png)
-![menuLoginScreen](doc/GDDImagenes/MenuLoginScreen.png)
+![LoginScreen](doc/GDDImagenes/UI/LoginScreen.png)                               <-- aquí poner captura del menú principal que aparezca el login
 ___
-![menuPlayerScreen](doc/GDDImagenes/MenuPlayerScreen.png)
+![UserScreen](doc/GDDImagenes/UI/PlayerScreen.png)                               <-- aquí poner captura del menú principal que aparezca registrado
 ![DaiaProfile](doc/GDDImagenes/UI/DaiaIcon.png)
 ![IbbanProfile](doc/GDDImagenes/UI/IbbanIcon.png)
 
@@ -291,7 +304,7 @@ Un usuario tras iniciar sesión podrá ver cuantas partidas ha ganado haciendo c
 Para cerrar la ventana de Inicio de sesión, bastará con darle al botón X que aparece arriba a la izquierda de esta.
 
 ## **Chat**
-![MenuChat](doc/GDDImagenes/MenuChat.png)
+                                                                                   <-- Aquí captura del menú principal que aparezca el chat activo
 ___
 Para acceder al chat se debe pulsar el botón con el icono de bocadillo de texto y tres puntitos. Siempre y cuando el usuario esté registrado y con la sesión iniciada,  podrá enviar mensajes. Para enviar mensajes, se deberá escribir el mensaje en la caja de texto y darle al botón de enviar. El chat se cerrará al darle al botón X que aparece arriba a la izquierda de este.
 
@@ -412,13 +425,43 @@ De no ser así, caso en el que el usuario se ha desconectado y por ende no manda
 La capa de vista es gestionada por el código Javascript, donde la clase *MenuScene* es la encargada de mostrar, hacer interactivos y actualizar los elementos de la escena gracias a las clases *MessagesManager*, *ServerConnectionManager* y *PlayersManager*.
 
 
-### Instrucciones precisas para ejecutar la aplicación
+### Instrucciones precisas para ejecutar la aplicacion
 
-Para ejecutar la aplicación es necesaria la creación de un archivo .jar a través del pom.xml. En este proceso es necesario especificar el manifiesto del propio.jar, ya que es obligatorio especificar los plugins y dependencias del mismo. 
+Para ejecutar la aplicación es necesaria la creación de un archivo .jar. que se genera en el proceso *install* a través del pom.xml. 
 
-Una vez creado el .jar si se quiere ejecutar se puede hacer desde la consola de comandos, navegando hasta la carpeta en la que el archivo se encuentre y ejecutando el comando “introduzca comando aquí“ . En cuanto a la instalación de archivos en la máquina no debería ser necesario siempre y cuando se posean los archivos del propio juego. 
+Además, es necesario especificar el manifiesto del propio .jar, para que trás ejecutar la aplicación por la Temrinal de sistema, este ejecute la clase **Aplication.java* automáticamente. Para ello hay que usar los siguientes plugins:
 
-Finalmente la URL necesaria para poder jugar al juego debería de ser localhost:8080
+´´´
+
+    <build>
+        <plugins>
+            <!--Plugin to define Manifest, in this way, jar will run automatically-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>es.urjc.code.daw.Application</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!--Plugin to build spring properties to make Spring Boot application funcitonal-->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+
+        </plugins>
+    </build>
+    
+´´´
+
+Una vez creado el .jar si se quiere ejecutar se puede hacer desde la consola de comandos, navegando hasta la carpeta en la que el archivo se encuentre y ejecutando el comando ***java -jar Dual*** . En cuanto a la instalación de archivos en la máquina no debería ser necesario siempre y cuando se posean los archivos del propio juego. 
+
+Finalmente la URL necesaria para poder jugar al juego debería de ser *** localhost:8080 ***
 
 
 
