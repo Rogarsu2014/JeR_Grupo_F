@@ -198,6 +198,8 @@ Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo d
 ![menu boceto](doc/GDDImagenes/BocetosUI/Menu.jpg)
 ___
 ![menu principal](doc/GDDImagenes/Menu_principal.gif)
+___
+![menu principal2](doc/GDDImagenes/MenuPrincipalActualizado.png)
 
 Descripción del menú principal:
 
@@ -226,7 +228,9 @@ Descripción de la selección de personaje
 * Flechas de dirección (al lado de los personajes): Al ser pulsadas selecciona diferentes modelos de personaje.
 
 ## **Sistema de Log In**
+![ButtonLogin](doc/GDDImagenes/Botones_y_Creditos/ButtonLogin.png)
 ![LoginScreen](doc/GDDImagenes/UI/LoginScreen.png)
+___
 ![UserScreen](doc/GDDImagenes/UI/PlayerScreen.png)
 ![DaiaProfile](doc/GDDImagenes/UI/DaiaIcon.png)
 ![IbbanProfile](doc/GDDImagenes/UI/IbbanIcon.png)
@@ -242,6 +246,11 @@ ___
 Para acceder al chat se debe pulsar el botón con el icono de bocadillo de texto y tres puntitos. Siempre y cuando el usuario esté registrado y con la sesión iniciada,  podrá enviar mensajes. Para enviar mensajes, se deberá escribir el mensaje en la caja de texto y darle al botón de enviar. El chat se cerrará al darle al botón X que aparece arriba a la izquierda de este.
 
 
+## **Estado de la conexión**
+___
+![Net1](doc/GDDImagenes/Botones_y_Creditos/NetworkSymbol.png)
+![Net2](doc/GDDImagenes/Botones_y_Creditos/NetworkSymbolError.png)
+![Net3](doc/GDDImagenes/Botones_y_Creditos/NetworkSymbolSuccess.png)
 
 ## Tutorial y Créditos
 ![creditos](doc/GDDImagenes/Creditos.gif)
