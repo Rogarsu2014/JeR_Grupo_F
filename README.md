@@ -270,7 +270,7 @@ Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo d
 ___
 ![menu principal](doc/GDDImagenes/Menu_principal.gif)
 ___
-![menu principal2](doc/GDDImagenes/MenuPrincipalActualizado.png)            <-- Aquí poner captura del menú principal que aparezcan todos los botones
+![menu principal2](doc/GDDImagenes/MenuPrincipalActualizado.png)
 
 Descripción del menú principal:
 
@@ -300,19 +300,19 @@ Descripción de la selección de personaje
 
 ## **Sistema de Log In**
 ![ButtonLogin](doc/GDDImagenes/Botones_y_Creditos/ButtonLogin.png)
-![LoginScreen](doc/GDDImagenes/UI/LoginScreen.png)                               <-- aquí poner captura del menú principal que aparezca el login
+![menuLoginScreen](doc/GDDImagenes/MenuLoginScreen.png)
 ___
-![UserScreen](doc/GDDImagenes/UI/PlayerScreen.png)                               <-- aquí poner captura del menú principal que aparezca registrado
+![menuPlayerScreen](doc/GDDImagenes/MenuPlayerScreen.png)
 ![DaiaProfile](doc/GDDImagenes/UI/DaiaIcon.png)
 ![IbbanProfile](doc/GDDImagenes/UI/IbbanIcon.png)
 
 El sistema de Log In se encuentra en la esquina superior izquierda del menú principal. Al hacer click al botón, aparecerá un menú que permitirá al usuario introducir su nombre de usuario y contraseña para iniciar sesión, esto lo realizará introduciendo su usuario y contraseña en las secciones correspondientes y haciendo click al botón de Log In. 
 En caso de querer registrarse, el usuario deberá rellenar los mismos campos que para iniciar sesión, pero deberá hacer click al botón de Register.
 Un usuario tras iniciar sesión podrá ver cuantas partidas ha ganado haciendo click al mismo botón de Log In (el cual pasará a ser el botón de perfil) y hablar por el chat.
-Para cerrar la ventana de Inicio de sesión, bastará con darle al botón X que aparece arriba a la izquierda de esta.
+Para cerrar la ventana de Inicio de sesión, bastará con darle a la flecha que aparece en el menú.
 
 ## **Chat**
-                                                                                   <-- Aquí captura del menú principal que aparezca el chat activo
+![menuChat](doc/GDDImagenes/MenuChat.png)
 ___
 Para acceder al chat se debe pulsar el botón con el icono de bocadillo de texto y tres puntitos. Siempre y cuando el usuario esté registrado y con la sesión iniciada,  podrá enviar mensajes. Para enviar mensajes, se deberá escribir el mensaje en la caja de texto y darle al botón de enviar. El chat se cerrará al darle al botón X que aparece arriba a la izquierda de este.
 
