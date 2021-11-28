@@ -1,5 +1,5 @@
 export class PlayersJQuery {
-    signUp(username, password,confirmPassword, onSuccess){
+    signUp(username, password,confirmPassword, onSuccess,onError){
         if (password==confirmPassword) {
             $.ajax({
                 method: 'POST',
@@ -21,18 +21,25 @@ export class PlayersJQuery {
                         onSuccess(user)
                     
                 },fail:()=>{console.log("Failed")},
-                error:()=>{console.log("user with that username already registered")} // in case user is null, it launches
+                error:()=>{console.log("user with that username already registered")
+                    if (onError!==null) {
+                        onError()
+                    }
+                } // in case user is null, it launches
 
             })
         }
     }
     
-    logIn(username, password,onSuccess){
+    logIn(username, password,onSuccess,onMisMatch,onAlreadyLogIn){
         $.ajax({
             method: "GET",
             url:'http://localhost:8080/player/'+username+'/'+password,
             success:(user)=> {
                 if (!user){
+                    if (onAlreadyLogIn!==null){
+                        onAlreadyLogIn();
+                    }
                  console.log("Null user -> an user with that id has already log in")   
                 }else{
                     console.log("User connetced: " + JSON.stringify(user))
@@ -40,7 +47,13 @@ export class PlayersJQuery {
                         onSuccess(user)
                 }
             },
-            error:()=>{ console.log("User already logged in")}
+            error:(xhr,status,error)=>{
+                var err = xhr.responseText.toString();
+                console.log("Error: "+err)
+                if (onMisMatch!==null) {
+                    onMisMatch()
+                }
+            }
         })
     }
 }

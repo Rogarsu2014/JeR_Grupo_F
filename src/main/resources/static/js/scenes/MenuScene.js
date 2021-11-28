@@ -128,13 +128,16 @@ export class MenuScene extends Phaser.Scene {
         loginButton.setInteractive();
 
 
-        this.chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.5).setVisible(0);
+        this.chatScreen = this.add.image(width - 200, 300, 'ChatScreen').setDepth(1).setScale(.72).setVisible(0);
         this.loginScreen = this.add.image(168, 110, 'registerScreen').setDepth(1).setScale(.4).setVisible(0);
         this.playerScreen = this.add.image(168, 80, 'PlayerScreen').setDepth(1).setScale(.49).setVisible(0);
 
-        this.logInButton = this.add.image(94, 170, 'LogIn').setDepth(1).setScale(.4).setVisible(0);
-        this.registerButton = this.add.image(240, 170, 'registerButton').setDepth(1).setScale(.4).setVisible(0);
-        this.disableResgisterScreen();
+        this.loginErrorText = this.add.text(26,115,'',{
+            fontFamily: 'ink-free-normal',
+            fontSize: '22px', color: '#f00'
+        }).setDepth(100).setVisible(false)
+        this.logInButton = this.add.image(240, 170, 'LogIn').setDepth(1).setScale(.4).setVisible(0);
+        this.registerButton = this.add.image(94, 170, 'registerButton').setDepth(1).setScale(.4).setVisible(0);
         this.logInButton.setInteractive();
         this.registerButton.setInteractive();
 
@@ -142,6 +145,8 @@ export class MenuScene extends Phaser.Scene {
         this.xButton2 = this.add.image(335, 20, 'XButton').setDepth(1).setScale(.3).setVisible(0);
 
 
+        this.disableResgisterScreen();
+        this.disablePlayerScreen()
         const COLOR_LIGHT = 0x7b5e57;
         const COLOR_DARK = 0x260e04;
         this.textArea = this.rexUI.add.textArea({
@@ -158,6 +163,7 @@ export class MenuScene extends Phaser.Scene {
             slider: {
                 track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+                position:'bottom',
             },
 
             space: {
@@ -248,8 +254,11 @@ export class MenuScene extends Phaser.Scene {
                 if (this.loginVisible === false) {
                     this.enableResgisterScreen()
                     // loginScreen.setVisible(1);
+                    
                     console.log("Click");
                     this.xButton2.setVisible(1);
+                    this.loginErrorText.setVisible(true);
+                    this.loginErrorText.text="";
                     this.formUtil.showElement("myUser");
                     this.formUtil.showElement("myPass");
                     this.formUtil.placeElementAt(1, 'myUser', true);
@@ -257,20 +266,19 @@ export class MenuScene extends Phaser.Scene {
                     this.loginVisible = true;
                 }
             } else {
-                this.playerScreen.setVisible(1);
-                this.xButton2.setVisible(1);
+                this.enablePlayerScreen()
             }
         })
         this.xButton2.on('pointerdown', () => {
             if (this.loginVisible === true) {
                 this.disableResgisterScreen()
                 this.xButton2.setVisible(0);
+                this.loginErrorText.setVisible(false);
                 this.formUtil.hideElement("myUser");
                 this.formUtil.hideElement("myPass");
                 this.loginVisible = false;
             } else if (this.gamesVisible === true) {
-                this.playerScreen.setVisible(0);
-                this.xButton2.setVisible(0);
+                this.disablePlayerScreen();
             }
         })
             this.logInButton.on('pointerdown', () => {
@@ -371,7 +379,10 @@ export class MenuScene extends Phaser.Scene {
         {
             let username = this.formUtil.getTextAreaValue("myUser");
             let password = this.formUtil.getTextAreaValue("myPass");
-            this.userRegistration.logIn(username, password, (user) => this.Registered(user))
+            
+            this.userRegistration.logIn(username, password, (user) => this.Registered(user),
+                ()=>this.loginErrorText.text = "Wrong Username and Password",
+                ()=>this.loginErrorText.text = "User has already logged in")
         }
 
         signUpPlayer()
@@ -379,7 +390,8 @@ export class MenuScene extends Phaser.Scene {
             let username = this.formUtil.getTextAreaValue("myUser");
             let password = this.formUtil.getTextAreaValue("myPass");
             let confirmPassword = this.formUtil.getTextAreaValue("myPass");
-            this.userRegistration.trySignUp(username, password, confirmPassword, (user) => this.Registered(user))
+            this.userRegistration.trySignUp(username, password, confirmPassword, 
+                (user) => this.Registered(user), ()=>this.loginErrorText.text = "Username "+ username +" already taken")
         }
 
         Registered(user)
@@ -390,12 +402,10 @@ export class MenuScene extends Phaser.Scene {
                 this.enableChatButton();
                 ServerPing.setClientId(user['username'])
                 ServerPing.ConnectUser();
-
+                this.setPlayerInformation();
                 if (this.loginVisible === true) {
                     this.disableResgisterScreen()
                     this.xButton2.setVisible(0);
-                    this.formUtil.hideElement("myUser");
-                    this.formUtil.hideElement("myPass");
                     this.loginVisible = false;
                     this.gamesVisible = true;
                 }
@@ -405,7 +415,36 @@ export class MenuScene extends Phaser.Scene {
             }
         }
 
+        setPlayerInformation(){
+            this.playerUsernameText=this.add.text(158,23,this.user['username'],{fontFamily: 'ink-free-normal',
+                fontSize: '22px', color: '#000'
+            }).setDepth(100).setVisible(false);
+            this.playerGamesWonText=this.add.text(225,90,this.user['gameswon'],{fontFamily: 'ink-free-normal',
+                fontSize: '48px', color: '#fff'}).setDepth(100).setVisible(false);
+        }
 
+    enablePlayerScreen(){
+        if (this.playerUsernameText!==undefined) {
+            this.playerUsernameText.setVisible(true);
+        }
+        if (this.playerGamesWonText!==undefined) {
+            this.playerGamesWonText.setVisible(true);
+        }
+            this.playerScreen.setVisible(true)
+            this.xButton2.setVisible(true);
+            
+        }
+        disablePlayerScreen(){
+            if (this.playerUsernameText!==undefined) {
+                this.playerUsernameText.setVisible(false);
+            }
+            if (this.playerGamesWonText!==undefined) {
+                this.playerGamesWonText.setVisible(false);
+            }
+            this.playerScreen.setVisible(false)
+            this.xButton2.setVisible(false);
+            
+        }
         enableChatButton()
         {
             this.chatButton.alpha = 1;
@@ -414,14 +453,18 @@ export class MenuScene extends Phaser.Scene {
 
         enableResgisterScreen()
         {
-
+            this.formUtil.showElement("myUser");
+            this.formUtil.showElement("myPass");
+            this.loginErrorText.setVisible(1)
             this.loginScreen.setVisible(1);
             this.logInButton.setVisible(1);
             this.registerButton.setVisible(1);
         }
         disableResgisterScreen()
         {
-
+            this.formUtil.hideElement("myUser");
+            this.formUtil.hideElement("myPass");
+            this.loginErrorText.setVisible(0)
             this.loginScreen.setVisible(0);
             this.logInButton.setVisible(0);
             this.registerButton.setVisible(0);
@@ -481,6 +524,14 @@ export class MenuScene extends Phaser.Scene {
 
         update()
         {
-            console.log("")
+            // console.log("")
+            this.setElementsPosition()    
+        }
+        
+        setElementsPosition(){
+            this.formUtil.placeElementAt(97, 'myText', true);
+            this.formUtil.placeElementAt(98, "btnSend");
+            this.formUtil.placeElementAt(1, 'myUser', true);
+            this.formUtil.placeElementAt(12, 'myPass', true);
         }
     }
