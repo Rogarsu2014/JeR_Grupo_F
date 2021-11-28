@@ -138,6 +138,12 @@ export class Preloader extends Phaser.Scene {
         this.load.image('loginScreen','./Resources/assets/UI/Buttons/LoginScreen.png');
         
         this.load.image("LogIn", "./Resources/assets/LogIn/LoginButton.png");
+        this.load.image("PlayerScreen", "./Resources/assets/Register/PlayerScreen.png");
+        
+        this.load.image("daiaIcon", "./Resources/assets/Iconos/DaiaIcon.png");
+        this.load.image("ibbanIcon", "./Resources/assets/Iconos/IbbanIcon.png");
+        
+        this.load.image("UI_Arrow", "./Resources/assets/UI/MainMenu/Arrow.png");
         
     }
     create(){
