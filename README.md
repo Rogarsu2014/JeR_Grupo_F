@@ -226,6 +226,10 @@ Descripción de la selección de personaje
 * Flechas de dirección (al lado de los personajes): Al ser pulsadas selecciona diferentes modelos de personaje.
 
 ## **Sistema de Log In**
+![LoginScreen](doc/GDDImagenes/UI/LoginScreen.png)
+![UserScreen](doc/GDDImagenes/UI/PlayerScreen.png)
+![DaiaProfile](doc/GDDImagenes/UI/DaiaIcon.png)
+![IbbanProfile](doc/GDDImagenes/UI/IbbanIcon.png)
 ___
 
 El sistema de Log In se encuentra en la esquina superior izquierda del menú principal. Al hacer click al botón, aparecerá un menú que permitirá al usuario introducir su nombre de usuario y contraseña para iniciar sesión, esto lo realizará introduciendo su usuario y contraseña en las secciones correspondientes y haciendo click al botón de Log In. 
