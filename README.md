@@ -319,6 +319,16 @@ Versión final del nivel bocetado arriba
 
 ![ggez](doc/GDDImagenes/Coop3.png)
 
+
+### Instrucciones precisas para ejecutar la aplicación
+
+Para ejecutar la aplicación es necesaria la creación de un archivo .jar a través del pom.xml. En este proceso es necesario especificar el manifiesto del propio.jar, ya que es obligatorio especificar los plugins y dependencias del mismo. 
+
+Una vez creado el .jar si se quiere ejecutar se puede hacer desde la consola de comandos, navegando hasta la carpeta en la que el archivo se encuentre y ejecutando el comando “introduzca comando aquí“ . En cuanto a la instalación de archivos en la máquina no debería ser necesario siempre y cuando se posean los archivos del propio juego. 
+
+Finalmente la URL necesaria para poder jugar al juego debería de ser localhost:8080
+
+
 ### Hoja de ruta del desarrollo
 
 **Plataformas**: Web
