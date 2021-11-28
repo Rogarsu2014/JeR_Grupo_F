@@ -478,7 +478,7 @@ Una vez creado el .jar si se quiere ejecutar se puede hacer desde la consola de 
     
 ´´´
 
-Finalmente la URL necesaria para poder jugar al juego debería de ser *** localhost:8080 ***
+Finalmente la URL necesaria para poder jugar al juego debería de ser ***localhost:8080***
 
 
 
