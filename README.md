@@ -244,6 +244,8 @@ Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo d
 ![menu boceto](doc/GDDImagenes/BocetosUI/Menu.jpg)
 ___
 ![menu principal](doc/GDDImagenes/Menu_principal.gif)
+___
+![menu principal2](doc/GDDImagenes/MenuPrincipalActualizado.png)            <-- Aquí poner captura del menú principal que aparezcan todos los botones
 
 Descripción del menú principal:
 
@@ -271,10 +273,33 @@ Descripción de la selección de personaje
 
 * Flechas de dirección (al lado de los personajes): Al ser pulsadas selecciona diferentes modelos de personaje.
 
+## **Sistema de Log In**
+![ButtonLogin](doc/GDDImagenes/Botones_y_Creditos/ButtonLogin.png)
+![LoginScreen](doc/GDDImagenes/UI/LoginScreen.png)                               <-- aquí poner captura del menú principal que aparezca el login
+___
+![UserScreen](doc/GDDImagenes/UI/PlayerScreen.png)                               <-- aquí poner captura del menú principal que aparezca registrado
+![DaiaProfile](doc/GDDImagenes/UI/DaiaIcon.png)
+![IbbanProfile](doc/GDDImagenes/UI/IbbanIcon.png)
+
+El sistema de Log In se encuentra en la esquina superior izquierda del menú principal. Al hacer click al botón, aparecerá un menú que permitirá al usuario introducir su nombre de usuario y contraseña para iniciar sesión, esto lo realizará introduciendo su usuario y contraseña en las secciones correspondientes y haciendo click al botón de Log In. 
+En caso de querer registrarse, el usuario deberá rellenar los mismos campos que para iniciar sesión, pero deberá hacer click al botón de Register.
+Un usuario tras iniciar sesión podrá ver cuantas partidas ha ganado haciendo click al mismo botón de Log In (el cual pasará a ser el botón de perfil) y hablar por el chat.
+Para cerrar la ventana de Inicio de sesión, bastará con darle al botón X que aparece arriba a la izquierda de esta.
+
+## **Chat**
+                                                                                   <-- Aquí captura del menú principal que aparezca el chat activo
+___
+Para acceder al chat se debe pulsar el botón con el icono de bocadillo de texto y tres puntitos. Siempre y cuando el usuario esté registrado y con la sesión iniciada,  podrá enviar mensajes. Para enviar mensajes, se deberá escribir el mensaje en la caja de texto y darle al botón de enviar. El chat se cerrará al darle al botón X que aparece arriba a la izquierda de este.
 
 
+## **Estado de la conexión**
+___
+![Net1](doc/GDDImagenes/Botones_y_Creditos/NetworkSymbol.png)
+![Net2](doc/GDDImagenes/Botones_y_Creditos/NetworkSymbolError.png)
+![Net3](doc/GDDImagenes/Botones_y_Creditos/NetworkSymbolSuccess.png)
 
-
+Una vez se inicie la aplicación, se mostrará el primer icono de conexión, indicando que aún no ha comprobado el estado de la conexión con el servidor. Una vez se haya comprobado el estado de la conexión, cambiará al segundo o tercer icono dependiendo del estado de la conexión.
+Es decir, su propósito es mostrar cuando el usuario se conecta o desconecta del servidor.
 
 ## Tutorial y Créditos
 ![creditos](doc/GDDImagenes/Creditos.gif)
@@ -340,6 +365,7 @@ Versión final del nivel bocetado arriba
 
 ![ggez](doc/GDDImagenes/Coop3.png)
 
+
 # Implementación de Servidor con API REST y diagrama de clases
 
 Siguiendo una arquitectura MVC (Model View Data), el diagrama de la aplicación tiene la siguiente forma:
@@ -381,6 +407,17 @@ De no ser así, caso en el que el usuario se ha desconectado y por ende no manda
 
 La capa de vista es gestionada por el código Javascript, donde la clase *MenuScene* es la encargada de mostrar, hacer interactivos y actualizar los elementos de la escena gracias a las clases *MessagesManager*, *ServerConnectionManager* y *PlayersManager*.
 
+
+### Instrucciones precisas para ejecutar la aplicación
+
+Para ejecutar la aplicación es necesaria la creación de un archivo .jar a través del pom.xml. En este proceso es necesario especificar el manifiesto del propio.jar, ya que es obligatorio especificar los plugins y dependencias del mismo. 
+
+Una vez creado el .jar si se quiere ejecutar se puede hacer desde la consola de comandos, navegando hasta la carpeta en la que el archivo se encuentre y ejecutando el comando “introduzca comando aquí“ . En cuanto a la instalación de archivos en la máquina no debería ser necesario siempre y cuando se posean los archivos del propio juego. 
+
+Finalmente la URL necesaria para poder jugar al juego debería de ser localhost:8080
+
+
+
 ### Hoja de ruta del desarrollo
 
 **Plataformas**: Web
@@ -389,7 +426,7 @@ La capa de vista es gestionada por el código Javascript, donde la clase *MenuSc
 
 **Hito 1:** Desarrollo de juego en local - 27/10/2021
 
-**Hito 2:** Extensión del juego incluyendo un back-end que utilice tecnología REST - 24/11/2021
+**Hito 2:** Extensión del juego incluyendo un back-end que utilice tecnología REST - 29/11/2021
 
 **Hito 3:** Extensión del juego utilizando REST y WebSockets -  21/12/2021
 
