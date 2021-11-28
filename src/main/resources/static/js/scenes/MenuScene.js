@@ -217,8 +217,6 @@ export class MenuScene extends Phaser.Scene {
             if (this.chatVisible === false) {
                 this.chatScreen.setVisible(1);
                 this.xButton.setVisible(1);
-                this.buttons.pop();
-                this.buttons.push(this.xButton);
                 this.formUtil.showElement("myText");
                 this.formUtil.showElement("btnSend");
                 this.formUtil.placeElementAt(97, 'myText', true);
@@ -233,8 +231,6 @@ export class MenuScene extends Phaser.Scene {
             if (this.chatVisible === true) {
                 this.chatScreen.setVisible(0);
                 this.xButton.setVisible(0);
-                this.buttons.pop();
-                this.buttons.push(this.chatButton);
                 this.formUtil.hideElement("myText");
                 this.formUtil.hideElement("btnSend");
                 this.chatVisible = false;
