@@ -1,4 +1,5 @@
-# JeR_Grupo_F
+
+# <div style="text-align: center">JeR_Grupo_F</div>
 
 ## Nombre_del_Juego
 Dual Interest
@@ -24,6 +25,47 @@ Dual Interests es un videojuego multijugador de plataformas 2D de dos personas c
 
 
 ___
+# <div style="text-align: center">GDD</div>
+
+## Índice
+- [Introducción](#introduccin)
+  - [Concepto del juego](#concepto-del-juego)
+  - [Características principales](#caractersticas-principales)
+  - [Género](#gnero)
+  - [Propósito y público objetivo](#propsito-y-pblico-objetivo)
+  - [Jugabilidad](#jugabilidad)
+  - [Estilo visual](#estilo-visual)
+  - [Alcance](#alcance)
+- [Mecánicas de juego](#mecnicas-de-juego)
+  - [Jugabilidad](#jugabilidad)
+  - [Puntos](#puntos)
+  - [Salto](#salto)
+  - [Empuje](#empuje)
+  - [Desplazamiento lateral](#desplazamiento-lateral)
+  - [Trampas](#trampas)
+  - [Tiempos](#tiempos)
+  - [Personaje](#personaje)
+- [Movimiento y físicas](#movimiento-y-fsicas)
+  - [Colisiones](#colisiones)
+  - [Controles](#controles)
+- [Interfaz](#interfaz)
+  - [**Diagrama de flujo**](#diagrama-de-flujo)
+  - [<span style="color:lightgreen">**Transición de escenas** </span>](#transicin-de-escenas)
+  - [Flujo de gameplay](#flujo-de-gameplay)
+  - [Game-loop](#game-loop)
+  - [Menú principal](#men-principal)
+  - [Selección de Personajes (NO IMPLEMENTADA)](#seleccin-de-personajes-no-implementada)
+  - [Tutorial y Créditos](#tutorial-y-crditos)
+- [Arte](#arte)
+  - [Audio](#audio)
+- [Diseño de niveles](#Diseño-de-niveles)
+- [<span style="color:lightgreen">**Implementación de Servidor con API REST y diagrama de clases**</span>](#implementacin-de-servidor-con-api-rest-y-diagrama-de-clases)
+  - [<span style="color:lightgreen">**Datos (*Data*)**</span>](#datos-data)
+  - [<span style="color:lightgreen">**Modelo (*Model*)**</span>](#modelo-model)
+  - [<span style="color:lightgreen">**Vista (*View*)**</span>](#vista-view)
+
+ 
+
 # Introducción
 
 Este es el documento de diseño de juego de *Dual Interest*.Aquí expondremos la idea original del juego de plataformas y competición que está en desarrollo. 
@@ -183,7 +225,11 @@ En caso de usar control por mando, la palanca izquierda permite mover al jugador
 Se desarrollarán varios diagramas para mostrar: transición de escenas, flujo de *gameplay*, *game-loop*.
 
 ## **Transición de escenas**
+
 ![menu boceto](doc/GDDImagenes/Diagramas/Untitled_Diagram.png)
+
+### Navegación Fase 3 Menú principal y juego
+![navegacion_fase_3](doc/GDDImagenes/Diagramas/Tareas_Fase_3.png)
 
 
 ##  **Flujo de gameplay**
@@ -255,11 +301,11 @@ Descripción de la pantalla de fin de nivel:
 * **Jugar de nuevo:**  Al ser pulsado inicia una nueva partida.
 * **Volver al menú principal:** Al ser pulsado te lleva al menú principal.
 
-## Arte
+# Arte
 
 _Dual Interest_ tendrá estilo 2D con un carácter visual intenso, simple y con cierta inocencia irónica, ilustrado con colores vivos que resalten a los personajes y escenarios. Estos últimos serán poco detallados con el fin de que el jugador centre su atención en los niveles y la jugabilidad.
 
-### Audio
+## Audio
 
 La música en _Dual Interest_ trata de amplificar la idea de la competitividad poniendo una música de acción en la fase de competición y una más tranquila en la fase de colaboración. El juego dispone de diversos sonidos cuando se interactúa con el entorno, además de música durante los menús.
 
@@ -271,7 +317,7 @@ La música en _Dual Interest_ trata de amplificar la idea de la competitividad p
 * Música del menú: https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
 * Puerta abriendose: http://www.theallsounds.com/2018/04/door-opening-sound-effects-all-sounds.html
 
-### Diseño de niveles
+# Diseño de niveles
 
 Los niveles de cooperación en Dual Interest tienen diversos elementos: suelo y pared estático(1), suelo y pared que desaparece al pulsar un botón(2) suelo y pared que aparece al pulsar un botón (3), botones (4) y puerta (5);
 
@@ -293,6 +339,47 @@ Versión final del nivel bocetado arriba
 ![ggez](doc/GDDImagenes/emoujon.gif)
 
 ![ggez](doc/GDDImagenes/Coop3.png)
+
+# Implementación de Servidor con API REST y diagrama de clases
+
+Siguiendo una arquitectura MVC (Model View Data), el diagrama de la aplicación tiene la siguiente forma:
+
+![Fase3](doc/GDDImagenes/Fase_3/Diagrama_fase_3.png)
+
+## Datos (*Data*)
+
+![Fase3](doc/GDDImagenes/Fase_3/Diagrama_fase_3_data.png)
+
+La parte de datos (sección azul, *Data*) se ha implementado usnado una base de datos MySQL.
+Dicha instancia de MySQL se ha conseguido gracias a RDS, un servicio de AWS.
+Con ello, no solo se ha obtenido una base de datos, si no que se ha generado una gestión escalable de los datos gestionados.
+Además, se dispone de copias de seguridad realizadas automáticamente con las que se prevenir el riesgo de los datos.
+finalmente, se ha optado por este servicio para tener un sistema escalable y adaptable a futuras versiones de la apliación.
+
+## Modelo (*Model*)
+
+![Fase3](doc/GDDImagenes/Fase_3/Diagrama_fase_3_model.png)
+
+Consiste en todo la gestion de la aplicación Spring gestionada en lago Java.
+
+Las clases etiquetadas con @RestController son los las encargadas de recibir peticiones y realizar distintas peticiones segun la instruccion recibida.
+
+La aplicación cuenta con un total de 3 clases con anotación @RestController:
+* MessageController: encargada de enviar y recibir mensajes del chat
+* ConnectionController: responsable de las conexiones entre cliente y servidor. Informa a los jugadores que usuarios se han conectado/desconectado mandando mensajes que se recibirán en el chat.
+* PlayerController: Encargada de recibir y mandar información a la base de datos sobre los jugadores.
+
+También, la arquitectura cuenta con clases @Entity e interfaces que heredan de *Repository*.
+La etiqueta Entity se encargada de definir *Entidades* que serán almacenadas en la base de datos. Y, gracias a las interfaces de tipo *Repository*, es posible mandar y recibir objetos del tipo asociado al repositorio (p.e., en PlayerRepository, Objetos de tipo Player). 
+
+Finalmente, la gestión de usuaios conectados/desconectados se realiza en un Thread en el que cada usuario ha de mandar una petición al servidor para comprobar si está conectado.
+De no ser así, caso en el que el usuario se ha desconectado y por ende no manda ninguna petición de que está conectado, se interrumpe el hilo y se trata al usuario como desconectado.
+
+# Vista (*View*)
+
+![Fase3](doc/GDDImagenes/Fase_3/Diagrama_fase_3_View.png)
+
+La capa de vista es gestionada por el código Javascript, donde la clase *MenuScene* es la encargada de mostrar, hacer interactivos y actualizar los elementos de la escena gracias a las clases *MessagesManager*, *ServerConnectionManager* y *PlayersManager*.
 
 ### Hoja de ruta del desarrollo
 

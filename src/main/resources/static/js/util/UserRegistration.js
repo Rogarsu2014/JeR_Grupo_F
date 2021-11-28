@@ -1,10 +1,10 @@
-import {PlayersJQuery} from "../server/playersJQuery.js";
+import {PlayersDataManager} from "../server/PlayersDataManager.js";
 
 export class UserRegistration {
 
 
     constructor() {
-        this.playersJquery = new PlayersJQuery();
+        this.playersJquery = new PlayersDataManager();
     }
 
     trySignUp(username,password,confirmPassword,onSuccess,onError){
@@ -13,6 +13,8 @@ export class UserRegistration {
     logIn(username,password,onSuccess,onMisMatch,onAlreadyLogIn){
         this.playersJquery.logIn(username,password,(user)=>onSuccess(user),onMisMatch,onAlreadyLogIn);
     }
-    
+    updatePlayerIcon(username,iconIndex,onSuccess){
+        this.playersJquery.updatePlayerIcon(username,iconIndex,onSuccess);
+    }
     
 }

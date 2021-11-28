@@ -1,4 +1,4 @@
-export class PlayersJQuery {
+export class PlayersDataManager {
     signUp(username, password,confirmPassword, onSuccess,onError){
         if (password==confirmPassword) {
             $.ajax({
@@ -8,7 +8,8 @@ export class PlayersJQuery {
                 data: JSON.stringify({
                     "username": username,
                     "password": password,
-                    "gameswon": 0
+                    "gameswon": 0,
+                    "iconIndex":0
                 }),
                 processData: false,
                 headers: {
@@ -53,6 +54,22 @@ export class PlayersJQuery {
                 if (onMisMatch!==null) {
                     onMisMatch()
                 }
+            }
+        })
+    }
+    
+    updatePlayerIcon(username,iconIndex,onSuccess){
+        $.ajax({
+            method: 'POST',
+            url:'http://localhost:8080/player/'+username+'/'+iconIndex,
+            success:(user)=> {
+                if (onSuccess!==null){
+                    onSuccess();
+                }
+            },
+            error:(xhr,status,error)=>{
+                var err = xhr.responseText.toString();
+                console.log("Error: "+err)
             }
         })
     }

@@ -20,6 +20,7 @@ public class Player {
     private String username;
     private String password;
     private int gameswon;
+    private int iconIndex;
 } 
 
 
