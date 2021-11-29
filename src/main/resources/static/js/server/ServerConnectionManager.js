@@ -31,7 +31,7 @@ export class ServerConnectionManager {
                 'id':this.clientId
             },
             success: () => {
-                // console.log("User connected to server")
+                console.log("User connected to server")
                 if (connected===false){
                     connected=true;
                 }

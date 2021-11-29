@@ -17,12 +17,14 @@ export class MessagesManager {
         $.ajax({
             url: 'http://localhost:8080/message',
             success: (messages) => {
+                let firstPass= lastMessageId==0;
                 let lastMessages = messages.forEach(message => {
                     if (message['id'] > lastMessageId) {
-                        this.printMessageLn(messagesBox, message)
+                        this.printMessageLn(messagesBox, message,firstPass)
                         // text.text += `<${(message)['username']}>: ${(message)['content']}\n`
                     }
                 });
+                
                 lastMessageId = messages[messages.length - 1]['id']
                 // console.log(lastMessageId)
                 messagesTimeout = setTimeout(() => {
@@ -106,14 +108,15 @@ export class MessagesManager {
         })
     }
 
-    static printMessageLn(text, message) {
+    static printMessageLn(text, message, firstPass=true) {
         if (message['username'] === 'Server') {
             if (message['content'].includes("disconnected")) {
                 text.appendText(`[align=center][color=red]<${(message)['username']}>: ${(message)['content']}[/color][/align]\n`)
             } else {
                 text.appendText(`[b][align=center][color=green]<${(message)['username']}>: ${(message)['content']}[/color][/align][/b]\n`)
             }
-            console.log(message['content'])
+            if (firstPass===false)
+                console.log(message['content'])
         } else {
             text.appendText(`[stroke=black]<${(message)['username']}>: ${(message)['content']}[/stroke]\n`)
         }
