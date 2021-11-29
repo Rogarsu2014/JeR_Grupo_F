@@ -9,7 +9,7 @@ export class MessagesManager {
         $.ajax({
             url: 'http://localhost:8080/message'
         }).done(function (items) {
-            console.log('Messages loaded: ' + JSON.stringify(items));
+            // console.log('Messages loaded: ' + JSON.stringify(items));
         })
     }
 
@@ -24,14 +24,14 @@ export class MessagesManager {
                     }
                 });
                 lastMessageId = messages[messages.length - 1]['id']
-                console.log(lastMessageId)
+                // console.log(lastMessageId)
                 messagesTimeout = setTimeout(() => {
                     if (!stopReceivingMessages)
                         this.getLastMessages(messagesBox)
                 }, 1000);
             },
             error: () => {
-                console.log('Error en getLastMessages');
+                // console.log('Error en getLastMessages');
                 messagesTimeout = setTimeout(() => {
                     if (!stopReceivingMessages)
                         this.getLastMessages(messagesBox)
@@ -73,10 +73,10 @@ export class MessagesManager {
                 "Content-Type": "application/json"
             },
             success: (item) => {
-                console.log("Message sent")
-                console.log((item))
-                console.log((item)['username'])
-                console.log((item)['content'])
+                // console.log("Message sent")
+                // console.log((item))
+                // console.log((item)['username'])
+                // console.log((item)['content'])
                 if (onSuccess !== null) {
                     onSuccess();
                 }
@@ -102,7 +102,7 @@ export class MessagesManager {
             // añadir al final del texto
             // text.text+=(JSON.stringify(item).toString()+"\n")
 
-            console.log('Messages pushed: ' + JSON.stringify(item));
+            // console.log('Messages pushed: ' + JSON.stringify(item));
         })
     }
 
@@ -113,6 +113,7 @@ export class MessagesManager {
             } else {
                 text.appendText(`[b][align=center][color=green]<${(message)['username']}>: ${(message)['content']}[/color][/align][/b]\n`)
             }
+            console.log(message['content'])
         } else {
             text.appendText(`[stroke=black]<${(message)['username']}>: ${(message)['content']}[/stroke]\n`)
         }
