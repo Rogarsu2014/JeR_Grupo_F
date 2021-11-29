@@ -24,7 +24,7 @@ Dual Interests es un videojuego multijugador de plataformas 2D de dos personas c
 
 ## Nota
 
-**A la hora de trabajar, se realizan commits enstando todos los integrantes en trabajando en equipo y sumando los archivos y código del resto en un ordenador.**
+**A la hora de trabajar, se realizan commits estando todos los integrantes en trabajando en equipo y sumando los archivos y código del resto en un ordenador.**
 
 
 ___
@@ -316,6 +316,7 @@ Para cerrar la ventana de Inicio de sesión, bastará con darle a la flecha que 
 ___
 Para acceder al chat se debe pulsar el botón con el icono de bocadillo de texto y tres puntitos. Siempre y cuando el usuario esté registrado y con la sesión iniciada,  podrá enviar mensajes. Para enviar mensajes, se deberá escribir el mensaje en la caja de texto y darle al botón de enviar. El chat se cerrará al darle al botón X que aparece arriba a la izquierda de este.
 
+Además, se usará dicho chat para **mostrar la conexión y desconexión de clientes**. Los clientes desconectados se mostrarán con un texto rojo y los conectados con un texto verde.
 
 ## **Estado de la conexión**
 ___
@@ -325,6 +326,12 @@ ___
 
 Una vez se inicie la aplicación, se mostrará el primer icono de conexión, indicando que aún no ha comprobado el estado de la conexión con el servidor. Una vez se haya comprobado el estado de la conexión, cambiará al segundo o tercer icono dependiendo del estado de la conexión.
 Es decir, su propósito es mostrar cuando el usuario se conecta o desconecta del servidor.
+
+## **Estado de la conexión**
+___
+![UsersConnected](doc/GDDImagenes/Botones_y_Creditos/User_Connected.png)
+
+Se usará la imagen superior para mostrar cuantos usuarios hay conectados actualmente.
 
 ## Tutorial y Creditos
 ![creditos](doc/GDDImagenes/Creditos.gif)
