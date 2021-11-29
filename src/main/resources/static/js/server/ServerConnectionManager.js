@@ -14,14 +14,11 @@ export class ServerConnectionManager {
                 onSuccess();
             },
             error:  (XMLHttpRequest, textStatus,errorThrown)=>{
-                // console.log("NO hay conexion: entra en error")
-                // console.log("XMLHttpRequest: " +XMLHttpRequest)
-                // console.log("textStatus: " +textStatus)
-                // console.log("errorThrown: " +errorThrown)
+
+                console.log("Server not available")
                 onError();
                 setTimeout(()=>this.CheckNetworkConnection(onSuccess,onError),1000);
-                // this.checkIfOnline();
-                // setTimeout(()=>this.getLastMessages(),1000);
+
             }
 
         })
@@ -34,6 +31,7 @@ export class ServerConnectionManager {
                 'id':this.clientId
             },
             success: () => {
+                console.log("User connected to server")
                 if (connected===false){
                     connected=true;
                 }

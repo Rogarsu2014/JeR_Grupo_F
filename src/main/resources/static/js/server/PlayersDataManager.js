@@ -16,7 +16,7 @@ export class PlayersDataManager {
                     "Content-Type": "application/json"
                 },
                 success: (user) => {
-                        console.log("user registered: " + JSON.stringify(user))
+                        // console.log("user registered: " + JSON.stringify(user))
                         
                     if (onSuccess!==undefined)
                         onSuccess(user)
@@ -41,16 +41,16 @@ export class PlayersDataManager {
                     if (onAlreadyLogIn!==null){
                         onAlreadyLogIn();
                     }
-                 console.log("Null user -> an user with that id has already log in")   
+                 // console.log("Null user -> an user with that id has already log in")   
                 }else{
-                    console.log("User connetced: " + JSON.stringify(user))
+                    // console.log("User connetced: " + JSON.stringify(user))
                     if (onSuccess !== undefined)
                         onSuccess(user)
                 }
             },
             error:(xhr,status,error)=>{
                 var err = xhr.responseText.toString();
-                console.log("Error: "+err)
+                // console.log("Error: "+err)
                 if (onMisMatch!==null) {
                     onMisMatch()
                 }
@@ -69,7 +69,7 @@ export class PlayersDataManager {
             },
             error:(xhr,status,error)=>{
                 var err = xhr.responseText.toString();
-                console.log("Error: "+err)
+                // console.log("Error: "+err)
             }
         })
     }

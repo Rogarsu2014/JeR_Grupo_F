@@ -6,8 +6,8 @@ import java.util.TimerTask;
 
 public class UserConnectedThread{
     
-    private final int delay=3000;
-    private final int period=3000;
+    private final int delay=4000;
+    private final int period=4000;
     
     private ConnectionController connectionController;
     private String playerId;

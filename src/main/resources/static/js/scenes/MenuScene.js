@@ -53,7 +53,7 @@ export class MenuScene extends Phaser.Scene {
 
         // this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
         let playButton = this.add.image(width / 3, height / 2 - 25, 'LocalGame').setDepth(1).setScale(.8);
-        let onlineGame = this.add.image(width / 3, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
+        this.onlineGame = this.add.image(width / 3, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
         let tutorial = this.add.image(width / 3, height / 2 + 125, 'Tutorial').setDepth(1).setScale(.8);
         let options = this.add.image(width / 3, height / 2 + 200, 'Options').setDepth(1).setScale(.8);
         let credits = this.add.image(width / 3, height / 2 + 275, 'Credits').setDepth(1).setScale(.8);
@@ -64,7 +64,7 @@ export class MenuScene extends Phaser.Scene {
 
         // *fase2* settings
         options.alpha = 0.4;
-        onlineGame.alpha = 0.4;
+        this.onlineGame.alpha = 0.4;
         this.buttons.push(playButton);
         this.buttons.push(tutorial);
         this.buttons.push(credits);
@@ -254,7 +254,7 @@ export class MenuScene extends Phaser.Scene {
                     this.enableResgisterScreen()
                     // loginScreen.setVisible(1);
 
-                    console.log("Click");
+                    // console.log("Click");
                     this.xButton2.setVisible(1);
                     this.loginErrorText.setVisible(true);
                     this.loginErrorText.text = "";
@@ -307,9 +307,9 @@ export class MenuScene extends Phaser.Scene {
     }
 
     sendMessage() {
-        console.log("sendForm");
+        // console.log("sendForm");
         let content = this.formUtil.getTextAreaValue("myText");
-        console.log(content)
+        // console.log(content)
         MessagesManager.postMessage(this.user['username'], content, () => {
                 this.formUtil.clearTextAreaValue("myText");
                 
@@ -409,8 +409,9 @@ export class MenuScene extends Phaser.Scene {
     Registered(user) {
         if (user !== null) {
             this.user = user;
-            console.log("username obtained " + user['username'])
+            // console.log("username obtained " + user['username'])
             this.enableChatButton();
+            this. enableOnlineGameButton()
             ServerConnectionManager.setClientId(user['username'])
             ServerConnectionManager.ConnectUser();
             this.xButton2.x=240;
@@ -423,10 +424,15 @@ export class MenuScene extends Phaser.Scene {
             }
 
         } else {
-            console.log("User undefined")
+            // console.log("User undefined")
         }
     }
-
+    
+    enableOnlineGameButton(){
+        this.onlineGame.alpha=1.0;
+        this.buttons.splice(1,0,this.onlineGame);
+    }
+    
     setPlayerInformation() {
         this.playerUsernameText = this.add.text(120, 16, this.user['username'], {
             fontFamily: 'ink-free-normal',
