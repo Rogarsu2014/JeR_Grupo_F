@@ -7,7 +7,7 @@ let stopReceivingMessages = false;
 export class MessagesManager {
     static getMessages() {
         $.ajax({
-            url: 'http://localhost:8080/message'
+            url: ServerConnectionManager.host+'/message'
         }).done(function (items) {
             // console.log('Messages loaded: ' + JSON.stringify(items));
         })
@@ -15,7 +15,7 @@ export class MessagesManager {
 
     static getLastMessages(messagesBox) {
         $.ajax({
-            url: 'http://localhost:8080/message',
+            url: ServerConnectionManager.host+'/message',
             success: (messages) => {
                 let firstPass= lastMessageId==0;
                 let lastMessages = messages.forEach(message => {
@@ -65,7 +65,7 @@ export class MessagesManager {
         $.ajax({
             method: "POST",
             dataType: 'json',
-            url: 'http://localhost:8080/message',
+            url: ServerConnectionManager.host+'/message',
             data: JSON.stringify({
                 "username": user,
                 "content": message
