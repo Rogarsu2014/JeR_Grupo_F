@@ -1,10 +1,12 @@
+import {ServerConnectionManager} from "./ServerConnectionManager.js";
+
 export class PlayersDataManager {
     signUp(username, password,confirmPassword, onSuccess,onError){
         if (password==confirmPassword) {
             $.ajax({
                 method: 'POST',
                 dataType: 'json',
-                url: 'http://localhost:8080/player',
+                url: ServerConnectionManager.host+'/player',
                 data: JSON.stringify({
                     "username": username,
                     "password": password,
@@ -35,7 +37,7 @@ export class PlayersDataManager {
     logIn(username, password,onSuccess,onMisMatch,onAlreadyLogIn){
         $.ajax({
             method: "GET",
-            url:'http://localhost:8080/player/'+username+'/'+password,
+            url:ServerConnectionManager.host+'/player/'+username+'/'+password,
             success:(user)=> {
                 if (!user){
                     if (onAlreadyLogIn!==null){
@@ -61,7 +63,7 @@ export class PlayersDataManager {
     updatePlayerIcon(username,iconIndex,onSuccess){
         $.ajax({
             method: 'POST',
-            url:'http://localhost:8080/player/'+username+'/'+iconIndex,
+            url:ServerConnectionManager.host+'/player/'+username+'/'+iconIndex,
             success:(user)=> {
                 if (onSuccess!==null){
                     onSuccess();
