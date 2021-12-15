@@ -7,31 +7,33 @@ let stopReceivingMessages = false;
 export class MessagesManager {
     static getMessages() {
         $.ajax({
-            url: 'http://localhost:8080/message'
+            url: ServerConnectionManager.host+'/message'
         }).done(function (items) {
-            console.log('Messages loaded: ' + JSON.stringify(items));
+            // console.log('Messages loaded: ' + JSON.stringify(items));
         })
     }
 
     static getLastMessages(messagesBox) {
         $.ajax({
-            url: 'http://localhost:8080/message',
+            url: ServerConnectionManager.host+'/message',
             success: (messages) => {
+                let firstPass= lastMessageId==0;
                 let lastMessages = messages.forEach(message => {
                     if (message['id'] > lastMessageId) {
-                        this.printMessageLn(messagesBox, message)
+                        this.printMessageLn(messagesBox, message,firstPass)
                         // text.text += `<${(message)['username']}>: ${(message)['content']}\n`
                     }
                 });
+                
                 lastMessageId = messages[messages.length - 1]['id']
-                console.log(lastMessageId)
+                // console.log(lastMessageId)
                 messagesTimeout = setTimeout(() => {
                     if (!stopReceivingMessages)
                         this.getLastMessages(messagesBox)
                 }, 1000);
             },
             error: () => {
-                console.log('Error en getLastMessages');
+                // console.log('Error en getLastMessages');
                 messagesTimeout = setTimeout(() => {
                     if (!stopReceivingMessages)
                         this.getLastMessages(messagesBox)
@@ -63,7 +65,7 @@ export class MessagesManager {
         $.ajax({
             method: "POST",
             dataType: 'json',
-            url: 'http://localhost:8080/message',
+            url: ServerConnectionManager.host+'/message',
             data: JSON.stringify({
                 "username": user,
                 "content": message
@@ -73,10 +75,10 @@ export class MessagesManager {
                 "Content-Type": "application/json"
             },
             success: (item) => {
-                console.log("Message sent")
-                console.log((item))
-                console.log((item)['username'])
-                console.log((item)['content'])
+                // console.log("Message sent")
+                // console.log((item))
+                // console.log((item)['username'])
+                // console.log((item)['content'])
                 if (onSuccess !== null) {
                     onSuccess();
                 }
@@ -102,17 +104,19 @@ export class MessagesManager {
             // añadir al final del texto
             // text.text+=(JSON.stringify(item).toString()+"\n")
 
-            console.log('Messages pushed: ' + JSON.stringify(item));
+            // console.log('Messages pushed: ' + JSON.stringify(item));
         })
     }
 
-    static printMessageLn(text, message) {
+    static printMessageLn(text, message, firstPass=true) {
         if (message['username'] === 'Server') {
             if (message['content'].includes("disconnected")) {
                 text.appendText(`[align=center][color=red]<${(message)['username']}>: ${(message)['content']}[/color][/align]\n`)
             } else {
                 text.appendText(`[b][align=center][color=green]<${(message)['username']}>: ${(message)['content']}[/color][/align][/b]\n`)
             }
+            if (firstPass===false)
+                console.log(message['content'])
         } else {
             text.appendText(`[stroke=black]<${(message)['username']}>: ${(message)['content']}[/stroke]\n`)
         }

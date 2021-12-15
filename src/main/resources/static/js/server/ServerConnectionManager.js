@@ -4,9 +4,10 @@ export class ServerConnectionManager {
     static setClientId(id){
         this.clientId=id;
     }
+    static host=window.location.href
     static CheckNetworkConnection(onSuccess,onError){
         $.ajax({
-            url: 'http://localhost:8080/ping',
+            url: this.host+'/ping',
             timeout:3000,
             success: () => {
                 // console.log("Hay conexion: entra en success")
@@ -14,14 +15,11 @@ export class ServerConnectionManager {
                 onSuccess();
             },
             error:  (XMLHttpRequest, textStatus,errorThrown)=>{
-                // console.log("NO hay conexion: entra en error")
-                // console.log("XMLHttpRequest: " +XMLHttpRequest)
-                // console.log("textStatus: " +textStatus)
-                // console.log("errorThrown: " +errorThrown)
+
+                console.log("Server not available")
                 onError();
                 setTimeout(()=>this.CheckNetworkConnection(onSuccess,onError),1000);
-                // this.checkIfOnline();
-                // setTimeout(()=>this.getLastMessages(),1000);
+
             }
 
         })
@@ -29,11 +27,12 @@ export class ServerConnectionManager {
 
     static ConnectUser(onSuccess,onError){
         $.ajax({
-            url: 'http://localhost:8080/ping/connect',
+            url: this.host+'/ping/connect',
             data:{
                 'id':this.clientId
             },
             success: () => {
+                console.log("User connected to server")
                 if (connected===false){
                     connected=true;
                 }
@@ -44,7 +43,7 @@ export class ServerConnectionManager {
 
     static UpdateConnection(onSuccess,onError){
         $.ajax({
-            url: 'http://localhost:8080/ping/clientConnection',
+            url: this.host+'/ping/clientConnection',
             data:{
                 'id':this.clientId
             },
@@ -64,7 +63,7 @@ export class ServerConnectionManager {
     
     static GetClientsCount(onSuccess){
         $.ajax({
-            url: 'http://localhost:8080/ping/clientsCount',
+            url: this.host+'/ping/clientsCount',
             success: (clientsCount)=> {
                 onSuccess(clientsCount);
                 // console.log("Clientes conectados: " + clientsCount);
