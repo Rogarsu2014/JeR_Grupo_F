@@ -7,7 +7,7 @@ import {Door} from "../../../objects/Door.js";
 export class GameStage extends Phaser.Scene {
 
 
-    constructor(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth) {
+    constructor(sceneKey, nextLevelKey, timerTime, tilemapKey, sceneWidth) {
         super(sceneKey);
         this.nextLevelKey = nextLevelKey
         this.players = [];
@@ -15,10 +15,10 @@ export class GameStage extends Phaser.Scene {
         this.scores = [];
         this.door = null;
         this.music = null;
-        this.sceneWidth=sceneWidth;
+        this.sceneWidth = sceneWidth;
         this.backgroundMusicKey = 'coopStageMusic';
 
-        this.tilemapKey=tilemapKey;
+        this.tilemapKey = tilemapKey;
         this.timer = new Timer(this, timerTime)
         this.timer.onComplete(() => {
             this.timeOver()
@@ -30,7 +30,7 @@ export class GameStage extends Phaser.Scene {
     }
 
     create(data) {
-        
+
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 
@@ -40,22 +40,16 @@ export class GameStage extends Phaser.Scene {
         let floor = this.createFloor(this.tilemapKey);
 
 
+        this.definePlayers();
 
-        this.players[0]  = new Player(this, 0, 0, "dude");
-        // data.input1.setPlayer(player1)
-        // player1.setPlayerInput(data.input1);
-        this.players[0].setPlayerInput(new KeyboardProcessor(this, this.players[0] , 'W', 0, 'A', 'D', 'S', 'F'));
-
-        this.players[1] = new Player(this, 0, 0, "dude2");
-        this.players[1].setPlayerInput(new KeyboardProcessor(this, this.players[1] , 'U', 0, 'H', 'K', 'J', 'L'));
-        this.players[0].depth=2
-        this.players[1].depth=2
+        this.players[0].depth = 2
+        this.players[1].depth = 2
         this.definePlayersPosition();
         this.setPlayersData(data)
         this.disableAllPlayersMovement()
 
         this.scores[0] = this.add.text(75, 32, "Player 1: " + this.players[0].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
-        this.scores[1] = this.add.text(this.game.canvas.width-75, 32, "Player 2: " + this.players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
+        this.scores[1] = this.add.text(this.game.canvas.width - 75, 32, "Player 2: " + this.players[1].points, {fontFamily: 'ink-free-normal'}).setOrigin(.5, .5);
 
         this.timer.startTimer();
         this.timer.pauseTimer();
@@ -75,37 +69,48 @@ export class GameStage extends Phaser.Scene {
         }).setOrigin(0.5, 0.5);
 
         //***** between players
-        this.physics.add.collider(this.players[0], this.players[1], ()=> {
+        this.physics.add.collider(this.players[0], this.players[1], () => {
             this.bump = true;
         });
         //***** between players and floor
-        this.addStageFloorCollisions( floor);
+        this.addStageFloorCollisions(floor);
 
     }
 
     update() {
         this.players[0].update(this.bump, this.players[1]);
         this.players[1].update(this.bump, this.players[0]);
+
         this.bump = false;
+
         this.timerText.setText(this.timer.getRemainingSeconds(true));
-        
+
     }
 
-    setPlayersData(data){
-        if(Object.keys(data).length!==0){  // if object has information
+    setPlayersData(data) {
+        if (Object.keys(data).length !== 0) {  // if object has information
             for (let i = 0; i < this.players.length; i++) {
-                this.players[i].points=data.playerPoints[i];
+                this.players[i].points = data.playerPoints[i];
             }
         }
-
-
-    }
-    setPlayerPosition(playerIndex,x,y){
-        this.players[playerIndex].setPosition(x,y);
     }
 
-    setDoorPosition(x,y){
-        this.door.setPosition(x,y);
+    definePlayers() {
+        this.players[0] = new Player(this, 0, 0, "dude");
+        // data.input1.setPlayer(player1)
+        // player1.setPlayerInput(data.input1);
+        this.players[0].setPlayerInput(new KeyboardProcessor(this, this.players[0], 'W', 0, 'A', 'D', 'S', 'F'));
+
+        this.players[1] = new Player(this, 0, 0, "dude2");
+        this.players[1].setPlayerInput(new KeyboardProcessor(this, this.players[1], 'U', 0, 'H', 'K', 'J', 'L'));
+    }
+
+    setPlayerPosition(playerIndex, x, y) {
+        this.players[playerIndex].setPosition(x, y);
+    }
+
+    setDoorPosition(x, y) {
+        this.door.setPosition(x, y);
     }
 
     setCanvasWidth(width) {
@@ -122,7 +127,7 @@ export class GameStage extends Phaser.Scene {
         let floor = map.createLayer('Level', tileset);
         map.createLayer('Background', tileset);
         floor.setCollisionByProperty({collides: true});
-        floor.depth=2
+        floor.depth = 2
         return floor;
     }
 
@@ -145,17 +150,18 @@ export class GameStage extends Phaser.Scene {
         });
         textTween.play()
     }
+
     timeOver() {
         this.timer.pauseTimer();
         this.disableAllPlayersMovement()
-        this.onTimeOverPrimitive();    
+        this.onTimeOverPrimitive();
 
     }
-    
-    onTimeOverPrimitive(){
+
+    onTimeOverPrimitive() {
         throw new Error("timeOver() method must be defined");
     }
-   
+
     enableAllPlayersMovement() {
         for (let i = 0; i < this.players.length; i++) {
             this.players[i].enableMovement()
@@ -176,13 +182,12 @@ export class GameStage extends Phaser.Scene {
         this.music.stop()
         this.scene.start(this.nextLevelKey, {playerPoints: [this.players[0].points, this.players[1].points]})
     }
-    
+
 
     addStageFloorCollisions(floor) {
         this.physics.add.collider(this.players[0], floor);
         this.physics.add.collider(this.players[1], floor);
     }
-
 
 
     playBackgroundMusic() {
@@ -197,10 +202,11 @@ export class GameStage extends Phaser.Scene {
         this.music.stop()
     }
 
-    definePlayersPosition(){
-     throw new Error("Players position must be set")
+    definePlayersPosition() {
+        throw new Error("Players position must be set")
     }
-    stageCompleted(){
-     throw new Error("Players position must be set")
+
+    stageCompleted() {
+        throw new Error("Players position must be set")
     }
 }

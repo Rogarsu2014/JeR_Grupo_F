@@ -9,7 +9,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         //Particular player object gravity
         this.setGravityY(1500);
         //Add a little bounce effect
-        this.setBounce(0.2);
+        // this.setBounce(0.2);
         //Make the player collide with the screen borderd
         this.setCollideWorldBounds(true);
         this.setScale(0.07);
@@ -58,6 +58,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     moveLeft() {//Move left
+        // this.x-=1
         this.setVelocityX(-300);
         this.flipX=true;
         this.anims.play('movement' + this.spriteKey, true);

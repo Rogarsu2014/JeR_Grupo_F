@@ -1,19 +1,21 @@
 
-import {TaskManager} from "../../../objects/TaskManager.js";
-import {Button} from "../../../objects/Button.js";
-import {Platform} from "../../../objects/Platform.js";
+import {TaskManager} from "../../../../objects/TaskManager.js";
+import {Button} from "../../../../objects/Button.js";
+import {Platform} from "../../../../objects/Platform.js";
 
-import {CooperativeScene} from "./Base/CooperativeScene.js";
+import {getConnection} from "../../../../server/Websockets/SocketIntilalizer.js";
+import {OnlineCooperativeScene} from "../Base/OnlineCooperativeScene.js";
 
 
 /// Player 1 is upper layer player.
 /// Player 2 is down layer player
 
-export class OnlineCoop1 extends CooperativeScene {
+export class OnlineCoop1 extends OnlineCooperativeScene {
 
 
     constructor() {
-        super("Coop1","Comp1", 15000,'Coop1Map');
+        //TODO-> CAMBIAR TIEMPO A 15000
+        super("OnlineCoop1","Comp1", 9999000,'Coop1Map');
     }
 
     init() {
@@ -22,6 +24,7 @@ export class OnlineCoop1 extends CooperativeScene {
             console.log("All tasks completed");
             this.door.open()
         }, this.timer, this.players, this.updatePoints, 50);
+        
 
     }
 

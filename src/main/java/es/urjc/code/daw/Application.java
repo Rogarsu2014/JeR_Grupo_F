@@ -2,6 +2,7 @@ package es.urjc.code.daw;
 
 
 import es.urjc.code.daw.WebSockets.WebsocketEchoHandler;
+import es.urjc.code.daw.WebSockets.WebsocketMovementHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -22,11 +23,19 @@ public class Application implements WebSocketConfigurer {
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(echoHandler(), "/echo")
 				.setAllowedOrigins("*");
+		
+		registry.addHandler(createMovementHandler(), "/movement")
+				.setAllowedOrigins("*");
 	}
 
 	@Bean
 	public WebsocketEchoHandler echoHandler() {
 		return new WebsocketEchoHandler();
+	}
+	
+	@Bean
+	public WebsocketMovementHandler createMovementHandler() {
+		return new WebsocketMovementHandler();
 	}
 }
 

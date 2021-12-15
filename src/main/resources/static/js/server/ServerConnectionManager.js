@@ -4,10 +4,11 @@ export class ServerConnectionManager {
     static setClientId(id){
         this.clientId=id;
     }
-    static host=window.location.href
+    static windowHref=window.location.href
+    static host=window.location.host
     static CheckNetworkConnection(onSuccess,onError){
         $.ajax({
-            url: this.host+'/ping',
+            url: this.windowHref+'/ping',
             timeout:3000,
             success: () => {
                 // console.log("Hay conexion: entra en success")
@@ -27,7 +28,7 @@ export class ServerConnectionManager {
 
     static ConnectUser(onSuccess,onError){
         $.ajax({
-            url: this.host+'/ping/connect',
+            url: this.windowHref+'/ping/connect',
             data:{
                 'id':this.clientId
             },
@@ -43,7 +44,7 @@ export class ServerConnectionManager {
 
     static UpdateConnection(onSuccess,onError){
         $.ajax({
-            url: this.host+'/ping/clientConnection',
+            url: this.windowHref+'/ping/clientConnection',
             data:{
                 'id':this.clientId
             },
@@ -63,7 +64,7 @@ export class ServerConnectionManager {
     
     static GetClientsCount(onSuccess){
         $.ajax({
-            url: this.host+'/ping/clientsCount',
+            url: this.windowHref+'/ping/clientsCount',
             success: (clientsCount)=> {
                 onSuccess(clientsCount);
                 // console.log("Clientes conectados: " + clientsCount);
