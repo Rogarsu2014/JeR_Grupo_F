@@ -3,6 +3,9 @@ package es.urjc.code.daw.WebSockets;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import es.urjc.code.daw.WebSockets.Managers.BaseManager;
+import es.urjc.code.daw.WebSockets.Managers.MovementManager;
+import es.urjc.code.daw.chat.Message;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -15,48 +18,46 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
 
     final private ObjectMapper mapper = new ObjectMapper();
 
-    ConcurrentHashMap<String,WebSocketSession > playersSessions = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String,BaseManager> managers;
+
+    public WebsocketMovementHandler() {
+        this.managers= new ConcurrentHashMap<>();
+        BaseManager movementManager=new MovementManager();
+        this.managers.put(movementManager.getAssociatedType(), movementManager);
+    }
+
+    
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        playersSessions.put(session.getId(),session);
+        for (BaseManager manager:
+                this.managers.values()) {
+            manager.connectionEstablished(session);
+            
+        }
+//        playersSessions.put(session.getId(),session);
         System.out.println("Movement socket connected");
     }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 
-        System.out.println("Player moved to " +message.getPayload());
-        JsonNode  movementNode= mapper.readTree(message.getPayload());
-        int xDir= movementNode.get("xDir").asInt();
-        
-        ObjectNode movementObjectNode= mapper.createObjectNode();
-        movementObjectNode.put("xDir",xDir);
-        
-        sendMessagesToOtherSessions(session,movementObjectNode.toString());
-//        JsonNode movementNode = mapper.readTree(message.getPayload());
-//        String xDir = movementNode.get("xDir").asText();
-//
-//        ObjectNode movementObject = mapper.createObjectNode();
-//        movementObject.put("xDir", xDir);
-//
-//        sendPositions(session, movementObject);
+        String type=getMessageType(message);
+        this.managers.get(type).receiveMessage(session,message);
     }
-
-    private void sendPositions(WebSocketSession sender, ObjectNode position) throws Exception {
-        for (WebSocketSession session :
-                playersSessions.values()) {
-            if (sender != session) {
-                session.sendMessage(new TextMessage(position.toString()));
-            }
-        }
-    }
+    
 
 
-    private void sendMessagesToOtherSessions( WebSocketSession senderSession, String message) throws IOException {
-        for (WebSocketSession connectedSession  : playersSessions.values()) {
-            if(connectedSession!=senderSession)
-                connectedSession.sendMessage(new TextMessage(message.toString()));
-        }
+//    private void sendMessagesToOtherSessions( WebSocketSession senderSession, String message) throws IOException {
+//        for (WebSocketSession connectedSession  : playersSessions.values()) {
+//            if(connectedSession!=senderSession)
+//                connectedSession.sendMessage(new TextMessage(message.toString()));
+//        }
+//    }
+    
+    
+    private String getMessageType(TextMessage message) throws IOException {
+        JsonNode  messageNode= mapper.readTree(message.getPayload());
+        return messageNode.get("type").asText();
     }
 }

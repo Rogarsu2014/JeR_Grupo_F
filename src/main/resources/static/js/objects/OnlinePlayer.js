@@ -23,15 +23,18 @@ export class OnlinePlayer extends Player{
             }
         }
         this.xDir=0;
-        
+        this.isJumping=false
     }
-    
+    // jump(bump){
+    //     super.jump(bump)
+    //     this.sendDirection(this.xDir,true)
+    // }
     moveLeft() {
         // super.moveLeft();
         this.flipX=true;
         //this.anims.play('movement' + this.spriteKey, true);
         this.xDir=-1
-        this.sendDirection(-1)
+        this.sendDirection(-1,false)
     }
     
     moveRight() {
@@ -39,7 +42,7 @@ export class OnlinePlayer extends Player{
 
         //this.anims.play('movement' + this.spriteKey, true);
         this.xDir=1
-        this.sendDirection(1)
+        this.sendDirection(1,false)
     }
     
     idle() {
@@ -47,7 +50,7 @@ export class OnlinePlayer extends Player{
 
         //this.anims.play('turn' + this.spriteKey);
         this.xDir=0
-        this.sendDirection(0)
+        this.sendDirection(0,false)
     }
 
     moveTo(){
@@ -55,11 +58,14 @@ export class OnlinePlayer extends Player{
         // this.dirActions[this.xDir]()
         this.animations[this.xDir]()
         this.setVelocityX(this.xDir*300)
+        // this.isJumping
     }
     
-    sendDirection(dir){
+    sendDirection(dir,isJumping){
         let direction={
-            xDir:dir
+            type:"Movement",
+            xDir:dir,
+            isJumping:true
         }
         this.connection.send(JSON.stringify(direction))
     }
