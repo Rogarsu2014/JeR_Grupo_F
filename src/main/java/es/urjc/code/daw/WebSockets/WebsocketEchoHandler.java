@@ -21,6 +21,7 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.put(session.getId(),session);
+        System.out.println(session.getId()+" connected");
     }
 
     @Override
