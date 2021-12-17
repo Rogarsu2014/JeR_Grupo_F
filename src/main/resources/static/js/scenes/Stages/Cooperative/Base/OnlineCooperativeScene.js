@@ -2,16 +2,17 @@ import {OnlineGameStage} from "../../Base/OnlineGameStage.js";
 import {Door} from "../../../../objects/Door.js";
 import {Timer} from "../../../../util/Timer.js";
 import {SweepVerticalTransitionIn} from "../../../../util/cameraEffects.js";
+import {getConnection} from "../../../../server/Websockets/SocketIntilalizer.js";
 
-export class OnlineCooperativeScene extends OnlineGameStage{
-    constructor(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth=960) {
-        super(sceneKey, nextLevelKey, timerTime,tilemapKey,960);
+export class OnlineCooperativeScene extends OnlineGameStage {
+    constructor(sceneKey, nextLevelKey, timerTime, tilemapKey, sceneWidth = 960) {
+        super(sceneKey, nextLevelKey, timerTime, tilemapKey, 960);
 
         this.backgroundMusicKey = 'coopStageMusic';
 
 
     }
-    
+
     create(data) {
 
         super.create(data)
@@ -27,15 +28,17 @@ export class OnlineCooperativeScene extends OnlineGameStage{
             yoyo: true,
             repeat: 0,            // -1: infinity
         });
-        this.door = new Door(this, 0, 0,  this.timer)
-        this.door.depth=1
+        this.door = new Door(this, 0, 0, this.timer)
+        this.door.depth = 1
 
         this.taskManager.setOnTaskCompletedTween(timerTween)
 
         this.physics.add.collider(this.players[0], this.door, () => this.door.playerEntered(this.players[0]))
         this.physics.add.collider(this.players[1], this.door, () => this.door.playerEntered(this.players[1]))
 
+        this.pauseStartTransition()
 
+        this.sendReadyStatus();
         //**** players and platforms
         // this.setPlatformsColliders();
     }
@@ -45,9 +48,29 @@ export class OnlineCooperativeScene extends OnlineGameStage{
         this.UpdatePlatforms();
     }
 
+    sendReadyStatus() {
+        let connection = getConnection();
+        connection.onmessage = (msg) => {
+            let stageStatus = JSON.parse(msg.data)
+            // this.xDir = Number(movement.xDir);
+            // this.isJumping=Boolean(movement.isJumping);
+            let bothPlayersReady = Boolean(stageStatus.bothPlayersReady);
+            if (bothPlayersReady) {
+                this.resumeStartTransition()
+            }
+        }
+        var readyObj = {
+            type: "StageSynchronizer",
+            stageState: "ready"
+        }
+        connection.onopen = () => {
+            connection.send(JSON.stringify(readyObj))
+        }
 
-    setDoorPosition(x,y){
-        this.door.setPosition(x,y);
+    }
+
+    setDoorPosition(x, y) {
+        this.door.setPosition(x, y);
     }
 
 
@@ -89,6 +112,7 @@ export class OnlineCooperativeScene extends OnlineGameStage{
         timeOverTimer.startTimer()
 
     }
+
     stageCompleted() {
         this.timer.pauseTimer();
         let timeOverTimer = new Timer(this, 1000, () => {

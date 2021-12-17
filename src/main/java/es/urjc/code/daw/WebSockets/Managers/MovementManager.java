@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MovementManager extends BaseManager{
     
     final ObjectMapper mapper = new ObjectMapper();
-    ConcurrentHashMap<String,WebSocketSession > playersSessions = new ConcurrentHashMap<>();
+//    ConcurrentHashMap<String,WebSocketSession > playersSessions = new ConcurrentHashMap<>();
 
     public MovementManager() {
         associatedType= "Movement";
@@ -21,7 +21,7 @@ public class MovementManager extends BaseManager{
 
     @Override
     public void connectionEstablished(WebSocketSession session) {
-        playersSessions.put(session.getId(),session);
+//        playersSessions.put(session.getId(),session);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class MovementManager extends BaseManager{
 
     private void sendPositions(WebSocketSession sender, ObjectNode position) throws Exception {
         for (WebSocketSession session :
-                playersSessions.values()) {
+                SessionsManager.getInstance().getPlayersSessions().values()) {
             if (sender != session) {
                 session.sendMessage(new TextMessage(position.toString()));
             }

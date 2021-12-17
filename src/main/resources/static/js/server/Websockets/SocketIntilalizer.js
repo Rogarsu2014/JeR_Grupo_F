@@ -44,7 +44,10 @@ function connect(){
     newConnection.onclose = function() {
         console.log("Closing socket");
     }
-
+    // let connectionMsg={
+    //     type:"Session"
+    // }
+// newConnection.send()
 
     // $('#send-btn').click(function() {
     //     var msg = {

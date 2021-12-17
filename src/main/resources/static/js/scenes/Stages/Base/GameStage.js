@@ -56,12 +56,7 @@ export class GameStage extends Phaser.Scene {
 
         this.loadTransition = new SweepVerticalTransitionOut(this);
         this.loadTransition.addToScene()
-        this.loadTransition.playTransition(() => {
-
-                this.timer.resumeTimer();
-                this.enableAllPlayersMovement()
-            }, 500, 500
-        )
+        this.playStartTransition()
 
         this.timerText = this.add.text(this.game.canvas.width * 0.5, 40, 'test', {
             fontFamily: 'ink-free-normal',
@@ -75,6 +70,23 @@ export class GameStage extends Phaser.Scene {
         //***** between players and floor
         this.addStageFloorCollisions(floor);
 
+    }
+    
+    playStartTransition(){
+        
+        this.loadTransition.playTransition(() => {
+
+                this.timer.resumeTimer();
+                this.enableAllPlayersMovement()
+            }, 500, 500
+        )
+    }
+    
+    pauseStartTransition(){
+        this.loadTransition.pause();
+    }
+    resumeStartTransition(){
+        this.loadTransition.resume();
     }
 
     update() {

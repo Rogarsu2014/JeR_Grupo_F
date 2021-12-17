@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.WebSockets.Managers.BaseManager;
 import es.urjc.code.daw.WebSockets.Managers.MovementManager;
+import es.urjc.code.daw.WebSockets.Managers.SessionsManager;
+import es.urjc.code.daw.WebSockets.Managers.StageSynchronizerManager;
 import es.urjc.code.daw.chat.Message;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -22,8 +24,14 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
 
     public WebsocketMovementHandler() {
         this.managers= new ConcurrentHashMap<>();
+        
+        this.managers.put(SessionsManager.getInstance().getAssociatedType(), SessionsManager.getInstance());
+        
         BaseManager movementManager=new MovementManager();
         this.managers.put(movementManager.getAssociatedType(), movementManager);
+        
+        BaseManager stageSynchronizer=new StageSynchronizerManager();
+        this.managers.put(stageSynchronizer.getAssociatedType(), stageSynchronizer);
     }
 
     
