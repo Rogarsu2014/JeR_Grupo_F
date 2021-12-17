@@ -9,7 +9,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         //Particular player object gravity
         this.setGravityY(1500);
         //Add a little bounce effect
-        this.setBounce(0.2);
+        // this.setBounce(0.2);
         //Make the player collide with the screen borderd
         this.setCollideWorldBounds(true);
         this.setScale(0.07);
@@ -18,15 +18,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.points = points;
         this.initialPositionX = x;
         this.initialPositionY = y;
-
-
-        //Create the character animations (current ones are from tutorial)
-        // this.context.anims.create({
-        //     key: 'left' + this.spriteKey,
-        //     frames: this.anims.generateFrameNumbers(this.spriteKey, {start: 0, end: 6}),
-        //     frameRate: 10,
-        //     repeat: -1
-        // });
+        
 
         this.context.anims.create({
             key: 'turn' + this.spriteKey,
@@ -58,6 +50,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     moveLeft() {//Move left
+        // this.x-=1
         this.setVelocityX(-300);
         this.flipX=true;
         this.anims.play('movement' + this.spriteKey, true);
@@ -87,10 +80,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.moves = true
     }
 
-    jump(bump) {//Jump as long as you are on the floor
+    jump() {//Jump as long as you are on the floor
+        
         if (this.isOnFloor()) {
             this.setVelocityY(-550);
-        } else if (bump == true) {
+        } else if (this.bump == true) {
             if (this.body.touching.down == true) {
                 this.setVelocityY(-500);
             }

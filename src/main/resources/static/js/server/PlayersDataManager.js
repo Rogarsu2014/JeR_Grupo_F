@@ -6,7 +6,7 @@ export class PlayersDataManager {
             $.ajax({
                 method: 'POST',
                 dataType: 'json',
-                url: ServerConnectionManager.host+'/player',
+                url: ServerConnectionManager.windowHref+'/player',
                 data: JSON.stringify({
                     "username": username,
                     "password": password,
@@ -37,7 +37,7 @@ export class PlayersDataManager {
     logIn(username, password,onSuccess,onMisMatch,onAlreadyLogIn){
         $.ajax({
             method: "GET",
-            url:ServerConnectionManager.host+'/player/'+username+'/'+password,
+            url:ServerConnectionManager.windowHref+'/player/'+username+'/'+password,
             success:(user)=> {
                 if (!user){
                     if (onAlreadyLogIn!==null){
@@ -63,7 +63,7 @@ export class PlayersDataManager {
     updatePlayerIcon(username,iconIndex,onSuccess){
         $.ajax({
             method: 'POST',
-            url:ServerConnectionManager.host+'/player/'+username+'/'+iconIndex,
+            url:ServerConnectionManager.windowHref+'/player/'+username+'/'+iconIndex,
             success:(user)=> {
                 if (onSuccess!==null){
                     onSuccess();
