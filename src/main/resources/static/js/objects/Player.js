@@ -80,10 +80,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.moves = true
     }
 
-    jump(bump) {//Jump as long as you are on the floor
+    jump() {//Jump as long as you are on the floor
+        
         if (this.isOnFloor()) {
             this.setVelocityY(-550);
-        } else if (bump == true) {
+        } else if (this.bump == true) {
             if (this.body.touching.down == true) {
                 this.setVelocityY(-500);
             }

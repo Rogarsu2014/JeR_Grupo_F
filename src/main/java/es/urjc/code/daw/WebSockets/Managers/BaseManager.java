@@ -14,6 +14,5 @@ public abstract class BaseManager {
     public String getAssociatedType() {
         return associatedType;
     }
-
-    //    protected abstract void processMessage();
+    
 }

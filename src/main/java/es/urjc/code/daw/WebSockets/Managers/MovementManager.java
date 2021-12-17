@@ -10,7 +10,6 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-//@Component
 public class MovementManager extends BaseManager{
     
     final ObjectMapper mapper = new ObjectMapper();
@@ -30,9 +29,11 @@ public class MovementManager extends BaseManager{
         System.out.println("Player moved to " +message.getPayload());
         JsonNode movementNode= mapper.readTree(message.getPayload());
         int xDir= movementNode.get("xDir").asInt();
+        boolean isJumping= movementNode.get("isJumping").asBoolean();
 
         ObjectNode movementObjectNode= mapper.createObjectNode();
         movementObjectNode.put("xDir",xDir);
+        movementObjectNode.put("isJumping",isJumping);
 
         sendPositions(session,movementObjectNode);
     }

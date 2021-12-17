@@ -30,13 +30,13 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        for (BaseManager manager:
-                this.managers.values()) {
+        for (BaseManager manager: this.managers.values()) {
             manager.connectionEstablished(session);
-            
         }
+        
 //        playersSessions.put(session.getId(),session);
-        System.out.println("Movement socket connected");
+        
+        System.out.println("Socket connected");
     }
 
     @Override
@@ -44,6 +44,7 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
 
         String type=getMessageType(message);
         this.managers.get(type).receiveMessage(session,message);
+        
     }
     
 
