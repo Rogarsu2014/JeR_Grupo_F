@@ -30,7 +30,7 @@ export class HostOrJoin extends Phaser.Scene {
     }
 
     create() {
-
+        console.log("Loaded")
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 

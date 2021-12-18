@@ -13,6 +13,7 @@ import {Credits} from "./scenes/Credits.js";
 import {Tutorial} from "./scenes/Tutorial.js";
 import {MenuSceneSpringTest} from "./scenes/MenuSceneSpringTest.js";
 import {OnlineCoop1} from "./scenes/Stages/Cooperative/Online/OnlineCoop1.js";
+import {HostOrJoin} from "./scenes/HostOrJoin.js";
 
 
 window.onload=function (){
@@ -28,7 +29,7 @@ window.onload=function (){
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
 
-        scene: [Preloader,OnlineCoop1,MenuSceneSpringTest,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, GameCompletedScene, MenuScene, Comp1, Comp2, Comp3, Credits,Tutorial],
+        scene: [Preloader,HostOrJoin,OnlineCoop1,MenuSceneSpringTest,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, GameCompletedScene, MenuScene, Comp1, Comp2, Comp3, Credits,Tutorial],
 
 
         input: {
