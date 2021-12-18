@@ -14,5 +14,6 @@ public abstract class BaseManager {
     public String getAssociatedType() {
         return associatedType;
     }
-    
+
+    //public abstract void connectionLost() throws  Exception;
 }
