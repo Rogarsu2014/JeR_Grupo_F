@@ -104,7 +104,7 @@ export class SweepVerticalTransitionOut {
     }
 
     playTransition(onComplete=null,completeDelay=0,duration=1000) {
-        var tweenTop = this.context.tweens.add({
+        this.tweenTop = this.context.tweens.add({
             targets: this.top,
             y: 0,
             ease: 'Circ.easeIn',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
@@ -112,7 +112,7 @@ export class SweepVerticalTransitionOut {
             repeat: 0,            // -1: infinity
             yoyo: false
         });
-        var tweenBottom = this.context.tweens.add({
+        this.tweenBottom = this.context.tweens.add({
             targets: this.bottom,
             completeDelay:completeDelay,
             onComplete:()=>onComplete(),
@@ -124,6 +124,14 @@ export class SweepVerticalTransitionOut {
         });
         // tween.play();
 
+    }
+    pause(){
+        this.tweenTop.stop()
+        this.tweenBottom.stop()
+    }
+    resume(){
+        this.tweenTop.play()
+        this.tweenBottom.play()
     }
 
     move() {

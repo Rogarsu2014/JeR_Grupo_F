@@ -8,7 +8,7 @@ import java.io.IOException;
 public abstract class BaseManager {
     
     protected  String associatedType;
-    public abstract void connectionEstablished(WebSocketSession session);
+    public abstract void connectionEstablished(WebSocketSession session) throws IOException;
     public abstract void receiveMessage(WebSocketSession session, TextMessage message) throws Exception;
 
     public String getAssociatedType() {

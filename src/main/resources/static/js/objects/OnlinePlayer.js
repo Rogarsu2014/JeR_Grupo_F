@@ -5,9 +5,12 @@ export class OnlinePlayer extends Player {
         super(scene, x, y, spriteKey, points = 0);
         this.connection = connection;
         this.connection.onmessage = (msg) => {
-            let movement = JSON.parse(msg.data)
-            this.xDir = Number(movement.xDir);
-            this.isJumping=Boolean(movement.isJumping);
+            let message=JSON.parse(msg.data)
+            if (message.type ==="Movement") {
+                let movement = JSON.parse(msg.data)
+                this.xDir = Number(movement.xDir);
+                this.isJumping = Boolean(movement.isJumping);
+            }
         }
 
         this.animations = {
