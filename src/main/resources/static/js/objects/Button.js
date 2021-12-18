@@ -7,13 +7,13 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
         this.setOrigin(.5,1)
         this.isPressed = false;
         this.onPressed = onPressedCallback;
-        this.context.physics.add.collider(this, targetPlayer,()=> this.Press());
+        this.context.physics.add.collider(this, targetPlayer,()=> this.press());
         this.sfx = this.context.sound.add("buttonClick", this.context.game.config.musicConfig);
         // this.setIgnoreGravity(true)
     }
 
 
-    Press() {
+    press() {
         this.isPressed = true;
         this.sfx.play()
         console.log("Button pressed")
