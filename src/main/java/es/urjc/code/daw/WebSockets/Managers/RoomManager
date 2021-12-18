@@ -41,14 +41,16 @@ public class RoomManager extends BaseManager {
             }else{
                 SessionPair p = new SessionPair(player1, session);
                 games.put(roomNode.get("Code").asText(), p);
-                System.out.println("Connected in room with" );
+                System.out.println("Connected in room with" ); //Falta nombre
             }
         }else{
+            //Desconectar voluntariamente
         }
     }
 
     public void connectionLost(){
-
+        //Que hacer cuando se pierde la conexión
+        //Se sabe que session se ha desconectado?
     }
 
     String randomString() {
