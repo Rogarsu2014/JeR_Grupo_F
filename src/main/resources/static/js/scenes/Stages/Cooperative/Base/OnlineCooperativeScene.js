@@ -50,20 +50,29 @@ export class OnlineCooperativeScene extends OnlineGameStage {
 
     sendReadyStatus() {
         let connection = getConnection();
-        connection.onmessage = (msg) => {
-            let stageStatus = JSON.parse(msg.data)
-            // this.xDir = Number(movement.xDir);
-            // this.isJumping=Boolean(movement.isJumping);
-            let bothPlayersReady = Boolean(stageStatus.bothPlayersReady);
-            if (bothPlayersReady) {
-                this.resumeStartTransition()
+        connection.addEventListener('message', (msg) => {
+            let message=JSON.parse(msg.data)
+            console.log(message.type)
+            if (message.type === "StageSynchronizer") {
+                console.log("stage status received")
+                let stageStatus = JSON.parse(msg.data)
+                // this.xDir = Number(movement.xDir);
+                // this.isJumping=Boolean(movement.isJumping);
+                let bothPlayersReady = Boolean(stageStatus.bothPlayersReady);
+                if (bothPlayersReady) {
+                    this.resumeStartTransition()
+                }
             }
-        }
+        })
         var readyObj = {
             type: "StageSynchronizer",
             stageState: "ready"
         }
-        connection.onopen = () => {
+        if (connection.readyState !== WebSocket.OPEN) {
+            connection.addEventListener('open', () => {
+                connection.send(JSON.stringify(readyObj))
+            })
+        } else {
             connection.send(JSON.stringify(readyObj))
         }
 

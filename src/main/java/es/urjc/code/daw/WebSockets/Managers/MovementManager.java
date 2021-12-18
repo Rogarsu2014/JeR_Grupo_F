@@ -32,6 +32,7 @@ public class MovementManager extends BaseManager{
         boolean isJumping= movementNode.get("isJumping").asBoolean();
 
         ObjectNode movementObjectNode= mapper.createObjectNode();
+        movementObjectNode.put("type",associatedType);
         movementObjectNode.put("xDir",xDir);
         movementObjectNode.put("isJumping",isJumping);
 

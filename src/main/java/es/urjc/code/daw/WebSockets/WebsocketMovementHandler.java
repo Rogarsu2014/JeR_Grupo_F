@@ -3,10 +3,7 @@ package es.urjc.code.daw.WebSockets;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import es.urjc.code.daw.WebSockets.Managers.BaseManager;
-import es.urjc.code.daw.WebSockets.Managers.MovementManager;
-import es.urjc.code.daw.WebSockets.Managers.SessionsManager;
-import es.urjc.code.daw.WebSockets.Managers.StageSynchronizerManager;
+import es.urjc.code.daw.WebSockets.Managers.*;
 import es.urjc.code.daw.chat.Message;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -32,6 +29,9 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
         
         BaseManager stageSynchronizer=new StageSynchronizerManager();
         this.managers.put(stageSynchronizer.getAssociatedType(), stageSynchronizer);
+        
+        BaseManager cooperativeButtonsManager=new CooperativeButtonsManager();
+        this.managers.put(cooperativeButtonsManager.getAssociatedType(), cooperativeButtonsManager);
     }
 
     

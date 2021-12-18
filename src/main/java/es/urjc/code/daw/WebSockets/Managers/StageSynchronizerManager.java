@@ -40,6 +40,8 @@ public class StageSynchronizerManager extends BaseManager {
     private void NotifyClientsOfReady() throws IOException {
 
         ObjectNode readyStatus = mapper.createObjectNode();
+
+        readyStatus.put("type",associatedType);
         readyStatus.put("bothPlayersReady", true);
 
         for (WebSocketSession session :
