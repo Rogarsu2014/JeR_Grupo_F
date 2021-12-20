@@ -1,4 +1,4 @@
-import {getConnection} from "../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getRoomCode} from "../server/Websockets/SocketIntilalizer.js";
 
 export class Button extends Phaser.Physics.Arcade.Sprite {
     constructor(context, x, y, spriteKey, onPressedCallback, targetPlayer,buttonIndex) {
@@ -38,7 +38,8 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
         let connection = getConnection()
         let buttonInfo = {
             type: "CooperativeButton",
-            buttonIndex: buttonIndex
+            buttonIndex: buttonIndex,
+            RoomCode: getRoomCode()
         }
 
         if (connection.readyState !== WebSocket.OPEN) {
