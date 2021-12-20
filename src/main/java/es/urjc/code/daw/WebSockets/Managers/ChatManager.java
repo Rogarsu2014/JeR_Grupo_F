@@ -34,13 +34,13 @@ public class ChatManager extends BaseManager{
         System.out.println("Mensaje recibido del chat con información " +message.getPayload());
         //Crea un nodo con el mensaje recibido, dividiendo a su vez la info de este
         JsonNode chatNode= mapper.readTree(message.getPayload());
-        int user= chatNode.get("user").asInt();
+        String user= chatNode.get("username").asText();
         String content= chatNode.get("content").asText();
 
         //Envía el mensaje al resto de usuarios, indicando el tipo de mensaje junto con el resto de información recibida
         ObjectNode chatObjectNode= mapper.createObjectNode();
         chatObjectNode.put("type",associatedType);
-        chatObjectNode.put("user",user);
+        chatObjectNode.put("username",user);
         chatObjectNode.put("content",content);
 
         sendMessage(session, chatObjectNode);
