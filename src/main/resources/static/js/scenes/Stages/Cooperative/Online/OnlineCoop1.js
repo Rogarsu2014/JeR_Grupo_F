@@ -2,7 +2,7 @@ import {TaskManager} from "../../../../objects/TaskManager.js";
 import {Button} from "../../../../objects/Button.js";
 import {Platform} from "../../../../objects/Platform.js";
 
-import {getConnection} from "../../../../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getRoomCode} from "../../../../server/Websockets/SocketIntilalizer.js";
 import {OnlineCooperativeScene} from "../Base/OnlineCooperativeScene.js";
 
 
@@ -51,7 +51,7 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
 
 
         //*************** buttons
-        
+
         var button1_P1 = new Button(this, 480, 128, 'botonR', () => {
             platform2.enable();
             this.taskManager.taskCompleted();
@@ -95,6 +95,6 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
 
 
 
-  
+
 
 }
