@@ -31,9 +31,10 @@ public class StageSynchronizerManager extends BaseManager {
         System.out.println("status received");
         playersSessions.replace(session.getId(), true);
         
-        if (!playersSessions.containsValue(false) && playersSessions.size() >= 2) {
-            NotifyClientsOfReady();
-        }
+//        if (!playersSessions.containsValue(false) && playersSessions.size() >= 2) {
+//            NotifyClientsOfReady();
+//        }
+        TryNotifyClientsOfReadyPair(session,message);
 
     }
 
@@ -47,6 +48,24 @@ public class StageSynchronizerManager extends BaseManager {
         for (WebSocketSession session :
                 SessionsManager.getInstance().getPlayersSessions().values()) {
             session.sendMessage(new TextMessage(readyStatus.toString()));
+        }
+    }    
+    
+    private void TryNotifyClientsOfReadyPair(WebSocketSession sender, TextMessage message) throws Exception {
+
+        ObjectNode readyStatus = mapper.createObjectNode();
+
+        readyStatus.put("type",associatedType);
+        readyStatus.put("bothPlayersReady", true);
+        
+        WebSocketSession pair = RoomManager.getInstance().getPair(sender, message);
+        if(playersSessions.containsKey(pair.getId())) {
+            if(playersSessions.get(pair.getId()).equals(true)) {
+                if (sender != pair && pair != null) {
+                    pair.sendMessage(new TextMessage(readyStatus.toString()));
+                    sender.sendMessage(new TextMessage(readyStatus.toString()));
+                }
+            }
         }
     }
 

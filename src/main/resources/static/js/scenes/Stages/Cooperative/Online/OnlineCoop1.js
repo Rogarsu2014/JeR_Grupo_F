@@ -2,8 +2,9 @@ import {TaskManager} from "../../../../objects/TaskManager.js";
 import {Button} from "../../../../objects/Button.js";
 import {Platform} from "../../../../objects/Platform.js";
 
-import {getConnection, getRoomCode} from "../../../../server/Websockets/SocketIntilalizer.js";
+import {getConnection} from "../../../../server/Websockets/SocketIntilalizer.js";
 import {OnlineCooperativeScene} from "../Base/OnlineCooperativeScene.js";
+import {OnlineButton} from "../../../../objects/online/OnlineButton.js";
 
 
 /// Player 1 is upper layer player.
@@ -13,14 +14,14 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
 
 
     constructor() {
-        //TODO-> CAMBIAR TIEMPO A 15000
-        super("OnlineCoop1", "Comp1", 9999000, 'Coop1Map');
+        //TODO-> CAMBIAR TIEMPO A 15000 y que la siguiente escena sea la comp1
+        super("OnlineCoop1", "OnlineCoop2", 9999000, 'Coop1Map');
     }
 
     init() {
 
         this.taskManager = new TaskManager(this, 4, [1, 0, 1, 0], () => {
-            console.log("All tasks completed");
+            // console.log("All tasks completed");
             this.door.open()
         }, this.timer, this.players, this.updatePoints, 50);
 
@@ -51,36 +52,32 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
 
 
         //*************** buttons
-
-        var button1_P1 = new Button(this, 480, 128, 'botonR', () => {
+        
+        var button1_P1 = new OnlineButton(this, 480, 128, 'botonR', () => {
             platform2.enable();
             this.taskManager.taskCompleted();
             button1_P1.setTexture('botonRP')
-            // this.sendButtonInformation(0)
         }, this.players[0],0);
         this.buttons.push(button1_P1)
 
-        var button2_P1 = new Button(this, 360, 443 + 128 + 5, 'botonR', () => {
+        var button2_P1 = new OnlineButton(this, 360, 443 + 128 + 5, 'botonR', () => {
             platform4.enable();
             this.taskManager.taskCompleted()
             button2_P1.setTexture('botonRP')
-            // this.sendButtonInformation(1)
         }, this.players[0],1);
         this.buttons.push(button2_P1)
 
-        var button1_P2 = new Button(this, 780, 448, 'botonL', () => {
+        var button1_P2 = new OnlineButton(this, 780, 448, 'botonL', () => {
             platform1.enable();
             this.taskManager.taskCompleted();
             button1_P2.setTexture('botonLP')
-            // this.sendButtonInformation(2)
         }, this.players[1],2);
         this.buttons.push(button1_P2)
 
-        var button2_P2 = new Button(this, 480, 448, 'botonL', () => {
+        var button2_P2 = new OnlineButton(this, 480, 448, 'botonL', () => {
             platform3.enable();
             this.taskManager.taskCompleted();
             button2_P2.setTexture('botonLP')
-            // this.sendButtonInformation(3)
         }, this.players[1],3);
         this.buttons.push(button2_P2)
 
@@ -95,6 +92,6 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
 
 
 
-
+  
 
 }

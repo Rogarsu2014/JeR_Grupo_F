@@ -4,7 +4,7 @@ import {FormUtil} from "../util/FormUtil.js";
 import {MessagesManager} from "../server/MessagesManager.js";
 import {ServerConnectionManager} from "../server/ServerConnectionManager.js";
 import {UserRegistration} from "../util/UserRegistration.js";
-import {getConnection, getRoomCode, setRoomCode} from "../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getRoomCode, setPlayerIndex, setRoomCode} from "../server/Websockets/SocketIntilalizer.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -230,6 +230,7 @@ export class HostOrJoin extends Phaser.Scene {
             let message = JSON.parse(msg.data)
             if (message.type === "RoomCode") {
                 let code = message.code;
+                setPlayerIndex(message.playerIndex);
                 setRoomCode(code);
             }
         })

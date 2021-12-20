@@ -13,14 +13,21 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MovementManager extends BaseManager{
     
     final ObjectMapper mapper = new ObjectMapper();
-//    ConcurrentHashMap<String,WebSocketSession > playersSessions = new ConcurrentHashMap<>();
 
+    //TODO-> este es un indice para testear
+    int playerJoinedIndex;
+    
     public MovementManager() {
         associatedType= "Movement";
     }
 
     @Override
-    public void connectionEstablished(WebSocketSession session) {
+    public void connectionEstablished(WebSocketSession session) throws IOException {
+        
+//        ObjectNode movementObjectNode= mapper.createObjectNode();
+//        movementObjectNode.put("type","TEST_MovementPlayerIndexSetter");
+//        movementObjectNode.put("index",playerJoinedIndex++);
+//        session.sendMessage(new TextMessage(movementObjectNode.toString()));
 //        playersSessions.put(session.getId(),session);
     }
 

@@ -2,7 +2,7 @@ import {OnlineGameStage} from "../../Base/OnlineGameStage.js";
 import {Door} from "../../../../objects/Door.js";
 import {Timer} from "../../../../util/Timer.js";
 import {SweepVerticalTransitionIn} from "../../../../util/cameraEffects.js";
-import {getConnection} from "../../../../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getRoomCode} from "../../../../server/Websockets/SocketIntilalizer.js";
 
 export class OnlineCooperativeScene extends OnlineGameStage {
     constructor(sceneKey, nextLevelKey, timerTime, tilemapKey, sceneWidth = 960) {
@@ -37,9 +37,9 @@ export class OnlineCooperativeScene extends OnlineGameStage {
         this.physics.add.collider(this.players[1], this.door, () => this.door.playerEntered(this.players[1]))
 
         this.pauseStartTransition()
-
-        this.sendReadyStatus();
+        
         this.setOnButtonInfoReceived()
+        
         //**** players and platforms
         // this.setPlatformsColliders();
     }
@@ -49,35 +49,7 @@ export class OnlineCooperativeScene extends OnlineGameStage {
         this.UpdatePlatforms();
     }
 
-    sendReadyStatus() {
-        let connection = getConnection();
-        connection.addEventListener('message', (msg) => {
-            let message=JSON.parse(msg.data)
-            console.log(message.type)
-            if (message.type === "StageSynchronizer") {
-                console.log("stage status received")
-                let stageStatus = JSON.parse(msg.data)
-                // this.xDir = Number(movement.xDir);
-                // this.isJumping=Boolean(movement.isJumping);
-                let bothPlayersReady = Boolean(stageStatus.bothPlayersReady);
-                if (bothPlayersReady) {
-                    this.resumeStartTransition()
-                }
-            }
-        })
-        var readyObj = {
-            type: "StageSynchronizer",
-            stageState: "ready"
-        }
-        if (connection.readyState !== WebSocket.OPEN) {
-            connection.addEventListener('open', () => {
-                connection.send(JSON.stringify(readyObj))
-            })
-        } else {
-            connection.send(JSON.stringify(readyObj))
-        }
-
-    }
+   
 
     setDoorPosition(x, y) {
         this.door.setPosition(x, y);
