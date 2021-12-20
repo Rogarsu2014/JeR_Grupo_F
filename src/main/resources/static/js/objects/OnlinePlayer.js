@@ -25,15 +25,16 @@ export class OnlinePlayer extends Player {
     }
     setConnection(connection){
         this.connection = connection;
+      
+    }
+    setOnMovementMessage(){
         this.connection.onmessage = (msg) => {
-            
             let message=JSON.parse(msg.data)
             if (message.type ==="Movement") {
                 let movement = JSON.parse(msg.data)
                 this.xDir = Number(movement.xDir);
                 this.isJumping = Boolean(movement.isJumping);
             }
-            
         }
     }
     jump() {
@@ -41,6 +42,10 @@ export class OnlinePlayer extends Player {
         this.isJumping=true;
         this.sendDirection()
         // this.sendDirection(this.xDir, this.isJumping=true)
+    }
+    update(bump, playerp) {
+        // super.update(bump, playerp);
+        this.moveTo()
     }
 
     moveLeft() {

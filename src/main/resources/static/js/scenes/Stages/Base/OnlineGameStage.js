@@ -29,8 +29,17 @@ export class OnlineGameStage extends GameStage {
 
     setUserPlayerIndex() {
         let playerIndex = getPlayerIndex()
-        this.players[playerIndex].setConnection(getConnection())
-        this.players[playerIndex].setPlayerInput(new OnlineKeyboardProcessor(this, this.players[playerIndex], 'W', 0, 'A', 'D', 'S', 'F'));
+        // this.players[playerIndex].setConnection(getConnection())
+ 
+        for (let i = 0; i < this.players.length; i++) {
+            this.players[i].setConnection(getConnection())
+            if (i === playerIndex){
+                this.players[i].setPlayerInput(new KeyboardProcessor(this, this.players[i], 'W', 0, 'A', 'D', 'S', 'F'));
+            }else{
+                this.players[i].setOnMovementMessage()
+                // this.players[i].setPlayerInput(new KeyboardProcessor(this, this.players[i], 'm', 0, 'c', 'v', 'n', 'k'));
+            }
+        }
     }
 
     setDefinePlayerIndex() {

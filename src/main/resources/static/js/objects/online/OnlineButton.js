@@ -1,5 +1,5 @@
 import {Button} from "../Button.js";
-import {getConnection} from "../../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getRoomCode} from "../../server/Websockets/SocketIntilalizer.js";
 
 export class OnlineButton extends Button{
 
@@ -13,7 +13,8 @@ export class OnlineButton extends Button{
         let connection = getConnection()
         let buttonInfo = {
             type: "CooperativeButton",
-            buttonIndex: buttonIndex
+            buttonIndex: buttonIndex,
+            RoomCode:getRoomCode()
         }
 
         if (connection.readyState !== WebSocket.OPEN) {
