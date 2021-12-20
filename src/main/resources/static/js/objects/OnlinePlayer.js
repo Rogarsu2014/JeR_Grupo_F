@@ -1,18 +1,11 @@
 import {Player} from "./Player.js";
 
 export class OnlinePlayer extends Player {
-    constructor(scene, x, y, spriteKey, points = 0, connection) {
+    constructor(scene, x, y, spriteKey, points = 0 ) {
         super(scene, x, y, spriteKey, points = 0);
-        this.connection = connection;
-        this.connection.onmessage = (msg) => {
-            let message=JSON.parse(msg.data)
-            if (message.type ==="Movement") {
-                let movement = JSON.parse(msg.data)
-                this.xDir = Number(movement.xDir);
-                this.isJumping = Boolean(movement.isJumping);
-            }
-        }
-
+        
+        // this.setConnection(connection)
+        
         this.animations = {
             [0]: () => {
                 this.anims.play('turn' + this.spriteKey);
@@ -29,7 +22,17 @@ export class OnlinePlayer extends Player {
         this.xDir = 0;
         this.isJumping = false
     }
-
+    setConnection(connection){
+        this.connection = connection;
+        this.connection.onmessage = (msg) => {
+            let message=JSON.parse(msg.data)
+            if (message.type ==="Movement") {
+                let movement = JSON.parse(msg.data)
+                this.xDir = Number(movement.xDir);
+                this.isJumping = Boolean(movement.isJumping);
+            }
+        }
+    }
     jump() {
         super.jump()
         this.isJumping=true;

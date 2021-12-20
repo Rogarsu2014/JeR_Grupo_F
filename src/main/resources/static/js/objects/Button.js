@@ -1,7 +1,7 @@
 import {getConnection} from "../server/Websockets/SocketIntilalizer.js";
 
 export class Button extends Phaser.Physics.Arcade.Sprite {
-    constructor(context, x, y, spriteKey, onPressedCallback, targetPlayer,buttonIndex) {
+    constructor(context, x, y, spriteKey, onPressedCallback, targetPlayer) {
         super(context,x, y, spriteKey);
         this.context= context;
         this.context.add.existing(this,true);
@@ -9,10 +9,7 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
         this.setOrigin(.5,1)
         this.isPressed = false;
         this.onPressed = onPressedCallback;
-        this.context.physics.add.collider(this, targetPlayer,()=> {
-            this.press()
-            this.sendButtonInformation(buttonIndex)
-        });
+       this.setCollider(targetPlayer)
         // this.context.physics.add.collider(this, targetPlayer,()=> this.sendButtonInformation(buttonIndex));
         this.sfx = this.context.sound.add("buttonClick", this.context.game.config.musicConfig);
         // this.setIgnoreGravity(true)
@@ -22,7 +19,7 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
     press() {
         this.isPressed = true;
         this.sfx.play()
-        console.log("Button pressed")
+        // console.log("Button pressed")
         this.removeCollider();
         if (this.onPressed != null) {
             this.onPressed();
@@ -33,20 +30,10 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
         // this.body.destroy()
         this.disableBody()
     }
-
-    sendButtonInformation(buttonIndex) {
-        let connection = getConnection()
-        let buttonInfo = {
-            type: "CooperativeButton",
-            buttonIndex: buttonIndex
-        }
-
-        if (connection.readyState !== WebSocket.OPEN) {
-            connection.addEventListener('open', () => {
-                connection.send(JSON.stringify(buttonInfo))
-            })
-        } else {
-            connection.send(JSON.stringify(buttonInfo))
-        }
+    setCollider(targetPlayer){
+        this.context.physics.add.collider(this, targetPlayer,()=> {
+             this.press()
+        });
     }
+
 }

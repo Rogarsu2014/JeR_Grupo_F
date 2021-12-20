@@ -46,7 +46,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(bump, playerp) {
-        this.playerInput.update(bump, playerp);
+        if(this.playerInput!==undefined)
+            this.playerInput.update(bump, playerp);
     }
 
     moveLeft() {//Move left
