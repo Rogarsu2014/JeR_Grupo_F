@@ -1,4 +1,5 @@
 import {Player} from "./Player.js";
+import {getRoomCode} from "../server/Websockets/SocketIntilalizer.js";
 
 export class OnlinePlayer extends Player {
     constructor(scene, x, y, spriteKey, points = 0 ) {
@@ -85,7 +86,8 @@ export class OnlinePlayer extends Player {
         let direction = {
             type: "Movement",
             xDir: this.xDir,
-            isJumping: this.isJumping
+            isJumping: this.isJumping,
+            RoomCode: getRoomCode()
         }
         this.connection.send(JSON.stringify(direction))
     }

@@ -49,17 +49,23 @@ public class RoomManager extends BaseManager {
             session.sendMessage(new TextMessage(node.toString()));
 
         }else if(roomNode.get("type2").asText().equals("Join")){
-            WebSocketSession player1 = games.get(roomNode.get("RoomCode").asText()).getW1();
-            if(player1 == null){
-                System.out.println("Room not Found");
-            }else{
-                games.get(roomNode.get("RoomCode").asText()).setW2(session);
-                System.out.println("Connected in room with " + games.get(roomNode.get("RoomCode").asText()).getW1().getId() ); //Falta nombre
+            if(games.containsKey(roomNode.get("RoomCode").asText())){
+                WebSocketSession player1 = games.get(roomNode.get("RoomCode").asText()).getW1();
+                if(player1 == null){
+                    System.out.println("Room not Found");
+                }else if(games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")){
+                    System.out.println("Room Full");
+                }else{
+                    games.get(roomNode.get("RoomCode").asText()).setW2(session);
+                    System.out.println("Connected in room with " + games.get(roomNode.get("RoomCode").asText()).getW1().getId() ); //Falta nombre
 
-                ObjectNode node= mapper.createObjectNode();
-                node.put("type","RoomCode");
-                node.put("code",roomNode.get("RoomCode").asText());
-                session.sendMessage(new TextMessage(node.toString()));
+                    ObjectNode node= mapper.createObjectNode();
+                    node.put("type","RoomCode");
+                    node.put("code",roomNode.get("RoomCode").asText());
+                    session.sendMessage(new TextMessage(node.toString()));
+                }
+            }else{
+                System.out.println("Room not Found");
             }
         }else{
             //Desconectar voluntariamente
@@ -90,6 +96,14 @@ public class RoomManager extends BaseManager {
 
     public WebSocketSession getPair(WebSocketSession s, TextMessage message)throws Exception{
         JsonNode roomNode= mapper.readTree(message.getPayload());
-        return games.get(roomNode.get("RoomCode").asText()).getOtherSession(s);
+        if(games.containsKey(roomNode.get("RoomCode").asText())){
+            if(games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")){
+                return games.get(roomNode.get("RoomCode").asText()).getOtherSession(s);
+            }else{
+                return s;
+            }
+        }else{
+            return s;
+        }
     }
 }
