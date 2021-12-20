@@ -68,7 +68,7 @@ export class OnlinePlayer extends Player {
     }
 
     moveTo() {
-        console.log("Move To done")
+        // console.log("Move To done")
         // this.dirActions[this.xDir]()
         this.animations[this.xDir]()
         this.setVelocityX(this.xDir * 300)
