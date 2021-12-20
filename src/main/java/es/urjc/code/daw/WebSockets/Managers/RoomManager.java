@@ -2,6 +2,7 @@ package es.urjc.code.daw.WebSockets.Managers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.WebSockets.Classes.SessionPair;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -13,9 +14,15 @@ public class RoomManager extends BaseManager {
 
     final ObjectMapper mapper = new ObjectMapper();
 
+    static RoomManager instance= new RoomManager();
+
+    public static RoomManager getInstance() {
+        return instance;
+    }
+
     ConcurrentHashMap<String, SessionPair> games = new ConcurrentHashMap<>();
 
-    ConcurrentHashMap<String,WebSocketSession > openRooms = new ConcurrentHashMap<>();
+    //ConcurrentHashMap<String,WebSocketSession > openRooms = new ConcurrentHashMap<>();
 
     public RoomManager() {
         associatedType= "Room";
@@ -23,28 +30,41 @@ public class RoomManager extends BaseManager {
 
     @Override
     public void connectionEstablished(WebSocketSession session) {
-        openRooms.put(session.getId(),session);
+
     }
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
         JsonNode roomNode= mapper.readTree(message.getPayload());
 
-        if(roomNode.get("type").asText() == "Host"){
+        if(roomNode.get("type2").asText().equals("Host")){
             String roomCode = randomString();
-            openRooms.put(roomCode, session);
+            SessionPair p = new SessionPair(session);
+            games.put(roomCode, p);
             System.out.println("Created room with code :" + roomCode);
-        }else if(roomNode.get("type").asText() == "Join"){
-            WebSocketSession player1 = openRooms.get(roomNode.get("Code").asText());
+
+            ObjectNode node= mapper.createObjectNode();
+            node.put("type","RoomCode");
+            node.put("code",roomCode);
+            session.sendMessage(new TextMessage(node.toString()));
+
+        }else if(roomNode.get("type2").asText().equals("Join")){
+            WebSocketSession player1 = games.get(roomNode.get("RoomCode").asText()).getW1();
             if(player1 == null){
                 System.out.println("Room not Found");
             }else{
-                SessionPair p = new SessionPair(player1, session);
-                games.put(roomNode.get("Code").asText(), p);
-                System.out.println("Connected in room with" ); //Falta nombre
+                games.get(roomNode.get("RoomCode").asText()).setW2(session);
+                System.out.println("Connected in room with " + games.get(roomNode.get("RoomCode").asText()).getW1().getId() ); //Falta nombre
+
+                ObjectNode node= mapper.createObjectNode();
+                node.put("type","RoomCode");
+                node.put("code",roomNode.get("RoomCode").asText());
+                session.sendMessage(new TextMessage(node.toString()));
             }
         }else{
             //Desconectar voluntariamente
+            System.out.println(roomNode.get("type2").asText());
+            System.out.println("Unknown error");
         }
     }
 
@@ -68,4 +88,8 @@ public class RoomManager extends BaseManager {
         return generatedString;
     }
 
+    public WebSocketSession getPair(WebSocketSession s, TextMessage message)throws Exception{
+        JsonNode roomNode= mapper.readTree(message.getPayload());
+        return games.get(roomNode.get("RoomCode").asText()).getOtherSession(s);
+    }
 }

@@ -33,8 +33,7 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
         BaseManager cooperativeButtonsManager=new CooperativeButtonsManager();
         this.managers.put(cooperativeButtonsManager.getAssociatedType(), cooperativeButtonsManager);
 
-        BaseManager roomManager = new RoomManager();
-        this.managers.put(roomManager.getAssociatedType(), roomManager);
+        this.managers.put(RoomManager.getInstance().getAssociatedType(), RoomManager.getInstance());
     }
 
     

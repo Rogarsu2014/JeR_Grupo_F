@@ -2,7 +2,7 @@ import {TaskManager} from "../../../../objects/TaskManager.js";
 import {Button} from "../../../../objects/Button.js";
 import {Platform} from "../../../../objects/Platform.js";
 
-import {getConnection} from "../../../../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getRoomCode} from "../../../../server/Websockets/SocketIntilalizer.js";
 import {OnlineCooperativeScene} from "../Base/OnlineCooperativeScene.js";
 
 
@@ -99,7 +99,8 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
         let connection = getConnection()
         let buttonInfo = {
             type: "CooperativeButton",
-            buttonIndex: buttonIndex
+            buttonIndex: buttonIndex,
+            RoomCode: getRoomCode()
         }
 
         if (connection.readyState !== WebSocket.OPEN) {
