@@ -35,8 +35,8 @@ public class MovementManager extends BaseManager{
         movementObjectNode.put("type",associatedType);
         movementObjectNode.put("xDir",xDir);
         movementObjectNode.put("isJumping",isJumping);
-
-        sendPositions(session,movementObjectNode);
+        //sendPositions(session,movementObjectNode);
+        sendPositionsPair(session,movementObjectNode, message);
     }
 
 
@@ -46,6 +46,13 @@ public class MovementManager extends BaseManager{
             if (sender != session) {
                 session.sendMessage(new TextMessage(position.toString()));
             }
+        }
+    }
+
+    private void sendPositionsPair(WebSocketSession sender,ObjectNode position, TextMessage message2) throws Exception {
+        WebSocketSession pair = RoomManager.getInstance().getPair(sender, message2);
+        if (sender != pair && pair != null) {
+            pair.sendMessage(new TextMessage(position.toString()));
         }
     }
 }
