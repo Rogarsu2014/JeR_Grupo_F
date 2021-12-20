@@ -9,8 +9,8 @@ export class OnlineCooperativeScene extends OnlineGameStage {
         super(sceneKey, nextLevelKey, timerTime, tilemapKey, 960);
 
         this.backgroundMusicKey = 'coopStageMusic';
-
-
+        this.buttons = []
+        
     }
 
     create(data) {
@@ -39,6 +39,7 @@ export class OnlineCooperativeScene extends OnlineGameStage {
         this.pauseStartTransition()
 
         this.sendReadyStatus();
+        this.setOnButtonInfoReceived()
         //**** players and platforms
         // this.setPlatformsColliders();
     }
@@ -219,5 +220,18 @@ export class OnlineCooperativeScene extends OnlineGameStage {
         for (let i = 0; i < this.platforms.length; i++) {
             this.platforms[i].movePlatform()
         }
+    }
+
+    setOnButtonInfoReceived() {
+        let connection = getConnection()
+        connection.addEventListener('message', (msg) => {
+
+            let message = JSON.parse(msg.data)
+            if (message.type === "CooperativeButton") {
+                console.log("Message received")
+                let pressedButtonIndex = message.buttonIndex
+                this.buttons[pressedButtonIndex].press();
+            }
+        })
     }
 }

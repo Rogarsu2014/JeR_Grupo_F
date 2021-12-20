@@ -51,43 +51,41 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
 
 
         //*************** buttons
-
-        this.buttons = []
+        
         var button1_P1 = new Button(this, 480, 128, 'botonR', () => {
             platform2.enable();
             this.taskManager.taskCompleted();
             button1_P1.setTexture('botonRP')
-            this.sendButtonInformation(0)
-        }, this.players[0]);
+            // this.sendButtonInformation(0)
+        }, this.players[0],0);
         this.buttons.push(button1_P1)
 
         var button2_P1 = new Button(this, 360, 443 + 128 + 5, 'botonR', () => {
             platform4.enable();
             this.taskManager.taskCompleted()
             button2_P1.setTexture('botonRP')
-            this.sendButtonInformation(1)
-        }, this.players[0]);
+            // this.sendButtonInformation(1)
+        }, this.players[0],1);
         this.buttons.push(button2_P1)
 
         var button1_P2 = new Button(this, 780, 448, 'botonL', () => {
             platform1.enable();
             this.taskManager.taskCompleted();
             button1_P2.setTexture('botonLP')
-            this.sendButtonInformation(2)
-        }, this.players[1]);
+            // this.sendButtonInformation(2)
+        }, this.players[1],2);
         this.buttons.push(button1_P2)
 
         var button2_P2 = new Button(this, 480, 448, 'botonL', () => {
             platform3.enable();
             this.taskManager.taskCompleted();
             button2_P2.setTexture('botonLP')
-            this.sendButtonInformation(3)
-        }, this.players[1]);
+            // this.sendButtonInformation(3)
+        }, this.players[1],3);
         this.buttons.push(button2_P2)
 
 
         this.setPlatformsColliders();
-        this.setOnButtonInfoReceived();
     }
 
     definePlayersPosition() {
@@ -95,31 +93,8 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
         this.setPlayerPosition(1, 820, 384)
     }
 
-    sendButtonInformation(buttonIndex) {
-        let connection = getConnection()
-        let buttonInfo = {
-            type: "CooperativeButton",
-            buttonIndex: buttonIndex
-        }
 
-        if (connection.readyState !== WebSocket.OPEN) {
-            connection.addEventListener('open', () => {
-                connection.send(JSON.stringify(buttonInfo))
-            })
-        } else {
-            connection.send(JSON.stringify(buttonInfo))
-        }
-    }
 
-    setOnButtonInfoReceived() {
-        let connection = getConnection()
-        connection.addEventListener('message', (msg) => {
-            let message = JSON.parse(msg.data)
-            if (message.type === "CooperativeButton") {
-                let pressedButtonIndex = message.buttonIndex
-                this.buttons[pressedButtonIndex].press();
-            }
-        })
-    }
+  
 
 }
