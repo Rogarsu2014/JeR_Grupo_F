@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.chat.Message;
 import es.urjc.code.daw.chat.MessageRepository;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -30,13 +31,38 @@ public class ChatManager extends BaseManager{
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception{
-    } //Por implementar...
+        System.out.println("Mensaje recibido del chat con información " +message.getPayload());
+        //Crea un nodo con el mensaje recibido, dividiendo a su vez la info de este
+        JsonNode chatNode= mapper.readTree(message.getPayload());
+        int user= chatNode.get("user").asInt();
+        String content= chatNode.get("content").asText();
+
+        //Envía el mensaje al resto de usuarios, indicando el tipo de mensaje junto con el resto de información recibida
+        ObjectNode chatObjectNode= mapper.createObjectNode();
+        chatObjectNode.put("type",associatedType);
+        chatObjectNode.put("user",user);
+        chatObjectNode.put("content",content);
+
+        sendMessage(session, chatObjectNode);
+    }
+
+    //Método que envia el mensaje
+    private void sendMessage(WebSocketSession sender, ObjectNode mensaje) throws Exception {
+        //Comprueba todas las sesiones
+        for (WebSocketSession session : SessionsManager.getInstance().getPlayersSessions().values()) {
+            //Si el que lo envía no es la sesión que envía...
+            if (sender != session) {
+                //... le envía el mensaje
+                session.sendMessage(new TextMessage(mensaje.toString()));
+            }
+        }
+    }
 
     public List<Message> getAllMessages() {
         return messageRepository.findAll();
     }   //Devuelve todos los mensajes
 
-
+    //Quizás falte reimplementar el método de guardado
 
 
 }
