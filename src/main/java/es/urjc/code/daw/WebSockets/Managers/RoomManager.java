@@ -63,7 +63,9 @@ public class RoomManager extends BaseManager {
                     ObjectNode node= mapper.createObjectNode();
                     node.put("type","RoomCode");
                     node.put("code",roomNode.get("RoomCode").asText());
+
                     node.put("playerIndex",games.get(roomNode.get("RoomCode").asText()).getPlayerIndex(session));
+
                     session.sendMessage(new TextMessage(node.toString()));
                 }
             }else{
