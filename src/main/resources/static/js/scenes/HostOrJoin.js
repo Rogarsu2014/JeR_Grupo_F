@@ -102,7 +102,7 @@ export class HostOrJoin extends Phaser.Scene {
 
         backButton.on('pointerdown', () => {
             this.disableListeners();
-            this.stopBackgroundMusic()
+            this.stopBackgroundMusic();
             this.scene.start('OnlineCoop1');
         })
 

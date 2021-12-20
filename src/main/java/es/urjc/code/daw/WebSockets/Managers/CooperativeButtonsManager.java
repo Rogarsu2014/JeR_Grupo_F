@@ -43,7 +43,7 @@ public class CooperativeButtonsManager extends BaseManager {
     }
     private void NotifyOfButtonPressedPair(WebSocketSession sender,String message, TextMessage message2) throws Exception {
         WebSocketSession pair = RoomManager.getInstance().getPair(sender, message2);
-            if (sender != pair) {
+            if (sender != pair && pair != null) {
                 pair.sendMessage(new TextMessage(message));
             }
     }
