@@ -16,6 +16,7 @@ public class MovementManager extends BaseManager{
 
     //TODO-> este es un indice para testear
     int playerJoinedIndex;
+    
     public MovementManager() {
         associatedType= "Movement";
     }
@@ -23,10 +24,10 @@ public class MovementManager extends BaseManager{
     @Override
     public void connectionEstablished(WebSocketSession session) throws IOException {
         
-        ObjectNode movementObjectNode= mapper.createObjectNode();
-        movementObjectNode.put("type","TEST_MovementPlayerIndexSetter");
-        movementObjectNode.put("index",playerJoinedIndex++);
-        session.sendMessage(new TextMessage(movementObjectNode.toString()));
+//        ObjectNode movementObjectNode= mapper.createObjectNode();
+//        movementObjectNode.put("type","TEST_MovementPlayerIndexSetter");
+//        movementObjectNode.put("index",playerJoinedIndex++);
+//        session.sendMessage(new TextMessage(movementObjectNode.toString()));
 //        playersSessions.put(session.getId(),session);
     }
 

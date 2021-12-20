@@ -74,3 +74,10 @@ export function setRoomCode(newroomCode){
 export function getRoomCode(){
     return roomCode;
 }
+let playerIndex=-1;
+export function getPlayerIndex(){
+    return playerIndex;    
+}
+export function setPlayerIndex(newPlayerIndex){
+    playerIndex=newPlayerIndex;
+}

@@ -46,6 +46,7 @@ public class RoomManager extends BaseManager {
             ObjectNode node= mapper.createObjectNode();
             node.put("type","RoomCode");
             node.put("code",roomCode);
+            node.put("playerIndex",p.getPlayerIndex(session));
             session.sendMessage(new TextMessage(node.toString()));
 
         }else if(roomNode.get("type2").asText().equals("Join")){
@@ -62,6 +63,7 @@ public class RoomManager extends BaseManager {
                     ObjectNode node= mapper.createObjectNode();
                     node.put("type","RoomCode");
                     node.put("code",roomNode.get("RoomCode").asText());
+                    node.put("playerIndex",games.get(roomNode.get("RoomCode").asText()).getPlayerIndex(session));
                     session.sendMessage(new TextMessage(node.toString()));
                 }
             }else{

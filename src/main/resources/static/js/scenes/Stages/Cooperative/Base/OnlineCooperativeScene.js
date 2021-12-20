@@ -2,7 +2,7 @@ import {OnlineGameStage} from "../../Base/OnlineGameStage.js";
 import {Door} from "../../../../objects/Door.js";
 import {Timer} from "../../../../util/Timer.js";
 import {SweepVerticalTransitionIn} from "../../../../util/cameraEffects.js";
-import {getConnection} from "../../../../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getRoomCode} from "../../../../server/Websockets/SocketIntilalizer.js";
 
 export class OnlineCooperativeScene extends OnlineGameStage {
     constructor(sceneKey, nextLevelKey, timerTime, tilemapKey, sceneWidth = 960) {
@@ -67,7 +67,8 @@ export class OnlineCooperativeScene extends OnlineGameStage {
         })
         var readyObj = {
             type: "StageSynchronizer",
-            stageState: "ready"
+            stageState: "ready",
+            RoomCode: getRoomCode()
         }
         if (connection.readyState !== WebSocket.OPEN) {
             connection.addEventListener('open', () => {

@@ -7,11 +7,12 @@ public class SessionPair {
     WebSocketSession w2;
     String status;
 
-    public SessionPair(WebSocketSession s1, WebSocketSession s2){
+    public SessionPair(WebSocketSession s1, WebSocketSession s2) {
         w1 = s1;
         w2 = s2;
     }
-    public SessionPair(WebSocketSession s1){
+
+    public SessionPair(WebSocketSession s1) {
         w1 = s1;
         status = "open";
     }
@@ -20,15 +21,27 @@ public class SessionPair {
         w2 = s2;
         status = "full";
     }
-    public WebSocketSession getW1(){
+
+    public WebSocketSession getW1() {
         return w1;
     }
-    public WebSocketSession getOtherSession(WebSocketSession s){
-        if(s == w1){
+
+    public WebSocketSession getOtherSession(WebSocketSession s) {
+        if (s == w1) {
             return w2;
-        }else {
+        } else {
             return w1;
         }
     }
-    public String getStatus(){return status;}
+
+    public int getPlayerIndex(WebSocketSession s) {
+        if (s == w1) {
+            return 0;
+        }
+        return 1;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }
