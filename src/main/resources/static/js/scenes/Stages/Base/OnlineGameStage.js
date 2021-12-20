@@ -2,34 +2,31 @@ import {GameStage} from "./GameStage.js";
 import {Player} from "../../../objects/Player.js";
 import {KeyboardProcessor} from "../../../util/InputProcessors/KeyboardProcessor.js";
 import {OnlinePlayer} from "../../../objects/OnlinePlayer.js";
-import {getConnection, getPlayerIndex} from "../../../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getPlayerIndex, getRoomCode} from "../../../server/Websockets/SocketIntilalizer.js";
 import {OnlineKeyboardProcessor} from "../../../util/InputProcessors/OnlineKeyboardProcessor.js";
 
 let spriteKeys = ["dude", "dude2"]
 
 export class OnlineGameStage extends GameStage {
 
-    definePlayers() {
+    
+    create(data) {
+        super.create(data);
+        this.sendReadyStatus();
+    }
 
-        let movementConnection = getConnection();
-        // this.setDefinePlayerIndex()
+    definePlayers() {
+        
         this.players[0] = new OnlinePlayer(this, 0, 0, "dude", 0);
-        // data.input1.setPlayer(player1)
-        // player1.setPlayerInput(data.input1);
-        // this.players[0].setPlayerInput(new OnlineKeyboardProcessor(this, this.players[0], 'W', 0, 'A', 'D', 'S', 'F'));
 
         this.players[1] = new OnlinePlayer(this, 0, 0, "dude2", 0);
         
         this.setUserPlayerIndex()
-        // this.players[1].setPlayerInput(new KeyboardProcessor(this, this.players[1], 'U', 0, 'H', 'K', 'J', 'L'));
-
-        // this.players[1] = new OnlinePlayer(this, 0, 0, "dude2", 0,movementConnection);
-        // this.players[1].setPlayerInput(new OnlineKeyboardProcessor(this, this.players[1], 'U', 0, 'H', 'K', 'J', 'L'));
     }
 
     setUserPlayerIndex() {
         let playerIndex = getPlayerIndex()
-        // this.players[playerIndex].setConnection(getConnection())
+        
  
         for (let i = 0; i < this.players.length; i++) {
             this.players[i].setConnection(getConnection())
@@ -37,33 +34,36 @@ export class OnlineGameStage extends GameStage {
                 this.players[i].setPlayerInput(new KeyboardProcessor(this, this.players[i], 'W', 0, 'A', 'D', 'S', 'F'));
             }else{
                 this.players[i].setOnMovementMessage()
-                // this.players[i].setPlayerInput(new KeyboardProcessor(this, this.players[i], 'm', 0, 'c', 'v', 'n', 'k'));
             }
         }
     }
 
-    setDefinePlayerIndex() {
-        let connection = getConnection()
+    sendReadyStatus() {
+        let connection = getConnection();
         connection.addEventListener('message', (msg) => {
-            let message = JSON.parse(msg.data)
-            if (message.type === "TEST_MovementPlayerIndexSetter") {
-                let onlinePlayerIndex = message.index
-                let playerPoxX = this.players[onlinePlayerIndex].x
-                let playerPoxY = this.players[onlinePlayerIndex].y
-
-                // // this.players[onlinePlayerIndex].destroy()
-                // for (let i = 0; i < this.players.length; i++) {
-                //     if (i === onlinePlayerIndex){
-                //         this.players[i].setConnection(connection)
-                //         this.players[i].setPlayerInput(new OnlineKeyboardProcessor(this, this.players[onlinePlayerIndex], 'W', 0, 'A', 'D', 'S', 'F'));
-                //     }else{
-                //         this.players[i].setConnection(connection)        
-                //     }
-                // }
-                // this.players[onlinePlayerIndex].setConnection(connection)
-                // this.players[onlinePlayerIndex]= new OnlinePlayer(this, playerPoxX, playerPoxY, spriteKeys[onlinePlayerIndex],0, connection);
-                // this.players[onlinePlayerIndex].setPlayerInput(new OnlineKeyboardProcessor(this, this.players[onlinePlayerIndex], 'W', 0, 'A', 'D', 'S', 'F'));
+            let message=JSON.parse(msg.data)
+            console.log(message.type)
+            if (message.type === "StageSynchronizer") {
+                console.log("stage status received")
+                let stageStatus = JSON.parse(msg.data)
+                let bothPlayersReady = Boolean(stageStatus.bothPlayersReady);
+                if (bothPlayersReady) {
+                    this.resumeStartTransition()
+                }
             }
         })
+        var readyObj = {
+            type: "StageSynchronizer",
+            stageState: "ready",
+            RoomCode: getRoomCode()
+        }
+        if (connection.readyState !== WebSocket.OPEN) {
+            connection.addEventListener('open', () => {
+                connection.send(JSON.stringify(readyObj))
+            })
+        } else {
+            connection.send(JSON.stringify(readyObj))
+        }
+
     }
 }

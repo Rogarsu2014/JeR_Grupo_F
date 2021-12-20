@@ -1,5 +1,5 @@
 import {Button} from "../Button.js";
-import {getConnection, getRoomCode} from "../../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getPlayerIndex, getRoomCode} from "../../server/Websockets/SocketIntilalizer.js";
 
 export class OnlineButton extends Button{
 
@@ -27,9 +27,11 @@ export class OnlineButton extends Button{
     }
     
     setCollider(targetPlayer) {
-        this.context.physics.add.collider(this, targetPlayer,()=> {
-            this.press()
-            this.sendButtonInformation(this.buttonIndex)
-        });
+        if (this.context.players[getPlayerIndex()] === targetPlayer) {
+            this.context.physics.add.collider(this, targetPlayer, () => {
+                this.press()
+                this.sendButtonInformation(this.buttonIndex)
+            });
+        }
     }
 }
