@@ -2,9 +2,11 @@ package es.urjc.code.daw.WebSockets.Managers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.chat.Message;
 import es.urjc.code.daw.chat.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -15,19 +17,22 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ChatManager extends BaseManager{
 
+    @Autowired
     private final MessageRepository messageRepository;          //Repositorio de mensajes
+
     final ObjectMapper mapper = new ObjectMapper();             //Mapper del chat manager
 
 
-    public ChatManager(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;                //Inicializador del Chat Manager
-        associatedType= "Chat";                                    //Tipo asociado al chat
+    public ChatManager() {
+       associatedType= "Chat";                                    //Tipo asociado al chat
     }
 
     @Override
-    public void connectionEstablished(WebSocketSession session) {
-
-    } //Por implementar...
+    public void connectionEstablished(WebSocketSession session) throws IOException {
+        //Pilla todos los mensajes y los parsea a Json, los mensajes parseados los envia a la sesión que se ha conectado
+        ArrayNode messages = mapper.valueToTree(messageRepository.findAll());
+        session.sendMessage(new TextMessage(messages.toString()));
+    }
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception{

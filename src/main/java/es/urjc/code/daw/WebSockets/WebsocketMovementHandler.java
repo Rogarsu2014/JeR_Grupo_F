@@ -3,6 +3,7 @@ package es.urjc.code.daw.WebSockets;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import es.urjc.code.daw.WebSockets.Managers.*;
 import es.urjc.code.daw.chat.Message;
 import org.springframework.web.socket.TextMessage;
@@ -34,6 +35,9 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
         this.managers.put(cooperativeButtonsManager.getAssociatedType(), cooperativeButtonsManager);
 
         this.managers.put(RoomManager.getInstance().getAssociatedType(), RoomManager.getInstance());
+
+        BaseManager chatManager = new ChatManager();
+        this.managers.put(chatManager.getAssociatedType(),chatManager);
     }
 
     

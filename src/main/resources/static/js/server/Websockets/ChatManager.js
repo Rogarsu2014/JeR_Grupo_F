@@ -1,5 +1,6 @@
 import {ServerConnectionManager} from "../ServerConnectionManager.js";
 import {getConnection} from "./SocketIntilalizer.js";
+import {getText} from "../../scenes/MenuSceneWS.js"
 
 //Creación de la conexión
 /*var connection = new WebSocket('ws://'+ServerConnectionManager.host+'/chat');
@@ -29,19 +30,23 @@ let messagesTimeout = null;
 let stopReceivingMessages = false;
 let connection = getConnection();
 
-connection.onopen=()=>{
-    ChatManager.getLastMessages();
-}
+/*connection.onopen=()=>{
+    ChatManager.getLastMessages(getText());
+}En java*/
+
+connection.addEventListener('message', event =>
+{console.log("Mensaje recibido")
+    console.log("Info:" + event.data);})
+//=(msg)=>{
+
+
+    //ChatManager.getLastMessage(getText());
+//}
 
 export class ChatManager {
 
-    //Constructor del Chat Manager
-    /*constructor(){
-        this.newConnection = getConnection();
-    }*/
-
     //Enviar  mensajes
-    sendUserMessage(user, content) {
+    static sendUserMessage(user, content) {
         let mensaje = {
             type: "Chat",
             username: user,
@@ -50,36 +55,42 @@ export class ChatManager {
         connection.send(JSON.stringify(mensaje));
     }
 
-    getLastMessages(messagesBox) {
-        let firstPass = 0;
+    static getLastMessages(messagesBox) {
+        let firstPass = (lastMessageId == 0);
         let lastMessages = messages.forEach(message => {
             if (message['id'] > lastMessageId) {
-                this.printMessageLn(messagesBox, message, firstPass)
+                this.printMessageLn(messagesBox, message, firstPass);
             }
         });
 
         lastMessageId = messages[messages.length - 1]['id']
         //rehacer lo de abajo, ver ejemplo 2, hacer esquema a papel
-        messagesTimeout = setTimeout(() => {
+        /*messagesTimeout = setTimeout(() => {
             if (!stopReceivingMessages)
                 this.getLastMessages(messagesBox)
-        }, 1000);
+        }, 1000);*/
     }
 
-        receiveMessages(messageBox) {
-            stopReceivingMessages = false;
-            this.getLastMessages(messageBox)
+    static getLastMessage(messageBox) {
+        //if (message['id'] > lastMessageId) {
+            this.printMessageLn(messagesBox, message, false)
+        //}
+            lastMessageId = messages[messages.length - 1]['id'];
+    }
 
-        }
+    /*receiveMessages(messageBox) {
+        stopReceivingMessages = false;
+        this.getLastMessages(messageBox)
+    }
 
-         stopReceivingLastMessages() {
-            if (messagesTimeout !== null) {
-                {
-                    clearTimeout(messagesTimeout)
-                    stopReceivingMessages = true;
-                }
+    stopReceivingLastMessages() {
+        if (messagesTimeout !== null) {
+            {
+                clearTimeout(messagesTimeout)
+                stopReceivingMessages = true;
             }
         }
+    }*/
 
     printMessageLn(text, message, firstPass=true) {
         if (message['username'] === 'Server') {
