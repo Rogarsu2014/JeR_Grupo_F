@@ -1,14 +1,15 @@
-import {Trap} from '../../../objects/Trap.js'
-import {Platform} from "../../../objects/Platform.js";
-import {CompetitiveScene} from "./Base/CompetitiveScene.js";
+import {Trap} from '../../../../objects/Trap.js'
+import {Platform} from "../../../../objects/Platform.js";
+
+import {OnlineCompetitiveScene} from "../Base/OnlineCompetitiveScene.js";
 
 var traps = [];
 
 
-export class Comp3 extends CompetitiveScene {
+export class OnlineComp3 extends OnlineCompetitiveScene {
 
     constructor() {
-        super("Comp3", "GameCompletedScene", 30000, 'Comp3Map',1280);
+        super("OnlineComp3", "GameCompletedScene", 30000, 'Comp3Map',1280);
     }
 
 
