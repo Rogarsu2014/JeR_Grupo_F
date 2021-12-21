@@ -225,7 +225,7 @@ export class MenuSceneWS extends Phaser.Scene {
                 this.textArea.setVisible(true);
                 this.chatErrorText.setVisible(true);
                 this.chatVisible = true;
-                //ChatManager.receiveMessages(this.textArea)
+                ChatManager.receiveMessages(this.textArea)
             }
         })
         this.xButton.on('pointerdown', () => {
@@ -237,7 +237,7 @@ export class MenuSceneWS extends Phaser.Scene {
                 this.chatVisible = false;
                 this.chatErrorText.setVisible(false);
                 this.textArea.setVisible(false);
-                //ChatManager.stopReceivingLastMessages()
+                ChatManager.stopReceivingLastMessages()
             }
             /*
             * Si usamos el if de abajo funciona bien el cerrar y abrir de forma INDIVIDUAL cada ventana
@@ -624,10 +624,13 @@ export class MenuSceneWS extends Phaser.Scene {
         this.formUtil.placeElementAt(1, 'myUser', true);
         this.formUtil.placeElementAt(12, 'myPass', true);
     }
+    static getTextArea(){
+        return this.textArea;
+    }
 }
 
 //Devuelve el área de texto del menú
 export function getText(){
-    return this.textArea;
+    return MenuSceneWS.getTextArea();
 }
 
