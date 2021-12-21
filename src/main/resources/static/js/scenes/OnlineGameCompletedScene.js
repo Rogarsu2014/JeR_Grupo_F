@@ -5,7 +5,7 @@ import {getUsername} from "../server/PlayersDataManager.js";
 
 export class OnlineGameCompletedScene extends GameCompletedScene {
     constructor() {
-        super("GameCompletedScene");
+        super("OnlineGameCompletedScene");
     }
 
     create(data) {
