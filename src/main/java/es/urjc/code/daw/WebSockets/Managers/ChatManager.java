@@ -62,10 +62,10 @@ public class ChatManager extends BaseManager{
 
         for (WebSocketSession session : SessionsManager.getInstance().getPlayersSessions().values()) {
             //Si el que lo envía no es la sesión que envía...
-            if (sender != session) {
+            //if (sender != session) {
                 //... le envía el mensaje
                 session.sendMessage(new TextMessage(mensaje.toString()));
-            }
+            //}
         }
     }
 

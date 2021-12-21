@@ -37,7 +37,7 @@ function connect(){
     //     var message = JSON.parse(msg.data)
     //     // $('#chat').val($('#chat').val() + "\n" + message.name + ": " + message.message);
     // }
-    newConnection.onmessage=(msg)=>{console.log(msg.data)}
+    //newConnection.onmessage=(msg)=>{console.log(msg.data)}
     newConnection.onopen=()=>{
         console.log("Connected")
     }

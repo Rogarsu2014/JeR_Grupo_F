@@ -19,8 +19,15 @@ connection.addEventListener('message', event => {
 
     //Guardar todos los mensajes recibidos al oir uno
     let aux;
-    for (let i = 0; i < JSON.parse(event.data).length; i++) {
-        aux = JSON.parse(event.data)[i];
+    if(Array.isArray(JSON.parse(event.data))){
+        for (let i = 0; i < JSON.parse(event.data).length; i++) {
+            aux = JSON.parse(event.data)[i];
+            messages.push(aux);
+            aux = null;
+        }
+    }
+    else{
+        aux = JSON.parse(event.data);
         messages.push(aux);
         aux = null;
     }
