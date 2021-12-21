@@ -64,6 +64,9 @@ public class StageSynchronizerManager extends BaseManager {
                 if (sender != pair && pair != null) {
                     pair.sendMessage(new TextMessage(readyStatus.toString()));
                     sender.sendMessage(new TextMessage(readyStatus.toString()));
+                    
+                    playersSessions.replace(pair.getId(), false);
+                    playersSessions.replace(sender.getId(), false);
                 }
             }
         }

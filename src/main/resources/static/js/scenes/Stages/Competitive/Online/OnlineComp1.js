@@ -1,16 +1,16 @@
 
-import {Trap} from '../../../objects/Trap.js'
+import {Trap} from '../../../../objects/Trap.js'
 
-import {CompetitiveScene} from "./Base/CompetitiveScene.js";
+import {OnlineCooperativeScene} from "../../Cooperative/Base/OnlineCooperativeScene.js";
 
 
 var traps = [];
 
 
-export class Comp1 extends CompetitiveScene {
+export class Comp1 extends OnlineCooperativeScene {
 
     constructor() {
-        super("Comp1", "Coop2", 30000,'Comp1Map',1408);
+        super("OnlineComp1", "OnlineCoop2", 30000,'Comp1Map',1408);
     }
 
     create(data) {
@@ -47,19 +47,19 @@ export class Comp1 extends CompetitiveScene {
     }
 
     defineSkulls() {
-       this.addSkull(250, 325);
-       this.addSkull(225, 545);
-       this.addSkull(420, 350);
-       this.addSkull(545, 350);
-       this.addSkull(610, 475);
-       this.addSkull(670, 285);
-       this.addSkull(800, 480);
-       this.addSkull(830, 185);
-       this.addSkull(1050, 285);
-       this.addSkull(1115, 480);
-       this.addSkull(1150, 185);
-       this.addSkull(1185, 350);
-       this.addSkull(1350, 545);
+        this.addSkull(250, 325);
+        this.addSkull(225, 545);
+        this.addSkull(420, 350);
+        this.addSkull(545, 350);
+        this.addSkull(610, 475);
+        this.addSkull(670, 285);
+        this.addSkull(800, 480);
+        this.addSkull(830, 185);
+        this.addSkull(1050, 285);
+        this.addSkull(1115, 480);
+        this.addSkull(1150, 185);
+        this.addSkull(1185, 350);
+        this.addSkull(1350, 545);
     }
 
 
