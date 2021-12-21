@@ -667,6 +667,9 @@ La ifnromación a mandar es el indice del boton pulsado, la cual se manda al par
 
 ![img_6.png](doc/GDDImagenes/Fase_4/cooperativeButtonsNotifyPair.png)
 
+## Diagrama UML implementación Websocket
+
+
 ### Instrucciones precisas para ejecutar la aplicacion
 
 Para ejecutar la aplicación es necesaria la creación de un archivo .jar. que se genera en el proceso *install* a través
