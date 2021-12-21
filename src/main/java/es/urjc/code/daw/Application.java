@@ -2,7 +2,7 @@ package es.urjc.code.daw;
 
 
 import es.urjc.code.daw.WebSockets.WebsocketEchoHandler;
-import es.urjc.code.daw.WebSockets.WebsocketMovementHandler;
+import es.urjc.code.daw.WebSockets.WebsocketGatewayHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -34,8 +34,8 @@ public class Application implements WebSocketConfigurer {
 	}
 	
 	@Bean
-	public WebsocketMovementHandler createMovementHandler() {
-		return new WebsocketMovementHandler();
+	public WebsocketGatewayHandler createMovementHandler() {
+		return new WebsocketGatewayHandler();
 	}
 }
 
