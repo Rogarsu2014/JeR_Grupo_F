@@ -34,6 +34,7 @@ public class SessionPair {
         }
     }
 
+
     public int getPlayerIndex(WebSocketSession s) {
         if (s == w1) {
             return 0;
@@ -41,7 +42,7 @@ public class SessionPair {
         return 1;
     }
 
-    public String getStatus() {
-        return status;
-    }
+
+    public String getStatus(){return status;}
+
 }
