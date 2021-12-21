@@ -308,8 +308,10 @@ export class MenuScene extends Phaser.Scene {
 
     sendMessage() {
         // console.log("sendForm");
+        //content es el contenido de la area de texto con el tag de myText
         let content = this.formUtil.getTextAreaValue("myText");
         // console.log(content)
+        //Metodo con el que llamabamos al mensaje, CAMBIAR
         MessagesManager.postMessage(this.user['username'], content, () => {
                 this.formUtil.clearTextAreaValue("myText");
                 

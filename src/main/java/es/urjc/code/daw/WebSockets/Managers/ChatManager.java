@@ -62,7 +62,11 @@ public class ChatManager extends BaseManager{
         return messageRepository.findAll();
     }   //Devuelve todos los mensajes
 
-    //Quizás falte reimplementar el método de guardado
+    //Método de guardado
+    public Message saveMessage(Message message) {
+        return messageRepository.save(message);
+    }
+
 
 
 }
