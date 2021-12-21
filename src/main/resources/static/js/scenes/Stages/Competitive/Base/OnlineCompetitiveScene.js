@@ -3,7 +3,7 @@ import {cameraFadeOut} from "../../../../util/cameraEffects.js";
 import {Skull} from "../../../../objects/Skull.js";
 import {OnlineGameStage} from "../../Base/OnlineGameStage.js";
 
-export class CompetitiveScene extends OnlineGameStage{
+export class OnlineCompetitiveScene extends OnlineGameStage{
 
     constructor(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth) {
         super(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth);

@@ -10,8 +10,7 @@ export class OnlineCoop2 extends OnlineCooperativeScene {
 
     
     constructor() {
-        //TODO-> cambiar tiempo a 10000
-        super("OnlineCoop2","Comp2",99999000,'Coop2Map');
+        super("OnlineCoop2","OnlineComp2",10000,'Coop2Map');
     }
 
     init() {

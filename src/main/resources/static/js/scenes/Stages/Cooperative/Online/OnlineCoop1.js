@@ -14,8 +14,7 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
 
 
     constructor() {
-        //TODO-> CAMBIAR TIEMPO A 15000 y que la siguiente escena sea la comp1
-        super("OnlineCoop1", "OnlineCoop2", 9999000, 'Coop1Map');
+        super("OnlineCoop1", "OnlineComp1", 15000, 'Coop1Map');
     }
 
     init() {

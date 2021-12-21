@@ -1,13 +1,13 @@
 
 import {Trap} from '../../../../objects/Trap.js'
 
-import {OnlineCooperativeScene} from "../../Cooperative/Base/OnlineCooperativeScene.js";
+import {OnlineCompetitiveScene} from "../Base/OnlineCompetitiveScene.js";
 
 
 var traps = [];
 
 
-export class Comp1 extends OnlineCooperativeScene {
+export class OnlineComp1 extends OnlineCompetitiveScene {
 
     constructor() {
         super("OnlineComp1", "OnlineCoop2", 30000,'Comp1Map',1408);

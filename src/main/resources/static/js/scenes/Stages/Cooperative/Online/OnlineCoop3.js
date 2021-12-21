@@ -10,11 +10,10 @@ import {OnlineButton} from "../../../../objects/online/OnlineButton.js";
 /// Player 1 is upper layer player.
 /// Player 2 is down layer player
 
-export class Coop3 extends OnlineCooperativeScene {
+export class OnlineCoop3 extends OnlineCooperativeScene {
 
     constructor() {
-        //TODO-> camviar tiempo a 5000
-        super("OnlineCoop3", "Comp3", 999990000,'Coop3Map');
+        super("OnlineCoop3", "OnlineComp3", 5000,'Coop3Map');
     }
 
     init() {
