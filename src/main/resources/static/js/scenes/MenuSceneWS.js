@@ -314,6 +314,7 @@ export class MenuSceneWS extends Phaser.Scene {
 
         //Metodo con el que llamabamos al mensaje, CAMBIAR
         ChatManager.sendUserMessage(this.user['username'], content);
+        ChatManager.receiveMessages(this.textArea);
     }
 
     selectButton(index) {

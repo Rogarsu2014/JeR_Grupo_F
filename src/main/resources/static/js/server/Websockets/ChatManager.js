@@ -14,8 +14,8 @@ let messages=[];
 
 
 connection.addEventListener('message', event => {
-    console.log("Mensaje recibido");
-    console.log("Info:" + event.data);
+    //console.log("Mensaje recibido");
+    //console.log("Info:" + event.data);
 
     //Guardar todos los mensajes recibidos al oir uno
     let aux;
@@ -26,11 +26,6 @@ connection.addEventListener('message', event => {
     }
 
 })
-//=(msg)=>{
-
-
-    //ChatManager.getLastMessage(getText());
-//}
 
 export class ChatManager {
 
@@ -75,8 +70,8 @@ export class ChatManager {
     }
 
     static printMessageLn(text, message, firstPass=true) {
-        console.log("Entra en printMessage");
-        console.log("text tiene esta info: "+ text);
+        //console.log("Entra en printMessage");
+        //console.log("text tiene esta info: "+ text);
         if (message['username'] === 'Server') {
             if (message['content'].includes("disconnected")) {
                 text.appendText(`[align=center][color=red]<${(message)['username']}>: ${(message)['content']}[/color][/align]\n`)
@@ -96,11 +91,3 @@ export class ChatManager {
 
 
 }
-
-
-
-/*$('#send-btn').click(function() {
-    var message = $('#message').val();
-    $('#chat').val($('#chat').val() + "\n" + message);
-    connection.send(message);
-}); */

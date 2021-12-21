@@ -43,11 +43,13 @@ public class ChatManager extends BaseManager{
         String user= chatNode.get("username").asText();
         String content= chatNode.get("content").asText();
 
+        //Mensaje para guardarse
+        Message newMessage = new Message(user, content);
+        saveMessage(newMessage);
+
         //Envía el mensaje al resto de usuarios, indicando el tipo de mensaje junto con el resto de información recibida
-        ObjectNode chatObjectNode= mapper.createObjectNode();
+        ObjectNode chatObjectNode= mapper.valueToTree(newMessage);
         chatObjectNode.put("type",associatedType);
-        chatObjectNode.put("username",user);
-        chatObjectNode.put("content",content);
 
         sendMessage(session, chatObjectNode);
     }
@@ -55,6 +57,9 @@ public class ChatManager extends BaseManager{
     //Método que envia el mensaje
     private void sendMessage(WebSocketSession sender, ObjectNode mensaje) throws Exception {
         //Comprueba todas las sesiones
+
+        System.out.println("entra en send message");
+
         for (WebSocketSession session : SessionsManager.getInstance().getPlayersSessions().values()) {
             //Si el que lo envía no es la sesión que envía...
             if (sender != session) {
@@ -70,6 +75,7 @@ public class ChatManager extends BaseManager{
 
     //Método de guardado
     public Message saveMessage(Message message) {
+        System.out.println("entra en save message");
         return messageRepository.save(message);
     }
 
