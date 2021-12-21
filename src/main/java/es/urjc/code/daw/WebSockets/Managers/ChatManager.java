@@ -41,18 +41,29 @@ public class ChatManager extends BaseManager{
         
         //Crea un nodo con el mensaje recibido, dividiendo a su vez la info de este
         JsonNode chatNode= mapper.readTree(message.getPayload());
-        String user= chatNode.get("username").asText();
-        String content= chatNode.get("content").asText();
 
-        //Mensaje para guardarse
-        Message newMessage = new Message(user, content);
-        saveMessage(newMessage);
+        if(chatNode.get("typeId").asText().equals("BaitMensajes")){
+            //for (Message mensaje : messageRepository.findAll()) {
+                //sendMessage(session, mapper.valueToTree(mensaje));
+            //}
 
-        //Envía el mensaje al resto de usuarios, indicando el tipo de mensaje junto con el resto de información recibida
-        ObjectNode chatObjectNode= mapper.valueToTree(newMessage);
-        chatObjectNode.put("type",associatedType);
+            ArrayNode messages = mapper.valueToTree(messageRepository.findAll());
+            session.sendMessage(new TextMessage(messages.toString()));
+        }
+        else{
+            String user= chatNode.get("username").asText();
+            String content= chatNode.get("content").asText();
 
-        sendMessage(session, chatObjectNode);
+            //Mensaje para guardarse
+            Message newMessage = new Message(user, content);
+            saveMessage(newMessage);
+
+            //Envía el mensaje al resto de usuarios, indicando el tipo de mensaje junto con el resto de información recibida
+            ObjectNode chatObjectNode= mapper.valueToTree(newMessage);
+            chatObjectNode.put("type",associatedType);
+
+            sendMessage(session, chatObjectNode);
+        }
     }
 
     //Método que envia el mensaje

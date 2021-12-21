@@ -6,40 +6,15 @@ let lastMessageId = 0;
 let messagesTimeout = null;
 let stopReceivingMessages = false;
 let connection = getConnection();
-let messages=[];
+//let messages=[];
 let targetMessageBox;
-/*connection.onopen=()=>{
-    ChatManager.getLastMessages(getText());
-}En java*/
-
-
-connection.addEventListener('message', event => {
-    //console.log("Mensaje recibido");
-    //console.log("Info:" + event.data);
-
-    //Guardar todos los mensajes recibidos al oir uno
-    let aux;
-    if(Array.isArray(JSON.parse(event.data))){
-        for (let i = 0; i < JSON.parse(event.data).length; i++) {
-            aux = JSON.parse(event.data)[i];
-            ChatManager.printMessageLn(targetMessageBox,aux)
-            messages.push(aux);
-            aux = null;
-        }
-    }
-    else{
-        aux = JSON.parse(event.data);
-        ChatManager.printMessageLn(targetMessageBox,aux)
-        messages.push(aux);
-        aux = null;
-    }
-
-})
+let firstPass = (lastMessageId === 0);
 
 export class ChatManager {
 
     //Enviar  mensajes
     static sendUserMessage(user, content) {
+        //let connection = getConnection();
         let mensaje = {
             type: "Chat",
             username: user,
@@ -49,19 +24,57 @@ export class ChatManager {
     }
 
     static getLastMessages(messagesBox) {
-        let firstPass = (lastMessageId === 0);
-       messages.forEach(message => {
+        //let firstPass = (lastMessageId === 0);
+        //let connection = getConnection();
+
+        let dameLosMensajes = {
+            type: "Chat",
+            typeId: "BaitMensajes"
+        }
+
+        connection.send(JSON.stringify(dameLosMensajes));
+        this.catchMessages();
+        /*messages.forEach(message => {
             if (message['id'] > lastMessageId) {
                 this.printMessageLn(messagesBox, message, firstPass);
             }
-        });
+        });*/
+    }
 
-        lastMessageId = messages[messages.length - 1]['id'];
+    static catchMessages(){
+        //let connection = getConnection();
+        connection.addEventListener('message', event => {
+            let aux;
+            if(Array.isArray(JSON.parse(event.data))){
+                for (let i = 0; i < JSON.parse(event.data).length; i++) {
+                    aux = JSON.parse(event.data)[i];
+                    if(lastMessageId == 0){
+                        this.printMessageLn(targetMessageBox,aux,true)
+                    }
+                    else{
+                        this.printMessageLn(targetMessageBox,aux,false)
+                    }
+                    //messages.push(aux);
+                    aux = null;
+                }
+            }
+
+            /*while(event.data != null){
+                lastMessageId += 1;
+                messages.push(event.data);
+                if(lastMessageId == 0){
+                    this.printMessageLn(event.data.username,event.data.content,true)
+                }
+                else{
+                    this.printMessageLn(event.data.username,event.data.content,false)
+                }
+            }*/
+        })
     }
 
     static getLastMessage(messageBox) {
             this.printMessageLn(messagesBox, message, false)
-            lastMessageId = messages[messages.length - 1]['id'];
+            //lastMessageId = messages[messages.length - 1]['id'];
     }
 
     static receiveMessages(messageBox) {
@@ -69,8 +82,14 @@ export class ChatManager {
         if (targetMessageBox===undefined) {
             targetMessageBox = messageBox;
         }
-        //TODO-> recibir todos los mensajes si es la priemra vez que se abre el chat
-        // this.getLastMessages(messageBox)
+        if(firstPass == true){
+            this.getLastMessages(targetMessageBox);
+            firstPass = false;
+            //recibir todos los mensajes si es la priemra vez que se abre el chat
+        }
+        else{
+            this.getLastMessage(targetMessageBox);
+        }
     }
 
     static stopReceivingLastMessages() {
