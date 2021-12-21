@@ -34,6 +34,9 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
         BaseManager positionManager=new PositionManager();
         this.managers.put(positionManager.getAssociatedType(), positionManager);
 
+        BaseManager pointsManager=new PointsManager();
+        this.managers.put(pointsManager.getAssociatedType(), pointsManager);
+
         this.managers.put(RoomManager.getInstance().getAssociatedType(), RoomManager.getInstance());
     }
 

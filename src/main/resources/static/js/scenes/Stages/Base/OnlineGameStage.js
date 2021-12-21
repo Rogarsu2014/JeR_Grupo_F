@@ -43,7 +43,6 @@ export class OnlineGameStage extends GameStage {
         let connection = getConnection();
         connection.addEventListener('message', (msg) => {
             let message=JSON.parse(msg.data)
-            console.log(message.type)
             if (message.type === "StageSynchronizer") {
                 console.log("stage status received")
                 let stageStatus = JSON.parse(msg.data)
@@ -66,5 +65,16 @@ export class OnlineGameStage extends GameStage {
             connection.send(JSON.stringify(readyObj))
         }
 
+    }
+
+    receivePoints(){
+        let connection2 = getConnection();
+        connection2.addEventListener('message', (msg) => {
+            let message=JSON.parse(msg.data)
+            if (message.type === "Points") {
+                let points = Number(message.points);
+                this.players[getPlayerIndex()].addPoints((this.players[getPlayerIndex()].points - points) / 2)
+            }
+        })
     }
 }

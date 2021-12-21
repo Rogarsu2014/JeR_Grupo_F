@@ -57,6 +57,7 @@ public class StageSynchronizerManager extends BaseManager {
 
         readyStatus.put("type",associatedType);
         readyStatus.put("bothPlayersReady", true);
+
         
         WebSocketSession pair = RoomManager.getInstance().getPair(sender, message);
         if(playersSessions.containsKey(pair.getId())) {
@@ -71,5 +72,4 @@ public class StageSynchronizerManager extends BaseManager {
             }
         }
     }
-
 }

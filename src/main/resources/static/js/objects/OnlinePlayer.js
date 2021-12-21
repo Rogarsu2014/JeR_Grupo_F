@@ -122,4 +122,18 @@ export class OnlinePlayer extends Player {
         );
         timer.startTimer();
     }
+
+    addPoints(cantidad) {
+        super.addPoints(cantidad);
+        this.sendPoints();
+    }
+
+    sendPoints(){
+        let points = {
+            type: "Points",
+            points: this.points,
+            RoomCode: getRoomCode()
+        }
+        this.connection.send(JSON.stringify(points))
+    }
 }
