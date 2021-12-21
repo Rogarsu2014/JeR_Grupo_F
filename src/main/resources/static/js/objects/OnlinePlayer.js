@@ -1,5 +1,6 @@
 import {Player} from "./Player.js";
 import {getRoomCode} from "../server/Websockets/SocketIntilalizer.js";
+import {Timer} from "../util/Timer.js";
 
 export class OnlinePlayer extends Player {
     constructor(scene, x, y, spriteKey, points = 0 ) {
@@ -25,7 +26,6 @@ export class OnlinePlayer extends Player {
     }
     setConnection(connection){
         this.connection = connection;
-      
     }
     setOnMovementMessage(){
         this.connection.onmessage = (msg) => {
@@ -34,6 +34,10 @@ export class OnlinePlayer extends Player {
                 let movement = JSON.parse(msg.data)
                 this.xDir = Number(movement.xDir);
                 this.isJumping = Boolean(movement.isJumping);
+            }else if(message.type === "Position"){
+                let position = JSON.parse(msg.data)
+                this.x = Number(position.x);
+                this.y = Number(position.y);
             }
         }
     }
@@ -45,7 +49,7 @@ export class OnlinePlayer extends Player {
     }
     update(bump, playerp) {
         // super.update(bump, playerp);
-        this.moveTo()
+        this.moveTo();
     }
 
     moveLeft() {
@@ -69,7 +73,6 @@ export class OnlinePlayer extends Player {
 
     idle() {
         // super.idle();
-
         //this.anims.play('turn' + this.spriteKey);
         if (this.isJumping) {
             this.isJumping = false;
@@ -77,6 +80,7 @@ export class OnlinePlayer extends Player {
         this.xDir = 0
         // this.sendDirection(0, this.isJumping)
         this.sendDirection()
+        console.log("si")
     }
 
     moveTo() {
@@ -99,5 +103,23 @@ export class OnlinePlayer extends Player {
         }
         this.connection.send(JSON.stringify(direction))
     }
+    sendPos(){
+        let position = {
+            type: "Position",
+            x: this.x,
+            y: this.y,
+            RoomCode: getRoomCode()
+        }
+        this.connection.send(JSON.stringify(position))
+    }
 
+    sendPos200(){
+
+        var timer = new Timer(this.context, 200, () => {
+            this.sendPos();
+            timer.startTimer();
+            }
+        );
+        timer.startTimer();
+    }
 }

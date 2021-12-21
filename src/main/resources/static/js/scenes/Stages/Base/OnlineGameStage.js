@@ -32,8 +32,9 @@ export class OnlineGameStage extends GameStage {
             this.players[i].setConnection(getConnection())
             if (i === playerIndex){
                 this.players[i].setPlayerInput(new KeyboardProcessor(this, this.players[i], 'W', 0, 'A', 'D', 'S', 'F'));
+                this.players[i].sendPos200();
             }else{
-                this.players[i].setOnMovementMessage()
+                this.players[i].setOnMovementMessage();
             }
         }
     }
