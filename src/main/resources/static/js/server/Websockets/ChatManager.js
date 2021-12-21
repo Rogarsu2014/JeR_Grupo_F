@@ -27,14 +27,18 @@ connection.onclose = function() {
 let lastMessageId = 0;
 let messagesTimeout = null;
 let stopReceivingMessages = false;
+let connection = getConnection();
+
+connection.onopen=()=>{
+    ChatManager.getLastMessages();
+}
 
 export class ChatManager {
 
-
     //Constructor del Chat Manager
-    constructor(){
-        this.connection = getConnection();
-    }
+    /*constructor(){
+        this.newConnection = getConnection();
+    }*/
 
     //Enviar  mensajes
     sendUserMessage(user, content) {
@@ -43,7 +47,7 @@ export class ChatManager {
             username: user,
             content: content
         }
-        this.connection.send(JSON.stringify(mensaje));
+        connection.send(JSON.stringify(mensaje));
     }
 
     getLastMessages(messagesBox) {
