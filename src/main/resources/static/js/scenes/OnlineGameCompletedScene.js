@@ -1,11 +1,11 @@
-import {GameCompletedScene} from "./GameCompletedScene";
+import {GameCompletedScene} from "./GameCompletedScene.js";
 import {getConnection, getPlayerIndex} from "../server/Websockets/SocketIntilalizer.js";
 import {getUsername} from "../server/PlayersDataManager.js";
 
 
 export class OnlineGameCompletedScene extends GameCompletedScene {
     constructor() {
-        super("GameCompletedScene");
+        super("OnlineGameCompletedScene");
     }
 
     create(data) {

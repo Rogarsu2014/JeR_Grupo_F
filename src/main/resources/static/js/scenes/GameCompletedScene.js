@@ -4,8 +4,8 @@ import {Skull} from "../objects/Skull.js";
 
 
 export class GameCompletedScene extends Phaser.Scene {
-    constructor() {
-        super("GameCompletedScene");
+    constructor(sceneKey="GameCompletedScene") {
+        super(sceneKey);
         this.playerPoints=[]
         this.scores=[]
         this.winnerIndex=-1;
