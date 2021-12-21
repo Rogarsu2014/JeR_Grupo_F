@@ -1,4 +1,4 @@
-import {GameCompletedScene} from "./GameCompletedScene";
+import {GameCompletedScene} from "./GameCompletedScene.js";
 import {getConnection, getPlayerIndex} from "../server/Websockets/SocketIntilalizer.js";
 import {getUsername} from "../server/PlayersDataManager.js";
 
