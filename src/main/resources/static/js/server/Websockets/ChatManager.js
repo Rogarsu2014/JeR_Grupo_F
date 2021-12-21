@@ -7,7 +7,7 @@ let messagesTimeout = null;
 let stopReceivingMessages = false;
 let connection = getConnection();
 let messages=[];
-
+let targetMessageBox;
 /*connection.onopen=()=>{
     ChatManager.getLastMessages(getText());
 }En java*/
@@ -22,12 +22,14 @@ connection.addEventListener('message', event => {
     if(Array.isArray(JSON.parse(event.data))){
         for (let i = 0; i < JSON.parse(event.data).length; i++) {
             aux = JSON.parse(event.data)[i];
+            ChatManager.printMessageLn(targetMessageBox,aux)
             messages.push(aux);
             aux = null;
         }
     }
     else{
         aux = JSON.parse(event.data);
+        ChatManager.printMessageLn(targetMessageBox,aux)
         messages.push(aux);
         aux = null;
     }
@@ -47,8 +49,8 @@ export class ChatManager {
     }
 
     static getLastMessages(messagesBox) {
-        let firstPass = (lastMessageId == 0);
-        let lastMessages = messages.forEach(message => {
+        let firstPass = (lastMessageId === 0);
+       messages.forEach(message => {
             if (message['id'] > lastMessageId) {
                 this.printMessageLn(messagesBox, message, firstPass);
             }
@@ -64,7 +66,11 @@ export class ChatManager {
 
     static receiveMessages(messageBox) {
         stopReceivingMessages = false;
-        this.getLastMessages(messageBox)
+        if (targetMessageBox===undefined) {
+            targetMessageBox = messageBox;
+        }
+        //TODO-> recibir todos los mensajes si es la priemra vez que se abre el chat
+        // this.getLastMessages(messageBox)
     }
 
     static stopReceivingLastMessages() {
@@ -74,6 +80,8 @@ export class ChatManager {
                 stopReceivingMessages = true;
             }
         }
+        
+        
     }
 
     static printMessageLn(text, message, firstPass=true) {

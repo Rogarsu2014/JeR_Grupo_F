@@ -31,13 +31,14 @@ public class ChatManager extends BaseManager{
     @Override
     public void connectionEstablished(WebSocketSession session) throws IOException {
         //Pilla todos los mensajes y los parsea a Json, los mensajes parseados los envia a la sesión que se ha conectado
-        ArrayNode messages = mapper.valueToTree(messageRepository.findAll());
-        session.sendMessage(new TextMessage(messages.toString()));
+//        ArrayNode messages = mapper.valueToTree(messageRepository.findAll());
+//        session.sendMessage(new TextMessage(messages.toString()));
     }
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception{
         System.out.println("Mensaje recibido del chat con información " +message.getPayload());
+        
         //Crea un nodo con el mensaje recibido, dividiendo a su vez la info de este
         JsonNode chatNode= mapper.readTree(message.getPayload());
         String user= chatNode.get("username").asText();
