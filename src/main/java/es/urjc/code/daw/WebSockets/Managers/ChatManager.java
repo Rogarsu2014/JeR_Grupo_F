@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.chat.Message;
 import es.urjc.code.daw.chat.MessageRepository;
+import es.urjc.code.daw.services.MessageRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.socket.TextMessage;
@@ -17,8 +18,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ChatManager extends BaseManager{
 
-    @Autowired
-    private final MessageRepository messageRepository;          //Repositorio de mensajes
+    
+    private MessageRepository messageRepository = MessageRepositoryService.getMessageRepository();          //Repositorio de mensajes
 
     final ObjectMapper mapper = new ObjectMapper();             //Mapper del chat manager
 

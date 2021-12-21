@@ -3,6 +3,7 @@ package es.urjc.code.daw;
 
 import es.urjc.code.daw.WebSockets.WebsocketEchoHandler;
 import es.urjc.code.daw.WebSockets.WebsocketMovementHandler;
+import es.urjc.code.daw.chat.MessageRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -37,5 +38,6 @@ public class Application implements WebSocketConfigurer {
 	public WebsocketMovementHandler createMovementHandler() {
 		return new WebsocketMovementHandler();
 	}
+	
 }
 

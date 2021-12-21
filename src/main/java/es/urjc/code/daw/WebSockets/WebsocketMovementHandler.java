@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import es.urjc.code.daw.WebSockets.Managers.*;
 import es.urjc.code.daw.chat.Message;
+import es.urjc.code.daw.chat.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -14,8 +16,8 @@ import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class WebsocketMovementHandler extends TextWebSocketHandler {
-
-
+    
+    
     final private ObjectMapper mapper = new ObjectMapper();
 
     private ConcurrentHashMap<String,BaseManager> managers;
