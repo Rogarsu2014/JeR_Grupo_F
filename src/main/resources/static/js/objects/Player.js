@@ -85,7 +85,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         
         if (this.isOnFloor()) {
             this.setVelocityY(-550);
-        } else if (this.bump == true) {
+        } else if (this.context.bump == true) {
             if (this.body.touching.down == true) {
                 this.setVelocityY(-500);
             }
