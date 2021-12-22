@@ -2,7 +2,9 @@ package es.urjc.code.daw.WebSockets;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.WebSockets.Managers.*;
+import es.urjc.code.daw.chat.Message;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -35,16 +37,24 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
         this.managers.put(positionManager.getAssociatedType(), positionManager);
 
         this.managers.put(RoomManager.getInstance().getAssociatedType(), RoomManager.getInstance());
+
+        BaseManager chatManager = new ChatManager();
+        this.managers.put(chatManager.getAssociatedType(),chatManager);
     }
+
+    
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        
-        // The method connectionEstablished is called for every Manager in the Map 
+
+        // The method connectionEstablished is called for every Manager in the Map
         for (BaseManager manager: this.managers.values()) {
             manager.connectionEstablished(session);
         }
         
+//        playersSessions.put(session.getId(),session);
+        
+        System.out.println("Socket connected");
     }
 
     @Override
@@ -55,7 +65,7 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
         
         // Calling the manager associated to the received message type
         this.managers.get(messageType).receiveMessage(session,message);
-        
+
     }
     
     
