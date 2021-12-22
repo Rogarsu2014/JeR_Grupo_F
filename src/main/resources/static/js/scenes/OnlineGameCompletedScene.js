@@ -19,7 +19,7 @@ export class OnlineGameCompletedScene extends GameCompletedScene {
         
         let playerIndex = getPlayerIndex()
         
-        if (this.winnerIndex == playerIndex) {
+        if (this.winnerIndex === playerIndex) {
             
           let playerVictoryMessage={
               type:"PlayerVictory",

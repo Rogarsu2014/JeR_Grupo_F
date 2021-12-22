@@ -25,7 +25,6 @@ public class PlayerVictoryManager extends BaseManager{
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
-
         
         JsonNode node = mapper.readTree(message.getPayload());
         String username= node.get("username").asText();
@@ -43,8 +42,7 @@ public class PlayerVictoryManager extends BaseManager{
     public void connectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         
     }
-
-
+    
     private Player getPlayer(String username) throws Exception {
         return playerRepository.findById(username).orElseThrow(() -> new Exception("Player not found") );
     }
