@@ -50,6 +50,7 @@ ___
     + [**Movimiento**](#movimiento)
     + [**Botones de la escena cooperativa**](#botones-de-la-escena-cooperativa)
     + [**Victoria de jugadores**](#victoria-de-jugadores)
+    + [**ChatWS**](#chatws)
   
     
 #### Actualización del diagrama de clases
@@ -764,6 +765,28 @@ Se encargad e recibir el nombre de usuario del jugador ganador y actualizar su d
 victoria más.
 
 ![img_1.png](doc/GDDImagenes/Fase_4/PlayerVictoryManager.png)
+
+### ChatWS
+
+![UML_WS.png](doc/GDDImagenes/Fase_4/EsquemaChatWS.png)
+
+El funcionamiento del chat en Websockets es el siguiente:
+
+Al entrar al chat por primera vez, el programa detecta si es la primera vez que se ha entrado al chat, si lo es, 
+pasa a solicitar los mensajes anteriores mandando un mensaje "anzuelo" al servidor, el cual propicia que se envíen todos
+los mensajes guardados anteriormente debido a un tipo interno propio del mensaje. 
+Al mandar el mensaje "anzuelo", el programa también activa un eventlistener el cual reacciona a los mensajes enviados por el servidor
+parseándolos y transformándolos a datos que puedan ser imprimidos por pantalla.
+
+En cuanto al envío de mensajes, una vez que el usuario envía un mensaje dándole al botón Send, el programa recoge y envía el mensaje 
+al servidor, este es recibido y clasificado de acuerdo con un tipo interno genérico, el cual le dice que es un mensaje de chat común
+y lo almacena en el historial de mensajes. Una vez almacenado, lo envía a todos los usuarios conectados al chat.
+Al enviarse, se activa el eventListener activado anteriormente y lo transforma en datos que a continuación son impresos por pantalla.
+
+El motivo principal por el que se pasó de APIs REST a Webscokets el chat fue para evitar que el cliente estuviera pidiendo constantemente
+al servidor una actualización de los mensajes ya fuera la respuesta dada por el servidor positiva (hay mensajes nuevos) o negativa (no hay mensajes nuevos).
+Con Websockets se simplifica esto, ya que la petición por parte del cliente solo se hace al entrar y cuando se envían mensajes, mientras que
+quien entrega los mensajes nuevos es el servidor de manera automática.
 
 ## Diagrama UML implementación Websocket
 
