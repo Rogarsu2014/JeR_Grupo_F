@@ -37,70 +37,101 @@ ___
 
 ### Puntos fase 4
 
+#### Documentación del protocolo utilizado sobre WebSockets
+
+- [**Protocolo WS**](#protocolo-ws)
+  * [**WebsocketGatewayHandler**](#websocketgatewayhandler)
+  * [**Managers**](#managers)
+    + [**Sesiones de usuarios**](#sesiones-de-usuarios)
+    + [**Salas**](#salas)
+    + [**BumpManager**](#bumpmanager)
+    + [**PointsManager**](#pointsmanager)
+    + [**Sincronización de escena**](#sincronizaci-n-de-escena)
+    + [**Movimiento**](#movimiento)
+    + [**Botones de la escena cooperativa**](#botones-de-la-escena-cooperativa)
+    + [**Victoria de jugadores**](#victoria-de-jugadores)
+  
+    
+#### Actualización del diagrama de clases
+
+* [**Diagrama UML implementación Websocket**](#diagrama-uml-implementaci-n-websocket)
+
 #### Video
 
 [![Fse4](https://img.youtube.com/vi/v3jkW5DUXs4/0.jpg)](https://www.youtube.com/watch?v=v3jkW5DUXs4)
-
-
-#### Navegación:
-
-- [***Diagrama de flujo***](#diagrama-de-flujo)
-
-#### Diagrama de clases y API REST:
-
-- [***Implementación de Servidor con API REST y diagrama de
-  clases***](#implementacion-de-servidor-con-api-rest-y-diagrama-de-clases)
-    - [***Datos (*Data*)***](#datos-data)
-    - [***Modelo (*Model*)***](#modelo-model)
-    - [***Vista (*View*)***](#vista-view)
-
-#### Instrucciones precisas para ejecutar la aplicación:
-
-- [***Instrucciones precisas para ejecutar la aplicación***</span>](#instrucciones-precisas-para-ejecutar-la-aplicacion)
 
 ## Índice
 
 *Los acentos no están disponibles en el índice por el sistema de Markdown*
 
-- [Introducción](#introduccion)
-    - [Concepto del juego](#concepto-del-juego)
-    - [Características principales](#caracteristicas-principales)
-    - [Género](#genero)
-    - [Propósito y público objetivo](#proposito-y-publico-objetivo)
-    - [Jugabilidad](#jugabilidad)
-    - [Estilo visual](#estilo-visual)
-    - [Alcance](#alcance)
-- [Mecánicas de juego](#mecanicas-de-juego)
-    - [Jugabilidad](#jugabilidad)
-    - [Puntos](#puntos)
-    - [Salto](#salto)
-    - [Empuje](#empuje)
-    - [Desplazamiento lateral](#desplazamiento-lateral)
-    - [Trampas](#trampas)
-    - [Tiempos](#tiempos)
-    - [Personaje](#personaje)
-- [Movimiento y físicas](#movimiento-y-fisicas)
-    - [Colisiones](#colisiones)
-    - [Controles](#controles)
+- [Introduccion](#introduccion)
+  * [Concepto del juego](#concepto-del-juego)
+  * [Caracteristicas principales](#caracteristicas-principales)
+    - [Competitividad:](#competitividad-)
+    - [Colaboracion:](#colaboracion-)
+    - [Fácil de entender:](#f-cil-de-entender-)
+      * [Frenético:](#fren-tico-)
+  * [Genero](#genero)
+  * [Proposito y publico objetivo](#proposito-y-publico-objetivo)
+  * [Jugabilidad](#jugabilidad)
+    - [Desplazamiento  y movilidad:](#desplazamiento--y-movilidad-)
+    - [Interacción con el oponente:](#interacci-n-con-el-oponente-)
+    - [Escenario:](#escenario-)
+  * [Estilo visual](#estilo-visual)
+  * [Alcance](#alcance)
+- [Mecanicas de juego](#mecanicas-de-juego)
+  * [Jugabilidad](#jugabilidad-1)
+    + [Niveles](#niveles)
+    + [Fase de cooperación](#fase-de-cooperaci-n)
+    + [Funcionamiento del nivel](#funcionamiento-del-nivel)
+    + [Tareas](#tareas)
+    + [Recompensas](#recompensas)
+    + [Fase de competición](#fase-de-competici-n)
+  * [Puntos](#puntos)
+  * [Salto](#salto)
+  * [Empuje](#empuje)
+  * [Desplazamiento lateral](#desplazamiento-lateral)
+  * [Trampas](#trampas)
+  * [Tiempos](#tiempos)
+  * [Personaje](#personaje)
+- [Movimiento y fisicas](#movimiento-y-fisicas)
+  * [Colisiones](#colisiones)
+  * [Controles](#controles)
 - [Interfaz](#interfaz)
-    - [***Diagrama de flujo***](#diagrama-de-flujo)
-    - [<span style="color:lightgreen">***Transición de escenas*** </span>](#transicion-de-escenas)
-    - [Flujo de gameplay](#flujo-de-gameplay)
-    - [Game-loop](#game-loop)
-    - [Menú principal](#menu-principal)
-    - [Selección de Personajes (NO IMPLEMENTADA)](#seleccion-de-personajes-no-implementada)
-    - [Tutorial y Créditos](#tutorial-y-creditos)
+  * [Diagrama de flujo](#diagrama-de-flujo)
+  * [Transicion de escenas](#--transicion-de-escenas--)
+    + [Navegación Fase 3 Menu principal y juego](#navegaci-n-fase-3-menu-principal-y-juego)
+  * [Flujo de gameplay](#--flujo-de-gameplay--)
+  * [Game-loop](#--game-loop--)
+  * [Menu principal](#--menu-principal--)
+  * [Seleccion de Personajes (NO IMPLEMENTADA)](#seleccion-de-personajes--no-implementada-)
+  * [Sistema de Log In](#--sistema-de-log-in--)
+  * [Chat](#--chat--)
+  * [Estado de la conexión](#--estado-de-la-conexi-n--)
+  * [Estado de la conexión](#--estado-de-la-conexi-n---1)
+  * [Tutorial y Creditos](#tutorial-y-creditos)
+    - [Pantalla de resultados](#pantalla-de-resultados)
 - [Arte](#arte)
-    - [Audio](#audio)
-- [Diseño de niveles](#Diseño-de-niveles)
-- [***Implementación de Servidor con API REST y diagrama de
-  clases***](#implementacion-de-servidor-con-api-rest-y-diagrama-de-clases)
-    - [***Datos (*Data*)***](#datos-data)
-    - [***Modelo (*Model*)***](#modelo-model)
-    - [***Vista (*View*)***](#vista-view)
-- [***Instrucciones precisas para ejecutar la aplicación***</span>](#instrucciones-precisas-para-ejecutar-la-aplicacion)
+  * [Audio](#audio)
+- [Diseño de niveles](#dise-o-de-niveles)
+- [Implementacion de Servidor con API REST y diagrama de clases](#implementacion-de-servidor-con-api-rest-y-diagrama-de-clases)
+  * [Datos (Data)](#datos---data--)
+  * [Modelo (Model)](#modelo---model--)
+  * [Vista (View)](#vista---view--)
+- [**Protocolo WS**](#protocolo-ws)
+  * [**WebsocketGatewayHandler**](#websocketgatewayhandler)
+  * [**Managers**](#managers)
+    + [**Sesiones de usuarios**](#sesiones-de-usuarios)
+    + [**Salas**](#salas)
+    + [**BumpManager**](#bumpmanager)
+    + [**PointsManager**](#pointsmanager)
+    + [**Sincronización de escena**](#sincronizaci-n-de-escena)
+    + [**Movimiento**](#movimiento)
+    + [**Botones de la escena cooperativa**](#botones-de-la-escena-cooperativa)
+    + [**Victoria de jugadores**](#victoria-de-jugadores)
+  * [**Diagrama UML implementación Websocket**](#diagrama-uml-implementaci-n-websocket)
+- [Instrucciones precisas para ejecutar la aplicacion](#instrucciones-precisas-para-ejecutar-la-aplicacion)
 - [Hoja de ruta del desarrollo](#hoja-de-ruta-del-desarrollo)
-
 # Introduccion
 
 Este es el documento de diseño de juego de *Dual Interest*.Aquí expondremos la idea original del juego de plataformas y
@@ -562,7 +593,7 @@ La capa de vista es gestionada por el código Javascript, donde la clase *MenuSc
 interactivos y actualizar los elementos de la escena gracias a las clases *MessagesManager*, *ServerConnectionManager*
 y *PlayersManager*.
 
-## Protocolo WS
+# Protocolo WS
 
 
 Para el protocolo se ha usado la siguiente implementacion:
@@ -738,7 +769,7 @@ victoria más.
 
 ![UML_WS.png](doc/GDDImagenes/Fase_4/Diagrama_Websockets.png)
 
-### Instrucciones precisas para ejecutar la aplicacion
+# Instrucciones precisas para ejecutar la aplicacion
 
 Para ejecutar la aplicación es necesaria la creación de un archivo .jar. que se genera en el proceso *install* a través
 del pom.xml.
@@ -787,7 +818,7 @@ la que el archivo se encuentre y ejecutando el comando:
 
 Finalmente la URL necesaria para poder jugar al juego debería de ser ***localhost:8080***
 
-### Hoja de ruta del desarrollo
+# Hoja de ruta del desarrollo
 
 **Plataformas**: Web
 
