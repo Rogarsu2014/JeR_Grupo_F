@@ -279,7 +279,7 @@ jugador se queda inmovilizado durante 2 segundos como penalización.
 
 ![trampa](doc/GDDImagenes/Nivel/Trampa3.png)
 
-*Sprite de la trampa*
+*Sprite actual de la trampa*
 
 ## Tiempos
 
@@ -689,6 +689,8 @@ La ifnromación a mandar es el indice del boton pulsado, la cual se manda al par
 ![img_6.png](doc/GDDImagenes/Fase_4/cooperativeButtonsNotifyPair.png)
 
 ## Diagrama UML implementación Websocket
+
+![UML_WS.png](doc/GDDImagenes/Fase_4/Diagrama_Websockets.png)
 
 
 ### Instrucciones precisas para ejecutar la aplicacion
