@@ -14,10 +14,10 @@ export class OnlineKeyboardProcessor extends  KeyboardProcessor{
         if (this.empujar.isDown)//Move left
         {
             playerp.selfPush(bump);
-        }
-        if(bump !== this.context.bump){
-            this.context.bump = bump;
-            this.sendBump();
+            if(bump != this.bump){
+                this.bump = bump;
+                this.sendBump();
+            }
         }
     }
 
@@ -26,6 +26,7 @@ export class OnlineKeyboardProcessor extends  KeyboardProcessor{
         let bump = {
             type: "Bump",
             bump: this.bump,
+            push: true,
             RoomCode: getRoomCode()
         }
         connection.send(JSON.stringify(bump))
