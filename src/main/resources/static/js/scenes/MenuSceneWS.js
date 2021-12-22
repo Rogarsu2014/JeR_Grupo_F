@@ -4,6 +4,7 @@ import {FormUtil} from "../util/FormUtil.js";
 import {ServerConnectionManager} from "../server/ServerConnectionManager.js";
 import {UserRegistration} from "../util/UserRegistration.js";
 import {ChatManager} from "../server/Websockets/ChatManager.js";
+import {getUser} from "../server/PlayersDataManager.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -304,6 +305,7 @@ export class MenuSceneWS extends Phaser.Scene {
         // var enterKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
         this.defineNetworkAvailabilityFunctionalities();
         this.defineUserRegistration();
+        this.tryGetLoggedPlayer()
         // ServerPing.ConnectUser()
         // ServerPing.GetClientsCount()
 
@@ -641,6 +643,22 @@ export class MenuSceneWS extends Phaser.Scene {
         this.formUtil.placeElementAt(98, "btnSend");
         this.formUtil.placeElementAt(1, 'myUser', true);
         this.formUtil.placeElementAt(12, 'myPass', true);
+    }
+
+    tryGetLoggedPlayer(){
+        if (getUser()!==undefined){
+            this.playerIcon.setVisible(true)
+            this.loginVisible=true
+            this.gamesVisible = false
+            this.user=getUser()
+            this.loginButton.setVisible(true)
+            this.loginButton.setTexture(icons[this.user['iconIndex']])
+            let user={
+                username:getUser().username
+            }
+       
+            this.Registered(user)
+        }
     }
 
     static getTextArea() {

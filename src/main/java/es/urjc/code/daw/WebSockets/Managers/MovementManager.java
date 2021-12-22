@@ -56,7 +56,9 @@ public class MovementManager extends BaseManager{
         
         // send message to pair with new position
         if (sender != pair && pair != null) {
-            pair.sendMessage(new TextMessage(position.toString()));
+            if(pair.isOpen()) {
+                pair.sendMessage(new TextMessage(position.toString()));
+            }
         }
     }
 }

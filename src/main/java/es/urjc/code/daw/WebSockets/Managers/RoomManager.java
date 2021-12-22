@@ -15,7 +15,7 @@ public class RoomManager extends BaseManager {
 
     final ObjectMapper mapper = new ObjectMapper();
 
-    static RoomManager instance= new RoomManager();
+    static RoomManager instance = new RoomManager();
 
     public static RoomManager getInstance() {
         return instance;
@@ -26,7 +26,7 @@ public class RoomManager extends BaseManager {
     //ConcurrentHashMap<String,WebSocketSession > openRooms = new ConcurrentHashMap<>();
 
     public RoomManager() {
-        associatedType= "Room";
+        associatedType = "Room";
     }
 
     @Override
@@ -36,43 +36,43 @@ public class RoomManager extends BaseManager {
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
-        JsonNode roomNode= mapper.readTree(message.getPayload());
+        JsonNode roomNode = mapper.readTree(message.getPayload());
 
-        if(roomNode.get("type2").asText().equals("Host")){
+        if (roomNode.get("type2").asText().equals("Host")) {
             String roomCode = randomString();
             SessionPair p = new SessionPair(session);
             games.put(roomCode, p);
             System.out.println("Created room with code :" + roomCode);
 
-            ObjectNode node= mapper.createObjectNode();
-            node.put("type","RoomCode");
-            node.put("code",roomCode);
-            node.put("playerIndex",p.getPlayerIndex(session));
+            ObjectNode node = mapper.createObjectNode();
+            node.put("type", "RoomCode");
+            node.put("code", roomCode);
+            node.put("playerIndex", p.getPlayerIndex(session));
             session.sendMessage(new TextMessage(node.toString()));
 
-        }else if(roomNode.get("type2").asText().equals("Join")){
-            if(games.containsKey(roomNode.get("RoomCode").asText())){
+        } else if (roomNode.get("type2").asText().equals("Join")) {
+            if (games.containsKey(roomNode.get("RoomCode").asText())) {
                 WebSocketSession player1 = games.get(roomNode.get("RoomCode").asText()).getW1();
-                if(player1 == null){
+                if (player1 == null) {
                     System.out.println("Room not Found");
-                }else if(games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")){
+                } else if (games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")) {
                     System.out.println("Room Full");
-                }else{
+                } else {
                     games.get(roomNode.get("RoomCode").asText()).setW2(session);
-                    System.out.println("Connected in room with " + games.get(roomNode.get("RoomCode").asText()).getW1().getId() ); //Falta nombre
+                    System.out.println("Connected in room with " + games.get(roomNode.get("RoomCode").asText()).getW1().getId()); //Falta nombre
 
-                    ObjectNode node= mapper.createObjectNode();
-                    node.put("type","RoomCode");
-                    node.put("code",roomNode.get("RoomCode").asText());
+                    ObjectNode node = mapper.createObjectNode();
+                    node.put("type", "RoomCode");
+                    node.put("code", roomNode.get("RoomCode").asText());
 
-                    node.put("playerIndex",games.get(roomNode.get("RoomCode").asText()).getPlayerIndex(session));
+                    node.put("playerIndex", games.get(roomNode.get("RoomCode").asText()).getPlayerIndex(session));
 
                     session.sendMessage(new TextMessage(node.toString()));
                 }
-            }else{
+            } else {
                 System.out.println("Room not Found");
             }
-        }else{
+        } else {
             //Desconectar voluntariamente
             System.out.println(roomNode.get("type2").asText());
             System.out.println("Unknown error");
@@ -81,12 +81,26 @@ public class RoomManager extends BaseManager {
 
     @Override
     public void connectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        
+        WebSocketSession pair = null;
+        for (String key :
+                games.keySet()) {
+            if(games.get(key).containsSession(session)) {
+                
+                pair = getPair(session, key);
+                break;
+            }
+        }
+        if (pair != null) {
+            ObjectNode node = mapper.createObjectNode();
+            node.put("type", "ConnectionClosed");
+            pair.sendMessage(new TextMessage(node.toString()));
+        }
     }
 
-    public void connectionLost(){
+    public void connectionLost() {
         //Que hacer cuando se pierde la conexión
         //Se sabe que session se ha desconectado?
+
     }
 
     String randomString() {
@@ -104,15 +118,27 @@ public class RoomManager extends BaseManager {
         return generatedString;
     }
 
-    public WebSocketSession getPair(WebSocketSession s, TextMessage message)throws Exception{
-        JsonNode roomNode= mapper.readTree(message.getPayload());
-        if(games.containsKey(roomNode.get("RoomCode").asText())){
-            if(games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")){
+    public WebSocketSession getPair(WebSocketSession s, TextMessage message) throws Exception {
+        JsonNode roomNode = mapper.readTree(message.getPayload());
+        if (games.containsKey(roomNode.get("RoomCode").asText())) {
+            if (games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")) {
                 return games.get(roomNode.get("RoomCode").asText()).getOtherSession(s);
-            }else{
+            } else {
                 return s;
             }
-        }else{
+        } else {
+            return s;
+        }
+    }
+    public WebSocketSession getPair(WebSocketSession s, String roomCode) throws Exception {
+//        JsonNode roomNode = mapper.readTree(message.getPayload());
+        if (games.containsKey(roomCode)) {
+            if (games.get(roomCode).getStatus().equals("full")) {
+                return games.get(roomCode).getOtherSession(s);
+            } else {
+                return s;
+            }
+        } else {
             return s;
         }
     }

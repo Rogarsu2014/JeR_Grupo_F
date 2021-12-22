@@ -1,6 +1,6 @@
 import {GameCompletedScene} from "./GameCompletedScene.js";
 import {getConnection, getPlayerIndex} from "../server/Websockets/SocketIntilalizer.js";
-import {getUsername} from "../server/PlayersDataManager.js";
+import {getUser} from "../server/PlayersDataManager.js";
 
 
 export class OnlineGameCompletedScene extends GameCompletedScene {
@@ -23,7 +23,7 @@ export class OnlineGameCompletedScene extends GameCompletedScene {
             
           let playerVictoryMessage={
               type:"PlayerVictory",
-              username:getUsername()
+              username:getUser().username
           }
           
           connection.send(JSON.stringify(playerVictoryMessage))

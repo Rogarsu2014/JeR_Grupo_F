@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PlayersRepositoryService {
-    @Autowired
     private static PlayerRepository playerRepository;
-    
+
+    public PlayersRepositoryService(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
+
     public static PlayerRepository getPlayerRepository(){
         return playerRepository;
     }

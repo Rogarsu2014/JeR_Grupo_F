@@ -9,7 +9,7 @@ var traps = [];
 export class OnlineComp3 extends OnlineCompetitiveScene {
 
     constructor() {
-        super("OnlineComp3", "GameCompletedScene", 30000, 'Comp3Map',1280);
+        super("OnlineComp3", "OnlineGameCompletedScene", 30000, 'Comp3Map',1280);
     }
 
 

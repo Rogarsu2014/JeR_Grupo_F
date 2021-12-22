@@ -55,7 +55,6 @@ export class OnlinePlayer extends Player {
 
     moveLeft() {
         // super.moveLeft();
-        console.log("Move Left")
         this.flipX = true;
         //this.anims.play('movement' + this.spriteKey, true);
         this.xDir = -1
@@ -65,7 +64,6 @@ export class OnlinePlayer extends Player {
 
     moveRight() {
         // super.moveRight();
-        console.log("Move Right")
         //this.anims.play('movement' + this.spriteKey, true);
         this.xDir = 1
         // this.sendDirection(1, this.isJumping)
@@ -81,7 +79,6 @@ export class OnlinePlayer extends Player {
         this.xDir = 0
         // this.sendDirection(0, this.isJumping)
         this.sendDirection()
-        console.log("si")
     }
 
     moveTo() {

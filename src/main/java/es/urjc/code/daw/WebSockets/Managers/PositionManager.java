@@ -27,7 +27,7 @@ public class PositionManager extends BaseManager{
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println("Player tp'd to " +message.getPayload());
+//        System.out.println("Player tp'd to " +message.getPayload());
         JsonNode movementNode= mapper.readTree(message.getPayload());
         int x= movementNode.get("x").asInt();
         int y= movementNode.get("y").asInt();
@@ -48,7 +48,9 @@ public class PositionManager extends BaseManager{
     private void sendPositionsPair(WebSocketSession sender,ObjectNode position, TextMessage message2) throws Exception {
         WebSocketSession pair = RoomManager.getInstance().getPair(sender, message2);
         if (sender != pair && pair != null) {
-            pair.sendMessage(new TextMessage(position.toString()));
+            if(pair.isOpen()) {
+                pair.sendMessage(new TextMessage(position.toString()));
+            }
         }
     }
 }
