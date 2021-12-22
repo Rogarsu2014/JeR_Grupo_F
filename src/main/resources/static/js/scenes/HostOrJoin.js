@@ -124,7 +124,7 @@ export class HostOrJoin extends Phaser.Scene {
             rows: 11,
             cols: 11
         });
-        this.formUtil.showNumbers();
+        //this.formUtil.showNumbers();
         this.formUtil.scaleToGameW("myText", .2);
         this.formUtil.placeElementAt(97, 'myText', true);
 
