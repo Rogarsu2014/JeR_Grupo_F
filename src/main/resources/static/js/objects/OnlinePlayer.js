@@ -3,7 +3,7 @@ import {getRoomCode} from "../server/Websockets/SocketIntilalizer.js";
 import {Timer} from "../util/Timer.js";
 
 export class OnlinePlayer extends Player {
-    constructor(scene, x, y, spriteKey, points = 0 ) {
+    constructor(scene, x, y, spriteKey, points = 0) {
         super(scene, x, y, spriteKey, points = 0);
         
         // this.setConnection(connection)
@@ -22,7 +22,8 @@ export class OnlinePlayer extends Player {
             }
         }
         this.xDir = 0;
-        this.isJumping = false
+        this.isJumping = false;
+        this.res = -1;
     }
     setConnection(connection){
         this.connection = connection;
@@ -48,7 +49,7 @@ export class OnlinePlayer extends Player {
         // this.sendDirection(this.xDir, this.isJumping=true)
     }
     update(bump, playerp) {
-        // super.update(bump, playerp);
+        super.update(bump, playerp);
         this.moveTo();
     }
 
@@ -121,5 +122,24 @@ export class OnlinePlayer extends Player {
             }
         );
         timer.startTimer();
+    }
+
+    addPoints(cantidad) {
+        if(this.res == 0){
+            super.addPoints(cantidad);
+            this.sendPoints();
+        }
+    }
+    setRes(resp){
+        this.res = resp;
+    }
+
+    sendPoints(){
+        let points = {
+            type: "Points",
+            points: this.points,
+            RoomCode: getRoomCode()
+        }
+        this.connection.send(JSON.stringify(points))
     }
 }

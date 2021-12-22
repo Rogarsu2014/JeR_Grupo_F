@@ -36,6 +36,12 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
         BaseManager positionManager=new PositionManager();
         this.managers.put(positionManager.getAssociatedType(), positionManager);
 
+        BaseManager pointsManager=new PointsManager();
+        this.managers.put(pointsManager.getAssociatedType(), pointsManager);
+
+        BaseManager bumpManager=new BumpManager();
+        this.managers.put(bumpManager.getAssociatedType(), bumpManager);
+
         this.managers.put(RoomManager.getInstance().getAssociatedType(), RoomManager.getInstance());
 
         BaseManager chatManager = new ChatManager();
