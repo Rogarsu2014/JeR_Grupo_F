@@ -11,15 +11,15 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class PositionManager extends BaseManager{
+public class PointsManager extends BaseManager{
 
     final ObjectMapper mapper = new ObjectMapper();
 
     //TODO-> este es un indice para testear
     int playerJoinedIndex;
 
-    public PositionManager() {
-        associatedType= "Position";
+    public PointsManager() {
+        associatedType= "Points";
     }
 
     @Override
@@ -27,17 +27,16 @@ public class PositionManager extends BaseManager{
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println("Player tp'd to " +message.getPayload());
+        System.out.println("Player gained " +message.getPayload());
         JsonNode movementNode= mapper.readTree(message.getPayload());
-        int x= movementNode.get("x").asInt();
-        int y= movementNode.get("y").asInt();
+        int points= movementNode.get("points").asInt();
 
-        ObjectNode movementObjectNode= mapper.createObjectNode();
-        movementObjectNode.put("type",associatedType);
-        movementObjectNode.put("x",x);
-        movementObjectNode.put("y",y);
 
-        sendPositionsPair(session,movementObjectNode, message);
+        ObjectNode pointsObjectNode= mapper.createObjectNode();
+        pointsObjectNode.put("type",associatedType);
+        pointsObjectNode.put("points",points);
+
+        sendPositionsPair(session,pointsObjectNode, message);
     }
 
     @Override

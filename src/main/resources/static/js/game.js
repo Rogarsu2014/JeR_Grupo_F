@@ -12,7 +12,6 @@ import {Comp3} from "./scenes/Stages/Competitive/Comp3.js";
 import {Credits} from "./scenes/Credits.js";
 import {Tutorial} from "./scenes/Tutorial.js";
 import {MenuSceneSpringTest} from "./scenes/MenuSceneSpringTest.js";
-import {OnlineCoop1} from "./scenes/Stages/Cooperative/Online/OnlineCoop1.js";
 import {HostOrJoin} from "./scenes/HostOrJoin.js";
 import {MenuSceneWS} from "./scenes/MenuSceneWS.js";
 

@@ -115,7 +115,7 @@ export class HostOrJoin extends Phaser.Scene {
         backButton.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic();
-            this.scene.start('OnlineCoop1');
+            this.loadScene('OnlineCoop1');
         })
 
 
@@ -124,8 +124,9 @@ export class HostOrJoin extends Phaser.Scene {
             rows: 11,
             cols: 11
         });
-        //this.formUtil.showNumbers();
+        // this.formUtil.showNumbers();
         this.formUtil.scaleToGameW("myText", .2);
+        this.formUtil.showElement("myText")
         this.formUtil.placeElementAt(97, 'myText', true);
 
         this.selectButton(0);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.WebSockets.Classes.SessionPair;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -76,6 +77,11 @@ public class RoomManager extends BaseManager {
             System.out.println(roomNode.get("type2").asText());
             System.out.println("Unknown error");
         }
+    }
+
+    @Override
+    public void connectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        
     }
 
     public void connectionLost(){

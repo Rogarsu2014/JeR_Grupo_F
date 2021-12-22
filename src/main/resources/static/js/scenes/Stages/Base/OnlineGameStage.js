@@ -13,6 +13,8 @@ export class OnlineGameStage extends GameStage {
     create(data) {
         super.create(data);
         this.sendReadyStatus();
+        this.receivePoints();
+        this.receiveBump();
     }
 
     definePlayers() {
@@ -31,8 +33,9 @@ export class OnlineGameStage extends GameStage {
         for (let i = 0; i < this.players.length; i++) {
             this.players[i].setConnection(getConnection())
             if (i === playerIndex){
-                this.players[i].setPlayerInput(new KeyboardProcessor(this, this.players[i], 'W', 0, 'A', 'D', 'S', 'F'));
+                this.players[i].setPlayerInput(new OnlineKeyboardProcessor(this, this.players[i], 'W', 0, 'A', 'D', 'S', 'F'));
                 this.players[i].sendPos200();
+                this.players[i].setRes(0);
             }else{
                 this.players[i].setOnMovementMessage();
             }
@@ -43,7 +46,6 @@ export class OnlineGameStage extends GameStage {
         let connection = getConnection();
         connection.addEventListener('message', (msg) => {
             let message=JSON.parse(msg.data)
-            console.log(message.type)
             if (message.type === "StageSynchronizer") {
                 console.log("stage status received")
                 let stageStatus = JSON.parse(msg.data)
@@ -67,4 +69,37 @@ export class OnlineGameStage extends GameStage {
         }
 
     }
+
+    receivePoints(){
+        let connection2 = getConnection();
+        connection2.addEventListener('message', (msg) => {
+            let message=JSON.parse(msg.data)
+            if (message.type === "Points") {
+                let points = Number(message.points);
+                let indice = Math.abs(getPlayerIndex() - 1);
+/*                let cantidad;
+                if(points > this.players[indice].points){
+                    cantidad = points;
+                }else {
+                    cantidad = this.players[indice].points
+                }*/
+                this.players[indice].points = points;
+
+            }
+        })
+    }
+
+    receiveBump(){
+        let connection3 = getConnection();
+        connection3.addEventListener('message', (msg) => {
+            let message=JSON.parse(msg.data)
+            if (message.type === "Bump") {
+                let bump = Boolean(message.bump);
+                console.log(bump);
+                this.bump = bump;
+                this.players[getPlayerIndex()].selfPush(bump);
+            }
+        })
+    }
+
 }

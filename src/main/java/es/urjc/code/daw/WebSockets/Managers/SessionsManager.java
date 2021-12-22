@@ -1,5 +1,6 @@
 package es.urjc.code.daw.WebSockets.Managers;
 
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -33,5 +34,10 @@ public class SessionsManager extends BaseManager{
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
 
+    }
+
+    @Override
+    public void connectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        playersSessions.remove(session.getId());
     }
 }

@@ -1,7 +1,6 @@
 import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
-//import {MessagesManager} from "../server/MessagesManager.js";
 import {ServerConnectionManager} from "../server/ServerConnectionManager.js";
 import {UserRegistration} from "../util/UserRegistration.js";
 import {ChatManager} from "../server/Websockets/ChatManager.js";
@@ -77,17 +76,20 @@ export class MenuSceneWS extends Phaser.Scene {
         playButton.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic()
-            this.scene.start('Coop1');
+            // this.scene.start('Coop1');
+            this.loadScene('Coop1')
         })
         tutorial.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic();
-            this.scene.start('Tutorial')
+            // this.scene.start('Tutorial')
+            this.loadScene('Tutorial')
         })
         credits.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic();
-            this.scene.start('Credits')
+            // this.scene.start('Credits')
+            this.loadScene('Credits')
         })
 
         this.formUtil = new FormUtil({
@@ -306,7 +308,11 @@ export class MenuSceneWS extends Phaser.Scene {
         // ServerPing.GetClientsCount()
 
     }
-
+    
+    loadScene(sceneKey){
+        ServerConnectionManager.stopAll()
+        this.scene.start(sceneKey)
+    }
     sendMessage() {
 
         //content es el contenido de la area de texto con el tag de myText
@@ -355,7 +361,9 @@ export class MenuSceneWS extends Phaser.Scene {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setDepth(1);
+        
         ServerConnectionManager.GetClientsCount((clientsCount) => this.usersConnectedCountText.setText(clientsCount));
+        
         ServerConnectionManager.CheckNetworkConnection(() => {
                 networkSymbol.setTexture("networkSymbolSuccess")
                 this.enableClientsCountBox()
@@ -410,10 +418,10 @@ export class MenuSceneWS extends Phaser.Scene {
             this.user = user;
             // console.log("username obtained " + user['username'])
             this.enableChatButton();
-            this. enableOnlineGameButton()
+            this.enableOnlineGameButton()
             ServerConnectionManager.setClientId(user['username'])
             ServerConnectionManager.ConnectUser();
-            this.xButton2.x=240;
+            this.xButton2.x = 240;
             this.setPlayerInformation();
             if (this.loginVisible === true) {
                 this.disableResgisterScreen()
@@ -427,9 +435,14 @@ export class MenuSceneWS extends Phaser.Scene {
         }
     }
 
-    enableOnlineGameButton(){
-        this.onlineGame.alpha=1.0;
-        this.buttons.splice(1,0,this.onlineGame);
+    enableOnlineGameButton() {
+        this.onlineGame.alpha = 1.0;
+        this.buttons.splice(1, 0, this.onlineGame);
+        this.onlineGame.setInteractive()
+        this.onlineGame.on('pointerdown', () => {
+            // this.scene.start('HostOrJoin');
+            this.loadScene('HostOrJoin')
+        })
     }
 
     setPlayerInformation() {
@@ -464,11 +477,13 @@ export class MenuSceneWS extends Phaser.Scene {
         })
 
     }
-    enableChangeIconArrows(){
+
+    enableChangeIconArrows() {
         this.iconUpArrow.setVisible(true)
         this.iconDownArrow.setVisible(true)
     }
-    disableChangeIconArrows(){
+
+    disableChangeIconArrows() {
         this.iconUpArrow.setVisible(false)
         this.iconDownArrow.setVisible(false)
     }
@@ -483,26 +498,28 @@ export class MenuSceneWS extends Phaser.Scene {
         }
 
         this.disableChangeIconArrows()
-        this.userRegistration.updatePlayerIcon(this.user['username'], this.user['iconIndex'],()=>{
+        this.userRegistration.updatePlayerIcon(this.user['username'], this.user['iconIndex'], () => {
             this.updateIconTextures()
             this.enableChangeIconArrows()
         })
     }
-    updateIconTextures(){
+
+    updateIconTextures() {
         this.playerIcon.setTexture(icons[this.user['iconIndex']])
         this.loginButton.setTexture(icons[this.user['iconIndex']])
     }
+
     onIconDown() {
         let currentIconIndex = this.user['iconIndex'];
         if ((currentIconIndex - 1) < 0) {
 
-            this.user['iconIndex'] = Object.keys(icons).length-1;
+            this.user['iconIndex'] = Object.keys(icons).length - 1;
 
         } else {
             this.user['iconIndex']--;
         }
         this.disableChangeIconArrows()
-        this.userRegistration.updatePlayerIcon(this.user['username'], this.user['iconIndex'],()=>{
+        this.userRegistration.updatePlayerIcon(this.user['username'], this.user['iconIndex'], () => {
             this.updateIconTextures()
             this.enableChangeIconArrows()
         })
@@ -625,13 +642,14 @@ export class MenuSceneWS extends Phaser.Scene {
         this.formUtil.placeElementAt(1, 'myUser', true);
         this.formUtil.placeElementAt(12, 'myPass', true);
     }
-    static getTextArea(){
+
+    static getTextArea() {
         return this.textArea;
     }
 }
 
 //Devuelve el área de texto del menú
-export function getText(){
+export function getText() {
     return MenuSceneWS.getTextArea();
 }
 

@@ -9,6 +9,7 @@ import es.urjc.code.daw.chat.MessageRepository;
 import es.urjc.code.daw.services.MessageRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -69,6 +70,11 @@ public class ChatManager extends BaseManager{
             }
         }
 
+    }
+
+    @Override
+    public void connectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        
     }
 
     //Método que envia el mensaje
