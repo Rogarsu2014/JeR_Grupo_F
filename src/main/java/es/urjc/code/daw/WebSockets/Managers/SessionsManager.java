@@ -13,8 +13,6 @@ public class SessionsManager extends BaseManager{
     ConcurrentHashMap<String, WebSocketSession> playersSessions = new ConcurrentHashMap<>();
 
     public static SessionsManager getInstance() {
-//        if (instance == null)
-//            instance = new SessionsManager();
         return instance;
     }
 

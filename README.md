@@ -594,7 +594,8 @@ En cuanto al manejo de mensajes, primero se lee el tipo del mensaje recibido y s
 ![img.png](doc/GDDImagenes/Fase_4/getType.png)
 ![img.png](doc/GDDImagenes/Fase_4/typeDefinition.png)
 
-Finalmente, con el tipo de mensaje obtenido, se llama al manejador almacenado en el diccionario y se invoca su respectivo método para manejar el mensaje enviado por el cliente:
+Finalmente, con el tipo de mensaje obtenido, se llama al manejador almacenado en el diccionario y se invoca su
+respectivo método para manejar el mensaje enviado por el cliente:
 
 ![img.png](doc/GDDImagenes/Fase_4/handleMessageGW.png)
 
@@ -614,26 +615,36 @@ Todos los Managers heredan de una clase abstracta BaseManager.java, la cual defi
 
 ### Sesiones de usuarios
 
+**Manager responsable de los datos:** Sessiones actuales en la aplicación
+
+Es el encargado de tener referencias de las sesioens en la aplicación.
+
+![img_1.png](doc/GDDImagenes/Fase_4/SessionsManager.png)
+
+Controla cuando una sesión se conecta y desconecta.
+
 ### Salas
+
 **Manager responsable del dato:** Emparejamiento de jugadores en salas y obtención de la pareja de la sala.
 
-Es el encargado de realizar las operaciones de creación de salas, la de unión a una sala ya creada y la de buscar la pareja de un usuario
-durante el envío de datos a través de websockets. 
+Es el encargado de realizar las operaciones de creación de salas, la de unión a una sala ya creada y la de buscar la
+pareja de un usuario durante el envío de datos a través de websockets.
 
 ![img.png](doc/GDDImagenes/Fase_4/RoomManagerAtributes.PNG)
 
-Cuando se envía una petición de Host la clase crea una clave aleatoria de 6 cifras (pueden ser tanto letras como números) y
-crea una pareja vacía. Esta pareja se guarda en un mapa estático (Singleton) accesible desde cualquier clase. 
+Cuando se envía una petición de Host la clase crea una clave aleatoria de 6 cifras (pueden ser tanto letras como
+números) y crea una pareja vacía. Esta pareja se guarda en un mapa estático (Singleton) accesible desde cualquier clase.
 
 ![img.png](doc/GDDImagenes/Fase_4/RoomManagerHost.PNG)
 
-Cuando por el contrario llega una petición de Join la clase busca en el mapa la clave. Si la encuentra comprueba si la pareja 
-esta llena (ya hay dos jugadores) o está vacía. Si está vacía entonces introduce al jugador a la pareja y marca la sala como llena.
+Cuando por el contrario llega una petición de Join la clase busca en el mapa la clave. Si la encuentra comprueba si la
+pareja esta llena (ya hay dos jugadores) o está vacía. Si está vacía entonces introduce al jugador a la pareja y marca
+la sala como llena.
 
 ![img.png](doc/GDDImagenes/Fase_4/RoomManagerJoin.PNG)
 
-Finalmente el método getPair() busca en el mapa la posición donde se encuentran las sesiones emparejadas y devuelve la otra sesión 
-con la que se está en este momento.
+Finalmente el método getPair() busca en el mapa la posición donde se encuentran las sesiones emparejadas y devuelve la
+otra sesión con la que se está en este momento.
 
 ![img.png](doc/GDDImagenes/Fase_4/RoomManagerGetPair.PNG)
 
@@ -660,11 +671,13 @@ cual sobreescribe el valor local.
 
 Se encarga de sincronizar el inicio de las escenas y que ambos jugadores comienzen a la vez.
 
-De esta manera, el reloj se sincroniza, y el comienzo de la escena ocurre a la vez para dos jugadores conectados en una misma sala.
+De esta manera, el reloj se sincroniza, y el comienzo de la escena ocurre a la vez para dos jugadores conectados en una
+misma sala.
 
 ![img_2.png](doc/GDDImagenes/Fase_4/stageSynchronizerManager.png)
 
-Al recibir un mensaje de tipo "StageSynchronizer" se cambia el valor booleano asociado a la sesión que manda el mesnaje a true.
+Al recibir un mensaje de tipo "StageSynchronizer" se cambia el valor booleano asociado a la sesión que manda el mesnaje
+a true.
 
 Después, se comprueba si el par asociado a dicho jugador está listo también.
 
@@ -682,7 +695,8 @@ Para ello se usa la dirección actual en la que se está moviendo el jugador.
 
 ![img_1.png](doc/GDDImagenes/Fase_4/movementManager.png)
 
-Al recibir un mensaje, se obtiene en forma de objeto la dirección a la que se mueve el jugador y esta se envía al par correspondiente del cliente:
+Al recibir un mensaje, se obtiene en forma de objeto la dirección a la que se mueve el jugador y esta se envía al par
+correspondiente del cliente:
 
 ![img_2.png](doc/GDDImagenes/Fase_4/movementManagerReceiveMEssage.png)
 
@@ -698,17 +712,25 @@ Dada la importancia que tienen, se va a controlar cuando ha sido pulsado un bot�
 
 ![img_4.png](doc/GDDImagenes/Fase_4/cooperativeButtonsManager.png)
 
-La ifnromación a mandar es el indice del boton pulsado, la cual se manda al par asociado al cliente que envía el mensaje.
+La infromación a mandar es el indice del boton pulsado, la cual se manda al par asociado al cliente que envía el
+mensaje.
 
 ![img_5.png](doc/GDDImagenes/Fase_4/CooperativeBuutonsReceiveMessage.png)
 
-
 ![img_6.png](doc/GDDImagenes/Fase_4/cooperativeButtonsNotifyPair.png)
+
+### Victoria de jugadores
+
+**Manager responsable del dato:** añadir un punto al contador de victorias del ganador.
+
+Se encargad e recibir el nombre de usuario del jugador ganador y actualizar su definición en la abse de datos con una
+victoria más.
+
+![img_1.png](doc/GDDImagenes/Fase_4/PlayerVictoryManager.png)
 
 ## Diagrama UML implementación Websocket
 
 ![UML_WS.png](doc/GDDImagenes/Fase_4/Diagrama_Websockets.png)
-
 
 ### Instrucciones precisas para ejecutar la aplicacion
 
