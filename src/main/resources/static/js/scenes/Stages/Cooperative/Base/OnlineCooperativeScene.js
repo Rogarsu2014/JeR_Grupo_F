@@ -172,8 +172,8 @@ export class OnlineCooperativeScene extends OnlineGameStage {
     setPlatformsColliders() {
 
         for (let i = 0; i < this.platforms.length; i++) {
-            this.physics.add.collider(this.players[0], this.platforms[i], () => console.log("over platform"))
-            this.physics.add.collider(this.players[1], this.platforms[i], () => console.log("over platform"))
+            this.physics.add.collider(this.players[0], this.platforms[i], () => {})
+            this.physics.add.collider(this.players[1], this.platforms[i], () => {})
         }
     }
 
@@ -200,7 +200,6 @@ export class OnlineCooperativeScene extends OnlineGameStage {
 
             let message = JSON.parse(msg.data)
             if (message.type === "CooperativeButton") {
-                console.log("Message received")
                 let pressedButtonIndex = message.buttonIndex
                 this.buttons[pressedButtonIndex].press();
             }

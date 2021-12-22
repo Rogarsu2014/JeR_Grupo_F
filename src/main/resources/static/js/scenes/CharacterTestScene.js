@@ -19,7 +19,7 @@ export class CharacterTestScene extends Phaser.Scene {
     preload() {
     }
     create() {
-        console.log("Character Test Scene created");
+        // console.log("Character Test Scene created");
 
         this.game.scale.resize(1480, 640);
 

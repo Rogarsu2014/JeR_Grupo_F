@@ -58,9 +58,7 @@ export class OnlineComp3 extends OnlineCompetitiveScene {
 
 
         this.setPlatformsColliders();
-
-
-        console.log("Escena comp 3 creada");
+        
     }
     setPlatformsColliders(){
 

@@ -27,7 +27,7 @@ public class PointsManager extends BaseManager{
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println("Player gained " +message.getPayload());
+//        System.out.println("Player gained " +message.getPayload());
         JsonNode movementNode= mapper.readTree(message.getPayload());
         int points= movementNode.get("points").asInt();
 

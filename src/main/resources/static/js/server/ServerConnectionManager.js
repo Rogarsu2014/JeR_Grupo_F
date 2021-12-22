@@ -80,7 +80,7 @@ export class ServerConnectionManager {
     
     static stopAll(){
         clearTimeout(getClientsCountTimeOut)
-        clearTimeout(checkConnectionTimeOut)
+        clearTimeout(updateConnectionTimeOut)
         clearTimeout(checkConnectionTimeOut)
     }
 }

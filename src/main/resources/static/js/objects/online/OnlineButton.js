@@ -9,7 +9,6 @@ export class OnlineButton extends Button{
     }
 
     sendButtonInformation(buttonIndex) {
-        console.warn("sending button information")
         let connection = getConnection()
         let buttonInfo = {
             type: "CooperativeButton",
