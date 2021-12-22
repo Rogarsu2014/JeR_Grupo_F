@@ -279,7 +279,7 @@ jugador se queda inmovilizado durante 2 segundos como penalización.
 
 ![trampa](doc/GDDImagenes/Nivel/Trampa3.png)
 
-*Sprite de la trampa*
+*Sprite actual de la trampa*
 
 ## Tiempos
 
