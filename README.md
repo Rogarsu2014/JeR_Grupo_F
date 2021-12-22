@@ -61,6 +61,16 @@ ___
 
 [![Fse4](https://img.youtube.com/vi/v3jkW5DUXs4/0.jpg)](https://www.youtube.com/watch?v=v3jkW5DUXs4)
 
+#### Enlace a versión online
+
+http://dualinterestonlineweb-env.eba-a9tqfimk.eu-west-3.elasticbeanstalk.com/
+
+Se ha creado una aplicación almacenada en un servidor en la nube.
+
+Gracais a ello,  se consigue lo siguiente:
+* **Hacer test del proyecto fuera del ámbito de la red local.**
+* **Tener une version accesible para testing:** gracias a dicho enlace, el juego puede ser distribuido a particulares y comunidades con el fin de que prueban el juego y mejorar el producto.
+
 ## Índice
 
 *Los acentos no están disponibles en el índice por el sistema de Markdown*
