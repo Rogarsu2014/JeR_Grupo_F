@@ -583,29 +583,30 @@ misma.
 
 Una vez inicializado la conexión, no se mandá ningún mensaje hasta que un jugador haga una operacion de host o join.
 
-En un caso práctico, lo primero que ocurrirá es que un jugador haga Host y cree la primera sala que estará vacía. Este suceso manda un mensaje al servidor para que se cree un código aleatorio, y unpareja vacía
+En un caso práctico, lo primero que ocurrirá es que un jugador haga Host y cree la primera sala que estará vacía. Este suceso manda un mensaje al servidor para que se cree un código aleatorio, y una pareja de sesiones la cual tiene un hueco en blanco, esperando a otra sesión para comenzar la partida.
 
 Esta creación le otorgará un código el cual podrá compartir por el chat o por vías alternativas de comunicación, y el
 cual se guarda tambien dentor del sistema local en una variable de la clase SocketInitializer.js.
 
-Una vez completado el proceso de host, se procede a que otro jugador haga Join. Una vez que estén los dos jugadores
-dentro de la misma sala, solo quedaría pulsar el botón de "Ready".
+Una vez completado el proceso de host, se procede a que otro jugador haga Join. Esta petición se hace mandando un mensaje con el código de la sala, que será buscado en el mapa y si encuentra una pareja de valores con uno vacío procederá a rellenarlo y marcar la sala como llena.
+Una vez que estén los dos jugadores dentro de la misma sala, solo quedaría pulsar el botón de "Ready".
 
 Una vez que los dos jugadores pulsen este boton, se comprueba mediante StageSynchronizerManager si ambos jugadores están
 listos. Y si efectivamente lo están, comienza la partida.
 
 Dentro de la partida, se usan varios Managers al mismo tiempo, por una parte, MovementManager.java, que es el responable
-de transmitir los saltors y la dirección de los jugadores.
+de transmitir los saltos y la dirección de los jugadores. Estos saltos y direcciones se mandan al usuario contrario (tu oponente) y dictan como se va a mover el personaje del usuario en la pantalla del contringante.
+
 
 Este proceso automatiza, relativamente, el paso de posiciones entre jugadores. Sin embargo, para más seguridad, se tiene
-un PositionManager.java, el cuál cada tiempo no actualiza la dirección, si no la posición.
+un PositionManager.java, el cuál cada tiempo no actualiza la dirección, si no la posición, haciendo que incluso si las posiciones se han descoordinado vuelvan a coordinarse. 
 
 También está el PointsManager.java, para asegurar que los puntos obtenidos por un jugador se actualicen correctamente.
 
-También, se encunetra el BumpManager.java, que controla las colisiones entre los jugadores.
+También, se encunetra el BumpManager.java, que controla las colisiones entre los jugadores y las actualiza.
 
-En las fases cooperativas exite el manejador de los botones CooperativeButtonsManager.java, con el que se garantiza que
-la acción desencadenana al pulsar un botón en la sala se realice.
+En las fases cooperativas existe el manejador de los botones CooperativeButtonsManager.java, con el que se garantiza que
+la acción desencadenada al pulsar un botón en la sala se realice el la otra pantalla. Se asegura esto mandando un índice que índica que botón ha sido presionado.
 
 Una vez completado el flujo de juego, en la escena de resultados, y en caso de no haber empate, añade una victoria al
 perfil del usuario que ha ganado la partida.
