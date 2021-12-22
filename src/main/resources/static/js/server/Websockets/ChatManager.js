@@ -91,7 +91,7 @@ export class ChatManager {
         if (targetMessageBox===undefined) {
             targetMessageBox = messageBox;
         }
-        if(firstPass == true){
+        if(firstPass === true){
             this.getLastMessages(targetMessageBox);
             firstPass = false;
             //recibir todos los mensajes si es la primera vez que se abre el chat

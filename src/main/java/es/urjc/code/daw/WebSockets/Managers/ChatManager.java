@@ -63,13 +63,13 @@ public class ChatManager extends BaseManager{
                 Message newMessage = new Message(user, content);
                 saveMessage(newMessage);
 
-                session.sendMessage(message);
+                //session.sendMessage(message);
 
                 //Envía el mensaje al resto de usuarios, indicando el tipo de mensaje junto con el resto de información recibida
-                //ObjectNode chatObjectNode= mapper.valueToTree(newMessage);
-                //chatObjectNode.put("type",associatedType);
+                ObjectNode chatObjectNode= mapper.valueToTree(newMessage);
+                chatObjectNode.put("type",associatedType);
 
-                //sendMessage(session, chatObjectNode);
+                sendMessage(session, chatObjectNode);
             }
         }
 
