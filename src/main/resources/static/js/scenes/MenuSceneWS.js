@@ -305,7 +305,7 @@ export class MenuSceneWS extends Phaser.Scene {
         // var enterKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
         this.defineNetworkAvailabilityFunctionalities();
         this.defineUserRegistration();
-        // this.tryGetLoggedPlayer()
+        this.tryGetLoggedPlayer()
         // ServerPing.ConnectUser()
         // ServerPing.GetClientsCount()
 
@@ -649,17 +649,19 @@ export class MenuSceneWS extends Phaser.Scene {
 
     tryGetLoggedPlayer(){
         if (getUser()!==undefined){
-            this.playerIcon.setVisible(true)
+            // this.playerIcon.setVisible(true)
             this.loginVisible=true
             this.gamesVisible = false
-            this.user=getUser()
-            this.loginButton.setVisible(true)
-            this.loginButton.setTexture(icons[this.user['iconIndex']])
-            let user={
-                username:getUser().username
+            // this.user=getUser()
+            // this.loginButton.setVisible(true)
+            // this.loginButton.setTexture(icons[this.user['iconIndex']])
+            let currentUser={
+                username:getUser().username,
+                password:getUser().password
             }
-       
-            this.Registered(user)
+            //
+            // this.Registered(user)
+            this.userRegistration.logIn(currentUser.username, currentUser.password, (user) => this.Registered(user))
         }
     }
 
