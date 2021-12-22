@@ -1,4 +1,7 @@
 let connected=false;
+let checkConnectionTimeOut;
+let updateConnectionTimeOut;
+let getClientsCountTimeOut;
 export class ServerConnectionManager {
     static clientId= '_'+Math.random().toString(36).substr(2,9);
     static setClientId(id){
@@ -12,14 +15,14 @@ export class ServerConnectionManager {
             timeout:3000,
             success: () => {
                 // console.log("Hay conexion: entra en success")
-                setTimeout(()=>this.CheckNetworkConnection(onSuccess,onError),1000);
+                checkConnectionTimeOut=setTimeout(()=>this.CheckNetworkConnection(onSuccess,onError),1000);
                 onSuccess();
             },
             error:  (XMLHttpRequest, textStatus,errorThrown)=>{
 
                 console.log("Server not available")
                 onError();
-                setTimeout(()=>this.CheckNetworkConnection(onSuccess,onError),1000);
+                checkConnectionTimeOut=setTimeout(()=>this.CheckNetworkConnection(onSuccess,onError),1000);
 
             }
 
@@ -52,12 +55,12 @@ export class ServerConnectionManager {
                 // if (connected===false) {
                 //     this.ConnectUser()
                 // }
-                setTimeout(() => this.UpdateConnection(), 2000)
+                updateConnectionTimeOut=setTimeout(() => this.UpdateConnection(), 2000)
             },
             error:()=>{
                 this.ConnectUser()
                 // connected=false;
-                setTimeout(()=>this.UpdateConnection(),2000)
+                updateConnectionTimeOut=setTimeout(()=>this.UpdateConnection(),2000)
             }
         })
     }
@@ -68,10 +71,16 @@ export class ServerConnectionManager {
             success: (clientsCount)=> {
                 onSuccess(clientsCount);
                 // console.log("Clientes conectados: " + clientsCount);
-                setTimeout(()=>this.GetClientsCount(onSuccess),2000)
+                getClientsCountTimeOut=setTimeout(()=>this.GetClientsCount(onSuccess),2000)
             },error:()=>{
-                setTimeout(()=>this.GetClientsCount(onSuccess),2000)
+                getClientsCountTimeOut=setTimeout(()=>this.GetClientsCount(onSuccess),2000)
             }
         })
+    }
+    
+    static stopAll(){
+        clearTimeout(getClientsCountTimeOut)
+        clearTimeout(checkConnectionTimeOut)
+        clearTimeout(checkConnectionTimeOut)
     }
 }
