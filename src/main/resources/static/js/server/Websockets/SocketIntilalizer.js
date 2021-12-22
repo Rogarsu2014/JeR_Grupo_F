@@ -67,6 +67,8 @@ export function getConnection(){
     return connection
 }
 
+
+
 let roomCode;
 export function setRoomCode(newroomCode){
     roomCode = newroomCode;

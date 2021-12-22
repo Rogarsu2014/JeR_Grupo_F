@@ -43,7 +43,7 @@ export class HostOrJoin extends Phaser.Scene {
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
             hostButton.off('selected')
             joinButton.off('selected');
-            backButton.off('selected');
+            readyButton.off('selected');
         })
         this.add.image(0, 0, 'menuImage').setOrigin(0).setDepth(0).setScale(1);
 
@@ -60,7 +60,7 @@ export class HostOrJoin extends Phaser.Scene {
         let hostButton = this.add.image(width / 2.1, height / 2 - 25, 'HostButton').setDepth(1).setScale(.8);
         //this.onlineGame = this.add.image(width / 3, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
         let joinButton = this.add.image(width / 2.1, height / 2 + 50, 'JoinButton').setDepth(1).setScale(.8);
-        let backButton = this.add.image(width / 2.1, height / 2 + 125, 'ReadyButton').setDepth(1).setScale(.8);
+        let readyButton = this.add.image(width / 2.1, height / 2 + 125, 'ReadyButton').setDepth(1).setScale(.8);
 
         this.codeText = this.add.text(width / 1.78, height / 2 - 35, " ", {fontFamily: 'ink-free-normal',fontSize:25});
         this.codeText.visible = false;
@@ -70,11 +70,11 @@ export class HostOrJoin extends Phaser.Scene {
 
         this.buttons.push(hostButton);
         this.buttons.push(joinButton);
-        this.buttons.push(backButton);
+        this.buttons.push(readyButton);
 
         hostButton.setInteractive();
         joinButton.setInteractive();
-        backButton.setInteractive();
+        readyButton.setInteractive();
 
         hostButton.on('pointerdown', () => {
             let connection = getConnection()
@@ -106,7 +106,7 @@ export class HostOrJoin extends Phaser.Scene {
             }
         })
 
-        backButton.on('pointerdown', () => {
+        readyButton.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic();
             this.scene.start('OnlineCoop1');
@@ -135,6 +135,10 @@ export class HostOrJoin extends Phaser.Scene {
         // ServerPing.GetClientsCount()
 
         this.setOnButtonInfoReceived();
+    }
+    
+    update(){
+        
     }
 
     sendMessage() {
