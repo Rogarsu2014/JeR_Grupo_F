@@ -1,7 +1,6 @@
 package es.urjc.code.daw;
 
 
-import es.urjc.code.daw.WebSockets.WebsocketEchoHandler;
 import es.urjc.code.daw.WebSockets.WebsocketGatewayHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,17 +20,11 @@ public class Application implements WebSocketConfigurer {
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(echoHandler(), "/chat")
-				.setAllowedOrigins("*");
 		
-		registry.addHandler(createMovementHandler(), "/movement")
+		registry.addHandler(createMovementHandler(), "/applicationGateway")
 				.setAllowedOrigins("*");
 	}
-
-	@Bean
-	public WebsocketEchoHandler echoHandler() {
-		return new WebsocketEchoHandler();
-	}
+	
 	
 	@Bean
 	public WebsocketGatewayHandler createMovementHandler() {

@@ -14,6 +14,8 @@ let icons = {
     1: "ibbanIcon"
 }
 
+let isHost=false;
+
 export class HostOrJoin extends Phaser.Scene {
     constructor() {
         super("HostOrJoin");
@@ -43,7 +45,7 @@ export class HostOrJoin extends Phaser.Scene {
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
             hostButton.off('selected')
             joinButton.off('selected');
-            backButton.off('selected');
+            readyButton.off('selected');
         })
         this.add.image(0, 0, 'menuImage').setOrigin(0).setDepth(0).setScale(1);
 
@@ -53,15 +55,15 @@ export class HostOrJoin extends Phaser.Scene {
         this.selectSprite.setVisible(false);
         this.selectSprite.setScale(.1);
 
-        this.add.image(250, 250, 'HostScreen').setOrigin(0).setDepth(1).setScale(1.3);
-        this.add.image(763, 250, 'SearchRoomScreen').setOrigin(0).setDepth(1).setScale(1.3);
+        let hostScreen=this.add.image(250, 250, 'HostScreen').setOrigin(0).setDepth(1).setScale(1.3);
+        let searchRoomScreen=this.add.image(763, 250, 'SearchRoomScreen').setOrigin(0).setDepth(1).setScale(1.3);
 
 
         // this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
         let hostButton = this.add.image(325, 262, 'HostButton').setOrigin(0).setDepth(2).setScale(.8);
         //this.onlineGame = this.add.image(width / 3, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
         let joinButton = this.add.image(850, 262, 'JoinButton').setOrigin(0).setDepth(2).setScale(.8);
-        let backButton = this.add.image(width / 2, height / 2 + 230, 'ReadyButton').setDepth(2).setScale(.8);
+        let readyButton = this.add.image(width / 2, height / 2 + 230, 'ReadyButton').setDepth(2).setScale(.8);
 
         this.codeText = this.add.text(275, 350, " ", {fontFamily: 'ink-free-normal',fontSize:33});
         this.codeText.visible = false;
@@ -72,11 +74,12 @@ export class HostOrJoin extends Phaser.Scene {
 
         this.buttons.push(hostButton);
         this.buttons.push(joinButton);
-        this.buttons.push(backButton);
+        this.buttons.push(readyButton);
 
         hostButton.setInteractive();
         joinButton.setInteractive();
-        backButton.setInteractive();
+        readyButton.alpha=.6
+        // readyButton.setInteractive();
 
         hostButton.on('pointerdown', () => {
             let connection = getConnection()
@@ -91,6 +94,12 @@ export class HostOrJoin extends Phaser.Scene {
             } else {
                 connection.send(JSON.stringify(hostInfo))
             }
+            isHost=true;
+            readyButton.setInteractive();
+            joinButton.disableInteractive();
+            joinButton.alpha=.6;
+            searchRoomScreen.alpha=.6;
+            this.formUtil.hideElement("myText")
             hostButton.disableInteractive();
         })
         joinButton.on('pointerdown', () => {
@@ -100,8 +109,14 @@ export class HostOrJoin extends Phaser.Scene {
                 type2: "Join",
                 RoomCode: this.formUtil.getTextAreaValue("myText")
             }
-            if (codeRecieved == true){
+            if (codeRecieved === true){
+                
+                readyButton.setInteractive();
+                hostScreen.alpha=.6
+                hostButton.alpha=.6
                 joinButton.disableInteractive();
+                hostButton.disableInteractive();
+                this.formUtil.hideElement("myText")
             }
             if (connection.readyState !== WebSocket.OPEN) {
                 connection.addEventListener('open', () => {
@@ -112,7 +127,7 @@ export class HostOrJoin extends Phaser.Scene {
             }
         })
 
-        backButton.on('pointerdown', () => {
+        readyButton.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic();
             this.loadScene('OnlineCoop1');
@@ -134,12 +149,7 @@ export class HostOrJoin extends Phaser.Scene {
         var arrowDown = this.input.keyboard.on('keydown-' + 'DOWN', () => this.selectNextButton(1));
 
         var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
-
-        // var enterKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
-        //this.defineNetworkAvailabilityFunctionalities();
-        //this.defineUserRegistration();
-        // ServerPing.ConnectUser()
-        // ServerPing.GetClientsCount()
+        
 
         this.setOnButtonInfoReceived();
     }
@@ -230,10 +240,10 @@ export class HostOrJoin extends Phaser.Scene {
     update() {
         // console.log("")
         this.setElementsPosition()
-        if (codeRecieved == true){
-            this.codeText.visible = true;
-            this.codeText.setText("Your room code: " + getRoomCode());
-        }
+        // if (codeRecieved === true){
+        //     this.codeText.visible = true;
+        //     this.codeText.setText("Your room code: " + getRoomCode());
+        // }
     }
 
     setElementsPosition() {
@@ -249,14 +259,21 @@ export class HostOrJoin extends Phaser.Scene {
                 setPlayerIndex(message.playerIndex);
                 setRoomCode(code);
                 codeRecieved = true;
+                this.codeText.visible = true;
+                if (isHost){
+                    this.codeText.setText("Your room code: " + code)
+                }else{
+                    this.setJoinCodeText(code)
+                }
             }
         })
     }
     
-    loadScene(sceneKey){
-        this.scene.start(sceneKey)
-        this.formUtil.hideElement("myText")
+    setJoinCodeText(code){
+        this.codeText.x=785
+        this.codeText.setText("Joined in room: " + code )
     }
+    
     loadScene(sceneKey){
         this.scene.start(sceneKey)
         this.formUtil.hideElement("myText")

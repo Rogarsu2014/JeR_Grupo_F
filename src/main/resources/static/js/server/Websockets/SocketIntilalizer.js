@@ -28,7 +28,7 @@ import {ServerConnectionManager} from "../ServerConnectionManager.js";
 // })
 let connection;
 function connect(){
-    let newConnection = new WebSocket('ws:'+ServerConnectionManager.host+'/movement');
+    let newConnection = new WebSocket('ws:'+ServerConnectionManager.host+'/applicationGateway');
     newConnection.onerror = function(e) {
         console.log("WS error: " + e);
     }
