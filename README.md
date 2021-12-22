@@ -615,6 +615,27 @@ Todos los Managers heredan de una clase abstracta BaseManager.java, la cual defi
 ### Sesiones de usuarios
 
 ### Salas
+**Manager responsable del dato:** Emparejamiento de jugadores en salas y obtención de la pareja de la sala.
+
+Es el encargado de realizar las operaciones de creación de salas, la de unión a una sala ya creada y la de buscar la pareja de un usuario
+durante el envío de datos a través de websockets. 
+
+![img.png](doc/GDDImagenes/Fase_4/RoomManagerAtributes.png)
+
+Cuando se envía una petición de Host la clase crea una clave aleatoria de 6 cifras (pueden ser tanto letras como números) y
+crea una pareja vacía. Esta pareja se guarda en un mapa estático (Singleton) accesible desde cualquier clase. 
+
+![img.png](doc/GDDImagenes/Fase_4/RoomManagerHost.png)
+
+Cuando por el contrario llega una petición de Join la clase busca en el mapa la clave. Si la encuentra comprueba si la pareja 
+esta llena (ya hay dos jugadores) o está vacía. Si está vacía entonces introduce al jugador a la pareja y marca la sala como llena.
+
+![img.png](doc/GDDImagenes/Fase_4/RoomManagerJoin.png)
+
+Finalmente el método getPair() busca en el mapa la posición donde se encuentran las sesiones emparejadas y devuelve la otra sesión 
+con la que se está en este momento.
+
+![img.png](doc/GDDImagenes/Fase_4/RoomManagerGetPair.png)
 
 ### Sincronización de escena
 
