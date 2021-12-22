@@ -30,28 +30,24 @@ public class ChatManager extends BaseManager{
 
     @Override
     public void connectionEstablished(WebSocketSession session) throws IOException {
-        //Pilla todos los mensajes y los parsea a Json, los mensajes parseados los envia a la sesión que se ha conectado
-//        ArrayNode messages = mapper.valueToTree(messageRepository.findAll());
-//        session.sendMessage(new TextMessage(messages.toString()));
+
     }
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception{
         System.out.println("Mensaje recibido del chat con información " +message.getPayload());
         
-        //Crea un nodo con el mensaje recibido, dividiendo a su vez la info de este
+        //Crea un nodo con el mensaje recibido
         JsonNode chatNode= mapper.readTree(message.getPayload());
 
         if(chatNode.get("typeId").asText().equals("BaitMensajes")){
-            //for (Message mensaje : messageRepository.findAll()) {
-                //sendMessage(session, mapper.valueToTree(mensaje));
-            //}
-
+            //Recibe todos los mensajes del chat
             ArrayNode messages = mapper.valueToTree(messageRepository.findAll());
             session.sendMessage(new TextMessage(messages.toString()));
         }
         else {
             if(chatNode.get("typeId").asText().equals("CeboMensaje")){
+                //Recibe el útlimo mensaje enviado, actualmente no en uso, dejado por si acaso
                 //ArrayNode messages = mapper.valueToTree(messageRepository.findById(lastMessageId);
                 session.sendMessage(message);//new TextMessage(messages.toString()));
             }
@@ -82,11 +78,8 @@ public class ChatManager extends BaseManager{
         System.out.println("entra en send message");
 
         for (WebSocketSession session : SessionsManager.getInstance().getPlayersSessions().values()) {
-            //Si el que lo envía no es la sesión que envía...
-            //if (sender != session) {
-                //... le envía el mensaje
                 session.sendMessage(new TextMessage(mensaje.toString()));
-            //}
+
         }
     }
 
