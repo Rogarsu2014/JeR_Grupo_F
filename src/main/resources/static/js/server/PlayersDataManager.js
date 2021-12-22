@@ -1,5 +1,12 @@
 import {ServerConnectionManager} from "./ServerConnectionManager.js";
 
+let playerUsername;
+
+export function getUsername(){
+    if (playerUsername!==undefined)
+        return playerUsername;  
+}
+
 export class PlayersDataManager {
     signUp(username, password,confirmPassword, onSuccess,onError){
         if (password==confirmPassword) {
@@ -33,7 +40,6 @@ export class PlayersDataManager {
             })
         }
     }
-    
     logIn(username, password,onSuccess,onMisMatch,onAlreadyLogIn){
         $.ajax({
             method: "GET",
@@ -46,8 +52,10 @@ export class PlayersDataManager {
                  // console.log("Null user -> an user with that id has already log in")   
                 }else{
                     // console.log("User connetced: " + JSON.stringify(user))
-                    if (onSuccess !== undefined)
+                    if (onSuccess !== undefined) {
                         onSuccess(user)
+                        playerUsername=username
+                    }
                 }
             },
             error:(xhr,status,error)=>{

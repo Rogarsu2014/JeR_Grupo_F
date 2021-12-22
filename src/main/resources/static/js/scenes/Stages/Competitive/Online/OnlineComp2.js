@@ -1,15 +1,15 @@
 
-import {Platform} from "../../../objects/Platform.js";
+import {Platform} from "../../../../objects/Platform.js";
 
-import {CompetitiveScene} from "./Base/CompetitiveScene.js";
-
-
+import {OnlineCompetitiveScene} from "../Base/OnlineCompetitiveScene.js";
 
 
-export class Comp2 extends CompetitiveScene{
+
+
+export class OnlineComp2 extends OnlineCompetitiveScene{
 
     constructor() {
-        super("Comp2","Coop3",30000,'Comp2Map',960);
+        super("OnlineComp2","OnlineCoop3",30000,'Comp2Map',960);
     }
 
 

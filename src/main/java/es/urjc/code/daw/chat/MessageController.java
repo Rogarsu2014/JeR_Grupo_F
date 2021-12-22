@@ -11,7 +11,7 @@ public class MessageController {
 
     int messageCount=0;
     
-    private final  MessageRepository  messageRepository;
+    private final MessageRepository  messageRepository;
 
     public MessageController(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;

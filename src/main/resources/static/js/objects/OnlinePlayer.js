@@ -1,19 +1,13 @@
 import {Player} from "./Player.js";
 import {getRoomCode} from "../server/Websockets/SocketIntilalizer.js";
+import {Timer} from "../util/Timer.js";
 
 export class OnlinePlayer extends Player {
-    constructor(scene, x, y, spriteKey, points = 0, connection) {
+    constructor(scene, x, y, spriteKey, points = 0 ) {
         super(scene, x, y, spriteKey, points = 0);
-        this.connection = connection;
-        this.connection.onmessage = (msg) => {
-            let message=JSON.parse(msg.data)
-            if (message.type ==="Movement") {
-                let movement = JSON.parse(msg.data)
-                this.xDir = Number(movement.xDir);
-                this.isJumping = Boolean(movement.isJumping);
-            }
-        }
-
+        
+        // this.setConnection(connection)
+        
         this.animations = {
             [0]: () => {
                 this.anims.play('turn' + this.spriteKey);
@@ -30,16 +24,37 @@ export class OnlinePlayer extends Player {
         this.xDir = 0;
         this.isJumping = false
     }
-
+    setConnection(connection){
+        this.connection = connection;
+    }
+    setOnMovementMessage(){
+        this.connection.onmessage = (msg) => {
+            let message=JSON.parse(msg.data)
+            if (message.type ==="Movement") {
+                let movement = JSON.parse(msg.data)
+                this.xDir = Number(movement.xDir);
+                this.isJumping = Boolean(movement.isJumping);
+            }else if(message.type === "Position"){
+                let position = JSON.parse(msg.data)
+                this.x = Number(position.x);
+                this.y = Number(position.y);
+            }
+        }
+    }
     jump() {
         super.jump()
         this.isJumping=true;
         this.sendDirection()
         // this.sendDirection(this.xDir, this.isJumping=true)
     }
+    update(bump, playerp) {
+        // super.update(bump, playerp);
+        this.moveTo();
+    }
 
     moveLeft() {
         // super.moveLeft();
+        console.log("Move Left")
         this.flipX = true;
         //this.anims.play('movement' + this.spriteKey, true);
         this.xDir = -1
@@ -49,7 +64,7 @@ export class OnlinePlayer extends Player {
 
     moveRight() {
         // super.moveRight();
-
+        console.log("Move Right")
         //this.anims.play('movement' + this.spriteKey, true);
         this.xDir = 1
         // this.sendDirection(1, this.isJumping)
@@ -58,7 +73,6 @@ export class OnlinePlayer extends Player {
 
     idle() {
         // super.idle();
-
         //this.anims.play('turn' + this.spriteKey);
         if (this.isJumping) {
             this.isJumping = false;
@@ -66,6 +80,7 @@ export class OnlinePlayer extends Player {
         this.xDir = 0
         // this.sendDirection(0, this.isJumping)
         this.sendDirection()
+        console.log("si")
     }
 
     moveTo() {
@@ -88,5 +103,23 @@ export class OnlinePlayer extends Player {
         }
         this.connection.send(JSON.stringify(direction))
     }
+    sendPos(){
+        let position = {
+            type: "Position",
+            x: this.x,
+            y: this.y,
+            RoomCode: getRoomCode()
+        }
+        this.connection.send(JSON.stringify(position))
+    }
 
+    sendPos200(){
+
+        var timer = new Timer(this.context, 200, () => {
+            this.sendPos();
+            timer.startTimer();
+            }
+        );
+        timer.startTimer();
+    }
 }

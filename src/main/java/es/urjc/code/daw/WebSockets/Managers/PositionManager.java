@@ -10,45 +10,37 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MovementManager extends BaseManager{
-    
+public class PositionManager extends BaseManager{
+
     final ObjectMapper mapper = new ObjectMapper();
-    
-    public MovementManager() {
-        associatedType= "Movement";
+
+    //TODO-> este es un indice para testear
+    int playerJoinedIndex;
+
+    public PositionManager() {
+        associatedType= "Position";
     }
 
     @Override
-    public void connectionEstablished(WebSocketSession session) throws IOException {
-        
-    }
+    public void connectionEstablished(WebSocketSession session) throws IOException {}
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println("Player moved to " +message.getPayload());
-        
-        // Read position Json
+        System.out.println("Player tp'd to " +message.getPayload());
         JsonNode movementNode= mapper.readTree(message.getPayload());
-        int xDir= movementNode.get("xDir").asInt();
-        boolean isJumping= movementNode.get("isJumping").asBoolean();
+        int x= movementNode.get("x").asInt();
+        int y= movementNode.get("y").asInt();
 
-        // Create object to be sent to pair of the rooom
         ObjectNode movementObjectNode= mapper.createObjectNode();
         movementObjectNode.put("type",associatedType);
-        movementObjectNode.put("xDir",xDir);
-        movementObjectNode.put("isJumping",isJumping);
-        
-        // send the position to the respect
+        movementObjectNode.put("x",x);
+        movementObjectNode.put("y",y);
+
         sendPositionsPair(session,movementObjectNode, message);
     }
-    
 
     private void sendPositionsPair(WebSocketSession sender,ObjectNode position, TextMessage message2) throws Exception {
-        
-        // find Pair
         WebSocketSession pair = RoomManager.getInstance().getPair(sender, message2);
-        
-        // send message to pair with new position
         if (sender != pair && pair != null) {
             pair.sendMessage(new TextMessage(position.toString()));
         }
