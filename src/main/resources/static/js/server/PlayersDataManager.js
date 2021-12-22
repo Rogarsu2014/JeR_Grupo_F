@@ -1,11 +1,13 @@
 import {ServerConnectionManager} from "./ServerConnectionManager.js";
 
-let playerUsername;
+let storedUser;
 
-export function getUsername(){
-    if (playerUsername!==undefined)
-        return playerUsername;  
+export function getUser(){
+    if (storedUser!==undefined)
+        return storedUser;  
 }
+
+
 
 export class PlayersDataManager {
     signUp(username, password,confirmPassword, onSuccess,onError){
@@ -54,7 +56,7 @@ export class PlayersDataManager {
                     // console.log("User connetced: " + JSON.stringify(user))
                     if (onSuccess !== undefined) {
                         onSuccess(user)
-                        playerUsername=username
+                        storedUser=user;
                     }
                 }
             },

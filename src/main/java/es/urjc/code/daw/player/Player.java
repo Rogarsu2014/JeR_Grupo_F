@@ -21,6 +21,38 @@ public class Player {
     private String password;
     private int gameswon;
     private int iconIndex;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getGameswon() {
+        return gameswon;
+    }
+
+    public void setGameswon(int gameswon) {
+        this.gameswon = gameswon;
+    }
+
+    public int getIconIndex() {
+        return iconIndex;
+    }
+
+    public void setIconIndex(int iconIndex) {
+        this.iconIndex = iconIndex;
+    }
 } 
 
 

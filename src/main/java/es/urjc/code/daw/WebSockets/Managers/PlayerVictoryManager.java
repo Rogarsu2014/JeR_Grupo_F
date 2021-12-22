@@ -31,8 +31,7 @@ public class PlayerVictoryManager extends BaseManager{
 
         Player player=getPlayer(username);
         int playerGamesWon=player.getGameswon();
-        playerGamesWon++;
-        player.setGameswon(playerGamesWon);
+        player.setGameswon(++playerGamesWon);
         
         playerRepository.save(player);
         

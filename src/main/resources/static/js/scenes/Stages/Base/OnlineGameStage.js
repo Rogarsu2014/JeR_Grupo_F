@@ -8,7 +8,7 @@ import {OnlineKeyboardProcessor} from "../../../util/InputProcessors/OnlineKeybo
 let spriteKeys = ["dude", "dude2"]
 
 export class OnlineGameStage extends GameStage {
-
+    
     
     create(data) {
         super.create(data);

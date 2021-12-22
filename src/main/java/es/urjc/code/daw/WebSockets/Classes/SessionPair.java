@@ -42,6 +42,9 @@ public class SessionPair {
         return 1;
     }
 
+    public boolean containsSession(WebSocketSession session){
+        return session== w1|| session==w2;
+    }
 
     public String getStatus(){return status;}
 

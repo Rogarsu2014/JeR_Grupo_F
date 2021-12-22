@@ -43,7 +43,7 @@ public class ConnectionController {
 
         idsTable.put(id, true);
         new UserConnectedThread(this, id);
-        messageRepository.save(new Message("Server", "Client " + id + " connected"));
+//        messageRepository.save(new Message("Server", "Client " + id + " connected"));
         System.out.println("Users connected with id: " + (id));
 //        System.out.println("Users connected count: " + (idsTable.size()));
         return "Connected";
@@ -72,7 +72,7 @@ public class ConnectionController {
 
     public void removeUser(String id) {
         System.out.println("Users DISCONNECTED with id: " + (id));
-        messageRepository.save(new Message("Server", "Client " + id + " disconnected"));
+//        messageRepository.save(new Message("Server", "Client " + id + " disconnected"));
         idsTable.remove(id);
     }
 
