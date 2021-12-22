@@ -33,6 +33,7 @@ public class BumpManager extends BaseManager{
         ObjectNode bumpObjectNode= mapper.createObjectNode();
         bumpObjectNode.put("type",associatedType);
         bumpObjectNode.put("bump",bump);
+        bumpObjectNode.put("push",true);
 
         sendPositionsPair(session,bumpObjectNode, message);
     }

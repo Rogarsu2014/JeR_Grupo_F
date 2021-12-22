@@ -97,6 +97,7 @@ export class OnlineGameStage extends GameStage {
                 let bump = Boolean(message.bump);
                 console.log(bump);
                 this.bump = bump;
+                this.players[getPlayerIndex()].selfPush(bump);
             }
         })
     }
