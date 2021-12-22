@@ -50,20 +50,29 @@ public class ChatManager extends BaseManager{
             ArrayNode messages = mapper.valueToTree(messageRepository.findAll());
             session.sendMessage(new TextMessage(messages.toString()));
         }
-        else{
-            String user= chatNode.get("username").asText();
-            String content= chatNode.get("content").asText();
+        else {
+            if(chatNode.get("typeId").asText().equals("CeboMensaje")){
+                //ArrayNode messages = mapper.valueToTree(messageRepository.findById(lastMessageId);
+                session.sendMessage(message);//new TextMessage(messages.toString()));
+            }
+            else {
+                String user= chatNode.get("username").asText();
+                String content= chatNode.get("content").asText();
 
-            //Mensaje para guardarse
-            Message newMessage = new Message(user, content);
-            saveMessage(newMessage);
+                //Mensaje para guardarse
+                Message newMessage = new Message(user, content);
+                saveMessage(newMessage);
 
-            //Envía el mensaje al resto de usuarios, indicando el tipo de mensaje junto con el resto de información recibida
-            ObjectNode chatObjectNode= mapper.valueToTree(newMessage);
-            chatObjectNode.put("type",associatedType);
+                session.sendMessage(message);
 
-            sendMessage(session, chatObjectNode);
+                //Envía el mensaje al resto de usuarios, indicando el tipo de mensaje junto con el resto de información recibida
+                //ObjectNode chatObjectNode= mapper.valueToTree(newMessage);
+                //chatObjectNode.put("type",associatedType);
+
+                //sendMessage(session, chatObjectNode);
+            }
         }
+
     }
 
     //Método que envia el mensaje

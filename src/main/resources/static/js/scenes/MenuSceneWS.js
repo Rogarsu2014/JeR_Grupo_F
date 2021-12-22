@@ -237,7 +237,7 @@ export class MenuSceneWS extends Phaser.Scene {
                 this.chatVisible = false;
                 this.chatErrorText.setVisible(false);
                 this.textArea.setVisible(false);
-                ChatManager.stopReceivingLastMessages()
+                //ChatManager.stopReceivingLastMessages()
             }
             /*
             * Si usamos el if de abajo funciona bien el cerrar y abrir de forma INDIVIDUAL cada ventana
@@ -314,7 +314,7 @@ export class MenuSceneWS extends Phaser.Scene {
 
         //Metodo con el que llamabamos al mensaje, CAMBIAR
         ChatManager.sendUserMessage(this.user['username'], content);
-        ChatManager.receiveMessages(this.textArea);
+        //ChatManager.receiveMessages(this.textArea);
     }
 
     selectButton(index) {
