@@ -38,7 +38,6 @@ export class Preloader extends Phaser.Scene {
         this.load.image('XButtonPush','./Resources/assets/UI/Buttons/XButtonPush.png');
         this.load.image('ChatButtonPush','./Resources/assets/UI/Buttons/ChatButtonPush.png');
 
-
         this.load.image('PlayAgain','./Resources/assets/UI/Buttons/PlayAgain.png');
         this.load.image('PlayAgainPush','./Resources/assets/UI/Buttons/PlayAgainPush.png');
         this.load.image('ReturnToMenu','./Resources/assets/UI/Buttons/ReturnToMenu.png');
@@ -144,7 +143,16 @@ export class Preloader extends Phaser.Scene {
         this.load.image("ibbanIcon", "./Resources/assets/Iconos/IbbanIcon.png");
         
         this.load.image("UI_Arrow", "./Resources/assets/UI/MainMenu/Arrow.png");
-        
+
+        //Host and Join
+        this.load.image('HostButton','./Resources/assets/UI/Buttons/HostButton.png');
+        this.load.image('HostButtonPush','./Resources/assets/UI/Buttons/HostButtonPush.png');
+        this.load.image('JoinButton','./Resources/assets/UI/Buttons/JoinButton.png');
+        this.load.image('JoinButtonPush','./Resources/assets/UI/Buttons/JoinButtonPush.png');
+        this.load.image('ReadyButton','./Resources/assets/UI/Buttons/ReadyButton.png');
+        this.load.image('ReadyButtonPush','./Resources/assets/UI/Buttons/ReadyButtonPush.png');
+        this.load.image('SearchRoomScreen', './Resources/assets/UI/SearchRoomScreen.png');
+        this.load.image('HostScreen', './Resources/assets/UI/HostScreen.png');
     }
     create(){
         console.log("Preload hecho");

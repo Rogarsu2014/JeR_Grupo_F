@@ -2,12 +2,13 @@ import {Player} from '../objects/Player.js'
 import {cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 
-var players = [];
-var scores = [];
 
 export class GameCompletedScene extends Phaser.Scene {
-    constructor() {
-        super("GameCompletedScene");
+    constructor(sceneKey="GameCompletedScene") {
+        super(sceneKey);
+        this.playerPoints=[]
+        this.scores=[]
+        this.winnerIndex=-1;
     }
 
     init() {
@@ -29,8 +30,8 @@ export class GameCompletedScene extends Phaser.Scene {
         var width = this.game.canvas.width;
         var height = this.game.canvas.height;
 
-        players[0] = data.playerPoints[0];
-        players[1] = data.playerPoints[1];
+        this.playerPoints[0] = data.playerPoints[0];
+        this.playerPoints[1] = data.playerPoints[1];
 
         this.add.image(0, 0, 'victoryImage').setOrigin(0).setDepth(0).setScale(1);
 
@@ -43,19 +44,21 @@ export class GameCompletedScene extends Phaser.Scene {
         this.buttons.push(playAgainButton);
         this.buttons.push(mainMenuButton);
 
-        if (players[0] > players[1]) {
+        if (this.playerPoints[0] > this.playerPoints[1]) {
+            this.winnerIndex=0;
             this.add.text(width * .5, 60, "Player 1 wins!",{fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5)
-            scores[0] = this.add.text(width * .5, 213, "Player 1: " + players[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
-            scores[1] = this.add.text(width * .5, 233, "Player 2: " + players[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            this.scores[1] = this.add.text(width * .5, 233, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
 
-        } else if (players[0] < players[1]) {
+        } else if (this.playerPoints[0] < this.playerPoints[1]) {
+            this.winnerIndex=1
             this.add.text(width*.5, 60, "Player 2 wins!",{fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5);
-            scores[0] = this.add.text(width * .5, 233, "Player 1: " + players[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
-            scores[1] = this.add.text(width * .5, 213, "Player 2: " + players[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            this.scores[0] = this.add.text(width * .5, 233, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            this.scores[1] = this.add.text(width * .5, 213, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
         } else {
             this.add.text(width * .5, 60, "Draw!", {fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5);
-            scores[0] = this.add.text(width * .5, 213, "Player 1: " + players[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
-            scores[1] = this.add.text(width * .5, 233, "Player  2: " + players[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            this.scores[1] = this.add.text(width * .5, 233, "Player  2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
         }
 
         this.add.image(150, 250, "daia0").setScale(0.3);
@@ -96,7 +99,7 @@ export class GameCompletedScene extends Phaser.Scene {
         this.selectSprite.x = button.x - button.displayWidth * 0.71
         this.selectSprite.y = button.y - 2.7
         this.selectedButtonIndex = index;
-        this.selectSprite.setVisible(true);
+        //this.selectSprite.setVisible(true);
     }
 
     selectNextButton(change = 1) {

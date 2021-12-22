@@ -3,11 +3,8 @@ package es.urjc.code.daw.WebSockets;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import es.urjc.code.daw.WebSockets.Managers.*;
 import es.urjc.code.daw.chat.Message;
-import es.urjc.code.daw.chat.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -15,14 +12,14 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class WebsocketMovementHandler extends TextWebSocketHandler {
-    
-    
+public class WebsocketGatewayHandler extends TextWebSocketHandler {
+
+
     final private ObjectMapper mapper = new ObjectMapper();
 
     private ConcurrentHashMap<String,BaseManager> managers;
 
-    public WebsocketMovementHandler() {
+    public WebsocketGatewayHandler() {
         this.managers= new ConcurrentHashMap<>();
         
         this.managers.put(SessionsManager.getInstance().getAssociatedType(), SessionsManager.getInstance());
@@ -36,6 +33,9 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
         BaseManager cooperativeButtonsManager=new CooperativeButtonsManager();
         this.managers.put(cooperativeButtonsManager.getAssociatedType(), cooperativeButtonsManager);
 
+        BaseManager positionManager=new PositionManager();
+        this.managers.put(positionManager.getAssociatedType(), positionManager);
+
         this.managers.put(RoomManager.getInstance().getAssociatedType(), RoomManager.getInstance());
 
         BaseManager chatManager = new ChatManager();
@@ -46,6 +46,8 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+
+        // The method connectionEstablished is called for every Manager in the Map
         for (BaseManager manager: this.managers.values()) {
             manager.connectionEstablished(session);
         }
@@ -58,19 +60,13 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 
-        String type=getMessageType(message);
-        this.managers.get(type).receiveMessage(session,message);
+        // Getting messageType
+        String messageType=getMessageType(message);
         
+        // Calling the manager associated to the received message type
+        this.managers.get(messageType).receiveMessage(session,message);
+
     }
-    
-
-
-//    private void sendMessagesToOtherSessions( WebSocketSession senderSession, String message) throws IOException {
-//        for (WebSocketSession connectedSession  : playersSessions.values()) {
-//            if(connectedSession!=senderSession)
-//                connectedSession.sendMessage(new TextMessage(message.toString()));
-//        }
-//    }
     
     
     private String getMessageType(TextMessage message) throws IOException {
@@ -78,3 +74,4 @@ public class WebsocketMovementHandler extends TextWebSocketHandler {
         return messageNode.get("type").asText();
     }
 }
+

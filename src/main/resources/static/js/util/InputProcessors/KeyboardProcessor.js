@@ -5,14 +5,14 @@ export class KeyboardProcessor extends InputProcessor {
         super(context,player,jumpButton,dashButton);
         this.left=this.context.input.keyboard.addKey(left);
         this.left.on('down',()=> {
-            console.log("Left Down")
+            // console.log("Left Down")
             this.player.moveLeft()
         });
         this.bump=false;
         
         this.right=this.context.input.keyboard.addKey(right);
         this.right.on('down',()=> {
-            console.log("Right Down")
+            // console.log("Right Down")
             this.player.moveRight()
         });   
         
@@ -23,7 +23,7 @@ export class KeyboardProcessor extends InputProcessor {
         this.jumpButton=this.context.input.keyboard.addKey(jumpButton);
 
         this.jumpButton.on('down',()=> {
-            console.log("Right Down")
+            // console.log("Right Down")
             this.player.jump( this.bump);
         });
         //this.context.input.keyboard.on("keydown-"+jumpButton,()=>this.player.jump());

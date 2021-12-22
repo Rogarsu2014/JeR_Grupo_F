@@ -16,6 +16,15 @@ import {OnlineCoop1} from "./scenes/Stages/Cooperative/Online/OnlineCoop1.js";
 import {HostOrJoin} from "./scenes/HostOrJoin.js";
 import {MenuSceneWS} from "./scenes/MenuSceneWS.js";
 
+import {OnlineCoop1} from "./scenes/Stages/Cooperative/Online/OnlineCoop1.js";
+import {OnlineCoop2} from "./scenes/Stages/Cooperative/Online/OnlineCoop2.js";
+import {OnlineCoop3} from "./scenes/Stages/Cooperative/Online/OnlineCoop3.js";
+
+import {OnlineComp1} from "./scenes/Stages/Competitive/Online/OnlineComp1.js";
+import {OnlineComp2} from "./scenes/Stages/Competitive/Online/OnlineComp2.js";
+import {OnlineComp3} from "./scenes/Stages/Competitive/Online/OnlineComp3.js";
+import {OnlineGameCompletedScene} from "./scenes/OnlineGameCompletedScene.js";
+
 
 window.onload=function (){
 
@@ -30,7 +39,7 @@ window.onload=function (){
         //Carga de escenas
         // CharacterTestScene,TimerTestScene, TransitionsScene, CooperativeStage, Preloader,Coop1, Coop2
 
-        scene: [Preloader,MenuSceneWS,HostOrJoin,OnlineCoop1,MenuSceneSpringTest,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, GameCompletedScene, MenuScene, Comp1, Comp2, Comp3, Credits,Tutorial],
+        scene: [Preloader,MenuSceneWS,HostOrJoin,OnlineCoop1,OnlineCoop2,OnlineCoop3,OnlineComp1,OnlineComp2,OnlineComp3,OnlineGameCompletedScene,MenuSceneSpringTest,JoinScreen,CharacterTestScene, Coop1,Coop2,Coop3, GameCompletedScene, MenuScene, Comp1, Comp2, Comp3, Credits,Tutorial],
 
 
         input: {

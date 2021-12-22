@@ -26,25 +26,20 @@ public class CooperativeButtonsManager extends BaseManager {
         JsonNode buttonNode = mapper.readTree(message.getPayload());
         int buttonIndex = buttonNode.get("buttonIndex").asInt();
 
+        // Object with the pressed button index
         ObjectNode node= mapper.createObjectNode();
         node.put("type",associatedType);
         node.put("buttonIndex",buttonIndex);
-        //NotifyOfButtonPressed(session,node.toString());
+        
+        // Notify client pair of the button
         NotifyOfButtonPressedPair(session,node.toString(), message);
     }
     
-    private void NotifyOfButtonPressed(WebSocketSession sender,String message) throws IOException {
-        for (WebSocketSession session :
-                SessionsManager.getInstance().getPlayersSessions().values()) {
-            if (sender != session) {
-                session.sendMessage(new TextMessage(message));
-            }
-        }
-    }
     private void NotifyOfButtonPressedPair(WebSocketSession sender,String message, TextMessage message2) throws Exception {
         WebSocketSession pair = RoomManager.getInstance().getPair(sender, message2);
             if (sender != pair && pair != null) {
                 pair.sendMessage(new TextMessage(message));
             }
     }
+    
 }

@@ -1,6 +1,6 @@
 import {Trap} from '../../../objects/Trap.js'
 import {Platform} from "../../../objects/Platform.js";
-import {CompetitiveScene} from "./CompetitiveScene.js";
+import {CompetitiveScene} from "./Base/CompetitiveScene.js";
 
 var traps = [];
 
@@ -8,7 +8,7 @@ var traps = [];
 export class Comp3 extends CompetitiveScene {
 
     constructor() {
-        super("Comp3", "GameCompletedScene", 30000, 'Comp3Map',1280);
+        super("Comp3", "OnlineGameCompletedScene", 30000, 'Comp3Map',1280);
     }
 
 
