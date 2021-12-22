@@ -257,4 +257,8 @@ export class HostOrJoin extends Phaser.Scene {
         this.scene.start(sceneKey)
         this.formUtil.hideElement("myText")
     }
+    loadScene(sceneKey){
+        this.scene.start(sceneKey)
+        this.formUtil.hideElement("myText")
+    }
 }

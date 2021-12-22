@@ -637,6 +637,23 @@ con la que se está en este momento.
 
 ![img.png](doc/GDDImagenes/Fase_4/RoomManagerGetPair.PNG)
 
+
+### BumpManager
+**Manager responsable del dato:** Mandar las colisiones y el empujon.
+
+Método de funcionamiento similar al de la mayoría, el cuál recibe un valor que indica si los personajes están colisionando o no
+y manda a la pareja un aviso de que está siendo empujado (siempre y cuando estén colisionando)
+
+![img.png](doc/GDDImagenes/Fase_4/BumpManager.PNG)
+
+### PointsManager
+**Manager responsable del dato:** Mandar los puntos recogidos.
+
+Método de funcionamiento similar al de la mayoría, el cuál recibe un valor que marca el valor de la puntuación del rival, el 
+cual sobreescribe el valor local.
+
+![img.png](doc/GDDImagenes/Fase_4/PointsManager.PNG)
+
 ### Sincronización de escena
 
 **Manager responsable del dato:** sincronización del inicio de las escenas.
