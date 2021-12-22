@@ -39,10 +39,10 @@ export class GameCompletedScene extends Phaser.Scene {
         this.selectSprite.setVisible(false);
         this.selectSprite.setScale(.1);
 
-        let playAgainButton = this.add.image(width *.5, height - 180, 'PlayAgain').setDepth(1);
-        let mainMenuButton = this.add.image(width *.5, height - 80, 'ReturnToMenu').setDepth(1);
-        this.buttons.push(playAgainButton);
-        this.buttons.push(mainMenuButton);
+        this.playAgainButton = this.add.image(width *.5, height - 180, 'PlayAgain').setDepth(1);
+        this.mainMenuButton = this.add.image(width *.5, height - 80, 'ReturnToMenu').setDepth(1);
+        this.buttons.push(this.playAgainButton);
+        this.buttons.push(this.mainMenuButton);
 
         if (this.playerPoints[0] > this.playerPoints[1]) {
             this.winnerIndex=0;
@@ -64,13 +64,13 @@ export class GameCompletedScene extends Phaser.Scene {
         this.add.image(150, 250, "daia0").setScale(0.3);
         this.add.image(800, 250, "ibban").setScale(0.3).flipX=true;
 
-        playAgainButton.setInteractive();
+        this.playAgainButton.setInteractive();
 
-        playAgainButton.on('selected', () => {
+        this.playAgainButton.on('selected', () => {
             this.scene.start('Coop1');
         })
 
-        mainMenuButton.on('selected', () => {
+        this.mainMenuButton.on('selected', () => {
             this.scene.start('MenuScene');
         })
 

@@ -59,35 +59,42 @@ export class OnlineCoop3 extends OnlineCooperativeScene {
         ///******* players points
 
         //*************** buttons
+        let button3_P2 = new OnlineButton(this, 460, 288, 'botonL', () => {
+            platform2.enable()
+            platform4.enable()
+            platform5.enable()
+            this.taskManager.taskCompleted();
+            button3_P2.setTexture('botonLP')
+        }, this.players[1],2);
+        button3_P2.setVisible(false)
+        
+        let button1_P1 = new OnlineButton(this, 320, 512, 'botonR', () => {
+            platform1.enable();
+            this.taskManager.taskCompleted();
+            button1_P1.setTexture('botonRP')
+            button3_P2.setVisible(true)
+
+        }, this.players[0], 1);
+        button1_P1.setVisible(false)
+        
+       
+        
         let button1_P2 = new OnlineButton(this, 256, 288, 'botonL', () => {   //ley de +58
             platform2.enable()
             platform3.enable()
             this.taskManager.taskCompleted();
             this.taskManager.taskCompleted();
-
-            button1_P2.setVisible(false);
-            let button1_P2P = new OnlineButton(this, 256, 290, 'botonLP');
-
-            let button1_P1 = new OnlineButton(this, 320, 512, 'botonR', () => {
-                platform1.enable();
-                this.taskManager.taskCompleted();
-                button1_P1.setTexture('botonRP')
-
-                let button1_P2 = new Button(this, 460, 288, 'botonL', () => {
-                    platform2.enable()
-                    platform4.enable()
-                    platform5.enable()
-                    this.taskManager.taskCompleted();
-                    button1_P2.setTexture('botonLP')
-                }, this.players[1],2);
-                this.buttons.push(button1_P2)
-                
-            }, this.players[0],1);
-            this.buttons.push(button1_P1)
-            
+            button1_P1.setVisible(true)
+            // button1_P2.setVisible(false);
+            button1_P2.setTexture('botonLP')
+            // let button1_P2P = new OnlineButton(this, 256, 290, 'botonLP');
         }, this.players[1],0);
+        
         this.buttons.push(button1_P2)
-
+        
+        this.buttons.push(button1_P1)
+        
+        this.buttons.push(button3_P2)
 
 
 

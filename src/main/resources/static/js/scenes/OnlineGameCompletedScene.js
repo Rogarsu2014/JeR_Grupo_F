@@ -11,6 +11,11 @@ export class OnlineGameCompletedScene extends GameCompletedScene {
     create(data) {
         super.create(data);
         this.checkWinner();
+        
+        this.playAgainButton.removeAllListeners('selected')
+        this.playAgainButton.on('selected',()=>{
+            this.scene.start('HostOrJoin');
+        })
     }
 
     checkWinner() {

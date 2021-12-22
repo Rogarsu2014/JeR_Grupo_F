@@ -26,7 +26,7 @@ public class MovementManager extends BaseManager{
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println("Player moved to " +message.getPayload());
+//        System.out.println("Player moved to " +message.getPayload());
         
         // Read position Json
         JsonNode movementNode= mapper.readTree(message.getPayload());

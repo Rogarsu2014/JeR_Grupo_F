@@ -305,7 +305,7 @@ export class MenuSceneWS extends Phaser.Scene {
         // var enterKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
         this.defineNetworkAvailabilityFunctionalities();
         this.defineUserRegistration();
-        this.tryGetLoggedPlayer()
+        // this.tryGetLoggedPlayer()
         // ServerPing.ConnectUser()
         // ServerPing.GetClientsCount()
 
@@ -313,6 +313,8 @@ export class MenuSceneWS extends Phaser.Scene {
     
     loadScene(sceneKey){
         ServerConnectionManager.stopAll()
+        this.formUtil.hideElement("btnSend")
+        this.formUtil.clearTextAreaValue("myText")
         this.scene.start(sceneKey)
     }
     sendMessage() {

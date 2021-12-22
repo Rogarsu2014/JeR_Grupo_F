@@ -29,7 +29,7 @@ export class MenuSceneSpringTest extends Phaser.Scene {
         playerMessageText.setInteractive();
 
         getMessageText.on('pointerdown', () => {
-            console.log("pointer down")
+            // console.log("pointer down")
             this.getLastMessages();
         })
 
