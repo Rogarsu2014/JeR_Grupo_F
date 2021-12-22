@@ -1,6 +1,6 @@
 import {ServerConnectionManager} from "./ServerConnectionManager.js";
 
-let lastMessageId = 0
+let lastMessageId = 0;
 let messagesTimeout = null;
 let stopReceivingMessages = false;
 
