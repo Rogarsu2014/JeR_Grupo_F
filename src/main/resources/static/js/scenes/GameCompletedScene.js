@@ -96,7 +96,7 @@ export class GameCompletedScene extends Phaser.Scene {
         this.selectSprite.x = button.x - button.displayWidth * 0.71
         this.selectSprite.y = button.y - 2.7
         this.selectedButtonIndex = index;
-        this.selectSprite.setVisible(true);
+        //this.selectSprite.setVisible(true);
     }
 
     selectNextButton(change = 1) {

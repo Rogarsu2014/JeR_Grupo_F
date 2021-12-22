@@ -344,7 +344,7 @@ export class MenuScene extends Phaser.Scene {
         });
 
         this.selectedButtonIndex = index;
-        this.selectSprite.setVisible(true);
+        //this.selectSprite.setVisible(true);
     }
 
     defineNetworkAvailabilityFunctionalities() {

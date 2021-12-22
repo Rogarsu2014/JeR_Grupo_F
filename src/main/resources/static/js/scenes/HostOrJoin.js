@@ -8,6 +8,7 @@ import {getConnection, getRoomCode, setRoomCode} from "../server/Websockets/Sock
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
+var codeRecieved = false;
 let icons = {
     0: "daiaIcon",
     1: "ibbanIcon"
@@ -52,12 +53,17 @@ export class HostOrJoin extends Phaser.Scene {
         this.selectSprite.setVisible(false);
         this.selectSprite.setScale(.1);
 
-        // this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
-        let hostButton = this.add.image(width / 3, height / 2 - 25, 'LocalGame').setDepth(1).setScale(.8);
-        //this.onlineGame = this.add.image(width / 3, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
-        let joinButton = this.add.image(width / 3, height / 2 + 125, 'Tutorial').setDepth(1).setScale(.8);
-        let backButton = this.add.image(width / 3, height / 2 + 200, 'Options').setDepth(1).setScale(.8);
+        this.add.image(800, 450, 'SearchRoomScreen').setOrigin(0).setDepth(1).setScale(1.3);
+        this.add.image(50, 50, 'HostScreen').setOrigin(0).setDepth(1).setScale(1.3);
 
+        // this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
+        let hostButton = this.add.image(width / 2.1, height / 2 - 25, 'HostButton').setDepth(1).setScale(.8);
+        //this.onlineGame = this.add.image(width / 3, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
+        let joinButton = this.add.image(width / 2.1, height / 2 + 50, 'JoinButton').setDepth(1).setScale(.8);
+        let backButton = this.add.image(width / 2.1, height / 2 + 125, 'ReadyButton').setDepth(1).setScale(.8);
+
+        this.codeText = this.add.text(width / 1.78, height / 2 - 35, " ", {fontFamily: 'ink-free-normal',fontSize:25});
+        this.codeText.visible = false;
 
         // chatText.setWordWrapWidth(778 * .5 - 20)
         // chatText.setWordWrapHeight(960 *.5 - 20)
@@ -112,7 +118,7 @@ export class HostOrJoin extends Phaser.Scene {
             rows: 11,
             cols: 11
         });
-        // this.formUtil.showNumbers();
+        this.formUtil.showNumbers();
         this.formUtil.scaleToGameW("myText", .2);
         this.formUtil.placeElementAt(97, 'myText', true);
 
@@ -129,7 +135,6 @@ export class HostOrJoin extends Phaser.Scene {
         // ServerPing.GetClientsCount()
 
         this.setOnButtonInfoReceived();
-
     }
 
     sendMessage() {
@@ -170,7 +175,7 @@ export class HostOrJoin extends Phaser.Scene {
         });
 
         this.selectedButtonIndex = index;
-        this.selectSprite.setVisible(true);
+        //this.selectSprite.setVisible(true);
     }
 
 
@@ -218,6 +223,11 @@ export class HostOrJoin extends Phaser.Scene {
     update() {
         // console.log("")
         this.setElementsPosition()
+        if (codeRecieved == true){
+            //console.log("Ey");
+            this.codeText.visible = true;
+            this.codeText.setText("Your room code: " + getRoomCode());
+        }
     }
 
     setElementsPosition() {
@@ -231,6 +241,7 @@ export class HostOrJoin extends Phaser.Scene {
             if (message.type === "RoomCode") {
                 let code = message.code;
                 setRoomCode(code);
+                codeRecieved = true;
             }
         })
     }
