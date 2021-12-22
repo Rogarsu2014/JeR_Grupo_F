@@ -15,8 +15,8 @@ export class OnlineKeyboardProcessor extends  KeyboardProcessor{
         {
             playerp.selfPush(bump);
         }
-        if(bump != this.bump){
-            this.bump = bump;
+        if(bump !== this.context.bump){
+            this.context.bump = bump;
             this.sendBump();
         }
     }

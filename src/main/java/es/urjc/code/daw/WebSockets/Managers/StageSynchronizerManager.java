@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 //import javafx.util.Pair;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -35,6 +36,11 @@ public class StageSynchronizerManager extends BaseManager {
         // Check if players in same room
         TryNotifyClientsOfReadyPair(session,message);
 
+    }
+
+    @Override
+    public void connectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        
     }
 
     // Checks if player and its pair are ready.

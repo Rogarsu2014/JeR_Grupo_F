@@ -3,6 +3,7 @@ package es.urjc.code.daw.WebSockets.Managers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -34,7 +35,12 @@ public class CooperativeButtonsManager extends BaseManager {
         // Notify client pair of the button
         NotifyOfButtonPressedPair(session,node.toString(), message);
     }
-    
+
+    @Override
+    public void connectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        
+    }
+
     private void NotifyOfButtonPressedPair(WebSocketSession sender,String message, TextMessage message2) throws Exception {
         WebSocketSession pair = RoomManager.getInstance().getPair(sender, message2);
             if (sender != pair && pair != null) {

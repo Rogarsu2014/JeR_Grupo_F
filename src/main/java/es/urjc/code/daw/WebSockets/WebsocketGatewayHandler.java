@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.WebSockets.Managers.*;
 import es.urjc.code.daw.chat.Message;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -71,10 +72,15 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
         
         // Calling the manager associated to the received message type
         this.managers.get(messageType).receiveMessage(session,message);
-
     }
-    
-    
+
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        for (BaseManager manager: this.managers.values()) {
+            manager.connectionClosed(session,status);
+        }
+    }
+
     private String getMessageType(TextMessage message) throws IOException {
         JsonNode  messageNode= mapper.readTree(message.getPayload());
         return messageNode.get("type").asText();

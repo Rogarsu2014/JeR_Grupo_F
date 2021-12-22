@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import es.urjc.code.daw.player.Player;
 import es.urjc.code.daw.player.PlayerRepository;
 import es.urjc.code.daw.services.PlayersRepositoryService;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -37,8 +38,13 @@ public class PlayerVictoryManager extends BaseManager{
         playerRepository.save(player);
         
     }
-    
-    
+
+    @Override
+    public void connectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        
+    }
+
+
     private Player getPlayer(String username) throws Exception {
         return playerRepository.findById(username).orElseThrow(() -> new Exception("Player not found") );
     }
