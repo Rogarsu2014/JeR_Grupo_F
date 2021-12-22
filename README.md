@@ -842,10 +842,20 @@ Para ejecutar la aplicación, es necesario tener Java instalado. La aplicación 
 
 Una vez creado el .jar si se quiere ejecutar se puede hacer desde la consola de comandos, navegando hasta la carpeta en
 la que el archivo se encuentre y ejecutando el comando:
+ 
+**Fase 3**
 
 ´´´
 
      java -jar Dual_Interest-0.0.3.jar
+
+´´´
+
+**Fase 4**
+
+´´´
+
+     java -jar Dual_Interest-0.0.4.jar
 
 ´´´
 
