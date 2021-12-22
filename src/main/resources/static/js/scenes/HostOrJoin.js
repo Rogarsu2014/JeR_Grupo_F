@@ -53,17 +53,19 @@ export class HostOrJoin extends Phaser.Scene {
         this.selectSprite.setVisible(false);
         this.selectSprite.setScale(.1);
 
-        this.add.image(800, 450, 'SearchRoomScreen').setOrigin(0).setDepth(1).setScale(1.3);
-        this.add.image(50, 50, 'HostScreen').setOrigin(0).setDepth(1).setScale(1.3);
+        this.add.image(250, 250, 'HostScreen').setOrigin(0).setDepth(1).setScale(1.3);
+        this.add.image(763, 250, 'SearchRoomScreen').setOrigin(0).setDepth(1).setScale(1.3);
+
 
         // this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
-        let hostButton = this.add.image(width / 2.1, height / 2 - 25, 'HostButton').setDepth(1).setScale(.8);
+        let hostButton = this.add.image(325, 262, 'HostButton').setOrigin(0).setDepth(2).setScale(.8);
         //this.onlineGame = this.add.image(width / 3, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
-        let joinButton = this.add.image(width / 2.1, height / 2 + 50, 'JoinButton').setDepth(1).setScale(.8);
-        let backButton = this.add.image(width / 2.1, height / 2 + 125, 'ReadyButton').setDepth(1).setScale(.8);
+        let joinButton = this.add.image(850, 262, 'JoinButton').setOrigin(0).setDepth(2).setScale(.8);
+        let backButton = this.add.image(width / 2, height / 2 + 230, 'ReadyButton').setDepth(2).setScale(.8);
 
-        this.codeText = this.add.text(width / 1.78, height / 2 - 35, " ", {fontFamily: 'ink-free-normal',fontSize:25});
+        this.codeText = this.add.text(275, 350, " ", {fontFamily: 'ink-free-normal',fontSize:33});
         this.codeText.visible = false;
+        this.codeText.setDepth(3);
 
         // chatText.setWordWrapWidth(778 * .5 - 20)
         // chatText.setWordWrapHeight(960 *.5 - 20)
@@ -89,6 +91,7 @@ export class HostOrJoin extends Phaser.Scene {
             } else {
                 connection.send(JSON.stringify(hostInfo))
             }
+            hostButton.disableInteractive();
         })
         joinButton.on('pointerdown', () => {
             let connection = getConnection()
@@ -96,6 +99,9 @@ export class HostOrJoin extends Phaser.Scene {
                 type: "Room",
                 type2: "Join",
                 RoomCode: this.formUtil.getTextAreaValue("myText")
+            }
+            if (codeRecieved == true){
+                joinButton.disableInteractive();
             }
             if (connection.readyState !== WebSocket.OPEN) {
                 connection.addEventListener('open', () => {
@@ -224,14 +230,13 @@ export class HostOrJoin extends Phaser.Scene {
         // console.log("")
         this.setElementsPosition()
         if (codeRecieved == true){
-            //console.log("Ey");
             this.codeText.visible = true;
             this.codeText.setText("Your room code: " + getRoomCode());
         }
     }
 
     setElementsPosition() {
-        this.formUtil.placeElementAt(97, 'myText', true);
+        this.formUtil.placeElementAt(73, 'myText', true);
     }
 
     setOnButtonInfoReceived() {

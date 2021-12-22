@@ -1,9 +1,10 @@
 import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
-import {MessagesManager} from "../server/MessagesManager.js";
+//import {MessagesManager} from "../server/MessagesManager.js";
 import {ServerConnectionManager} from "../server/ServerConnectionManager.js";
 import {UserRegistration} from "../util/UserRegistration.js";
+import {ChatManager} from "../server/Websockets/ChatManager.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -12,9 +13,9 @@ let icons = {
     1: "ibbanIcon"
 }
 
-export class MenuScene extends Phaser.Scene {
+export class MenuSceneWS extends Phaser.Scene {
     constructor() {
-        super("MenuScene");
+        super("MenuSceneWS");
     }
 
     init() {
@@ -102,11 +103,11 @@ export class MenuScene extends Phaser.Scene {
         this.formUtil.placeElementAt(98, "btnSend");
         this.formUtil.addClickCallback("btnSend", () => this.sendMessage());
 
-        
+
         this.formUtil.scaleToGameW("myUser", .11);
         this.formUtil.placeElementAt(1, 'myUser', true);
 
-        
+
         this.formUtil.scaleToGameW("myPass", .11);
         this.formUtil.placeElementAt(12, 'myPass', true);
 
@@ -224,7 +225,7 @@ export class MenuScene extends Phaser.Scene {
                 this.textArea.setVisible(true);
                 this.chatErrorText.setVisible(true);
                 this.chatVisible = true;
-                MessagesManager.receiveMessages(this.textArea)
+                ChatManager.receiveMessages(this.textArea)
             }
         })
         this.xButton.on('pointerdown', () => {
@@ -236,7 +237,7 @@ export class MenuScene extends Phaser.Scene {
                 this.chatVisible = false;
                 this.chatErrorText.setVisible(false);
                 this.textArea.setVisible(false);
-                MessagesManager.stopReceivingLastMessages()
+                //ChatManager.stopReceivingLastMessages()
             }
             /*
             * Si usamos el if de abajo funciona bien el cerrar y abrir de forma INDIVIDUAL cada ventana
@@ -307,17 +308,13 @@ export class MenuScene extends Phaser.Scene {
     }
 
     sendMessage() {
-        // console.log("sendForm");
+
         //content es el contenido de la area de texto con el tag de myText
         let content = this.formUtil.getTextAreaValue("myText");
-        // console.log(content)
+
         //Metodo con el que llamabamos al mensaje, CAMBIAR
-        MessagesManager.postMessage(this.user['username'], content, () => {
-                this.formUtil.clearTextAreaValue("myText");
-                
-                this.chatErrorText.text = '';
-            }, () => this.chatErrorText.text = 'Failed to sent message'
-            , () => this.chatErrorText.text = 'Error while sending message');
+        ChatManager.sendUserMessage(this.user['username'], content);
+        //ChatManager.receiveMessages(this.textArea);
     }
 
     selectButton(index) {
@@ -346,7 +343,7 @@ export class MenuScene extends Phaser.Scene {
         });
 
         this.selectedButtonIndex = index;
-        //this.selectSprite.setVisible(true);
+        this.selectSprite.setVisible(true);
     }
 
     defineNetworkAvailabilityFunctionalities() {
@@ -429,12 +426,12 @@ export class MenuScene extends Phaser.Scene {
             // console.log("User undefined")
         }
     }
-    
+
     enableOnlineGameButton(){
         this.onlineGame.alpha=1.0;
         this.buttons.splice(1,0,this.onlineGame);
     }
-    
+
     setPlayerInformation() {
         this.playerUsernameText = this.add.text(120, 16, this.user['username'], {
             fontFamily: 'ink-free-normal',
@@ -465,17 +462,17 @@ export class MenuScene extends Phaser.Scene {
         this.iconDownArrow.on('pointerdown', () => {
             this.onIconDown()
         })
-        
+
     }
     enableChangeIconArrows(){
         this.iconUpArrow.setVisible(true)
         this.iconDownArrow.setVisible(true)
-    } 
+    }
     disableChangeIconArrows(){
         this.iconUpArrow.setVisible(false)
         this.iconDownArrow.setVisible(false)
     }
-    
+
     onIconUp() {
         let currentIconIndex = this.user['iconIndex'];
         if ((currentIconIndex + 1) >= Object.keys(icons).length) {
@@ -498,7 +495,7 @@ export class MenuScene extends Phaser.Scene {
     onIconDown() {
         let currentIconIndex = this.user['iconIndex'];
         if ((currentIconIndex - 1) < 0) {
-            
+
             this.user['iconIndex'] = Object.keys(icons).length-1;
 
         } else {
@@ -628,4 +625,13 @@ export class MenuScene extends Phaser.Scene {
         this.formUtil.placeElementAt(1, 'myUser', true);
         this.formUtil.placeElementAt(12, 'myPass', true);
     }
+    static getTextArea(){
+        return this.textArea;
+    }
 }
+
+//Devuelve el área de texto del menú
+export function getText(){
+    return MenuSceneWS.getTextArea();
+}
+
