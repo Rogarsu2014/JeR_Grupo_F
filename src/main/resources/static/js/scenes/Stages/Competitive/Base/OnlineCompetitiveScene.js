@@ -2,11 +2,12 @@
 import {cameraFadeOut} from "../../../../util/cameraEffects.js";
 import {Skull} from "../../../../objects/Skull.js";
 import {OnlineGameStage} from "../../Base/OnlineGameStage.js";
+import {getRandomComp} from "../../../../util/ScenesRandomizer.js";
 
 export class OnlineCompetitiveScene extends OnlineGameStage{
 
-    constructor(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth) {
-        super(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth);
+    constructor(sceneKey, timerTime,tilemapKey,sceneWidth) {
+        super(sceneKey, "Online"+getRandomComp(), timerTime,tilemapKey,sceneWidth);
         this.backgroundMusicKey='compStageMusic';
         this.skulls=[]
     }

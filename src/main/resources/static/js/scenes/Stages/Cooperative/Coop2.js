@@ -4,13 +4,17 @@ import {Button} from "../../../objects/Button.js";
 import {Platform} from "../../../objects/Platform.js";
 
 import {CooperativeScene} from "./Base/CooperativeScene.js";
+import {addCoopScene} from "../../../util/ScenesRandomizer.js";
 
 
+let sceneKey="Coop2"
+addCoopScene(sceneKey)
 
 export class Coop2 extends CooperativeScene {
 
     constructor() {
-        super("Coop2","Comp2",10000,'Coop2Map');
+        super(sceneKey,10000,'Coop2Map');
+        // super("Coop2","Comp2",10000,'Coop2Map');
     }
 
     init() {

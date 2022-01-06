@@ -51,8 +51,7 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
         BaseManager playersVictoryManager = new PlayerVictoryManager();
         this.managers.put(playersVictoryManager.getAssociatedType(),playersVictoryManager);
         
-        BaseManager registrationManager = new RegistrationManager();
-        this.managers.put(registrationManager.getAssociatedType(),registrationManager);
+        this.managers.put(RegistrationManager.getInstance().getAssociatedType(),RegistrationManager.getInstance());
     }
 
     

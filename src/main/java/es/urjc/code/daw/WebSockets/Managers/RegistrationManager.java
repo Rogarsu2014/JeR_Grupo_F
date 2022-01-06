@@ -11,6 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class RegistrationManager extends BaseManager{
 
+    private static RegistrationManager instance = new RegistrationManager(); 
+    public static RegistrationManager getInstance(){
+        return instance;
+    }
     ConcurrentHashMap<WebSocketSession,String> usernamesMap= new ConcurrentHashMap<>();
     
     final ObjectMapper mapper = new ObjectMapper();
@@ -39,5 +43,9 @@ public class RegistrationManager extends BaseManager{
         String username=usernamesMap.get(session);
         System.out.println("User logged out with username: " + username);
         usernamesMap.remove(session);
+    }
+    
+    public boolean isUserLoggedIn(String username){
+        return usernamesMap.containsValue(username);
     }
 }
