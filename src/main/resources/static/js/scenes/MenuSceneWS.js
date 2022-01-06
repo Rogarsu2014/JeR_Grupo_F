@@ -5,6 +5,7 @@ import {ServerConnectionManager} from "../server/ServerConnectionManager.js";
 import {UserRegistration} from "../util/UserRegistration.js";
 import {ChatManager} from "../server/Websockets/ChatManager.js";
 import {getUser} from "../server/PlayersDataManager.js";
+import {getConnection} from "../server/Websockets/SocketIntilalizer.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -413,32 +414,55 @@ export class MenuSceneWS extends Phaser.Scene {
         let username = this.formUtil.getTextAreaValue("myUser");
         let password = this.formUtil.getTextAreaValue("myPass");
         let confirmPassword = this.formUtil.getTextAreaValue("myPass");
+        
         this.userRegistration.trySignUp(username, password, confirmPassword,
             (user) => this.Registered(user), () => this.loginErrorText.text = "Username " + username + " already taken")
+        
     }
 
     Registered(user) {
+        
+        
+        
         if (user !== null) {
             this.user = user;
             // console.log("username obtained " + user['username'])
-            this.enableChatButton();
-            this.enableOnlineGameButton()
+            
             ServerConnectionManager.setClientId(user['username'])
-            ServerConnectionManager.ConnectUser();
-            this.xButton2.x = 240;
-            this.setPlayerInformation();
-            if (this.loginVisible === true) {
-                this.disableResgisterScreen()
-                this.xButton2.setVisible(0);
-                this.loginVisible = false;
-                this.gamesVisible = true;
+            
+            // New implementation uses WebSocket to check connections
+            // ServerConnectionManager.ConnectUser();
+            
+            this.displayPlayerWindow()
+            
+            let connection = getConnection();
+            let registrationMsg = {
+                type: "Registration",
+                username:this.user.username
             }
+            connection.send(JSON.stringify(registrationMsg))
 
         } else {
             // console.log("User undefined")
         }
     }
+    
+    
+    displayPlayerWindow(){
+        this.enableChatButton();
+        this.enableOnlineGameButton()
+        
 
+        this.xButton2.x = 240;
+        this.setPlayerInformation();
+
+        if (this.loginVisible === true) {
+            this.disableResgisterScreen()
+            this.xButton2.setVisible(0);
+            this.loginVisible = false;
+            this.gamesVisible = true;
+        }
+    }
     enableOnlineGameButton() {
         this.onlineGame.alpha = 1.0;
         this.buttons.splice(1, 0, this.onlineGame);
@@ -655,13 +679,16 @@ export class MenuSceneWS extends Phaser.Scene {
             // this.user=getUser()
             // this.loginButton.setVisible(true)
             // this.loginButton.setTexture(icons[this.user['iconIndex']])
+            this.user=getUser()
             let currentUser={
-                username:getUser().username,
-                password:getUser().password
+                username:this.user.username,
+                password:this.user.password
             }
             //
             // this.Registered(user)
-            this.userRegistration.logIn(currentUser.username, currentUser.password, (user) => this.Registered(user))
+            // this.userRegistration.logIn(currentUser.username, currentUser.password, (user) => this.Registered(user))
+            this.displayPlayerWindow()
+            //TODO-> obtener victorias de nuevo
         }
     }
 
