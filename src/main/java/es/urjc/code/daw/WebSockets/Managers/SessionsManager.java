@@ -27,6 +27,7 @@ public class SessionsManager extends BaseManager{
     @Override
     public void connectionEstablished(WebSocketSession session) throws IOException {
         playersSessions.put(session.getId(), session);
+        System.out.println("User connected");
     }
 
     @Override
@@ -37,5 +38,6 @@ public class SessionsManager extends BaseManager{
     @Override
     public void connectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         playersSessions.remove(session.getId());
+        System.out.println("User disconnected");
     }
 }

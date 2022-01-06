@@ -47,8 +47,12 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
 
         BaseManager chatManager = new ChatManager();
         this.managers.put(chatManager.getAssociatedType(),chatManager);
+        
         BaseManager playersVictoryManager = new PlayerVictoryManager();
         this.managers.put(playersVictoryManager.getAssociatedType(),playersVictoryManager);
+        
+        BaseManager registrationManager = new RegistrationManager();
+        this.managers.put(registrationManager.getAssociatedType(),registrationManager);
     }
 
     
@@ -63,7 +67,7 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
         
 //        playersSessions.put(session.getId(),session);
         
-        System.out.println("Socket connected");
+//        System.out.println("Socket connected");
     }
 
     @Override
