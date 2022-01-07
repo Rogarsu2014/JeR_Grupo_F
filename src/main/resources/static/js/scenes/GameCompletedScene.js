@@ -1,7 +1,9 @@
 import {Player} from '../objects/Player.js'
 import {cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
+import {Timer} from "../util/Timer.js";
 
+var victory, victory1, defeat, defeat1;
 
 export class GameCompletedScene extends Phaser.Scene {
     constructor(sceneKey="GameCompletedScene") {
@@ -46,23 +48,36 @@ export class GameCompletedScene extends Phaser.Scene {
 
         if (this.playerPoints[0] > this.playerPoints[1]) {
             this.winnerIndex=0;
-            this.add.text(width * .5, 60, "Player 1 wins!",{fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5)
-            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
-            this.scores[1] = this.add.text(width * .5, 233, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            this.add.text(width * .5, 60, "Player 1 wins!",{fontFamily: 'ink-free-normal',fontSize:80, color: '#fff'}).setOrigin(0.5,0.5)
+            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal',fontSize:60, color: '#868080'}).setOrigin(0.5,0.5);
+            this.scores[1] = this.add.text(width * .5, 293, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal',fontSize:40, color: '#868080'}).setOrigin(0.5,0.5);
+            victory = this.add.image(150, 250, "daia0").setScale(0.3).setVisible(1);
+            victory1 = this.add.image(150, 250, "DaiaVictoryPose").setScale(0.3).setVisible(0);
+            defeat = this.add.image(800, 250, "Ibban_Muerte").setScale(0.3).setVisible(1);
+            defeat.flipX=true;
+            defeat1 = this.add.image(800, 250, "Ibban_Muerte2").setScale(0.3).setVisible(0);
+            defeat1.flipX=true;
+            this.playAnim();
 
         } else if (this.playerPoints[0] < this.playerPoints[1]) {
             this.winnerIndex=1
             this.add.text(width*.5, 60, "Player 2 wins!",{fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5);
-            this.scores[0] = this.add.text(width * .5, 233, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
-            this.scores[1] = this.add.text(width * .5, 213, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            this.scores[0] = this.add.text(width * .5, 293, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal',fontSize:40, color: '#868080'}).setOrigin(0.5,0.5);
+            this.scores[1] = this.add.text(width * .5, 213, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal',fontSize:60, color: '#868080'}).setOrigin(0.5,0.5);
+            defeat =this.add.image(150, 250, "Daia_Muerte2").setScale(0.3).setVisible(1);
+            defeat1 =this.add.image(150, 250, "Daia_Muerte3").setScale(0.3).setVisible(0);
+            victory = this.add.image(800, 250, "ibban").setScale(0.3).setVisible(1);
+            victory.flipX=true;
+            victory1 = this.add.image(800, 250, "IbbanVictoryPose").setScale(0.3).setVisible(0);
+            victory1.flipX = true;
+            this.playAnim();
         } else {
-            this.add.text(width * .5, 60, "Draw!", {fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5);
-            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
-            this.scores[1] = this.add.text(width * .5, 233, "Player  2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal'}).setOrigin(0.5,0.5);
+            this.add.text(width * .5, 60, "Draw!", {fontFamily: 'ink-free-normal',fontSize:80, color: '#a98d06'}).setOrigin(0.5,0.5);
+            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal', fontSize:50, color: '#868080'}).setOrigin(0.5,0.5);
+            this.scores[1] = this.add.text(width * .5, 293, "Player  2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal',fontSize:50, color: '#868080'}).setOrigin(0.5,0.5);
+            this.add.image(150, 250, "daia0").setScale(0.3);
+            this.add.image(800, 250, "ibban").setScale(0.3).flipX=true;
         }
-
-        this.add.image(150, 250, "daia0").setScale(0.3);
-        this.add.image(800, 250, "ibban").setScale(0.3).flipX=true;
 
         this.playAgainButton.setInteractive();
 
@@ -82,6 +97,27 @@ export class GameCompletedScene extends Phaser.Scene {
         var spaceKey = this.input.keyboard.on('keydown-' + 'SPACE', () => this.confirmSelection());
 
     }
+
+    playAnim(){
+        var timer = new Timer(this, 500, () => {
+                victory.setVisible(0);
+                victory1.setVisible(1);
+                defeat.setVisible(0);
+                defeat1.setVisible(1);
+                timer1.startTimer();
+            }
+        );
+        var timer1 = new Timer(this, 500, () => {
+                victory1.setVisible(0);
+                victory.setVisible(1);
+                defeat1.setVisible(0);
+                defeat.setVisible(1);
+                timer.startTimer();
+            }
+        );
+        timer.startTimer();
+    }
+
 
     selectButton(index) {
         const button = this.buttons[index];

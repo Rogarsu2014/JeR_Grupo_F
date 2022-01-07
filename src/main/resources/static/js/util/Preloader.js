@@ -153,6 +153,14 @@ export class Preloader extends Phaser.Scene {
         this.load.image('ReadyButtonPush','./Resources/assets/UI/Buttons/ReadyButtonPush.png');
         this.load.image('SearchRoomScreen', './Resources/assets/UI/SearchRoomScreen.png');
         this.load.image('HostScreen', './Resources/assets/UI/HostScreen.png');
+
+        //Escena Victoria
+        this.load.image('Daia_Muerte2','./Resources/assets/items/Daia_Muerte2.png');
+        this.load.image('Daia_Muerte3','./Resources/assets/items/Daia_muerte3.png');
+        this.load.image('DaiaVictoryPose','./Resources/assets/items/DaiaVictoryPose.png');
+        this.load.image('Ibban_Muerte','./Resources/assets/items/Ibban_Muerte.png');
+        this.load.image('Ibban_Muerte2','./Resources/assets/items/Ibban_Muerte2.png');
+        this.load.image('IbbanVictoryPose','./Resources/assets/items/IbbanVictoryPose.png');
     }
     create(){
         console.log("Preload hecho");
