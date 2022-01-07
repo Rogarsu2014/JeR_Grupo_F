@@ -5,11 +5,10 @@ import {Platform} from "../../../../objects/Platform.js";
 
 import {OnlineCooperativeScene} from "../Base/OnlineCooperativeScene.js";
 import {OnlineButton} from "../../../../objects/online/OnlineButton.js";
-import {addCoopScene} from "../../../../util/ScenesRandomizer.js";
 
 
 let sceneKey="OnlineCoop3"
-// addCoopScene(sceneKey)
+
 /// Player 1 is upper layer player.
 /// Player 2 is down layer player
 

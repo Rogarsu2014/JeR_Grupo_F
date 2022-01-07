@@ -6,7 +6,7 @@ import {UserRegistration} from "../util/UserRegistration.js";
 import {ChatManager} from "../server/Websockets/ChatManager.js";
 import {getUser} from "../server/PlayersDataManager.js";
 import {getConnection} from "../server/Websockets/SocketIntilalizer.js";
-import {getRandomCoop, redefineArrays} from "../util/ScenesRandomizer.js";
+import {getNextRandomCoop, redefineArrays} from "../util/ScenesRandomizer.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -82,7 +82,7 @@ export class MenuSceneWS extends Phaser.Scene {
             this.stopBackgroundMusic()
             // this.scene.start('Coop1');
             redefineArrays()
-            this.loadScene(getRandomCoop())
+            this.loadScene(getNextRandomCoop())
             
             //Old
             // this.loadScene('Coop1')

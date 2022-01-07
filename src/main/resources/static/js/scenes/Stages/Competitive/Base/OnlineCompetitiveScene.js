@@ -2,12 +2,12 @@
 import {cameraFadeOut} from "../../../../util/cameraEffects.js";
 import {Skull} from "../../../../objects/Skull.js";
 import {OnlineGameStage} from "../../Base/OnlineGameStage.js";
-import {getRandomComp} from "../../../../util/ScenesRandomizer.js";
+import {getNextRandomComp} from "../../../../util/ScenesRandomizer.js";
 
 export class OnlineCompetitiveScene extends OnlineGameStage{
 
     constructor(sceneKey, timerTime,tilemapKey,sceneWidth) {
-        super(sceneKey, "Online"+getRandomComp(), timerTime,tilemapKey,sceneWidth);
+        super(sceneKey, timerTime,tilemapKey,sceneWidth);
         this.backgroundMusicKey='compStageMusic';
         this.skulls=[]
     }
@@ -16,6 +16,7 @@ export class OnlineCompetitiveScene extends OnlineGameStage{
         super.create(data);
         this.defineSkulls()
         this.setSkullsCollision()
+        this.nextLevelKey="Online"+getNextRandomComp()
     }
 
     setPlayerPosition(playerIndex, x, y) {

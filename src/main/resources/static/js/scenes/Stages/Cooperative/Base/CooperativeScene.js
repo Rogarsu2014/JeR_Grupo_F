@@ -4,7 +4,7 @@ import {KeyboardProcessor} from "../../../../util/InputProcessors/KeyboardProces
 import {SweepVerticalTransitionIn, SweepVerticalTransitionOut} from "../../../../util/cameraEffects.js";
 import {Door} from "../../../../objects/Door.js";
 import {GameStage} from "../../Base/GameStage.js";
-import {getRandomComp} from "../../../../util/ScenesRandomizer.js";
+import {getNextRandomComp} from "../../../../util/ScenesRandomizer.js";
 
 export class CooperativeScene extends GameStage {
 
@@ -41,7 +41,7 @@ export class CooperativeScene extends GameStage {
         this.physics.add.collider(this.players[0], this.door, () => this.door.playerEntered(this.players[0]))
         this.physics.add.collider(this.players[1], this.door, () => this.door.playerEntered(this.players[1]))
 
-        this.nextLevelKey=getRandomComp();
+        this.nextLevelKey=getNextRandomComp();
         //**** players and platforms
         // this.setPlatformsColliders();
     }

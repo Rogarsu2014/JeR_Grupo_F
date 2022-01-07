@@ -1,7 +1,7 @@
 import {GameStage} from "../../Base/GameStage.js";
 import {cameraFadeOut} from "../../../../util/cameraEffects.js";
 import {Skull} from "../../../../objects/Skull.js";
-import {getRandomCoop} from "../../../../util/ScenesRandomizer.js";
+import {getNextRandomCoop} from "../../../../util/ScenesRandomizer.js";
 
 export class CompetitiveScene extends GameStage{
 
@@ -15,7 +15,7 @@ export class CompetitiveScene extends GameStage{
         super.create(data);
         this.defineSkulls()
         this.setSkullsCollision()
-        this.nextLevelKey = getRandomCoop()
+        this.nextLevelKey = getNextRandomCoop()
     }
 
     setPlayerPosition(playerIndex, x, y) {
