@@ -1,4 +1,5 @@
 package es.urjc.code.daw.player;
+import es.urjc.code.daw.WebSockets.Managers.RegistrationManager;
 import es.urjc.code.daw.ping.ConnectionController;
 import lombok.SneakyThrows;
 
@@ -20,6 +21,7 @@ public class PlayerController {
 //        this.playerRepository = playerRepository;
 ////        this.connectionController = connectionController;
 //    }   
+    
     public PlayerController(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
 //        this.connectionController = connectionController;
@@ -46,7 +48,11 @@ public class PlayerController {
     @SneakyThrows
     @GetMapping("/{username}/{password}")
     public Player logIn(@PathVariable String username,@PathVariable String password) {
-        if(!ConnectionController.getInstance().isUserLogIn(username)) {
+//        if(!ConnectionController.getInstance().isUserLogIn(username)) {
+//            Player player = playerRepository.findById(username).filter((player1 -> player1.getPassword().equals(password))).orElseThrow(() -> new Exception("Player not available"));
+//            return player;
+//        } 
+        if(!RegistrationManager.getInstance().isUserLoggedIn(username)) {
             Player player = playerRepository.findById(username).filter((player1 -> player1.getPassword().equals(password))).orElseThrow(() -> new Exception("Player not available"));
             return player;
         }

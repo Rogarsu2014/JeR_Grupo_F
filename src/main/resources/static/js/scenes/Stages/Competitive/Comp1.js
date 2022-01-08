@@ -2,15 +2,18 @@
 import {Trap} from '../../../objects/Trap.js'
 
 import {CompetitiveScene} from "./Base/CompetitiveScene.js";
+import {addCompScene} from "../../../util/ScenesRandomizer.js";
 
 
 var traps = [];
 
+let sceneKey="Comp1"
+addCompScene(sceneKey)
 
 export class Comp1 extends CompetitiveScene {
 
     constructor() {
-        super("Comp1", "Coop2", 30000,'Comp1Map',1408);
+        super(sceneKey, 30000,'Comp1Map',1408);
     }
 
     create(data) {

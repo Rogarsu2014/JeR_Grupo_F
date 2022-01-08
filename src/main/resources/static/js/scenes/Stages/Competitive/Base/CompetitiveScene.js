@@ -1,11 +1,12 @@
 import {GameStage} from "../../Base/GameStage.js";
 import {cameraFadeOut} from "../../../../util/cameraEffects.js";
 import {Skull} from "../../../../objects/Skull.js";
+import {getNextRandomCoop} from "../../../../util/ScenesRandomizer.js";
 
 export class CompetitiveScene extends GameStage{
 
-    constructor(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth) {
-        super(sceneKey, nextLevelKey, timerTime,tilemapKey,sceneWidth);
+    constructor(sceneKey, timerTime,tilemapKey,sceneWidth) {
+        super(sceneKey, timerTime,tilemapKey,sceneWidth);
         this.backgroundMusicKey='compStageMusic';
         this.skulls=[]
     }
@@ -14,6 +15,7 @@ export class CompetitiveScene extends GameStage{
         super.create(data);
         this.defineSkulls()
         this.setSkullsCollision()
+        this.nextLevelKey = getNextRandomCoop()
     }
 
     setPlayerPosition(playerIndex, x, y) {

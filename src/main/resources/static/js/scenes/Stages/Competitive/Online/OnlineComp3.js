@@ -2,14 +2,18 @@ import {Trap} from '../../../../objects/Trap.js'
 import {Platform} from "../../../../objects/Platform.js";
 
 import {OnlineCompetitiveScene} from "../Base/OnlineCompetitiveScene.js";
+import {addCompScene} from "../../../../util/ScenesRandomizer.js";
 
 var traps = [];
 
+let sceneKey="OnlineComp3"
+// addCompScene(sceneKey)
 
 export class OnlineComp3 extends OnlineCompetitiveScene {
 
     constructor() {
-        super("OnlineComp3", "OnlineGameCompletedScene", 30000, 'Comp3Map',1280);
+        super(sceneKey, 30000, 'Comp3Map',1280);
+        // super("OnlineComp3", "OnlineGameCompletedScene", 30000, 'Comp3Map',1280);
     }
 
 

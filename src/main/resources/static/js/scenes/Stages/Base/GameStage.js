@@ -7,9 +7,9 @@ import {Door} from "../../../objects/Door.js";
 export class GameStage extends Phaser.Scene {
 
 
-    constructor(sceneKey, nextLevelKey, timerTime, tilemapKey, sceneWidth) {
+    constructor(sceneKey, timerTime, tilemapKey, sceneWidth) {
         super(sceneKey);
-        this.nextLevelKey = nextLevelKey
+        this.nextLevelKey = ""
         this.players = [];
         this.bump = false;
         this.scores = [];

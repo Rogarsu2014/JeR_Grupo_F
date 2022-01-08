@@ -2,14 +2,17 @@
 import {Platform} from "../../../../objects/Platform.js";
 
 import {OnlineCompetitiveScene} from "../Base/OnlineCompetitiveScene.js";
+import {addCompScene} from "../../../../util/ScenesRandomizer.js";
 
 
-
+let sceneKey="OnlineComp2"
+// addCompScene(sceneKey)
 
 export class OnlineComp2 extends OnlineCompetitiveScene{
 
     constructor() {
-        super("OnlineComp2","OnlineCoop3",30000,'Comp2Map',960);
+        super(sceneKey,30000,'Comp2Map',960);
+        // super("OnlineComp2","OnlineCoop3",30000,'Comp2Map',960);
     }
 
 
