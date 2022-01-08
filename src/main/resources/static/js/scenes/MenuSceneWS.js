@@ -121,7 +121,7 @@ export class MenuSceneWS extends Phaser.Scene {
 
         //**** 778x960
         this.chatText = this.add.text(128 * 8 + 5, 58 * 1.3, '', {
-            fontSize: '8px', color: '#fff', backgroundColor: '#000', fixedWidth: 128 * 3.25,
+            fontSize: '8px', color: '#000000', fixedWidth: 128 * 3.25,
             fixedHeight: 58 * 8.2
         }).setDepth(1).setScale(.8).setVisible(false);
         this.chatText.depth = 100;

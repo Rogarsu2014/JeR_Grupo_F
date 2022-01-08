@@ -33,7 +33,7 @@ export class Preloader extends Phaser.Scene {
         this.load.image('Tutorial','./Resources/assets/UI/Buttons/Tutorial.png');
         this.load.image('TutorialPush','./Resources/assets/UI/Buttons/TutorialPush.png');
         this.load.image('ChatButton','./Resources/assets/UI/Buttons/ChatButton.png');
-        this.load.image('ChatScreen','./Resources/assets/UI/MainMenu/ChatScreen.png');
+        this.load.image('ChatScreen','./Resources/assets/UI/MainMenu/ChatScreen1.png');
         this.load.image('XButton','./Resources/assets/UI/Buttons/XButton.png');
         this.load.image('XButtonPush','./Resources/assets/UI/Buttons/XButtonPush.png');
         this.load.image('ChatButtonPush','./Resources/assets/UI/Buttons/ChatButtonPush.png');
