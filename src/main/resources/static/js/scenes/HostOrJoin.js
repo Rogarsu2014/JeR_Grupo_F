@@ -4,6 +4,7 @@ import {FormUtil} from "../util/FormUtil.js";
 import {MessagesManager} from "../server/MessagesManager.js";
 
 import {getConnection, getRoomCode, setPlayerIndex, setRoomCode} from "../server/Websockets/SocketIntilalizer.js";
+import {getNextRandomCoop, getScenesOrder, redefineArrays, setScenesOrder} from "../util/ScenesRandomizer.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -81,10 +82,16 @@ export class HostOrJoin extends Phaser.Scene {
 
         this.hostButton.on('pointerdown', () => {
             let connection = getConnection()
+            
+            redefineArrays()
+            
             let hostInfo = {
                 type: "Room",
-                type2: "Host"
+                type2: "Host",
+                scenesOrder: getScenesOrder()
             }
+            
+            
             if (connection.readyState !== WebSocket.OPEN) {
                 connection.addEventListener('open', () => {
                     connection.send(JSON.stringify(hostInfo))
@@ -130,7 +137,8 @@ export class HostOrJoin extends Phaser.Scene {
         this.readyButton.on('pointerdown', () => {
             this.disableListeners();
             this.stopBackgroundMusic();
-            this.loadScene('OnlineCoop1');
+            // redefineArrays()
+            this.loadScene("Online"+getNextRandomCoop());
         })
 
 
@@ -154,7 +162,7 @@ export class HostOrJoin extends Phaser.Scene {
 
         // TEST
 
-        this.input.keyboard.on("keydown-ESC",this.goBackToMenu())
+        // this.input.keyboard.on("keydown-ESC",this.goBackToMenu())
 
         let goBackImage= this.add.image(height-200,100,"")
         goBackImage.setInteractive()
@@ -265,12 +273,16 @@ export class HostOrJoin extends Phaser.Scene {
                 let code = message.code;
                 setPlayerIndex(message.playerIndex);
                 setRoomCode(code);
+                
+ 
+                
                 codeRecieved = true;
                 this.codeText.visible = true;
                 if (isHost) {
                     this.codeText.setText("Your room code: " + code)
                 } else {
                     this.setJoinCodeText(code)
+                    setScenesOrder(message.scenesOrder)
                 }
             }
             if (message.type === "ConnectionClosed") {

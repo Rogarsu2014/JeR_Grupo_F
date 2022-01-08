@@ -6,6 +6,7 @@ import {UserRegistration} from "../util/UserRegistration.js";
 import {ChatManager} from "../server/Websockets/ChatManager.js";
 import {getUser} from "../server/PlayersDataManager.js";
 import {getConnection} from "../server/Websockets/SocketIntilalizer.js";
+import {getNextRandomCoop, redefineArrays} from "../util/ScenesRandomizer.js";
 
 var music;
 const backgroundMusicKey = 'mainMenuMusic';
@@ -13,6 +14,7 @@ let icons = {
     0: "daiaIcon",
     1: "ibbanIcon"
 }
+
 
 export class MenuSceneWS extends Phaser.Scene {
     constructor() {
@@ -79,7 +81,11 @@ export class MenuSceneWS extends Phaser.Scene {
             this.disableListeners();
             this.stopBackgroundMusic()
             // this.scene.start('Coop1');
-            this.loadScene('Coop1')
+            redefineArrays()
+            this.loadScene(getNextRandomCoop())
+            
+            //Old
+            // this.loadScene('Coop1')
         })
         tutorial.on('pointerdown', () => {
             this.disableListeners();
