@@ -48,9 +48,9 @@ export class GameCompletedScene extends Phaser.Scene {
 
         if (this.playerPoints[0] > this.playerPoints[1]) {
             this.winnerIndex=0;
-            this.add.text(width * .5, 60, "Player 1 wins!",{fontFamily: 'ink-free-normal',fontSize:80, color: '#fff'}).setOrigin(0.5,0.5)
-            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal',fontSize:60, color: '#868080'}).setOrigin(0.5,0.5);
-            this.scores[1] = this.add.text(width * .5, 293, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal',fontSize:40, color: '#868080'}).setOrigin(0.5,0.5);
+            this.add.text(width * .5, 60, "Player 1 wins!",{fontFamily: 'ink-free-normal',fontSize:80, color: '#ffcd03'}).setOrigin(0.5,0.5)
+            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal',fontSize:60, color: '#ffffff'}).setOrigin(0.5,0.5);
+            this.scores[1] = this.add.text(width * .5, 293, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal',fontSize:40, color: '#000000'}).setOrigin(0.5,0.5);
             victory = this.add.image(150, 250, "daia0").setScale(0.3).setVisible(1);
             victory1 = this.add.image(150, 250, "DaiaVictoryPose").setScale(0.3).setVisible(0);
             defeat = this.add.image(800, 250, "Ibban_Muerte").setScale(0.3).setVisible(1);
@@ -61,9 +61,9 @@ export class GameCompletedScene extends Phaser.Scene {
 
         } else if (this.playerPoints[0] < this.playerPoints[1]) {
             this.winnerIndex=1
-            this.add.text(width*.5, 60, "Player 2 wins!",{fontFamily: 'ink-free-normal',fontSize:80}).setOrigin(0.5,0.5);
-            this.scores[0] = this.add.text(width * .5, 293, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal',fontSize:40, color: '#868080'}).setOrigin(0.5,0.5);
-            this.scores[1] = this.add.text(width * .5, 213, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal',fontSize:60, color: '#868080'}).setOrigin(0.5,0.5);
+            this.add.text(width*.5, 60, "Player 2 wins!",{fontFamily: 'ink-free-normal',fontSize:80, color: '#ffd300'}).setOrigin(0.5,0.5);
+            this.scores[0] = this.add.text(width * .5, 293, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal',fontSize:40, color: '#000000'}).setOrigin(0.5,0.5);
+            this.scores[1] = this.add.text(width * .5, 213, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal',fontSize:60, color: '#ffffff'}).setOrigin(0.5,0.5);
             defeat =this.add.image(150, 250, "Daia_Muerte2").setScale(0.3).setVisible(1);
             defeat1 =this.add.image(150, 250, "Daia_Muerte3").setScale(0.3).setVisible(0);
             victory = this.add.image(800, 250, "ibban").setScale(0.3).setVisible(1);
@@ -72,9 +72,9 @@ export class GameCompletedScene extends Phaser.Scene {
             victory1.flipX = true;
             this.playAnim();
         } else {
-            this.add.text(width * .5, 60, "Draw!", {fontFamily: 'ink-free-normal',fontSize:80, color: '#a98d06'}).setOrigin(0.5,0.5);
-            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal', fontSize:50, color: '#868080'}).setOrigin(0.5,0.5);
-            this.scores[1] = this.add.text(width * .5, 293, "Player  2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal',fontSize:50, color: '#868080'}).setOrigin(0.5,0.5);
+            this.add.text(width * .5, 60, "Draw!", {fontFamily: 'ink-free-normal',fontSize:80, color: '#000000'}).setOrigin(0.5,0.5);
+            this.scores[0] = this.add.text(width * .5, 213, "Player 1: " + this.playerPoints[0], {fontFamily: 'ink-free-normal', fontSize:50, color: '#000000'}).setOrigin(0.5,0.5);
+            this.scores[1] = this.add.text(width * .5, 293, "Player 2: " + this.playerPoints[1], {fontFamily: 'ink-free-normal',fontSize:50, color: '#000000'}).setOrigin(0.5,0.5);
             this.add.image(150, 250, "daia0").setScale(0.3);
             this.add.image(800, 250, "ibban").setScale(0.3).flipX=true;
         }
