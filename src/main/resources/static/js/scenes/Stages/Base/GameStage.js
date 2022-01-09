@@ -18,8 +18,9 @@ export class GameStage extends Phaser.Scene {
         this.sceneWidth = sceneWidth;
         this.backgroundMusicKey = 'coopStageMusic';
 
+        this.sceneTime=timerTime;
         this.tilemapKey = tilemapKey;
-        this.timer = new Timer(this, timerTime)
+        this.timer = new Timer(this, this.sceneTime)
         this.timer.onComplete(() => {
             this.timeOver()
         })
@@ -58,7 +59,7 @@ export class GameStage extends Phaser.Scene {
         this.loadTransition.addToScene()
         this.playStartTransition()
 
-        this.timerText = this.add.text(this.game.canvas.width * 0.5, 40, 'test', {
+        this.timerText = this.add.text(this.game.canvas.width * 0.5, 40,this.getSceneSeconds(), {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setOrigin(0.5, 0.5);
@@ -76,7 +77,7 @@ export class GameStage extends Phaser.Scene {
         
         this.loadTransition.playTransition(() => {
 
-                this.timer.resumeTimer();
+                // this.timer.resumeTimer();
                 this.enableAllPlayersMovement()
             }, 500, 500
         )
@@ -220,5 +221,9 @@ export class GameStage extends Phaser.Scene {
 
     stageCompleted() {
         throw new Error("Players position must be set")
+    }
+    
+    getSceneSeconds(){
+        return Math.round(this.sceneTime/1000)
     }
 }

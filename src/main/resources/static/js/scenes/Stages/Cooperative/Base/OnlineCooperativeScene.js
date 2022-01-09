@@ -36,8 +36,7 @@ export class OnlineCooperativeScene extends OnlineGameStage {
 
         this.physics.add.collider(this.players[0], this.door, () => this.door.playerEntered(this.players[0]))
         this.physics.add.collider(this.players[1], this.door, () => this.door.playerEntered(this.players[1]))
-
-        this.pauseStartTransition()
+        
         
         this.setOnButtonInfoReceived()
         this.nextLevelKey="Online"+getNextRandomComp();
