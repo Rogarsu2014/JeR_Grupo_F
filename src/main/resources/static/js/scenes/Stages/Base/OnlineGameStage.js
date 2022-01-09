@@ -12,8 +12,7 @@ export class OnlineGameStage extends GameStage {
 
     create(data) {
         super.create(data);
-        console.log("Create")
-        this.events.on('shutdown',()=>console.log("shutdown"))
+        this.pauseStartTransition()
         this.sendReadyStatus();
         this.receivePoints();
         this.receiveBump();

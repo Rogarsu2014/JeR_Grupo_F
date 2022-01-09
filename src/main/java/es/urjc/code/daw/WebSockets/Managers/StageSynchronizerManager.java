@@ -36,6 +36,10 @@ public class StageSynchronizerManager extends BaseManager {
         // Check if players in same room
         TryNotifyClientsOfReadyPair(session,message);
 
+        
+        /// Debug
+        System.out.println("Ready from "+session+"Value " + playersReadyMap.get(session));
+        System.out.println("Pair Value " + playersReadyMap.get(RoomManager.getInstance().getPair(session, message)));
     }
 
     @Override
