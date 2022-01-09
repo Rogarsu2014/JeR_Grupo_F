@@ -13,6 +13,7 @@ export class OnlineGameStage extends GameStage {
     create(data) {
         super.create(data);
         this.pauseStartTransition()
+        this.setTimerListener();
         this.sendReadyStatus();
         this.receivePoints();
         this.receiveBump();
@@ -43,6 +44,31 @@ export class OnlineGameStage extends GameStage {
         }
     }
 
+    setTimerListener(){
+//remove the last timer
+        this.remainingTime=this.getSceneSeconds()
+        this.timer=null;
+        let connection = getConnection();
+        this.timeListener=(msg)=>this.timerListenerFunction(msg);
+        // let timerListener=(msg)=>this.timerListener(msg);
+        
+        connection.addEventListener('message', this.timeListener)
+        this.events.on('shutdown',()=>connection.removeEventListener('message',this.timeListener))
+    }
+    
+    timerListenerFunction(msg){
+        let message = JSON.parse(msg.data)
+        if (message.type === "GameTime") {
+            console.log("Time received")
+            this.remainingTime -= 1;
+            this.timerText.setText(this.remainingTime)
+            if (this.remainingTime===0){
+                this.timeOver()
+                let connection=getConnection()
+                connection.removeEventListener('message',this.timeListener)
+            }
+        }
+    }
     sendReadyStatus() {
         let connection = getConnection();
         
@@ -116,4 +142,16 @@ export class OnlineGameStage extends GameStage {
         })
     }
 
+    
+    update() {
+        this.players[0].update(this.bump, this.players[1]);
+        this.players[1].update(this.bump, this.players[0]);
+
+        this.bump = false;
+    }
+    
+    timeOver() {
+        this.disableAllPlayersMovement()
+        this.onTimeOverPrimitive();
+    }
 }

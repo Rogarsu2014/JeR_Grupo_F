@@ -33,7 +33,12 @@ public class SessionPair {
     public WebSocketSession getW1() {
         return w1;
     }
-
+    
+    public WebSocketSession[] getSessions(){
+        WebSocketSession[] webSocketSessions = {w1, w2};
+        return webSocketSessions;
+    }
+            
     public WebSocketSession getOtherSession(WebSocketSession s) {
         if (s == w1) {
             return w2;
@@ -55,5 +60,6 @@ public class SessionPair {
     }
 
     public String getStatus(){return status;}
+    
 
 }
