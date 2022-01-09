@@ -63,6 +63,8 @@ public class StageSynchronizerManager extends BaseManager {
                     // Sending a message to notify that both players are ready to begin
                     pair.sendMessage(new TextMessage(readyStatus.toString()));
                     sender.sendMessage(new TextMessage(readyStatus.toString()));
+
+                    System.out.println("Ambos syncronizados a false");
                     
                     // To make clients to synchronize the following stages, the value is set to false, 
                     // so it will need to be set to true once more in a future 
