@@ -38,8 +38,10 @@ export function redefineArrays(){
 }
 
 export function getNextRandomCoop(){
-    if (randomCoopScenes.length===0)
-        return victoryStageKey
+    console.log("Coop scenes left " + randomCoopScenes.length)
+    if (randomCoopScenes.length===0) {
+        return victoryStageKey;
+    }
     // return getRandomScene(randomCoopScenes)
     return randomCoopScenes.pop()
 }
