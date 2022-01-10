@@ -32,7 +32,11 @@ export class Trap extends Phaser.Physics.Arcade.Sprite {
         this.music.play();
         player.setPosition(player.initialPositionX, player.initialPositionY);
         player.body.moves = false;
-        var timer = new Timer(this.context, 2000, () => player.body.moves = true);
+        player.setDeath();
+        var timer = new Timer(this.context, 2000, () =>{
+            player.removeDeath();
+            player.body.moves = true;
+        });
         timer.startTimer();
     }
 }
