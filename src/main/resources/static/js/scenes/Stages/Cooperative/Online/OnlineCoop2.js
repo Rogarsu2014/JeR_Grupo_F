@@ -3,14 +3,17 @@ import {Platform} from "../../../../objects/Platform.js";
 
 import {OnlineCooperativeScene} from "../Base/OnlineCooperativeScene.js";
 import {OnlineButton} from "../../../../objects/online/OnlineButton.js";
+import {addCoopScene} from "../../../../util/ScenesRandomizer.js";
 
-
+let sceneKey="OnlineCoop2"
+// addCoopScene(sceneKey)
 
 export class OnlineCoop2 extends OnlineCooperativeScene {
 
     
     constructor() {
-        super("OnlineCoop2","OnlineComp2",10000,'Coop2Map');
+        super(sceneKey,10000,'Coop2Map');
+        // super("OnlineCoop2","OnlineComp2",10000,'Coop2Map');
     }
 
     init() {

@@ -2,14 +2,16 @@
 import {Platform} from "../../../objects/Platform.js";
 
 import {CompetitiveScene} from "./Base/CompetitiveScene.js";
+import {addCompScene} from "../../../util/ScenesRandomizer.js";
 
 
 
-
+let sceneKey="Comp2"
+addCompScene(sceneKey)
 export class Comp2 extends CompetitiveScene{
 
     constructor() {
-        super("Comp2","Coop3",30000,'Comp2Map',960);
+        super("Comp2",30000,'Comp2Map',960);
     }
 
 

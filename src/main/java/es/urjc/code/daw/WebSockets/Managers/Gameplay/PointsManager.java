@@ -1,8 +1,10 @@
-package es.urjc.code.daw.WebSockets.Managers;
+package es.urjc.code.daw.WebSockets.Managers.Gameplay;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import es.urjc.code.daw.WebSockets.Managers.BaseManager;
+import es.urjc.code.daw.WebSockets.Managers.RoomManager;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -11,7 +13,7 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class PointsManager extends BaseManager{
+public class PointsManager extends BaseManager {
 
     final ObjectMapper mapper = new ObjectMapper();
 

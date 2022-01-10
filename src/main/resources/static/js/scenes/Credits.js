@@ -25,7 +25,7 @@ export class Credits extends Phaser.Scene{
             ease: 'Quart.In',
             completeDelay:1500,
             onComplete:()=> {
-                cameraFadeOut(this,3000,()=>this.scene.start('MenuScene'))
+                cameraFadeOut(this,3000,()=>this.scene.start('MenuSceneWS'))
             },
             duration: 500,
             paused:true

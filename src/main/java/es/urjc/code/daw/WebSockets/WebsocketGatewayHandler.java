@@ -2,9 +2,8 @@ package es.urjc.code.daw.WebSockets;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.WebSockets.Managers.*;
-import es.urjc.code.daw.chat.Message;
+import es.urjc.code.daw.WebSockets.Managers.Gameplay.*;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -47,8 +46,11 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
 
         BaseManager chatManager = new ChatManager();
         this.managers.put(chatManager.getAssociatedType(),chatManager);
+        
         BaseManager playersVictoryManager = new PlayerVictoryManager();
         this.managers.put(playersVictoryManager.getAssociatedType(),playersVictoryManager);
+        
+        this.managers.put(RegistrationManager.getInstance().getAssociatedType(),RegistrationManager.getInstance());
     }
 
     
@@ -63,7 +65,7 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
         
 //        playersSessions.put(session.getId(),session);
         
-        System.out.println("Socket connected");
+//        System.out.println("Socket connected");
     }
 
     @Override

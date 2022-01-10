@@ -4,15 +4,19 @@ import {Button} from "../../../objects/Button.js";
 import {Platform} from "../../../objects/Platform.js";
 
 import {CooperativeScene} from "./Base/CooperativeScene.js";
+import {addCoopScene} from "../../../util/ScenesRandomizer.js";
 
 
 /// Player 1 is upper layer player.
 /// Player 2 is down layer player
 
+let sceneKey="Coop3"
+addCoopScene(sceneKey)
+
 export class Coop3 extends CooperativeScene {
 
     constructor() {
-        super("Coop3", "Comp3", 5000,'Coop3Map');
+        super(sceneKey, 5000,'Coop3Map');
     }
 
     init() {

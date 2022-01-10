@@ -7,13 +7,16 @@ import {OnlineCooperativeScene} from "../Base/OnlineCooperativeScene.js";
 import {OnlineButton} from "../../../../objects/online/OnlineButton.js";
 
 
+let sceneKey="OnlineCoop3"
+
 /// Player 1 is upper layer player.
 /// Player 2 is down layer player
 
 export class OnlineCoop3 extends OnlineCooperativeScene {
 
     constructor() {
-        super("OnlineCoop3", "OnlineComp3", 5000,'Coop3Map');
+        super(sceneKey, 5000,'Coop3Map');
+        // super("OnlineCoop3", "OnlineComp3", 5000,'Coop3Map');
     }
 
     init() {
