@@ -18,40 +18,44 @@ import java.util.concurrent.ConcurrentHashMap;
 public class GameTimeManager {
 
     final ObjectMapper mapper = new ObjectMapper();
-    
+
     ConcurrentHashMap<SessionPair, Timer> timers;
-    
+
     public GameTimeManager() {
-        timers= new ConcurrentHashMap<SessionPair, Timer>();
+        timers = new ConcurrentHashMap<SessionPair, Timer>();
     }
-    
-    
-    public void setTimer(SessionPair sessionPair,long delay, long period){
-        
-        TimerTask task =  new TimerTask() {
+
+
+    public void setTimer(SessionPair sessionPair, long delay, long period) {
+
+        TimerTask task = new TimerTask() {
             @SneakyThrows
             @Override
-            public void  run() {
+            public void run() {
                 for (WebSocketSession session : sessionPair.getSessions()) {
                     ObjectNode node = mapper.createObjectNode();
-                    node.put("type","GameTime");
+                    node.put("type", "GameTime");
                     session.sendMessage(new TextMessage(node.toString()));
                 }
             }
         };
-        
-        Timer timer= new Timer();
-        timer.schedule(task,delay,period);
-        
-        if(timers.containsKey(sessionPair)){
+
+        Timer timer = new Timer();
+        timer.schedule(task, delay, period);
+
+        if (timers.containsKey(sessionPair)) {
             timers.get(sessionPair).cancel();
             timers.get(sessionPair).purge();
-            timers.replace(sessionPair,timer);
-        }else {
-            timers.put(sessionPair,timer);
+            timers.replace(sessionPair, timer);
+        } else {
+            timers.put(sessionPair, timer);
         }
-        
-        
     }
-    
+
+    public void removeTimer(SessionPair sessionPair) {
+        if (timers.containsKey(sessionPair)) {
+            timers.remove(sessionPair);
+        }
+    }
+
 }

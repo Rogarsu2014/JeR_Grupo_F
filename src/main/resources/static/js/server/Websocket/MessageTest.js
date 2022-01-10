@@ -3,7 +3,7 @@ import {ServerConnectionManager} from "../ServerConnectionManager.js";
 $(document).ready(function(){
     console.log(ServerConnectionManager.host)
     var connection =
-        new WebSocket('ws://'+ServerConnectionManager.host+'/chat');
+        new WebSocket('wss://'+ServerConnectionManager.host+'/chat');
     connection.onerror = function(e) {
         console.log("WS error: " + e);
     }

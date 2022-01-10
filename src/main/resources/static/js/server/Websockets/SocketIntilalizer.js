@@ -28,7 +28,7 @@ import {ServerConnectionManager} from "../ServerConnectionManager.js";
 // })
 let connection;
 function connect(){
-    let newConnection = new WebSocket('ws:'+ServerConnectionManager.host+'/applicationGateway');
+    let newConnection = new WebSocket('wss:'+ServerConnectionManager.host+'/applicationGateway');
     newConnection.onerror = function(e) {
         console.log("WS error: " + e);
     }
@@ -63,6 +63,7 @@ function connect(){
 export function getConnection(){
     if (connection===undefined){
         connection=connect();
+        connection.onopen=function (){console.log("opened")}
     }
     return connection
 }
