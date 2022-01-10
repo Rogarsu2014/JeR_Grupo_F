@@ -68,7 +68,7 @@ public class RoomManager extends BaseManager {
                     node.put("code", roomNode.get("RoomCode").asText());
 
                     node.put("playerIndex", games.get(roomNode.get("RoomCode").asText()).getPlayerIndex(session));
-                    node.put("scenesOrder",pair.getScenesOrder());
+                    node.put("scenesOrder", pair.getScenesOrder());
                     session.sendMessage(new TextMessage(node.toString()));
                 }
             } else {
@@ -86,8 +86,8 @@ public class RoomManager extends BaseManager {
         WebSocketSession pair = null;
         for (String key :
                 games.keySet()) {
-            if(games.get(key).containsSession(session)) {
-                
+            if (games.get(key).containsSession(session)) {
+
                 pair = getPair(session, key);
                 break;
             }
@@ -132,6 +132,7 @@ public class RoomManager extends BaseManager {
             return s;
         }
     }
+
     public WebSocketSession getPair(WebSocketSession s, String roomCode) throws Exception {
 //        JsonNode roomNode = mapper.readTree(message.getPayload());
         if (games.containsKey(roomCode)) {
@@ -143,5 +144,15 @@ public class RoomManager extends BaseManager {
         } else {
             return s;
         }
+    }
+
+    public SessionPair getSessionPair(WebSocketSession session) {
+        SessionPair sessionPair = null;
+        for (SessionPair value : games.values()) {
+            if (value.containsSession(session)) {
+                sessionPair = value;
+            }
+        }
+        return sessionPair;
     }
 }

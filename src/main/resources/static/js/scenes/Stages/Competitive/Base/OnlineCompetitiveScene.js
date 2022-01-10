@@ -2,7 +2,7 @@
 import {cameraFadeOut} from "../../../../util/cameraEffects.js";
 import {Skull} from "../../../../objects/Skull.js";
 import {OnlineGameStage} from "../../Base/OnlineGameStage.js";
-import {getNextRandomComp} from "../../../../util/ScenesRandomizer.js";
+import {getNextRandomCoop} from "../../../../util/ScenesRandomizer.js";
 
 export class OnlineCompetitiveScene extends OnlineGameStage{
 
@@ -16,7 +16,7 @@ export class OnlineCompetitiveScene extends OnlineGameStage{
         super.create(data);
         this.defineSkulls()
         this.setSkullsCollision()
-        this.nextLevelKey="Online"+getNextRandomComp()
+        this.nextLevelKey="Online"+getNextRandomCoop()
     }
 
     setPlayerPosition(playerIndex, x, y) {

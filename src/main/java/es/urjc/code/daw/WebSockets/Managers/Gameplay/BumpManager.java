@@ -1,8 +1,10 @@
-package es.urjc.code.daw.WebSockets.Managers;
+package es.urjc.code.daw.WebSockets.Managers.Gameplay;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import es.urjc.code.daw.WebSockets.Managers.BaseManager;
+import es.urjc.code.daw.WebSockets.Managers.RoomManager;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -11,15 +13,15 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class PositionManager extends BaseManager{
+public class BumpManager extends BaseManager {
 
     final ObjectMapper mapper = new ObjectMapper();
 
     //TODO-> este es un indice para testear
     int playerJoinedIndex;
 
-    public PositionManager() {
-        associatedType= "Position";
+    public BumpManager() {
+        associatedType= "Bump";
     }
 
     @Override
@@ -27,17 +29,16 @@ public class PositionManager extends BaseManager{
 
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
-//        System.out.println("Player tp'd to " +message.getPayload());
-        JsonNode movementNode= mapper.readTree(message.getPayload());
-        int x= movementNode.get("x").asInt();
-        int y= movementNode.get("y").asInt();
+        System.out.println("Player pushed to " +message.getPayload());
+        JsonNode bumpNode= mapper.readTree(message.getPayload());
+        boolean bump = bumpNode.get("bump").asBoolean();
 
-        ObjectNode movementObjectNode= mapper.createObjectNode();
-        movementObjectNode.put("type",associatedType);
-        movementObjectNode.put("x",x);
-        movementObjectNode.put("y",y);
+        ObjectNode bumpObjectNode= mapper.createObjectNode();
+        bumpObjectNode.put("type",associatedType);
+        bumpObjectNode.put("bump",bump);
+        bumpObjectNode.put("push",true);
 
-        sendPositionsPair(session,movementObjectNode, message);
+        sendPositionsPair(session,bumpObjectNode, message);
     }
 
     @Override
@@ -48,9 +49,7 @@ public class PositionManager extends BaseManager{
     private void sendPositionsPair(WebSocketSession sender,ObjectNode position, TextMessage message2) throws Exception {
         WebSocketSession pair = RoomManager.getInstance().getPair(sender, message2);
         if (sender != pair && pair != null) {
-            if(pair.isOpen()) {
-                pair.sendMessage(new TextMessage(position.toString()));
-            }
+            pair.sendMessage(new TextMessage(position.toString()));
         }
     }
 }
