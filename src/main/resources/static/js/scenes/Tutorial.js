@@ -64,7 +64,7 @@ export class Tutorial extends Phaser.Scene {
             ease:'Quart.out',
             duration: 800,
             completeDelay: 3000,
-            onComplete: () => {cameraFadeOut(this, 3000,()=>this.scene.start('MenuScene'))}
+            onComplete: () => {cameraFadeOut(this, 3000,()=>this.scene.start('MenuSceneWS'))}
         })
     }
 

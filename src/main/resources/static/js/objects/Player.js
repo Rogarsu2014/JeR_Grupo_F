@@ -33,6 +33,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             repeat: -1
         });
 
+        this.context.anims.create({
+            key: 'jump' + this.spriteKey,
+            frames: this.anims.generateFrameNumbers(this.spriteKey, {start: 15, end: 18}),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        this.context.anims.create({
+            key: 'death' + this.spriteKey,
+            frames: this.anims.generateFrameNumbers(this.spriteKey, {start: 19, end: 20}),
+            frameRate: 4,
+            repeat: -1
+        });
 
     }
 

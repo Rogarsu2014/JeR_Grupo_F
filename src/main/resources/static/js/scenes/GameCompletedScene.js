@@ -86,7 +86,7 @@ export class GameCompletedScene extends Phaser.Scene {
         })
 
         this.mainMenuButton.on('selected', () => {
-            this.scene.start('MenuScene');
+            this.scene.start('MenuSceneWS');
         })
 
         this.selectButton(0);
