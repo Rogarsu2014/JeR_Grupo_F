@@ -94,14 +94,14 @@ export class ChatManager {
     static printMessageLn(text, message, firstPass=true) {
         if (message['username'] === 'Server') {
             if (message['content'].includes("disconnected")) {
-                text.appendText(`[align=center][color=red]<${(message)['username']}>: ${(message)['content']}[/color][/align]\n`)
+                text.appendText(`[b][align=center][color=red]<${(message)['username']}>: ${(message)['content']}[/color][/align][/b]\n`)
             } else {
                 text.appendText(`[b][align=center][color=green]<${(message)['username']}>: ${(message)['content']}[/color][/align][/b]\n`)
             }
             if (firstPass===false)
                 console.log(message['content'])
         } else {
-            text.appendText(`[stroke=black]<${(message)['username']}>: ${(message)['content']}[/stroke]\n`)
+            text.appendText(`[b][stroke=black][color=black]<${(message)['username']}>: ${(message)['content']}[/color][/stroke][/b]\n`)
         }
         text.scrollToBottom();
     }

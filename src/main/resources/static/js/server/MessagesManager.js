@@ -118,7 +118,7 @@ export class MessagesManager {
             if (firstPass===false)
                 console.log(message['content'])
         } else {
-            text.appendText(`[stroke=black]<${(message)['username']}>: ${(message)['content']}[/stroke]\n`)
+            text.appendText(`[stroke=black][color=black]<${(message)['username']}>: ${(message)['content']}[/color][/stroke]\n`)
         }
         text.scrollToBottom();
     }

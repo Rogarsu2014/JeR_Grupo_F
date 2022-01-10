@@ -113,7 +113,7 @@ export class OnlinePlayer extends Player {
 
     sendPos200(){
 
-        var timer = new Timer(this.context, 200, () => {
+        var timer = new Timer(this.context, 10, () => {
             this.sendPos();
             timer.startTimer();
             }

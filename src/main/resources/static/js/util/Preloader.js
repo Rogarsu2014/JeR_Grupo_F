@@ -33,7 +33,7 @@ export class Preloader extends Phaser.Scene {
         this.load.image('Tutorial','./Resources/assets/UI/Buttons/Tutorial.png');
         this.load.image('TutorialPush','./Resources/assets/UI/Buttons/TutorialPush.png');
         this.load.image('ChatButton','./Resources/assets/UI/Buttons/ChatButton.png');
-        this.load.image('ChatScreen','./Resources/assets/UI/MainMenu/ChatScreen.png');
+        this.load.image('ChatScreen','./Resources/assets/UI/MainMenu/ChatScreen1.png');
         this.load.image('XButton','./Resources/assets/UI/Buttons/XButton.png');
         this.load.image('XButtonPush','./Resources/assets/UI/Buttons/XButtonPush.png');
         this.load.image('ChatButtonPush','./Resources/assets/UI/Buttons/ChatButtonPush.png');
@@ -153,6 +153,14 @@ export class Preloader extends Phaser.Scene {
         this.load.image('ReadyButtonPush','./Resources/assets/UI/Buttons/ReadyButtonPush.png');
         this.load.image('SearchRoomScreen', './Resources/assets/UI/SearchRoomScreen.png');
         this.load.image('HostScreen', './Resources/assets/UI/HostScreen.png');
+
+        //Escena Victoria
+        this.load.image('Daia_Muerte2','./Resources/assets/items/Daia_Muerte2.png');
+        this.load.image('Daia_Muerte3','./Resources/assets/items/Daia_muerte3.png');
+        this.load.image('DaiaVictoryPose','./Resources/assets/items/DaiaVictoryPose.png');
+        this.load.image('Ibban_Muerte','./Resources/assets/items/Ibban_Muerte.png');
+        this.load.image('Ibban_Muerte2','./Resources/assets/items/Ibban_Muerte2.png');
+        this.load.image('IbbanVictoryPose','./Resources/assets/items/IbbanVictoryPose.png');
     }
     create(){
         console.log("Preload hecho");

@@ -142,6 +142,7 @@ export class OnlineGameStage extends GameStage {
         })
     }
 
+
     
     update() {
         this.players[0].update(this.bump, this.players[1]);
