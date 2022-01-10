@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+
+@CrossOrigin
 @RequestMapping("/player")
 @RestController
 public class PlayerController {
@@ -28,6 +31,7 @@ public class PlayerController {
     }
 
 //    @SneakyThrows
+    
     @PostMapping
     public Player signUp(@RequestBody Player player) {
         boolean usernameAlreadyExits=playerRepository.findById(player.getUsername().trim()).isPresent();

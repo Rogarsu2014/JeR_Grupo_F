@@ -11,8 +11,12 @@ export class ServerConnectionManager {
     static setClientId(id){
         this.clientId=id;
     }
+    
     static windowHref=window.location.href
     static host=window.location.host
+    
+    // static windowHref="dualinterest.eu-west-3.elasticbeanstalk.com"
+    // static host="dualinterest.eu-west-3.elasticbeanstalk.com"
     static CheckNetworkConnection(onSuccess,onError){
         $.ajax({
             url: this.windowHref+'/ping',
