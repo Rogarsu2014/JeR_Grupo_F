@@ -20,7 +20,22 @@ export class OnlineKeyboardProcessor extends  KeyboardProcessor{
             }
         }
     }
+    primitiveSetInputListeners(){
+        this.left.on('down', () => {
+            // console.log("Left Down")
+            this.player.moveLeft()
+        });
 
+        this.right.on('down', () => {
+            // console.log("Right Down")
+            this.player.moveRight()
+        }); 
+
+        this.jumpButton.on('down', () => {
+            // console.log("Right Down")
+            this.player.jump(this.bump);
+        });
+    }
     sendBump(){
         let connection = getConnection();
         let bump = {

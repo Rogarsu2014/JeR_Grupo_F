@@ -70,6 +70,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.flipX=true;
         this.anims.play('movement' + this.spriteKey, true);
     }
+    
+    onMoveLeft(){
+        this.setVelocityX(-300);
+    }
+    onMoveRight(){
+        this.setVelocityX(300);
+    }
+    
+    
 
     idle() {//Stay still
         this.setVelocityX(0);
@@ -78,7 +87,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     moveRight() {//Move right
-        console.log("moving right")
+        // console.log("moving right")
         this.setVelocityX(300);
         this.flipX=false;
         this.anims.play('movement' + this.spriteKey, true);
