@@ -51,7 +51,9 @@ public class PositionManager extends BaseManager {
         WebSocketSession pair = RoomManager.getInstance().getPair(sender, message2);
         if (sender != pair && pair != null) {
             if(pair.isOpen()) {
-                pair.sendMessage(new TextMessage(position.toString()));
+                synchronized (pair) {
+                    pair.sendMessage(new TextMessage(position.toString()));
+                }
             }
         }
     }

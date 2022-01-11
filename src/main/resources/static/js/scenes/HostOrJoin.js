@@ -64,6 +64,8 @@ export class HostOrJoin extends Phaser.Scene {
         this.joinButton = this.add.image(850, 262, 'JoinButton').setOrigin(0).setDepth(2).setScale(.8);
         this.readyButton = this.add.image(width / 2, height / 2 + 230, 'ReadyButton').setDepth(2).setScale(.8);
 
+        this.returnButton = this.add.image(110, height - 50, 'ReturnButton').setDepth(2).setScale(.8);
+
         this.codeText = this.add.text(275, 350, " ", {fontFamily: 'ink-free-normal', fontSize: 33});
         this.codeText.visible = false;
         this.codeText.setDepth(3);
@@ -74,24 +76,26 @@ export class HostOrJoin extends Phaser.Scene {
         this.buttons.push(this.hostButton);
         this.buttons.push(this.joinButton);
         this.buttons.push(this.readyButton);
+        this.buttons.push(this.returnButton);
 
         this.hostButton.setInteractive();
         this.joinButton.setInteractive();
+        this.returnButton.setInteractive();
         this.readyButton.alpha = .6
         // readyButton.setInteractive();
 
         this.hostButton.on('pointerdown', () => {
             let connection = getConnection()
-            
+
             redefineArrays()
-            
+
             let hostInfo = {
                 type: "Room",
                 type2: "Host",
                 scenesOrder: getScenesOrder()
             }
-            
-            
+
+
             if (connection.readyState !== WebSocket.OPEN) {
                 connection.addEventListener('open', () => {
                     connection.send(JSON.stringify(hostInfo))
@@ -138,7 +142,11 @@ export class HostOrJoin extends Phaser.Scene {
             this.disableListeners();
             this.stopBackgroundMusic();
             // redefineArrays()
-            this.loadScene("Online"+getNextRandomCoop());
+            this.loadScene("Online" + getNextRandomCoop());
+        })
+        this.returnButton.on('pointerdown', () => {
+            this.disableListeners();
+            this.loadScene('MenuSceneWS');
         })
 
 
@@ -160,13 +168,6 @@ export class HostOrJoin extends Phaser.Scene {
 
         this.setOnButtonInfoReceived();
 
-        // TEST
-
-        // this.input.keyboard.on("keydown-ESC",this.goBackToMenu())
-
-        let goBackImage= this.add.image(height-200,100,"")
-        goBackImage.setInteractive()
-        goBackImage.on('pointerdown',()=>this.goBackToMenu())
     }
 
     sendMessage() {
@@ -267,32 +268,38 @@ export class HostOrJoin extends Phaser.Scene {
 
     setOnButtonInfoReceived() {
         let connection = getConnection()
-        connection.addEventListener('message', (msg) => {
-            let message = JSON.parse(msg.data)
-            if (message.type === "RoomCode") {
-                let code = message.code;
-                setPlayerIndex(message.playerIndex);
-                setRoomCode(code);
-                
- 
-                
-                codeRecieved = true;
-                this.codeText.visible = true;
-                if (isHost) {
-                    this.codeText.setText("Your room code: " + code)
-                } else {
-                    this.setJoinCodeText(code)
-                    setScenesOrder(message.scenesOrder)
-                }
-            }
-            if (message.type === "ConnectionClosed") {
-                console.log("external Connection closed reached")
-                // this.scene.manager.getScenes(true)[0].start("MenuSceneWS")
-                this.scene.manager.getScenes(true)[0].scene.start("MenuSceneWS")
-                // this.scene.manager.start("MenuSceneWS")
+        let roomCodeMsgListener = (msg) => this.getRoomCode(msg)
+        connection.addEventListener('message', roomCodeMsgListener)
+        this.events.on('shutdown',()=>connection.removeEventListener('message',roomCodeMsgListener))
+    }
 
+    getRoomCode(msg) {
+
+        let message = JSON.parse(msg.data)
+        if (message.type === "RoomCode") {
+            let code = message.code;
+            navigator.clipboard.writeText(code)
+            setPlayerIndex(message.playerIndex);
+            setRoomCode(code);
+
+
+            codeRecieved = true;
+            this.codeText.visible = true;
+            if (isHost) {
+                this.codeText.setText("Your room code: " + code)
+            } else {
+                this.setJoinCodeText(code)
+                setScenesOrder(message.scenesOrder)
             }
-        })
+        }
+        if (message.type === "ConnectionClosed") {
+            console.log("external Connection closed reached")
+            // this.scene.manager.getScenes(true)[0].start("MenuSceneWS")
+            this.scene.manager.getScenes(true)[0].scene.start("MenuSceneWS")
+            // this.scene.manager.start("MenuSceneWS")
+
+        }
+
     }
 
     setJoinCodeText(code) {

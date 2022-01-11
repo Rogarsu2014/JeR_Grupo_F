@@ -98,4 +98,8 @@ export class ServerConnectionManager {
         clearTimeout(updateConnectionTimeOut)
         clearTimeout(checkConnectionTimeOut)
     }
+
+    static enableRequests(){
+        terminated=false;
+    }
 }

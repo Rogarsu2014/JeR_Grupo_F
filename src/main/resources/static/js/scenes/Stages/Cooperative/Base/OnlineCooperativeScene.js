@@ -11,7 +11,7 @@ export class OnlineCooperativeScene extends OnlineGameStage {
 
         this.backgroundMusicKey = 'coopStageMusic';
         this.buttons = []
-        
+
     }
 
     create(data) {
@@ -36,10 +36,10 @@ export class OnlineCooperativeScene extends OnlineGameStage {
 
         this.physics.add.collider(this.players[0], this.door, () => this.door.playerEntered(this.players[0]))
         this.physics.add.collider(this.players[1], this.door, () => this.door.playerEntered(this.players[1]))
-        
-        
+
+
         this.setOnButtonInfoReceived()
-        this.nextLevelKey="Online"+getNextRandomComp();
+        this.nextLevelKey = "Online" + getNextRandomComp();
         //**** players and platforms
         // this.setPlatformsColliders();
     }
@@ -49,7 +49,6 @@ export class OnlineCooperativeScene extends OnlineGameStage {
         this.UpdatePlatforms();
     }
 
-   
 
     setDoorPosition(x, y) {
         this.door.setPosition(x, y);
@@ -172,8 +171,10 @@ export class OnlineCooperativeScene extends OnlineGameStage {
     setPlatformsColliders() {
 
         for (let i = 0; i < this.platforms.length; i++) {
-            this.physics.add.collider(this.players[0], this.platforms[i], () => {})
-            this.physics.add.collider(this.players[1], this.platforms[i], () => {})
+            this.physics.add.collider(this.players[0], this.platforms[i], () => {
+            })
+            this.physics.add.collider(this.players[1], this.platforms[i], () => {
+            })
         }
     }
 
@@ -196,13 +197,17 @@ export class OnlineCooperativeScene extends OnlineGameStage {
 
     setOnButtonInfoReceived() {
         let connection = getConnection()
-        connection.addEventListener('message', (msg) => {
+        let btnPressedMsg = (msg) => {
 
             let message = JSON.parse(msg.data)
             if (message.type === "CooperativeButton") {
                 let pressedButtonIndex = message.buttonIndex
                 this.buttons[pressedButtonIndex].press();
             }
-        })
+        }
+        connection.addEventListener('message', btnPressedMsg)
+
+        this.events.on('shutdown', () => connection.removeEventListener('message',btnPressedMsg))
+
     }
 }
