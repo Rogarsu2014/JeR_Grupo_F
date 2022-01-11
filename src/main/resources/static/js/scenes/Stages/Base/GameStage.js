@@ -77,7 +77,7 @@ export class GameStage extends Phaser.Scene {
         
         this.loadTransition.playTransition(() => {
 
-                // this.timer.resumeTimer();
+                this.timer.resumeTimer();
                 this.enableAllPlayersMovement()
             }, 500, 500
         )

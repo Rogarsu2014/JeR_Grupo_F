@@ -43,21 +43,27 @@ export class OnlinePlayer extends Player {
         this.connection = connection;
     }
     setOnMovementMessage(){
-        let movementMsg=(msg)=>{
-            let message=JSON.parse(msg.data)
-            if (message.type ==="Movement") {
-                let movement = JSON.parse(msg.data)
-                this.xDir = Number(movement.xDir);
-                this.isJumping = Boolean(movement.isJumping);
-            }else if(message.type === "Position"){
-                let position = JSON.parse(msg.data)
-                this.x = Number(position.x);
-                this.y = Number(position.y);
-            }
+        let movementMsgListener=(msg)=>{
+           this.movementMessageProcessor(msg)
         }
-        this.connection.addEventListener('message',movementMsg)
-        this.scene.events.on('shutdown',()=>this.connection.removeEventListener('message',movementMsg))
+        this.connection.addEventListener('message',movementMsgListener)
+        this.scene.events.on('shutdown',()=>this.connection.removeEventListener('message',movementMsgListener))
     }
+
+    movementMessageProcessor(msg){
+        let message=JSON.parse(msg.data)
+        if (message.type ==="Movement") {
+            let movement = JSON.parse(msg.data)
+            this.xDir = Number(movement.xDir);
+            this.isJumping = Boolean(movement.isJumping);
+        }else if(message.type === "Position"){
+            let position = JSON.parse(msg.data)
+            this.x = Number(position.x);
+            this.y = Number(position.y);
+        }
+    }
+    
+    
     jump() {
         super.jump()
         this.isJumping=true;

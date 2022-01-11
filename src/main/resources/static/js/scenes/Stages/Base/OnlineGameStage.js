@@ -44,49 +44,50 @@ export class OnlineGameStage extends GameStage {
         }
     }
 
-    setTimerListener(){
+    setTimerListener() {
 //remove the last timer
-        this.remainingTime=this.getSceneSeconds()
+        this.remainingTime = this.getSceneSeconds()
         // this.timer={}
-        this.timer.addSeconds = (ms)=>{
-            this.remainingTime += ms/1000
+        this.timer.addSeconds = (ms) => {
+            this.remainingTime += ms / 1000
             this.timerText.setText(this.remainingTime)
         }
         let connection = getConnection();
-        this.timeListener=(msg)=>this.timerListenerFunction(msg);
+        this.timeListener = (msg) => this.timerListenerFunction(msg);
         // let timerListener=(msg)=>this.timerListener(msg);
-        
+
         connection.addEventListener('message', this.timeListener)
-        this.events.on('shutdown',()=>connection.removeEventListener('message',this.timeListener))
+        this.events.on('shutdown', () => connection.removeEventListener('message', this.timeListener))
     }
-    
-    timerListenerFunction(msg){
+
+    timerListenerFunction(msg) {
         let message = JSON.parse(msg.data)
         if (message.type === "GameTime") {
             console.log("Time received")
             this.remainingTime -= 1;
             this.timerText.setText(this.remainingTime)
-            if (this.remainingTime===0){
+            if (this.remainingTime === 0) {
                 this.timeOver()
-                let connection=getConnection()
-                connection.removeEventListener('message',this.timeListener)
+                let connection = getConnection()
+                connection.removeEventListener('message', this.timeListener)
             }
         }
     }
+
     sendReadyStatus() {
         let connection = getConnection();
-        
+
         // Delegate with the function to be called
-        let getMsgDelegate =  (msg) =>{
+        let getMsgDelegate = (msg) => {
             this.getStageReadyMsg(msg)
         }
-        
+
         // event added when a message ius received
         connection.addEventListener('message', getMsgDelegate)
 
         // event removed at the end of a scene
-        this.events.on('shutdown',()=>connection.removeEventListener('message',getMsgDelegate))
-        
+        this.events.on('shutdown', () => connection.removeEventListener('message', getMsgDelegate))
+
         var readyObj = {
             type: "StageSynchronizer",
             stageState: "ready",
@@ -101,8 +102,8 @@ export class OnlineGameStage extends GameStage {
         }
 
     }
-    
-    getStageReadyMsg(msg){
+
+    getStageReadyMsg(msg) {
         let message = JSON.parse(msg.data)
         if (message.type === "StageSynchronizer") {
             console.log("stage status received")
@@ -115,8 +116,8 @@ export class OnlineGameStage extends GameStage {
     }
 
     receivePoints() {
-        let connection2 = getConnection();
-        connection2.addEventListener('message', (msg) => {
+        let connection = getConnection();
+        let pointsMsgListener = (msg) => {
             let message = JSON.parse(msg.data)
             if (message.type === "Points") {
                 let points = Number(message.points);
@@ -130,8 +131,11 @@ export class OnlineGameStage extends GameStage {
                 this.players[indice].points = points;
 
             }
-        })
+        }
+        connection.addEventListener('message', pointsMsgListener)
+        this.events.on('shutdown', () => connection.removeEventListener('message', pointsMsgListener))
     }
+
 
     receiveBump() {
         let connection3 = getConnection();
@@ -147,16 +151,23 @@ export class OnlineGameStage extends GameStage {
     }
 
 
-    
     update() {
         this.players[0].update(this.bump, this.players[1]);
         this.players[1].update(this.bump, this.players[0]);
 
         this.bump = false;
     }
-    
+
     timeOver() {
         this.disableAllPlayersMovement()
         this.onTimeOverPrimitive();
+    }
+
+    playStartTransition(){
+
+        this.loadTransition.playTransition(() => {
+                this.enableAllPlayersMovement()
+            }, 500, 500
+        )
     }
 }
