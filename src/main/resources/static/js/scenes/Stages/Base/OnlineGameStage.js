@@ -47,7 +47,11 @@ export class OnlineGameStage extends GameStage {
     setTimerListener(){
 //remove the last timer
         this.remainingTime=this.getSceneSeconds()
-        this.timer=null;
+        // this.timer={}
+        this.timer.addSeconds = (ms)=>{
+            this.remainingTime += ms/1000
+            this.timerText.setText(this.remainingTime)
+        }
         let connection = getConnection();
         this.timeListener=(msg)=>this.timerListenerFunction(msg);
         // let timerListener=(msg)=>this.timerListener(msg);
