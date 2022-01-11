@@ -56,11 +56,11 @@ export class MenuSceneWS extends Phaser.Scene {
         this.selectSprite.setScale(.1);
 
         // this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
-        let playButton = this.add.image(width / 3, height / 2 - 25, 'LocalGame').setDepth(1).setScale(.8);
-        this.onlineGame = this.add.image(width / 3, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
-        let tutorial = this.add.image(width / 3, height / 2 + 125, 'Tutorial').setDepth(1).setScale(.8);
-        let options = this.add.image(width / 3, height / 2 + 200, 'Options').setDepth(1).setScale(.8);
-        let credits = this.add.image(width / 3, height / 2 + 275, 'Credits').setDepth(1).setScale(.8);
+        let playButton = this.add.image(width / 2, height / 2 - 25, 'LocalGame').setDepth(1).setScale(.8);
+        this.onlineGame = this.add.image(width / 2, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
+        let tutorial = this.add.image(width / 2, height / 2 + 125, 'Tutorial').setDepth(1).setScale(.8);
+        let options = this.add.image(width / 2, height / 2 + 200, 'Options').setDepth(1).setScale(.8);
+        let credits = this.add.image(width / 2, height / 2 + 275, 'Credits').setDepth(1).setScale(.8);
 
 
         // chatText.setWordWrapWidth(778 * .5 - 20)
@@ -372,7 +372,9 @@ export class MenuSceneWS extends Phaser.Scene {
             fontFamily: 'ink-free-normal',
             fontSize: '40px'
         }).setDepth(1);
-        
+
+
+        ServerConnectionManager.enableRequests();
         ServerConnectionManager.GetClientsCount((clientsCount) => this.usersConnectedCountText.setText(clientsCount));
         
         ServerConnectionManager.CheckNetworkConnection(() => {

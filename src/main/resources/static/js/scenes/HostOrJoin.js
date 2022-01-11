@@ -64,7 +64,7 @@ export class HostOrJoin extends Phaser.Scene {
         this.joinButton = this.add.image(850, 262, 'JoinButton').setOrigin(0).setDepth(2).setScale(.8);
         this.readyButton = this.add.image(width / 2, height / 2 + 230, 'ReadyButton').setDepth(2).setScale(.8);
 
-        this.returnButton = this.add.image( 110, 50, 'ReturnButton').setDepth(2).setScale(.8);
+        this.returnButton = this.add.image( 110, height-50, 'ReturnButton').setDepth(2).setScale(.8);
 
         this.codeText = this.add.text(275, 350, " ", {fontFamily: 'ink-free-normal', fontSize: 33});
         this.codeText.visible = false;
@@ -146,7 +146,7 @@ export class HostOrJoin extends Phaser.Scene {
         })
         this.returnButton.on('pointerdown', () => {
             this.disableListeners();
-            this.loadScene('MenuScene');
+            this.loadScene('MenuSceneWS');
         })
 
 
@@ -167,14 +167,7 @@ export class HostOrJoin extends Phaser.Scene {
         var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
 
         this.setOnButtonInfoReceived();
-
-        // TEST
-
-        // this.input.keyboard.on("keydown-ESC",this.goBackToMenu())
-
-        let goBackImage= this.add.image(height-200,100,"")
-        goBackImage.setInteractive()
-        goBackImage.on('pointerdown',()=>this.goBackToMenu())
+        
     }
 
     sendMessage() {
@@ -279,6 +272,7 @@ export class HostOrJoin extends Phaser.Scene {
             let message = JSON.parse(msg.data)
             if (message.type === "RoomCode") {
                 let code = message.code;
+                navigator.clipboard.writeText(code)
                 setPlayerIndex(message.playerIndex);
                 setRoomCode(code);
                 

@@ -43,7 +43,7 @@ export class OnlinePlayer extends Player {
         this.connection = connection;
     }
     setOnMovementMessage(){
-        this.connection.onmessage = (msg) => {
+        let movementMsg=(msg)=>{
             let message=JSON.parse(msg.data)
             if (message.type ==="Movement") {
                 let movement = JSON.parse(msg.data)
@@ -55,6 +55,8 @@ export class OnlinePlayer extends Player {
                 this.y = Number(position.y);
             }
         }
+        this.connection.addEventListener('message',movementMsg)
+        this.scene.events.on('shutdown',()=>this.connection.removeEventListener('message',movementMsg))
     }
     jump() {
         super.jump()
