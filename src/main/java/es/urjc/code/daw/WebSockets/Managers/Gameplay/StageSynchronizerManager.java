@@ -1,9 +1,12 @@
-package es.urjc.code.daw.WebSockets.Managers;
+package es.urjc.code.daw.WebSockets.Managers.Gameplay;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 //import javafx.util.Pair;
+import es.urjc.code.daw.WebSockets.Classes.SessionPair;
+import es.urjc.code.daw.WebSockets.Managers.BaseManager;
+import es.urjc.code.daw.WebSockets.Managers.RoomManager;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -18,6 +21,8 @@ public class StageSynchronizerManager extends BaseManager {
     // Map with each session and a value to check if its scene is started
     ConcurrentHashMap<String, Boolean> playersReadyMap = new ConcurrentHashMap<>();
 
+    GameTimeManager gameTimeManager= new GameTimeManager();
+    
     public StageSynchronizerManager() {
         associatedType = "StageSynchronizer";
     }
@@ -35,7 +40,7 @@ public class StageSynchronizerManager extends BaseManager {
         
         // Check if players in same room
         TryNotifyClientsOfReadyPair(session,message);
-
+        
     }
 
     @Override
@@ -64,14 +69,19 @@ public class StageSynchronizerManager extends BaseManager {
                     pair.sendMessage(new TextMessage(readyStatus.toString()));
                     sender.sendMessage(new TextMessage(readyStatus.toString()));
                     
+                    
                     // To make clients to synchronize the following stages, the value is set to false, 
                     // so it will need to be set to true once more in a future 
                     playersReadyMap.replace(pair.getId(), false);
                     playersReadyMap.replace(sender.getId(), false);
+                    SessionPair sessionPair=RoomManager.getInstance().getSessionPair(sender);
                     
+                    gameTimeManager.setTimer(RoomManager.getInstance().getSessionPair(sender),1000L,1000L);
                 }
                 
             }
         }
     }
+    
+    
 }

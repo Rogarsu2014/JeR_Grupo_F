@@ -1,5 +1,5 @@
 import {Player} from "./Player.js";
-import {getRoomCode} from "../server/Websockets/SocketIntilalizer.js";
+import {getPlayerIndex, getRoomCode} from "../server/Websockets/SocketIntilalizer.js";
 import {Timer} from "../util/Timer.js";
 
 export class OnlinePlayer extends Player {
@@ -19,6 +19,20 @@ export class OnlinePlayer extends Player {
             [-1]: () => {
                 this.flipX = true;
                 this.anims.play('movement' + this.spriteKey, true)
+            },
+            [2]: () => {
+                this.flipX = false;
+                this.anims.play('jump' + this.spriteKey, true);
+            },
+            [-2]: () => {
+                this.flipX = true;
+                this.anims.play('jump' + this.spriteKey, true)
+            },[3]: () => {
+                this.flipX = false;
+                this.anims.play('death' + this.spriteKey, true)
+            },[-3]: () => {
+                this.flipX = true;
+                this.anims.play('death' + this.spriteKey, true)
             }
         }
         this.xDir = 0;
@@ -45,7 +59,7 @@ export class OnlinePlayer extends Player {
     jump() {
         super.jump()
         this.isJumping=true;
-        this.sendDirection()
+        this.sendDirection();
         // this.sendDirection(this.xDir, this.isJumping=true)
     }
     update(bump, playerp) {
@@ -84,12 +98,35 @@ export class OnlinePlayer extends Player {
     moveTo() {
         // console.log("Move To done")
         // this.dirActions[this.xDir]()
+        if(this.isJumping == true){
+            if(this.xDir == 1) this.xDir = 2;
+            if(this.xDir == -1) this.xDir = -2;
+        }
         this.animations[this.xDir]()
-        this.setVelocityX(this.xDir * 300)
+        if(this.xDir == 2){
+            this.setVelocityX(300);
+        }else if(this.xDir == -2){
+            this.setVelocityX(-300);
+        }else{
+            this.setVelocityX(this.xDir * 300);
+        }
+
 
         if (this.isJumping) {
             super.jump()
         }
+    }
+
+    setDeath(){
+        if(getPlayerIndex() == 0){
+            this.xDir = 3;
+        }else{
+            this.xDir = -3;
+        }
+    }
+
+    removeDeath(){
+        this.xDir = 0;
     }
 
     sendDirection() {
@@ -113,7 +150,7 @@ export class OnlinePlayer extends Player {
 
     sendPos200(){
 
-        var timer = new Timer(this.context, 200, () => {
+        var timer = new Timer(this.context, 10, () => {
             this.sendPos();
             timer.startTimer();
             }

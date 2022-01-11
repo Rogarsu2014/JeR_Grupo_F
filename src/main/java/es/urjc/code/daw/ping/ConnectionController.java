@@ -3,6 +3,7 @@ package es.urjc.code.daw.ping;
 import es.urjc.code.daw.chat.Message;
 import es.urjc.code.daw.chat.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+@CrossOrigin
 @RequestMapping("/ping")
 @RestController
 public class ConnectionController {

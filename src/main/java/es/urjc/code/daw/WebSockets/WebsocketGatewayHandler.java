@@ -2,9 +2,9 @@ package es.urjc.code.daw.WebSockets;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.WebSockets.Managers.*;
-import es.urjc.code.daw.chat.Message;
+import es.urjc.code.daw.WebSockets.Managers.Gameplay.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -13,6 +13,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+@CrossOrigin
 public class WebsocketGatewayHandler extends TextWebSocketHandler {
 
 
@@ -51,8 +53,7 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
         BaseManager playersVictoryManager = new PlayerVictoryManager();
         this.managers.put(playersVictoryManager.getAssociatedType(),playersVictoryManager);
         
-        BaseManager registrationManager = new RegistrationManager();
-        this.managers.put(registrationManager.getAssociatedType(),registrationManager);
+        this.managers.put(RegistrationManager.getInstance().getAssociatedType(),RegistrationManager.getInstance());
     }
 
     

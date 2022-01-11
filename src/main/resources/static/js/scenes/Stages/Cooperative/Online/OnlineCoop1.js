@@ -5,7 +5,11 @@ import {Platform} from "../../../../objects/Platform.js";
 import {getConnection} from "../../../../server/Websockets/SocketIntilalizer.js";
 import {OnlineCooperativeScene} from "../Base/OnlineCooperativeScene.js";
 import {OnlineButton} from "../../../../objects/online/OnlineButton.js";
+import {addCoopScene} from "../../../../util/ScenesRandomizer.js";
 
+
+let sceneKey="OnlineCoop1"
+// addCoopScene(sceneKey)
 
 /// Player 1 is upper layer player.
 /// Player 2 is down layer player
@@ -14,7 +18,8 @@ export class OnlineCoop1 extends OnlineCooperativeScene {
 
 
     constructor() {
-        super("OnlineCoop1", "OnlineComp1", 15000, 'Coop1Map');
+        super(sceneKey, 15000, 'Coop1Map');
+        // super("OnlineCoop1", "OnlineComp1", 15000, 'Coop1Map');
     }
 
     init() {

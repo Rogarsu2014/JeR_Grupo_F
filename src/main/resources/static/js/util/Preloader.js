@@ -33,7 +33,7 @@ export class Preloader extends Phaser.Scene {
         this.load.image('Tutorial','./Resources/assets/UI/Buttons/Tutorial.png');
         this.load.image('TutorialPush','./Resources/assets/UI/Buttons/TutorialPush.png');
         this.load.image('ChatButton','./Resources/assets/UI/Buttons/ChatButton.png');
-        this.load.image('ChatScreen','./Resources/assets/UI/MainMenu/ChatScreen.png');
+        this.load.image('ChatScreen','./Resources/assets/UI/MainMenu/ChatScreen1.png');
         this.load.image('XButton','./Resources/assets/UI/Buttons/XButton.png');
         this.load.image('XButtonPush','./Resources/assets/UI/Buttons/XButtonPush.png');
         this.load.image('ChatButtonPush','./Resources/assets/UI/Buttons/ChatButtonPush.png');
@@ -82,8 +82,8 @@ export class Preloader extends Phaser.Scene {
         this.load.tilemapTiledJSON('Comp1Map', './Resources/assets/level/comp1v2.json');
         this.load.tilemapTiledJSON('Comp2Map', './Resources/assets/level/comp2v2.json');
         this.load.tilemapTiledJSON('Comp3Map', './Resources/assets/level/Comp3.json');
-        this.load.spritesheet("dude","./Resources/assets/items/SPRITE_SHIIIIIITTT.png", { frameWidth: 706, frameHeight: 672 });
-        this.load.spritesheet("dude2","./Resources/assets/items/spriteshit2.png", { frameWidth: 731, frameHeight: 526 });
+        this.load.spritesheet("dude","./Resources/assets/items/spritesheetDaia.png", { frameWidth: 706, frameHeight: 672 });
+        this.load.spritesheet("dude2","./Resources/assets/items/spritesheetIbban.png", { frameWidth: 731, frameHeight: 526 });
         this.load.spritesheet("skull","./Resources/assets/items/SpriteSkulls.png", { frameWidth: 522, frameHeight: 518 });
         //this.load.image("skull", "./Resources/assets/items/skull.png");//Current sprites from tutorial
         this.load.audio("points+", "./Resources/assets/sounds/points.mp3");//https://www.youtube.com/watch?v=SoeT6x0O-CM
@@ -153,6 +153,14 @@ export class Preloader extends Phaser.Scene {
         this.load.image('ReadyButtonPush','./Resources/assets/UI/Buttons/ReadyButtonPush.png');
         this.load.image('SearchRoomScreen', './Resources/assets/UI/SearchRoomScreen.png');
         this.load.image('HostScreen', './Resources/assets/UI/HostScreen.png');
+
+        //Escena Victoria
+        this.load.image('Daia_Muerte2','./Resources/assets/items/Daia_Muerte2.png');
+        this.load.image('Daia_Muerte3','./Resources/assets/items/Daia_muerte3.png');
+        this.load.image('DaiaVictoryPose','./Resources/assets/items/DaiaVictoryPose.png');
+        this.load.image('Ibban_Muerte','./Resources/assets/items/Ibban_Muerte.png');
+        this.load.image('Ibban_Muerte2','./Resources/assets/items/Ibban_Muerte2.png');
+        this.load.image('IbbanVictoryPose','./Resources/assets/items/IbbanVictoryPose.png');
 
         this.load.image('ReturnButton','./Resources/assets/UI/Buttons/ReturnButton.png');
         this.load.image('ReturnButtonPush','./Resources/assets/UI/Buttons/ReturnButtonPush.png');

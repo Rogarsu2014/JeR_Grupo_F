@@ -6,12 +6,12 @@ public class SessionPair {
     WebSocketSession w1;
     WebSocketSession w2;
     String status;
-
+    String scenesOrder;
     public SessionPair(WebSocketSession s1, WebSocketSession s2) {
         w1 = s1;
         w2 = s2;
     }
-
+    
     public SessionPair(WebSocketSession s1) {
         w1 = s1;
         status = "open";
@@ -22,10 +22,23 @@ public class SessionPair {
         status = "full";
     }
 
+    public String getScenesOrder() {
+        return scenesOrder;
+    }
+
+    public void setScenesOrder(String roomsOrder) {
+        this.scenesOrder = roomsOrder;
+    }
+
     public WebSocketSession getW1() {
         return w1;
     }
-
+    
+    public WebSocketSession[] getSessions(){
+        WebSocketSession[] webSocketSessions = {w1, w2};
+        return webSocketSessions;
+    }
+            
     public WebSocketSession getOtherSession(WebSocketSession s) {
         if (s == w1) {
             return w2;
@@ -47,5 +60,6 @@ public class SessionPair {
     }
 
     public String getStatus(){return status;}
+    
 
 }

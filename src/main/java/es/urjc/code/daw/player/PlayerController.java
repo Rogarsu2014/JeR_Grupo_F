@@ -1,4 +1,5 @@
 package es.urjc.code.daw.player;
+import es.urjc.code.daw.WebSockets.Managers.RegistrationManager;
 import es.urjc.code.daw.ping.ConnectionController;
 import lombok.SneakyThrows;
 
@@ -7,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+
+@CrossOrigin
 @RequestMapping("/player")
 @RestController
 public class PlayerController {
@@ -20,12 +24,14 @@ public class PlayerController {
 //        this.playerRepository = playerRepository;
 ////        this.connectionController = connectionController;
 //    }   
+    
     public PlayerController(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
 //        this.connectionController = connectionController;
     }
 
 //    @SneakyThrows
+    
     @PostMapping
     public Player signUp(@RequestBody Player player) {
         boolean usernameAlreadyExits=playerRepository.findById(player.getUsername().trim()).isPresent();
@@ -46,7 +52,11 @@ public class PlayerController {
     @SneakyThrows
     @GetMapping("/{username}/{password}")
     public Player logIn(@PathVariable String username,@PathVariable String password) {
-        if(!ConnectionController.getInstance().isUserLogIn(username)) {
+//        if(!ConnectionController.getInstance().isUserLogIn(username)) {
+//            Player player = playerRepository.findById(username).filter((player1 -> player1.getPassword().equals(password))).orElseThrow(() -> new Exception("Player not available"));
+//            return player;
+//        } 
+        if(!RegistrationManager.getInstance().isUserLoggedIn(username)) {
             Player player = playerRepository.findById(username).filter((player1 -> player1.getPassword().equals(password))).orElseThrow(() -> new Exception("Player not available"));
             return player;
         }

@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://dual-interest-db.clcczifx5uvi.eu-west-3.rds.amazonaws.com:3306/dualinterest</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Dual interest DB [2]" uuid="d1774f89-b4ac-442f-921f-3a3c7dacf502">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://dual-interest-db.c1yk5pp10opc.eu-west-3.rds.amazonaws.com:3306/dualinterest</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

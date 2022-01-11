@@ -3,10 +3,11 @@ import {Door} from "../../../../objects/Door.js";
 import {Timer} from "../../../../util/Timer.js";
 import {SweepVerticalTransitionIn} from "../../../../util/cameraEffects.js";
 import {getConnection, getRoomCode} from "../../../../server/Websockets/SocketIntilalizer.js";
+import {getNextRandomComp} from "../../../../util/ScenesRandomizer.js";
 
 export class OnlineCooperativeScene extends OnlineGameStage {
-    constructor(sceneKey, nextLevelKey, timerTime, tilemapKey, sceneWidth = 960) {
-        super(sceneKey, nextLevelKey, timerTime, tilemapKey, 960);
+    constructor(sceneKey, timerTime, tilemapKey, sceneWidth = 960) {
+        super(sceneKey, timerTime, tilemapKey, 960);
 
         this.backgroundMusicKey = 'coopStageMusic';
         this.buttons = []
@@ -35,11 +36,10 @@ export class OnlineCooperativeScene extends OnlineGameStage {
 
         this.physics.add.collider(this.players[0], this.door, () => this.door.playerEntered(this.players[0]))
         this.physics.add.collider(this.players[1], this.door, () => this.door.playerEntered(this.players[1]))
-
-        this.pauseStartTransition()
+        
         
         this.setOnButtonInfoReceived()
-        
+        this.nextLevelKey="Online"+getNextRandomComp();
         //**** players and platforms
         // this.setPlatformsColliders();
     }

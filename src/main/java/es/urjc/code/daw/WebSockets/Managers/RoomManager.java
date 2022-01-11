@@ -41,6 +41,7 @@ public class RoomManager extends BaseManager {
         if (roomNode.get("type2").asText().equals("Host")) {
             String roomCode = randomString();
             SessionPair p = new SessionPair(session);
+            p.setScenesOrder(roomNode.get("scenesOrder").asText());
             games.put(roomCode, p);
             System.out.println("Created room with code :" + roomCode);
 
@@ -52,7 +53,8 @@ public class RoomManager extends BaseManager {
 
         } else if (roomNode.get("type2").asText().equals("Join")) {
             if (games.containsKey(roomNode.get("RoomCode").asText())) {
-                WebSocketSession player1 = games.get(roomNode.get("RoomCode").asText()).getW1();
+                SessionPair pair = games.get(roomNode.get("RoomCode").asText());
+                WebSocketSession player1 = pair.getW1();
                 if (player1 == null) {
                     System.out.println("Room not Found");
                 } else if (games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")) {
@@ -66,7 +68,7 @@ public class RoomManager extends BaseManager {
                     node.put("code", roomNode.get("RoomCode").asText());
 
                     node.put("playerIndex", games.get(roomNode.get("RoomCode").asText()).getPlayerIndex(session));
-
+                    node.put("scenesOrder", pair.getScenesOrder());
                     session.sendMessage(new TextMessage(node.toString()));
                 }
             } else {
@@ -84,8 +86,8 @@ public class RoomManager extends BaseManager {
         WebSocketSession pair = null;
         for (String key :
                 games.keySet()) {
-            if(games.get(key).containsSession(session)) {
-                
+            if (games.get(key).containsSession(session)) {
+
                 pair = getPair(session, key);
                 break;
             }
@@ -130,6 +132,7 @@ public class RoomManager extends BaseManager {
             return s;
         }
     }
+
     public WebSocketSession getPair(WebSocketSession s, String roomCode) throws Exception {
 //        JsonNode roomNode = mapper.readTree(message.getPayload());
         if (games.containsKey(roomCode)) {
@@ -141,5 +144,15 @@ public class RoomManager extends BaseManager {
         } else {
             return s;
         }
+    }
+
+    public SessionPair getSessionPair(WebSocketSession session) {
+        SessionPair sessionPair = null;
+        for (SessionPair value : games.values()) {
+            if (value.containsSession(session)) {
+                sessionPair = value;
+            }
+        }
+        return sessionPair;
     }
 }
