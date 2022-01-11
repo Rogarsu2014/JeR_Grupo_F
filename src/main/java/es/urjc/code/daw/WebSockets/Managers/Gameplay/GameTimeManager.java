@@ -31,11 +31,14 @@ public class GameTimeManager {
         TimerTask task = new TimerTask() {
             @SneakyThrows
             @Override
-            public void run() {
+            public synchronized void run() {
                 for (WebSocketSession session : sessionPair.getSessions()) {
                     ObjectNode node = mapper.createObjectNode();
                     node.put("type", "GameTime");
-                    session.sendMessage(new TextMessage(node.toString()));
+                    synchronized (session){
+                        session.sendMessage(new TextMessage(node.toString()));
+                    }
+                    
                 }
             }
         };

@@ -161,6 +161,10 @@ export class Preloader extends Phaser.Scene {
         this.load.image('Ibban_Muerte','./Resources/assets/items/Ibban_Muerte.png');
         this.load.image('Ibban_Muerte2','./Resources/assets/items/Ibban_Muerte2.png');
         this.load.image('IbbanVictoryPose','./Resources/assets/items/IbbanVictoryPose.png');
+
+        this.load.image('ReturnButton','./Resources/assets/UI/Buttons/ReturnButton.png');
+        this.load.image('ReturnButtonPush','./Resources/assets/UI/Buttons/ReturnButtonPush.png');
+
     }
     create(){
         console.log("Preload hecho");
