@@ -1,10 +1,10 @@
-import {Trap} from '../../../../objects/Trap.js'
+
 import {Platform} from "../../../../objects/Platform.js";
 
 import {OnlineCompetitiveScene} from "../Base/OnlineCompetitiveScene.js";
-import {addCompScene} from "../../../../util/ScenesRandomizer.js";
 
-var traps = [];
+
+
 
 let sceneKey="OnlineComp3"
 // addCompScene(sceneKey)
@@ -37,33 +37,21 @@ export class OnlineComp3 extends OnlineCompetitiveScene {
         this.platforms.push(platform6)
         var platform7 = new Platform(this, 64 * 16, 64 * 4, 'platM', 0, 0)
         this.platforms.push(platform7)
-
-
-        traps.push(new Trap(this, 150, 426, "trap"));
-        traps.push(new Trap(this, 300, 554, "trap"));
-        traps.push(new Trap(this, 350, 554, "trap"));
-        traps.push(new Trap(this, 615, 554, "trap"));
-        traps.push(new Trap(this, 665, 554, "trap"));
-        traps.push(new Trap(this, 930, 554, "trap"));
-        traps.push(new Trap(this, 980, 554, "trap"));
-        traps.push(new Trap(this, 980 + 150, 426, "trap"));
-
-        for (let i = 0; i < traps.length; i += 1) {
-            this.physics.add.collider(this.players[0], traps[i],  ()=> {
-                traps[i].harm(this.players[0]);
-                this.scores[0].setText("Player 1: " + this.players[0].points);
-            });
-            this.physics.add.collider(this.players[1], traps[i],  () =>{
-                traps[i].harm(this.players[1]);
-
-                this.scores[1].setText("Player 2: " + this.players[1].points);
-            });
-        }
-
-
-        this.setPlatformsColliders();
+        this.setPlatformsColliders()
         
     }
+    
+    primitiveSetTraps() {
+        this.addTrap( 150, 426);
+        this.addTrap( 300, 554);
+        this.addTrap(615, 554);
+        this.addTrap(350, 554);
+        this.addTrap(665, 554);
+        this.addTrap(930, 554);
+        this.addTrap(980, 554);
+        this.addTrap(980 + 150, 426);
+    }
+
     setPlatformsColliders(){
 
         for (let i = 0; i < this.platforms.length; i++) {

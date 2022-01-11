@@ -2,6 +2,7 @@ import {GameStage} from "../../Base/GameStage.js";
 import {cameraFadeOut} from "../../../../util/cameraEffects.js";
 import {Skull} from "../../../../objects/Skull.js";
 import {getNextRandomCoop} from "../../../../util/ScenesRandomizer.js";
+import {Trap} from "../../../../objects/Trap.js";
 
 export class CompetitiveScene extends GameStage{
 
@@ -9,12 +10,14 @@ export class CompetitiveScene extends GameStage{
         super(sceneKey, timerTime,tilemapKey,sceneWidth);
         this.backgroundMusicKey='compStageMusic';
         this.skulls=[]
+        this.traps=[]
     }
 
     create(data) {
         super.create(data);
         this.defineSkulls()
-        this.setSkullsCollision()
+        this.setSkullsCollisions()
+        this.setTraps()
         this.nextLevelKey = getNextRandomCoop()
     }
 
@@ -33,7 +36,8 @@ export class CompetitiveScene extends GameStage{
     defineSkulls(){
         throw new Error("Skulls to be implemented")
     }
-    setSkullsCollision(){
+    
+    setSkullsCollisions(){
         let counter=this.skulls.length;
         for (let i = 0; i < this.skulls.length; i += 1) {
             this.physics.add.collider(this.players[0], this.skulls[i],  ()=> {
@@ -68,5 +72,28 @@ export class CompetitiveScene extends GameStage{
             this.startNextLevel()
         })
     }
+    
+    addTrap(x,y){
+        this.traps.push(new Trap(this, x, y, "trap"))
+    }
+    
+    primitiveSetTraps() {}
+    setTraps(){
+        this.primitiveSetTraps()
+        this.setTrapsCollisions()
+    }
+    setTrapsCollisions(){
+        if (this.traps.length===0) return;
+        for (let i = 0; i < this.traps.length; i += 1) {
+            this.physics.add.collider(this.players[0], this.traps[i],  ()=> {
+                this.traps[i].harm(this.players[0]);
+                this.scores[0].setText("Jugador 1: " + this.players[0].points);
+            });
+            this.physics.add.collider(this.players[1], this.traps[i],  ()=> {
+                this.traps[i].harm(this.players[1]);
 
+                this.scores[1].setText("Jugador 2: " + this.players[1].points);
+            });
+        }
+    }
 }

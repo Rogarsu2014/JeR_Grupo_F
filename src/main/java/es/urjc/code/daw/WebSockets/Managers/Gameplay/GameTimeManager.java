@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.WebSockets.Classes.SessionPair;
 import es.urjc.code.daw.WebSockets.Managers.BaseManager;
+import es.urjc.code.daw.WebSockets.Managers.RoomManager;
 import lombok.SneakyThrows;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -20,6 +21,12 @@ public class GameTimeManager {
     final ObjectMapper mapper = new ObjectMapper();
 
     ConcurrentHashMap<SessionPair, Timer> timers;
+
+    static GameTimeManager instance = new GameTimeManager();
+
+    public static GameTimeManager getInstance() {
+        return instance;
+    }
 
     public GameTimeManager() {
         timers = new ConcurrentHashMap<SessionPair, Timer>();
@@ -57,6 +64,8 @@ public class GameTimeManager {
 
     public void removeTimer(SessionPair sessionPair) {
         if (timers.containsKey(sessionPair)) {
+            timers.get(sessionPair).cancel();
+            timers.get(sessionPair).purge();
             timers.remove(sessionPair);
         }
     }

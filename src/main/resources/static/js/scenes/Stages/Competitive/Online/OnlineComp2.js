@@ -2,7 +2,7 @@
 import {Platform} from "../../../../objects/Platform.js";
 
 import {OnlineCompetitiveScene} from "../Base/OnlineCompetitiveScene.js";
-import {addCompScene} from "../../../../util/ScenesRandomizer.js";
+
 
 
 let sceneKey="OnlineComp2"

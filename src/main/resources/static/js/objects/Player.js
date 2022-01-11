@@ -65,10 +65,20 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     moveLeft() {//Move left
         // this.x-=1
+        console.log("moving left")
         this.setVelocityX(-300);
         this.flipX=true;
         this.anims.play('movement' + this.spriteKey, true);
     }
+    
+    onMoveLeft(){
+        this.setVelocityX(-300);
+    }
+    onMoveRight(){
+        this.setVelocityX(300);
+    }
+    
+    
 
     idle() {//Stay still
         this.setVelocityX(0);
@@ -77,6 +87,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     moveRight() {//Move right
+        // console.log("moving right")
         this.setVelocityX(300);
         this.flipX=false;
         this.anims.play('movement' + this.spriteKey, true);
@@ -113,11 +124,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (bump == true) {
             if (this.body.touching.left == true) {
                 this.setAccelerationX(100000);
-                var timer = new Timer(this.context, 50, () => this.setAccelerationX(0));
+                let timer = new Timer(this.context, 50, () => this.setAccelerationX(0));
                 timer.startTimer();
             } else if (this.body.touching.right == true) {
                 this.setAccelerationX(-100000);
-                var timer = new Timer(this.context, 50, () => this.setAccelerationX(0));
+                let timer = new Timer(this.context, 50, () => this.setAccelerationX(0));
                 timer.startTimer();
             }
 

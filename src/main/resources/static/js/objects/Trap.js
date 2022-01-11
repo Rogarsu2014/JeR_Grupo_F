@@ -1,4 +1,4 @@
-import { Timer } from "../util/Timer.js";
+import {Timer} from "../util/Timer.js";
 
 export class Trap extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, spriteKey) {
@@ -14,27 +14,42 @@ export class Trap extends Phaser.Physics.Arcade.Sprite {
         this.spriteKey = spriteKey;
         this.pointsRemoved = -50;
         this.music = this.context.sound.add("hit", this.context.game.config.musicConfig);
+        this.onPlayerContact = () => {
+            player.body.moves = true;
+        };
     }
+
     init() {
 
     }
+
     preload() {
 
     }
+
     create() {
 
     }
+
     update() {
 
     }
+
     harm(player) {
+        this.baseHarm(player)
+        this.primitiveHarm(player)
+   
+    }
+
+    baseHarm(player) {
         player.addPoints(this.pointsRemoved);
         this.music.play();
         player.setPosition(player.initialPositionX, player.initialPositionY);
         player.body.moves = false;
-        player.setDeath();
-        var timer = new Timer(this.context, 2000, () =>{
-            player.removeDeath();
+    }
+    
+    primitiveHarm(player){
+        let timer = new Timer(this.context, 2000, () => {
             player.body.moves = true;
         });
         timer.startTimer();

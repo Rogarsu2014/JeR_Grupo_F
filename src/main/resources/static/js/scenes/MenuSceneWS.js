@@ -320,9 +320,17 @@ export class MenuSceneWS extends Phaser.Scene {
     
     loadScene(sceneKey){
         ServerConnectionManager.stopAll()
+        this.hideHTMLElements()
         this.formUtil.hideElement("btnSend")
         this.formUtil.clearTextAreaValue("myText")
         this.scene.start(sceneKey)
+    }
+    
+    hideHTMLElements(){
+        this.formUtil.hideElement("btnSend")
+        this.formUtil.hideElement("myUser");
+        this.formUtil.hideElement("myPass");
+        this.formUtil.hideElement("myText");
     }
     sendMessage() {
 
