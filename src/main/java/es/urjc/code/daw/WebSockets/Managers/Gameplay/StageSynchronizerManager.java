@@ -21,9 +21,10 @@ public class StageSynchronizerManager extends BaseManager {
     // Map with each session and a value to check if its scene is started
     ConcurrentHashMap<String, Boolean> playersReadyMap = new ConcurrentHashMap<>();
 
-    GameTimeManager gameTimeManager= new GameTimeManager();
+    GameTimeManager gameTimeManager;
     
     public StageSynchronizerManager() {
+        gameTimeManager=GameTimeManager.getInstance();
         associatedType = "StageSynchronizer";
     }
 

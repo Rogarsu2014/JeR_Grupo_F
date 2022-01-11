@@ -3,16 +3,13 @@ import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
 import {MessagesManager} from "../server/MessagesManager.js";
 
-import {getConnection, getRoomCode, setPlayerIndex, setRoomCode} from "../server/Websockets/SocketIntilalizer.js";
+import {getConnection, setPlayerIndex, setRoomCode} from "../server/Websockets/SocketIntilalizer.js";
 import {getNextRandomCoop, getScenesOrder, redefineArrays, setScenesOrder} from "../util/ScenesRandomizer.js";
+import {setAsHost} from "../server/HostData.js";
 
-var music;
+let music;
 const backgroundMusicKey = 'mainMenuMusic';
-var codeRecieved = false;
-let icons = {
-    0: "daiaIcon",
-    1: "ibbanIcon"
-}
+let codeRecieved = false;
 
 let isHost = false;
 
@@ -287,6 +284,7 @@ export class HostOrJoin extends Phaser.Scene {
             this.codeText.visible = true;
             if (isHost) {
                 this.codeText.setText("Your room code: " + code)
+                setAsHost()
             } else {
                 this.setJoinCodeText(code)
                 setScenesOrder(message.scenesOrder)

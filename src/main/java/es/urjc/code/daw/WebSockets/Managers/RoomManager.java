@@ -4,10 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import es.urjc.code.daw.WebSockets.Classes.SessionPair;
+import es.urjc.code.daw.WebSockets.Managers.Gameplay.GameTimeManager;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Random;
 
@@ -31,53 +34,30 @@ public class RoomManager extends BaseManager {
 
     @Override
     public void connectionEstablished(WebSocketSession session) {
-
+        
     }
-
+    ActionEvent event;
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
         JsonNode roomNode = mapper.readTree(message.getPayload());
+        String messageType = roomNode.get("type2").asText();
+        
+        switch (messageType) {
+            case "Host":
+                HostAction(session, roomNode);
+                break;
 
-        if (roomNode.get("type2").asText().equals("Host")) {
-            String roomCode = randomString();
-            SessionPair p = new SessionPair(session);
-            p.setScenesOrder(roomNode.get("scenesOrder").asText());
-            games.put(roomCode, p);
-            System.out.println("Created room with code :" + roomCode);
+            case "Join":
+                JoinAction(session, roomNode);
+                break;
+            case "RemoveRoom":
+                RemoveRoomAction(session, roomNode);
+                break;
 
-            ObjectNode node = mapper.createObjectNode();
-            node.put("type", "RoomCode");
-            node.put("code", roomCode);
-            node.put("playerIndex", p.getPlayerIndex(session));
-            session.sendMessage(new TextMessage(node.toString()));
-
-        } else if (roomNode.get("type2").asText().equals("Join")) {
-            if (games.containsKey(roomNode.get("RoomCode").asText())) {
-                SessionPair pair = games.get(roomNode.get("RoomCode").asText());
-                WebSocketSession player1 = pair.getW1();
-                if (player1 == null) {
-                    System.out.println("Room not Found");
-                } else if (games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")) {
-                    System.out.println("Room Full");
-                } else {
-                    games.get(roomNode.get("RoomCode").asText()).setW2(session);
-                    System.out.println("Connected in room with " + games.get(roomNode.get("RoomCode").asText()).getW1().getId()); //Falta nombre
-
-                    ObjectNode node = mapper.createObjectNode();
-                    node.put("type", "RoomCode");
-                    node.put("code", roomNode.get("RoomCode").asText());
-
-                    node.put("playerIndex", games.get(roomNode.get("RoomCode").asText()).getPlayerIndex(session));
-                    node.put("scenesOrder", pair.getScenesOrder());
-                    session.sendMessage(new TextMessage(node.toString()));
-                }
-            } else {
-                System.out.println("Room not Found");
-            }
-        } else {
-            //Desconectar voluntariamente
-            System.out.println(roomNode.get("type2").asText());
-            System.out.println("Unknown error");
+            default:
+                System.out.println(roomNode.get("type2").asText());
+                System.out.println("Unknown error");
+                break;
         }
     }
 
@@ -97,6 +77,52 @@ public class RoomManager extends BaseManager {
             node.put("type", "ConnectionClosed");
             pair.sendMessage(new TextMessage(node.toString()));
         }
+    }
+
+
+    public void HostAction(WebSocketSession session, JsonNode roomNode) throws IOException {
+        String roomCode = randomString();
+        SessionPair p = new SessionPair(session);
+        p.setScenesOrder(roomNode.get("scenesOrder").asText());
+        games.put(roomCode, p);
+        System.out.println("Created room with code :" + roomCode);
+
+        ObjectNode node = mapper.createObjectNode();
+        node.put("type", "RoomCode");
+        node.put("code", roomCode);
+        node.put("playerIndex", p.getPlayerIndex(session));
+        session.sendMessage(new TextMessage(node.toString()));
+    }
+
+    public void JoinAction(WebSocketSession session, JsonNode roomNode) throws IOException {
+        if (games.containsKey(roomNode.get("RoomCode").asText())) {
+            SessionPair pair = games.get(roomNode.get("RoomCode").asText());
+            WebSocketSession player1 = pair.getW1();
+            if (player1 == null) {
+                System.out.println("Room not Found");
+            } else if (games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")) {
+                System.out.println("Room Full");
+            } else {
+                games.get(roomNode.get("RoomCode").asText()).setW2(session);
+                System.out.println("Connected in room with " + games.get(roomNode.get("RoomCode").asText()).getW1().getId()); //Falta nombre
+
+                ObjectNode node = mapper.createObjectNode();
+                node.put("type", "RoomCode");
+                node.put("code", roomNode.get("RoomCode").asText());
+
+                node.put("playerIndex", games.get(roomNode.get("RoomCode").asText()).getPlayerIndex(session));
+                node.put("scenesOrder", pair.getScenesOrder());
+                session.sendMessage(new TextMessage(node.toString()));
+            }
+        } else {
+            System.out.println("Room not Found");
+        }
+    }
+    
+    public void RemoveRoomAction(WebSocketSession session, JsonNode roomNode){
+        String roomCode= roomNode.get("RoomCode").asText();
+        GameTimeManager.getInstance().removeTimer(games.get(roomCode));
+        games.remove(roomCode);
     }
 
     public void connectionLost() {

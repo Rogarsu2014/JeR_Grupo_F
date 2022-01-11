@@ -37,7 +37,7 @@ export class OnlineComp3 extends OnlineCompetitiveScene {
         this.platforms.push(platform6)
         var platform7 = new Platform(this, 64 * 16, 64 * 4, 'platM', 0, 0)
         this.platforms.push(platform7)
-        
+        this.setPlatformsColliders()
         
     }
     
