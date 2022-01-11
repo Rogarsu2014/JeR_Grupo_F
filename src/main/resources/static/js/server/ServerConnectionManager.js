@@ -15,8 +15,10 @@ export class ServerConnectionManager {
     static windowHref=window.location.href
     static host=window.location.host
     
+    // static windowHref="https://dual-interest.herokuapp.com/"
     // static windowHref="dualinterest.eu-west-3.elasticbeanstalk.com"
     // static host="dualinterest.eu-west-3.elasticbeanstalk.com"
+    // static host="dual-interest.herokuapp.com/"
     static CheckNetworkConnection(onSuccess,onError){
         $.ajax({
             url: this.windowHref+'/ping',
