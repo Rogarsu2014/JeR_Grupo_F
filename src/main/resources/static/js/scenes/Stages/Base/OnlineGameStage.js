@@ -1,7 +1,7 @@
 import {GameStage} from "./GameStage.js";
 import {Player} from "../../../objects/Player.js";
 import {KeyboardProcessor} from "../../../util/InputProcessors/KeyboardProcessor.js";
-import {OnlinePlayer} from "../../../objects/OnlinePlayer.js";
+import {OnlinePlayer} from "../../../objects/online/OnlinePlayer.js";
 import {getConnection, getPlayerIndex, getRoomCode} from "../../../server/Websockets/SocketIntilalizer.js";
 import {OnlineKeyboardProcessor} from "../../../util/InputProcessors/OnlineKeyboardProcessor.js";
 
@@ -108,6 +108,15 @@ export class OnlineGameStage extends GameStage {
                 this.resumeStartTransition()
             }
         }
+    }
+
+    playStartTransition() {
+        this.loadTransition.playTransition(() => {
+
+                // this.timer.resumeTimer();
+                this.enableAllPlayersMovement()
+            }, 500, 500
+        )
     }
 
     receivePoints() {

@@ -1,6 +1,6 @@
-import {Player} from "./Player.js";
-import {getPlayerIndex, getRoomCode} from "../server/Websockets/SocketIntilalizer.js";
-import {Timer} from "../util/Timer.js";
+import {Player} from "../Player.js";
+import {getPlayerIndex, getRoomCode} from "../../server/Websockets/SocketIntilalizer.js";
+import {Timer} from "../../util/Timer.js";
 
 export class OnlinePlayer extends Player {
     constructor(scene, x, y, spriteKey, points = 0) {
