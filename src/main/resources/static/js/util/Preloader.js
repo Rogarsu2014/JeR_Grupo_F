@@ -153,6 +153,10 @@ export class Preloader extends Phaser.Scene {
         this.load.image('ReadyButtonPush','./Resources/assets/UI/Buttons/ReadyButtonPush.png');
         this.load.image('SearchRoomScreen', './Resources/assets/UI/SearchRoomScreen.png');
         this.load.image('HostScreen', './Resources/assets/UI/HostScreen.png');
+
+        this.load.image('ReturnButton','./Resources/assets/UI/Buttons/ReturnButton.png');
+        this.load.image('ReturnButtonPush','./Resources/assets/UI/Buttons/ReturnButtonPush.png');
+
     }
     create(){
         console.log("Preload hecho");

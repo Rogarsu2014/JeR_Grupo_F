@@ -63,6 +63,8 @@ export class HostOrJoin extends Phaser.Scene {
         this.joinButton = this.add.image(850, 262, 'JoinButton').setOrigin(0).setDepth(2).setScale(.8);
         this.readyButton = this.add.image(width / 2, height / 2 + 230, 'ReadyButton').setDepth(2).setScale(.8);
 
+        this.returnButton = this.add.image( 110, 50, 'ReturnButton').setDepth(2).setScale(.8);
+
         this.codeText = this.add.text(275, 350, " ", {fontFamily: 'ink-free-normal', fontSize: 33});
         this.codeText.visible = false;
         this.codeText.setDepth(3);
@@ -73,9 +75,11 @@ export class HostOrJoin extends Phaser.Scene {
         this.buttons.push(this.hostButton);
         this.buttons.push(this.joinButton);
         this.buttons.push(this.readyButton);
+        this.buttons.push(this.returnButton);
 
         this.hostButton.setInteractive();
         this.joinButton.setInteractive();
+        this.returnButton.setInteractive();
         this.readyButton.alpha = .6
         // readyButton.setInteractive();
 
@@ -132,6 +136,10 @@ export class HostOrJoin extends Phaser.Scene {
             this.stopBackgroundMusic();
             this.loadScene('OnlineCoop1');
         })
+        this.returnButton.on('pointerdown', () => {
+            this.disableListeners();
+            this.loadScene('MenuScene');
+        })
 
 
         this.formUtil = new FormUtil({
@@ -154,7 +162,7 @@ export class HostOrJoin extends Phaser.Scene {
 
         // TEST
 
-        this.input.keyboard.on("keydown-ESC",this.goBackToMenu())
+        //this.input.keyboard.on("keydown-ESC",this.goBackToMenu())
 
         let goBackImage= this.add.image(height-200,100,"")
         goBackImage.setInteractive()
