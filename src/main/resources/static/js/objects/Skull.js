@@ -60,14 +60,14 @@ export class Skull extends Phaser.Physics.Arcade.Sprite {
             scale:0,
             x:xGoal,
             y:yGoal,
-            duration:100,
+            duration:600,
             ease:'Cubic.easeOut'
         })
 
         this.context.tweens.add({
             targets:this,
             scale:0.15,
-            duration:500,
+            duration:200,
             ease:'Expo.easeIn',
             onComplete:()=> {
                 movementTween.resume()

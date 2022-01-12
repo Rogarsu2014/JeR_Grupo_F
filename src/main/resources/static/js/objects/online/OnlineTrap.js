@@ -11,6 +11,8 @@ export class OnlineTrap extends Trap{
             player.body.moves = true;
         });
         timer.startTimer();
+        if (player.isControlledPlayer)
+            this.playEffect()
     }
 
 }
