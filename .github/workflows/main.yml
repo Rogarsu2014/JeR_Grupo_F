@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [closed]
 env:
-  ITCH_USERNAME: drowlerd-roberto
+  ITCH_USERNAME: improvisation-productions
   ITCH_GAME_ID: dual-interest
   
 jobs:
@@ -21,7 +21,7 @@ jobs:
       run: cd src/main/resources/static ;zip -r -D DualInterestGame.zip *
     - uses: KikimoraGames/itch-publish@v0.0.3
       with:
-        butlerApiKey: 8osD3cHHsXM3kiIu4vr8Tcumfm24d9Ip82wW7wfv
+        butlerApiKey: ${{secrets.BUTLER_CREDENTIALS}}
         gameData: src/main/resources/static/DualInterestGame.zip
         itchUsername: ${{env.ITCH_USERNAME}}
         itchGameId: ${{ env.ITCH_GAME_ID }}
