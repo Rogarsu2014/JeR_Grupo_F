@@ -17,6 +17,7 @@ export class OnlineGameStage extends GameStage {
         this.sendReadyStatus();
         this.receivePoints();
         this.receiveBump();
+        
     }
 
     definePlayers() {

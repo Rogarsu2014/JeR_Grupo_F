@@ -4,7 +4,11 @@ import {Skull} from "../objects/Skull.js";
 import {Timer} from "../util/Timer.js";
 import {redefineArrays} from "../util/ScenesRandomizer.js";
 
-var victory, victory1, defeat, defeat1;
+let music;
+const backgroundMusicKey = 'mainMenuMusic';
+let  victory, victory1, defeat, defeat1;
+
+
 
 export class GameCompletedScene extends Phaser.Scene {
     constructor(sceneKey="GameCompletedScene") {
@@ -12,6 +16,8 @@ export class GameCompletedScene extends Phaser.Scene {
         this.playerPoints=[]
         this.scores=[]
         this.winnerIndex=-1;
+        this.playAgainSceneKey = 'Coop1'
+        this.mainMenuKey='MenuSceneWS'
     }
 
     init() {
@@ -26,9 +32,12 @@ export class GameCompletedScene extends Phaser.Scene {
     preload() {
     }
 
+    
+  
     create(data) {
         
-
+        this.loadBackgroundMusic();
+        this.playBackgroundMusic()
         this.game.canvas.width = 960;
         var width = this.game.canvas.width;
         var height = this.game.canvas.height;
@@ -81,22 +90,33 @@ export class GameCompletedScene extends Phaser.Scene {
         }
 
         this.playAgainButton.setInteractive();
+        this.mainMenuButton.setInteractive();
 
-        this.playAgainButton.on('selected', () => {
+        // this.playAgainButton.on('selected', () => {
+        //     redefineArrays()
+        //     this.scene.start('Coop1');
+        // })
+        //
+        // this.mainMenuButton.on('selected', () => {
+        //     this.scene.start('MenuSceneWS');
+        // }) 
+        this.playAgainButton.on('pointerdown', () => {
             redefineArrays()
-            this.scene.start('Coop1');
+            this.loadScene(this.playAgainSceneKey)
+         })
+        
+        this.mainMenuButton.on('pointerdown', () => {
+             this.loadScene(this.mainMenuKey)
+             // this.scene.start('MenuSceneWS');
         })
+        this.setButtonsListeners()
 
-        this.mainMenuButton.on('selected', () => {
-            this.scene.start('MenuSceneWS');
-        })
-
-        this.selectButton(0);
-        var arrowDown = this.input.keyboard.on('keydown-' + 'DOWN', () => this.selectNextButton(-1));
-
-        var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
-
-        var spaceKey = this.input.keyboard.on('keydown-' + 'SPACE', () => this.confirmSelection());
+        // this.selectButton(0);
+        // var arrowDown = this.input.keyboard.on('keydown-' + 'DOWN', () => this.selectNextButton(-1));
+        //
+        // var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
+        //
+        // var spaceKey = this.input.keyboard.on('keydown-' + 'SPACE', () => this.confirmSelection());
 
     }
 
@@ -120,7 +140,37 @@ export class GameCompletedScene extends Phaser.Scene {
         timer.startTimer();
     }
 
+    setButtonsListeners(){
 
+        for (let i = 0; i < this.buttons.length; i++) {
+            let onBtnOverTween = this.tweens.add({
+                targets: this.buttons[i],
+                paused: true,
+                scale: 1.05,
+                angle: 3,
+                ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 1000,
+                yoyo: true,
+                repeat: -1,            // -1: infinity
+            });
+
+
+            this.buttons[i].on('pointerover', () => {
+                onBtnOverTween.resume()
+                let textureName = this.buttons[i].texture.key + 'Push';
+                this.buttons[i].setTexture(textureName)
+            })
+
+            this.buttons[i].on('pointerout', () => {
+                onBtnOverTween.restart()
+                onBtnOverTween.pause()
+                let textureName = this.buttons[i].texture.key.replace('Push', '');
+                this.buttons[i].setTexture(textureName)
+                // this.buttonOver(this.buttons[i])
+            })
+        }
+    }
+    
     selectButton(index) {
         const button = this.buttons[index];
         this.tweens.add({
@@ -166,4 +216,18 @@ export class GameCompletedScene extends Phaser.Scene {
         // button.emit('selected');
     }
 
+    loadScene(sceneKey) {
+        this.stopBackgroundMusic()
+        this.scene.start(sceneKey)
+    }
+
+    loadBackgroundMusic() {
+        music = this.sound.add(backgroundMusicKey, {volume: 0.18});
+    }
+    stopBackgroundMusic() {
+        music.stop()
+    }
+    playBackgroundMusic() {
+        music.play();
+    }
 }
