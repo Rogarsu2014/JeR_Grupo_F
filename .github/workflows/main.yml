@@ -1,7 +1,7 @@
 name: Create Archive
 on: push
 env:
-  ITCH_USERNAME: drowlerd-(roberto) 
+  ITCH_USERNAME: drowlerd-roberto
   ITCH_GAME_ID: dual-interest
   
 jobs:
