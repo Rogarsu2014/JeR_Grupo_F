@@ -12,7 +12,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: DualInterestGame.zip
-        path: src/main/resources/static/
+        path: ${{ github.workspace }}/src/main/resources/static/
 
   deployWebGL:
     needs: build
