@@ -27,6 +27,7 @@ export function getConnection(){
     if (connection===undefined){
         connection=connect();
         connection.onopen=function (){console.log("opened")}
+        pingConnection()
     }
     return connection
 }
