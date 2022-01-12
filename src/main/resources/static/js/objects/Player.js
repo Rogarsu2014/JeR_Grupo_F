@@ -65,7 +65,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     moveLeft() {//Move left
         // this.x-=1
-        console.log("moving left")
         this.setVelocityX(-300);
         this.flipX=true;
         this.anims.play('movement' + this.spriteKey, true);

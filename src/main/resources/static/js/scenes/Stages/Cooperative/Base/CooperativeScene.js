@@ -172,8 +172,8 @@ export class CooperativeScene extends GameStage {
     setPlatformsColliders() {
 
         for (let i = 0; i < this.platforms.length; i++) {
-            this.physics.add.collider(this.players[0], this.platforms[i], () => console.log("over platform"))
-            this.physics.add.collider(this.players[1], this.platforms[i], () => console.log("over platform"))
+            this.physics.add.collider(this.players[0], this.platforms[i], () => {})
+            this.physics.add.collider(this.players[1], this.platforms[i], () =>{})
         }
     }
 

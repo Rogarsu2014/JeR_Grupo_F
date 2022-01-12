@@ -1,5 +1,4 @@
-import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
-import {Skull} from "../objects/Skull.js";
+import {cameraFadeOut} from "../util/cameraEffects.js";
 import {FormUtil} from "../util/FormUtil.js";
 import {ServerConnectionManager} from "../server/ServerConnectionManager.js";
 import {UserRegistration} from "../util/UserRegistration.js";
@@ -8,7 +7,7 @@ import {getUser} from "../server/PlayersDataManager.js";
 import {getConnection} from "../server/Websockets/SocketIntilalizer.js";
 import {getNextRandomCoop, redefineArrays} from "../util/ScenesRandomizer.js";
 
-var music;
+let music;
 const backgroundMusicKey = 'mainMenuMusic';
 let icons = {
     0: "daiaIcon",
@@ -337,14 +336,12 @@ export class MenuSceneWS extends Phaser.Scene {
 
             
             this.buttons[i].on('pointerover', () => {
-                console.log("over")
                 onBtnOverTween.resume()
                 let textureName = this.buttons[i].texture.key + 'Push';
                 this.buttons[i].setTexture(textureName)
             })
 
             this.buttons[i].on('pointerout', () => {
-                console.log("out")
                 onBtnOverTween.restart()
                 onBtnOverTween.pause()
                 let textureName = this.buttons[i].texture.key.replace('Push', '');

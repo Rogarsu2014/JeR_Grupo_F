@@ -19,7 +19,7 @@ export class Button extends Phaser.Physics.Arcade.Sprite {
     press() {
         this.isPressed = true;
         this.sfx.play()
-        console.log("Button pressed")
+        // console.log("Button pressed")
         this.removeCollider();
         if (this.onPressed != null) {
             this.onPressed();
