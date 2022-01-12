@@ -51,7 +51,7 @@ public class RoomManager extends BaseManager {
                 JoinAction(session, roomNode);
                 break;
             case "RemoveRoom":
-                RemoveRoomAction(session, roomNode);
+                RemoveRoomAction(roomNode);
                 break;
 
             default:
@@ -69,17 +69,19 @@ public class RoomManager extends BaseManager {
             if (games.get(key).containsSession(session)) {
 
                 pair = getPair(session, key);
+                notifyOfRoomClosed(pair);
+                RemoveRoomAction(key);
                 break;
             }
         }
-        if (pair != null) {
-            ObjectNode node = mapper.createObjectNode();
-            node.put("type", "ConnectionClosed");
-            pair.sendMessage(new TextMessage(node.toString()));
-        }
     }
 
-
+    void notifyOfRoomClosed(WebSocketSession session) throws IOException {
+        ObjectNode node = mapper.createObjectNode();
+        node.put("type", "ConnectionClosed");
+        session.sendMessage(new TextMessage(node.toString()));
+    }
+        
     public void HostAction(WebSocketSession session, JsonNode roomNode) throws IOException {
         String roomCode = randomString();
         SessionPair p = new SessionPair(session);
@@ -119,8 +121,12 @@ public class RoomManager extends BaseManager {
         }
     }
     
-    public void RemoveRoomAction(WebSocketSession session, JsonNode roomNode){
+    public void RemoveRoomAction(JsonNode roomNode){
         String roomCode= roomNode.get("RoomCode").asText();
+        GameTimeManager.getInstance().removeTimer(games.get(roomCode));
+        games.remove(roomCode);
+    }  
+    public void RemoveRoomAction(String roomCode){
         GameTimeManager.getInstance().removeTimer(games.get(roomCode));
         games.remove(roomCode);
     }

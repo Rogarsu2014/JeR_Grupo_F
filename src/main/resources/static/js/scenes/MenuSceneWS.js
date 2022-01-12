@@ -79,7 +79,6 @@ export class MenuSceneWS extends Phaser.Scene {
 
         playButton.on('pointerdown', () => {
             this.disableListeners();
-            this.stopBackgroundMusic()
             // this.scene.start('Coop1');
             redefineArrays()
             this.loadScene(getNextRandomCoop())
@@ -89,13 +88,11 @@ export class MenuSceneWS extends Phaser.Scene {
         })
         tutorial.on('pointerdown', () => {
             this.disableListeners();
-            this.stopBackgroundMusic();
             // this.scene.start('Tutorial')
             this.loadScene('Tutorial')
         })
         credits.on('pointerdown', () => {
             this.disableListeners();
-            this.stopBackgroundMusic();
             // this.scene.start('Credits')
             this.loadScene('Credits')
         })
@@ -352,6 +349,7 @@ export class MenuSceneWS extends Phaser.Scene {
     }
 
     loadScene(sceneKey) {
+        this.stopBackgroundMusic()
         ServerConnectionManager.stopAll()
         this.hideHTMLElements()
         this.formUtil.hideElement("btnSend")

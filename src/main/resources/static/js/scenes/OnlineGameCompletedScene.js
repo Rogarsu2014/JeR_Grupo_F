@@ -7,16 +7,12 @@ import {isHost, removeHostProperty} from "../server/HostData.js";
 export class OnlineGameCompletedScene extends GameCompletedScene {
     constructor() {
         super("OnlineGameCompletedScene");
+        this.playAgainSceneKey='HostOrJoin'
     }
 
     create(data) {
         super.create(data);
         this.checkWinner();
-        
-        this.playAgainButton.removeAllListeners('selected')
-        this.playAgainButton.on('selected',()=>{
-            this.scene.start('HostOrJoin');
-        })
         
         if (isHost()) {
             this.removeRoom()

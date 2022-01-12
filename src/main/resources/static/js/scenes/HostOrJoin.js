@@ -267,7 +267,7 @@ export class HostOrJoin extends Phaser.Scene {
         let connection = getConnection()
         let roomCodeMsgListener = (msg) => this.getRoomCode(msg)
         connection.addEventListener('message', roomCodeMsgListener)
-        this.events.on('shutdown',()=>connection.removeEventListener('message',roomCodeMsgListener))
+        // this.events.on('shutdown',()=>connection.removeEventListener('message',roomCodeMsgListener))
     }
 
     getRoomCode(msg) {
@@ -290,6 +290,7 @@ export class HostOrJoin extends Phaser.Scene {
                 setScenesOrder(message.scenesOrder)
             }
         }
+        
         if (message.type === "ConnectionClosed") {
             // console.log("external Connection closed reached")
             // this.scene.manager.getScenes(true)[0].start("MenuSceneWS")
@@ -299,6 +300,7 @@ export class HostOrJoin extends Phaser.Scene {
         }
 
     }
+    
 
     setJoinCodeText(code) {
 
@@ -317,6 +319,7 @@ export class HostOrJoin extends Phaser.Scene {
     }
 
     loadScene(sceneKey) {
+        this.stopBackgroundMusic()
         this.scene.start(sceneKey)
         this.formUtil.hideElement("myText")
     }
