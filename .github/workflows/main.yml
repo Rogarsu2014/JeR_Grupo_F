@@ -16,11 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Zip Folder
-      run: zip -r -D DualInterestGame.zip src/main/resources/static/*
+      run: cd src/main/resources/static ;zip -r -D DualInterestGame.zip *
     - uses: KikimoraGames/itch-publish@v0.0.3
       with:
         butlerApiKey: 8osD3cHHsXM3kiIu4vr8Tcumfm24d9Ip82wW7wfv
-        gameData:  DualInterestGame.zip
+        gameData: src/main/resources/static/DualInterestGame.zip
         itchUsername: ${{env.ITCH_USERNAME}}
         itchGameId: ${{ env.ITCH_GAME_ID }}
         buildChannel: ${{ matrix.channel }}
