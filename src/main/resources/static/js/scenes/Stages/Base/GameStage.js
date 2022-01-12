@@ -18,8 +18,10 @@ export class GameStage extends Phaser.Scene {
         this.sceneWidth = sceneWidth;
         this.backgroundMusicKey = 'coopStageMusic';
 
-        // this.sceneTime=timerTime;
-        this.sceneTime=1000;
+        this.sceneTime=timerTime;
+        
+        // Test
+        // this.sceneTime=1000;
         
         this.tilemapKey = tilemapKey;
         this.timer = new Timer(this, this.sceneTime)
