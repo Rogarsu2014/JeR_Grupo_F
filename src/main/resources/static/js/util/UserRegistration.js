@@ -16,5 +16,10 @@ export class UserRegistration {
     updatePlayerIcon(username,iconIndex,onSuccess){
         this.playersJquery.updatePlayerIcon(username,iconIndex,onSuccess);
     }
+    getGamesWon(username,onSuccess){
+        return this.playersJquery.getGamesWon(username,(gamesWon)=>onSuccess(gamesWon));
+    }
+    
+    
     
 }

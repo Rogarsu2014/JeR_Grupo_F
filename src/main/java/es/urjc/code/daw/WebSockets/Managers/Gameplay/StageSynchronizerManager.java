@@ -77,7 +77,7 @@ public class StageSynchronizerManager extends BaseManager {
                     playersReadyMap.replace(sender.getId(), false);
                     SessionPair sessionPair=RoomManager.getInstance().getSessionPair(sender);
                     
-                    gameTimeManager.setTimer(RoomManager.getInstance().getSessionPair(sender),1000L,1000L);
+                    gameTimeManager.setTimer(RoomManager.getInstance().getSessionPair(sender),2000L,1000L);
                 }
                 
             }

@@ -85,4 +85,19 @@ export class PlayersDataManager {
             }
         })
     }
+    
+    getGamesWon(username,onSuccess){
+        $.ajax({
+            url:ServerConnectionManager.windowHref+'/player/'+username+'/gameswon',
+            success: (gameswon)=> {
+                if (onSuccess!==null){
+                    onSuccess(gameswon);
+                }
+            },
+            error:(xhr,status,error)=>{
+                var err = xhr.responseText.toString();
+                // console.log("Error: "+err)
+            }
+        })
+    }
 }

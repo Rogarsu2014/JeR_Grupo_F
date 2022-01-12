@@ -1,4 +1,5 @@
 package es.urjc.code.daw.player;
+
 import es.urjc.code.daw.WebSockets.Managers.RegistrationManager;
 import es.urjc.code.daw.ping.ConnectionController;
 import lombok.SneakyThrows;
@@ -17,29 +18,29 @@ public class PlayerController {
 
     @Autowired
     private final PlayerRepository playerRepository;
-    
+
 //    private final ConnectionController connectionController;
-    
+
 //    public PlayerController(PlayerRepository playerRepository, ConnectionController connectionController) {
 //        this.playerRepository = playerRepository;
 ////        this.connectionController = connectionController;
 //    }   
-    
+
     public PlayerController(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
 //        this.connectionController = connectionController;
     }
 
 //    @SneakyThrows
-    
+
     @PostMapping
     public Player signUp(@RequestBody Player player) {
-        boolean usernameAlreadyExits=playerRepository.findById(player.getUsername().trim()).isPresent();
-        if(!usernameAlreadyExits) {
-            System.out.println("New player with username '"+player.getUsername().trim());
+        boolean usernameAlreadyExits = playerRepository.findById(player.getUsername().trim()).isPresent();
+        if (!usernameAlreadyExits) {
+            System.out.println("New player with username '" + player.getUsername().trim());
             return playerRepository.save(player);
         } else {
-            System.out.println("Player with username '"+player.getUsername().trim()+"' already exists.");
+            System.out.println("Player with username '" + player.getUsername().trim() + "' already exists.");
             return null;
         }
     }
@@ -51,21 +52,29 @@ public class PlayerController {
 
     @SneakyThrows
     @GetMapping("/{username}/{password}")
-    public Player logIn(@PathVariable String username,@PathVariable String password) {
+    public Player logIn(@PathVariable String username, @PathVariable String password) {
 //        if(!ConnectionController.getInstance().isUserLogIn(username)) {
 //            Player player = playerRepository.findById(username).filter((player1 -> player1.getPassword().equals(password))).orElseThrow(() -> new Exception("Player not available"));
 //            return player;
 //        } 
-        if(!RegistrationManager.getInstance().isUserLoggedIn(username)) {
+        if (!RegistrationManager.getInstance().isUserLoggedIn(username)) {
             Player player = playerRepository.findById(username).filter((player1 -> player1.getPassword().equals(password))).orElseThrow(() -> new Exception("Player not available"));
             return player;
         }
         return null;
     }
-    
+
+    @SneakyThrows
+    @GetMapping("/{username}/gameswon")
+    public int getGamesWon(@PathVariable String username) {
+
+        Player player = playerRepository.findById(username).orElseThrow(() -> new Exception("Player not available"));
+        return player.getGameswon();
+    }
+
     @SneakyThrows
     @PostMapping("/{username}/{iconIndex}")
-    Player updatePlayerIcon(@PathVariable String username, @PathVariable int iconIndex){
+    Player updatePlayerIcon(@PathVariable String username, @PathVariable int iconIndex) {
         Player player = playerRepository.findById(username).orElseThrow(() -> new Exception("Player not available"));
         player.setIconIndex(iconIndex);
         playerRepository.save(player);

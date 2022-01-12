@@ -8,7 +8,7 @@ import {getNextRandomCoop, getScenesOrder, redefineArrays, setScenesOrder} from 
 import {setAsHost} from "../server/HostData.js";
 
 let music;
-const backgroundMusicKey = 'mainMenuMusic';
+const backgroundMusicKey = 'hostOrJoinMusic';
 let codeRecieved = false;
 
 let isHost = false;
@@ -164,6 +164,7 @@ export class HostOrJoin extends Phaser.Scene {
         var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
 
         this.setOnButtonInfoReceived();
+        this.events.on('shutdown',()=>this.stopBackgroundMusic())
 
     }
 
@@ -294,6 +295,7 @@ export class HostOrJoin extends Phaser.Scene {
         if (message.type === "ConnectionClosed") {
             // console.log("external Connection closed reached")
             // this.scene.manager.getScenes(true)[0].start("MenuSceneWS")
+            // this.scene.manager.getScenes(true)[0].stopBackgroundMusic()
             this.scene.manager.getScenes(true)[0].scene.start("MenuSceneWS")
             // this.scene.manager.start("MenuSceneWS")
 

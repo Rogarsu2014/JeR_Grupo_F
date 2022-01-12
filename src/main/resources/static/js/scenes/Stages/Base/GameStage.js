@@ -20,11 +20,15 @@ export class GameStage extends Phaser.Scene {
 
         this.sceneTime=timerTime;
         
+        // Test
+        // this.sceneTime=1000;
+        
         this.tilemapKey = tilemapKey;
         this.timer = new Timer(this, this.sceneTime)
         this.timer.onComplete(() => {
             this.timeOver()
         })
+        
     }
 
     init() {
@@ -71,6 +75,8 @@ export class GameStage extends Phaser.Scene {
         });
         //***** between players and floor
         this.addStageFloorCollisions(floor);
+
+        this.events.on('shutdown',()=>this.stopBackgroundMusic())
 
     }
     
@@ -193,7 +199,6 @@ export class GameStage extends Phaser.Scene {
     }
 
     startNextLevel() {
-        this.music.stop()
         this.scene.start(this.nextLevelKey, {playerPoints: [this.players[0].points, this.players[1].points]})
     }
 

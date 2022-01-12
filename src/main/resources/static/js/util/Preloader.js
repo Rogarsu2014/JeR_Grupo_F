@@ -75,7 +75,7 @@ export class Preloader extends Phaser.Scene {
         //Credits
         this.load.image('creditsImage','./Resources/assets/Credits/CreditsImage.png');
 
-        //Test
+        //Scenes tiles
         this.load.tilemapTiledJSON('Coop1Map', './Resources/assets/level/Coop1.json');
         this.load.tilemapTiledJSON('Coop2Map', './Resources/assets/level/Coop2.json');
         this.load.tilemapTiledJSON('Coop3Map', './Resources/assets/level/Coop3.json');
@@ -86,14 +86,22 @@ export class Preloader extends Phaser.Scene {
         this.load.spritesheet("dude2","./Resources/assets/items/spritesheetIbban.png", { frameWidth: 731, frameHeight: 526 });
         this.load.spritesheet("skull","./Resources/assets/items/SpriteSkulls.png", { frameWidth: 522, frameHeight: 518 });
         //this.load.image("skull", "./Resources/assets/items/skull.png");//Current sprites from tutorial
+        
+        //sfx
         this.load.audio("points+", "./Resources/assets/sounds/points.mp3");//https://www.youtube.com/watch?v=SoeT6x0O-CM
         this.load.audio("hit", "./Resources/assets/sounds/hit.mp3");//https://www.youtube.com/watch?v=dLED_gBGQsk
         this.load.image("trap", "./Resources/assets/items/itsatrap.png");
-
         this.load.audio("buttonClick", "./Resources/assets/sounds/buttonClick.mp3"); //https://creatorassets.com/a/button-sound-effects
+        this.load.audio("UI_click", "./Resources/assets/sounds/click_sfx.mp3"); //https://creatorassets.com/a/button-sound-effects
+        this.load.audio("UI_hover", "./Resources/assets/sounds/hover_sfx.mp3"); //https://creatorassets.com/a/button-sound-effects
+        
+        //music
         this.load.audio("coopStageMusic", "./Resources/assets/Music/coopStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
         this.load.audio("compStageMusic", "./Resources/assets/Music/compStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
         this.load.audio("mainMenuMusic", "./Resources/assets/Music/MainMenuMusic.mp3"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
+        this.load.audio("hostOrJoinMusic", "./Resources/assets/Music/HostOrJoin_Music.mp3"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
+        this.load.audio("VictoryMusic", "./Resources/assets/Music/Victory_Music.wav"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
+        this.load.audio("DefeatMusic", "./Resources/assets/Music/defeat_Music.wav"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
 
 
 
