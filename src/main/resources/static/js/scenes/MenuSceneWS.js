@@ -1,4 +1,4 @@
-import {cameraFadeOut} from "../util/cameraEffects.js";
+import {cameraFadeIn, cameraFadeOut} from "../util/cameraEffects.js";
 import {FormUtil} from "../util/FormUtil.js";
 import {ServerConnectionManager} from "../server/ServerConnectionManager.js";
 import {UserRegistration} from "../util/UserRegistration.js";
@@ -71,7 +71,7 @@ export class MenuSceneWS extends Phaser.Scene {
         this.buttons.push(playButton);
         this.buttons.push(tutorial);
         this.buttons.push(credits);
-        this.buttons.push( this.onlineGame);
+        this.buttons.push(this.onlineGame);
 
         playButton.setInteractive();
         tutorial.setInteractive();
@@ -318,29 +318,57 @@ export class MenuSceneWS extends Phaser.Scene {
 
     setButtonsListeners() {
 
-
+        let hoverSfx = this.sound.add("UI_hover", this.game.config.musicConfig);
+        let clickSfx = this.sound.add("UI_click", this.game.config.musicConfig);
         for (let i = 0; i < this.buttons.length; i++) {
+            let originalAngle = this.buttons[i].angle
+            let originalScale = this.buttons[i].scale
+
             let onBtnOverTween = this.tweens.add({
                 targets: this.buttons[i],
                 paused: true,
-                scale: 1.05,
-                angle: 3,
+                scale: .8,
+                angle: 0,
                 ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
                 duration: 1000,
                 yoyo: true,
                 repeat: -1,            // -1: infinity
             });
+            let btnOverTweenShow = this.tweens.add({
+                targets: this.buttons[i],
+                paused: true,
+                scale: 1.05,
+                angle: 3,
+                ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 200,
+                onComplete: () => {
+                    onBtnOverTween.resume()
+                }
+            });
 
-            
+
             this.buttons[i].on('pointerover', () => {
-                onBtnOverTween.resume()
+                hoverSfx.play()
+                // if (btnOverTweenShow.hasStarted){
+                // btnOverTweenShow.resume()
+                // }else {
+                btnOverTweenShow.play()
+                // btnOverTweenShow.resume()
+                // }
+                // onBtnOverTween.resume()
                 let textureName = this.buttons[i].texture.key + 'Push';
                 this.buttons[i].setTexture(textureName)
             })
+            this.buttons[i].on('pointerdown', () => {
+                console.log("touched")
+                clickSfx.play()
+            })
 
             this.buttons[i].on('pointerout', () => {
-                onBtnOverTween.restart()
+                onBtnOverTween.seek(0)
+                btnOverTweenShow.seek(0)
                 onBtnOverTween.pause()
+                btnOverTweenShow.pause()
                 let textureName = this.buttons[i].texture.key.replace('Push', '');
                 this.buttons[i].setTexture(textureName)
                 // this.buttonOver(this.buttons[i])
@@ -349,14 +377,25 @@ export class MenuSceneWS extends Phaser.Scene {
     }
 
     loadScene(sceneKey) {
-        this.stopBackgroundMusic()
-        ServerConnectionManager.stopAll()
-        this.hideHTMLElements()
-        this.formUtil.hideElement("btnSend")
-        this.formUtil.clearTextAreaValue("myText")
-        this.scene.start(sceneKey)
-    }
 
+        this.removeButtonListeners()
+        
+        cameraFadeOut(this, 1000, () => {
+            this.stopBackgroundMusic()
+            ServerConnectionManager.stopAll()
+            this.hideHTMLElements()
+            this.formUtil.hideElement("btnSend")
+            this.formUtil.clearTextAreaValue("myText")
+            this.scene.start(sceneKey)
+        })
+        
+
+    }
+    removeButtonListeners(){
+        for (let i = 0; i < this.buttons.length; i++) {
+            this.buttons[i].removeAllListeners()
+        }
+    }
     hideHTMLElements() {
         this.formUtil.hideElement("btnSend")
         this.formUtil.hideElement("myUser");
@@ -381,6 +420,7 @@ export class MenuSceneWS extends Phaser.Scene {
 
     buttonOver(selected) {
         const button = selected;
+
         this.tweens.add({
             targets: button,
             scaleX: 1.25,
