@@ -1,0 +1,44 @@
+name: Create Archive
+on:
+  pull_request:
+    types: [closed]
+env:
+  ITCH_USERNAME: drowlerd-(roberto) 
+  ITCH_GAME_ID: dual-interest
+  
+jobs:
+  build:
+    name: game zip
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
+      with:
+        path: ./src/main/resources/static
+        type: 'zip'
+        filename: 'DualInterestGame.zip'
+        exclusions: '*.git* /*node_modules/* .editorconfig'
+
+  deployWebGL:
+    needs: game zip
+    name: Upload to Itch.io WebGL
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        channel:
+          - webgl
+    steps:
+      - uses: actions/download-artifact@v2.0.8
+        with:
+          name: DualInterestGame.zip
+          path: DualInterestGame.zip
+      - uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{secrets.BUTLER_CREDENTIALS}}
+          gameData: ./build/${{ matrix.template }}
+          itchUsername: ${{env.ITCH_USERNAME}}
+          itchGameId: ${{ env.ITCH_GAME_ID }}
+          buildChannel: ${{ matrix.channel }}
+          buildNumber: ${{ needs.version.outputs.version_hash }}
