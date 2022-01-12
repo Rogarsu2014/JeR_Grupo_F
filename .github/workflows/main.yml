@@ -7,6 +7,11 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        channel:
+          - webgl
     steps:
     - uses: actions/checkout@v1
     - name: Zip Folder
@@ -24,4 +29,4 @@ jobs:
 #        name: DualInterestGame
 #        path: DualInterestGame.zip
 
- 
+
