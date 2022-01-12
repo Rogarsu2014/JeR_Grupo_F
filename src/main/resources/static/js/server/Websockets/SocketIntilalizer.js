@@ -51,7 +51,7 @@ export function setPlayerIndex(newPlayerIndex){
 function pingConnection(){
     setTimeout(()=> {
         console.log("Ping")
-        if (connection.readyState!==WebSocket.OPEN || connection.readyState!==WebSocket.CONNECTING ) {
+        if (connection.readyState!==WebSocket.OPEN && connection.readyState!==WebSocket.CONNECTING ) {
             connection.send("")
         }
     },1000)
