@@ -9,18 +9,10 @@ jobs:
     name: game zip
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Archive Release
-      uses: thedoctor0/zip-release@master
-      with:
-        path: src/main/resources/static
-        type: 'zip'
-        filename: 'DualInterestGame.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig'
     - uses: actions/upload-artifact@v2
       with:
         name: DualInterestGame.zip
-        path: DualInterestGame.zip
+        path: src/main/resources/static
 
   deployWebGL:
     needs: build
