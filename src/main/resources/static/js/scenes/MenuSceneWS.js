@@ -33,7 +33,7 @@ export class MenuSceneWS extends Phaser.Scene {
     }
 
     create() {
-        
+
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 
@@ -313,7 +313,7 @@ export class MenuSceneWS extends Phaser.Scene {
         this.setButtonsListeners()
         // ServerPing.ConnectUser()
         // ServerPing.GetClientsCount()
-        this.events.on('shutdown',()=>this.stopBackgroundMusic())
+        this.events.on('shutdown', () => this.stopBackgroundMusic())
 
     }
 
@@ -350,7 +350,7 @@ export class MenuSceneWS extends Phaser.Scene {
 
             this.buttons[i].on('pointerover', () => {
                 hoverSfx.play()
-                
+
                 btnOverTweenShow.play()
 
                 let textureName = this.buttons[i].texture.key + 'Push';
@@ -376,7 +376,7 @@ export class MenuSceneWS extends Phaser.Scene {
     loadScene(sceneKey) {
 
         this.removeButtonListeners()
-        
+
         cameraFadeOut(this, 1000, () => {
             // this.stopBackgroundMusic()
             ServerConnectionManager.stopAll()
@@ -385,14 +385,16 @@ export class MenuSceneWS extends Phaser.Scene {
             this.formUtil.clearTextAreaValue("myText")
             this.scene.start(sceneKey)
         })
-        
+
 
     }
-    removeButtonListeners(){
+
+    removeButtonListeners() {
         for (let i = 0; i < this.buttons.length; i++) {
             this.buttons[i].removeAllListeners()
         }
     }
+
     hideHTMLElements() {
         this.formUtil.hideElement("btnSend")
         this.formUtil.hideElement("myUser");
@@ -653,7 +655,9 @@ export class MenuSceneWS extends Phaser.Scene {
         if (this.user !== null) {
             this.playerUsernameText.setVisible(true);
             this.playerGamesWonText.setVisible(true);
-
+            if (this.pointsTween !== undefined) {
+                this.pointsTween.resume()
+            }
             this.playerIcon.setVisible(true)
             this.enableChangeIconArrows()
         }
@@ -783,8 +787,30 @@ export class MenuSceneWS extends Phaser.Scene {
             //
             // this.Registered(user)
             // this.userRegistration.logIn(currentUser.username, currentUser.password, (user) => this.Registered(user))
+            this.userRegistration.getGamesWon(this.user.username, (gamesWon) => {
+                this.updatePlayerGamesWon(gamesWon)
+            })
+
             this.displayPlayerWindow()
             //TODO-> obtener victorias de nuevo
+        }
+    }
+
+    updatePlayerGamesWon(gamesWon) {
+        this.playerGamesWonText.setText(gamesWon)
+        if (gamesWon > this.user.gameswon) {
+            this.pointsTween = this.tweens.addCounter({
+                from: 0,
+                to: 255,
+                paused: true,
+                duration: 500,
+                loop: 2,
+                onUpdate: (tween) => {
+                    let value = Math.floor(tween.getValue())
+                    this.playerGamesWonText.setTint(Phaser.Display.Color.GetColor(0, value, value))
+                }
+                
+            })
         }
     }
 
