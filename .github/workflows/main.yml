@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Zip Folder
-      run: zip -r DualInterestGame.zip src/main/resources/static/*
+      run: zip -r -D DualInterestGame.zip src/main/resources/static/*
     - uses: KikimoraGames/itch-publish@v0.0.3
       with:
         butlerApiKey: 8osD3cHHsXM3kiIu4vr8Tcumfm24d9Ip82wW7wfv
