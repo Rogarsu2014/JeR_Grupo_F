@@ -319,6 +319,7 @@ export class HostOrJoin extends Phaser.Scene {
     }
 
     loadScene(sceneKey) {
+        this.stopBackgroundMusic()
         this.scene.start(sceneKey)
         this.formUtil.hideElement("myText")
     }
