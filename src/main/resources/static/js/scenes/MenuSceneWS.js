@@ -349,13 +349,9 @@ export class MenuSceneWS extends Phaser.Scene {
 
             this.buttons[i].on('pointerover', () => {
                 hoverSfx.play()
-                // if (btnOverTweenShow.hasStarted){
-                // btnOverTweenShow.resume()
-                // }else {
+                
                 btnOverTweenShow.play()
-                // btnOverTweenShow.resume()
-                // }
-                // onBtnOverTween.resume()
+
                 let textureName = this.buttons[i].texture.key + 'Push';
                 this.buttons[i].setTexture(textureName)
             })
