@@ -33,7 +33,7 @@ export class MenuSceneWS extends Phaser.Scene {
     }
 
     create() {
-
+        
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 
@@ -313,6 +313,7 @@ export class MenuSceneWS extends Phaser.Scene {
         this.setButtonsListeners()
         // ServerPing.ConnectUser()
         // ServerPing.GetClientsCount()
+        this.events.on('shutdown',()=>this.stopBackgroundMusic())
 
     }
 
@@ -377,7 +378,7 @@ export class MenuSceneWS extends Phaser.Scene {
         this.removeButtonListeners()
         
         cameraFadeOut(this, 1000, () => {
-            this.stopBackgroundMusic()
+            // this.stopBackgroundMusic()
             ServerConnectionManager.stopAll()
             this.hideHTMLElements()
             this.formUtil.hideElement("btnSend")

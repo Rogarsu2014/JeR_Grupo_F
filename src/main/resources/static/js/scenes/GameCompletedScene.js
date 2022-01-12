@@ -153,7 +153,7 @@ export class GameCompletedScene extends Phaser.Scene {
         // var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
         //
         // var spaceKey = this.input.keyboard.on('keydown-' + 'SPACE', () => this.confirmSelection());
-
+        this.events.on('shutdown',()=>this.stopBackgroundMusic())
     }
 
     playAnim() {
@@ -279,7 +279,7 @@ export class GameCompletedScene extends Phaser.Scene {
     loadScene(sceneKey) {
         this.removeButtonListeners()
         cameraFadeOut(this, 1000, () => {
-            this.stopBackgroundMusic()
+            // this.stopBackgroundMusic()
             this.scene.start(sceneKey)
         })
     }

@@ -99,6 +99,7 @@ export class Preloader extends Phaser.Scene {
         this.load.audio("coopStageMusic", "./Resources/assets/Music/coopStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
         this.load.audio("compStageMusic", "./Resources/assets/Music/compStageMusic.mp3"); //https://www.youtube.com/watch?v=hdZLNZBZFlY&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=17
         this.load.audio("mainMenuMusic", "./Resources/assets/Music/MainMenuMusic.mp3"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
+        this.load.audio("hostOrJoinMusic", "./Resources/assets/Music/HostOrJoin_Music.mp3"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
         this.load.audio("VictoryMusic", "./Resources/assets/Music/Victory_Music.wav"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
         this.load.audio("DefeatMusic", "./Resources/assets/Music/defeat_Music.wav"); //https://www.youtube.com/watch?v=9DGO2Vtppu4&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=25
 
