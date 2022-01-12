@@ -35,9 +35,15 @@ export class OnlinePlayer extends Player {
                 this.anims.play('death' + this.spriteKey, true)
             }
         }
+        
+        this.isControlledPlayer=false;
         this.xDir = 0;
         this.isJumping = false;
         this.res = -1;
+    }
+    
+    setAsControlledPlayer(){
+        this.isControlledPlayer=true;
     }
     setConnection(connection){
         this.connection = connection;

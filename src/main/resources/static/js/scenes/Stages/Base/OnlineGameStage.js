@@ -38,6 +38,7 @@ export class OnlineGameStage extends GameStage {
                 this.players[i].setPlayerInput(new OnlineKeyboardProcessor(this, this.players[i], 'W', 0, 'A', 'D', 'S', 'F'));
                 this.players[i].sendPos200();
                 this.players[i].setRes(0);
+                this.players[i].setAsControlledPlayer();
             } else {
                 this.players[i].setOnMovementMessage();
             }

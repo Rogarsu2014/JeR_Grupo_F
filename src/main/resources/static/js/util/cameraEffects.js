@@ -1,6 +1,6 @@
-export function cameraShake(context, shakeTimeMs, onComplete = null) {
+export function cameraShake(context, shakeTimeMs, onComplete = null,intensity=0.05) {
 
-    cameraEffect(() => context.cameras.main.shake(shakeTimeMs),
+    cameraEffect(() => context.cameras.main.shake(shakeTimeMs,intensity),
         context, shakeTimeMs, onComplete)
 }
 

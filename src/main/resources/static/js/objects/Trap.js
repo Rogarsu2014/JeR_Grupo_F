@@ -1,4 +1,5 @@
 import {Timer} from "../util/Timer.js";
+import {cameraShake} from "../util/cameraEffects.js";
 
 export class Trap extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, spriteKey) {
@@ -38,14 +39,19 @@ export class Trap extends Phaser.Physics.Arcade.Sprite {
     harm(player) {
         this.baseHarm(player)
         this.primitiveHarm(player)
-   
     }
 
     baseHarm(player) {
         player.addPoints(this.pointsRemoved);
+        
         this.music.play();
         player.setPosition(player.initialPositionX, player.initialPositionY);
         player.body.moves = false;
+    }
+    
+    playEffect(){
+        this.context.cameras.main.zoomTo(1.1,100)
+        cameraShake( this.context,200, ()=>this.context.cameras.main.zoomTo(1,100),0.01)
     }
     
     primitiveHarm(player){
@@ -53,5 +59,6 @@ export class Trap extends Phaser.Physics.Arcade.Sprite {
             player.body.moves = true;
         });
         timer.startTimer();
+        this.playEffect()
     }
 }

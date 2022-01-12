@@ -4,13 +4,13 @@ import {Skull} from "../../../../objects/Skull.js";
 import {getNextRandomCoop} from "../../../../util/ScenesRandomizer.js";
 import {Trap} from "../../../../objects/Trap.js";
 
-export class CompetitiveScene extends GameStage{
+export class CompetitiveScene extends GameStage {
 
-    constructor(sceneKey, timerTime,tilemapKey,sceneWidth) {
-        super(sceneKey, timerTime,tilemapKey,sceneWidth);
-        this.backgroundMusicKey='compStageMusic';
-        this.skulls=[]
-        this.traps=[]
+    constructor(sceneKey, timerTime, tilemapKey, sceneWidth) {
+        super(sceneKey, timerTime, tilemapKey, sceneWidth);
+        this.backgroundMusicKey = 'compStageMusic';
+        this.skulls = []
+        this.traps = []
     }
 
     create(data) {
@@ -22,8 +22,8 @@ export class CompetitiveScene extends GameStage{
     }
 
     setPlayerPosition(playerIndex, x, y) {
-        super.setPlayerPosition(playerIndex,x,y);
-        this.players[playerIndex].setPlayerInitialPosition(x,y);
+        super.setPlayerPosition(playerIndex, x, y);
+        this.players[playerIndex].setPlayerInitialPosition(x, y);
     }
 
     onTimeOverPrimitive() {
@@ -33,63 +33,61 @@ export class CompetitiveScene extends GameStage{
         })
     }
 
-    defineSkulls(){
+    defineSkulls() {
         throw new Error("Skulls to be implemented")
     }
-    
-    setSkullsCollisions(){
-        let counter=this.skulls.length;
+
+    setSkullsCollisions() {
+        let counter = this.skulls.length;
         for (let i = 0; i < this.skulls.length; i += 1) {
-            this.physics.add.collider(this.players[0], this.skulls[i],  ()=> {
-                this.skulls[i].remove(this.players[0]);
-                this.scores[0].setText("Player 1: " + this.players[0].points);
+            for (let j = 0; j < this.players.length; j++) {
+                this.physics.add.collider(this.players[j], this.skulls[i], () => {
+                    this.skulls[i].remove(this.players[j],this.scores[j].x,this.scores[j].y);
 
-                if (--counter == 0) {
-                    this.stageCompleted();
-                }
-
-            });
-            this.physics.add.collider(this.players[1], this.skulls[i], ()=> {
-
-                this.skulls[i].remove(this.players[1]);
-                this.scores[1].setText("Player 2: " + this.players[1].points);
-
-                if (--counter == 0) {
-                    this.stageCompleted();
-                }
-
-            });
+                    let playerIndex=j+1;
+                    this.scores[j].setText("Player "+ playerIndex +": " + this.players[j].points);
+                    
+                    if (--counter === 0) {
+                        this.stageCompleted();
+                    }
+                });
+            }
         }
     }
-
-    addSkull(x,y){
+   
+    
+    addSkull(x, y) {
         this.skulls.push(new Skull(this, x, y, "skull"));
     }
-    stageCompleted(){
+
+    stageCompleted() {
         this.disableAllPlayersMovement()
         cameraFadeOut(this, 1000, () => {
             this.music.stop()
             this.startNextLevel()
         })
     }
-    
-    addTrap(x,y){
+
+    addTrap(x, y) {
         this.traps.push(new Trap(this, x, y, "trap"))
     }
-    
-    primitiveSetTraps() {}
-    setTraps(){
+
+    primitiveSetTraps() {
+    }
+
+    setTraps() {
         this.primitiveSetTraps()
         this.setTrapsCollisions()
     }
-    setTrapsCollisions(){
-        if (this.traps.length===0) return;
+
+    setTrapsCollisions() {
+        if (this.traps.length === 0) return;
         for (let i = 0; i < this.traps.length; i += 1) {
-            this.physics.add.collider(this.players[0], this.traps[i],  ()=> {
+            this.physics.add.collider(this.players[0], this.traps[i], () => {
                 this.traps[i].harm(this.players[0]);
                 this.scores[0].setText("Jugador 1: " + this.players[0].points);
             });
-            this.physics.add.collider(this.players[1], this.traps[i],  ()=> {
+            this.physics.add.collider(this.players[1], this.traps[i], () => {
                 this.traps[i].harm(this.players[1]);
 
                 this.scores[1].setText("Jugador 2: " + this.players[1].points);

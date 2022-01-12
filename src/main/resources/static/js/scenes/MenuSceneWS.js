@@ -24,7 +24,7 @@ export class MenuSceneWS extends Phaser.Scene {
     init() {
         this.buttons = Phaser.GameObjects.Image = []
         this.selectedButtonIndex = 0
-        this.selectSprite = null
+        // this.selectSprite = null
         this.user = null;
     }
 
@@ -51,9 +51,9 @@ export class MenuSceneWS extends Phaser.Scene {
 
         this.add.image(this.game.canvas.width * .5, 10, 'gameTittle').setOrigin(0.5, 0).setDepth(10).setScale(.25);
 
-        this.selectSprite = new Skull(this, width / 2 - 100, height / 2 - 100, "skull", 6)
-        this.selectSprite.setVisible(false);
-        this.selectSprite.setScale(.1);
+        // this.selectSprite = new Skull(this, width / 2 - 100, height / 2 - 100, "skull", 6)
+        // this.selectSprite.setVisible(false);
+        // this.selectSprite.setScale(.1);
 
         // this.add.text(width / 3,height * 0.1, 'Dual Interest', { fontSize: '40px', fill: '#000' }).setDepth(1);
         let playButton = this.add.image(width / 2, height / 2 - 25, 'LocalGame').setDepth(1).setScale(.8);
@@ -72,6 +72,7 @@ export class MenuSceneWS extends Phaser.Scene {
         this.buttons.push(playButton);
         this.buttons.push(tutorial);
         this.buttons.push(credits);
+        this.buttons.push( this.onlineGame);
 
         playButton.setInteractive();
         tutorial.setInteractive();
@@ -83,7 +84,7 @@ export class MenuSceneWS extends Phaser.Scene {
             // this.scene.start('Coop1');
             redefineArrays()
             this.loadScene(getNextRandomCoop())
-            
+
             //Old
             // this.loadScene('Coop1')
         })
@@ -303,35 +304,71 @@ export class MenuSceneWS extends Phaser.Scene {
         })
 
 
-        this.selectButton(0);
+        // this.selectButton(0);
 
-        var arrowDown = this.input.keyboard.on('keydown-' + 'DOWN', () => this.selectNextButton(1));
+        // var arrowDown = this.input.keyboard.on('keydown-' + 'DOWN', () => this.selectNextButton(1));
 
-        var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
+        // var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
 
         // var enterKey = this.input.keyboard.on('keydown-' + 'ENTER', () => this.confirmSelection());
         this.defineNetworkAvailabilityFunctionalities();
         this.defineUserRegistration();
         this.tryGetLoggedPlayer()
+        this.setButtonsListeners()
         // ServerPing.ConnectUser()
         // ServerPing.GetClientsCount()
 
     }
-    
-    loadScene(sceneKey){
+
+    setButtonsListeners() {
+
+
+        for (let i = 0; i < this.buttons.length; i++) {
+            let onBtnOverTween = this.tweens.add({
+                targets: this.buttons[i],
+                paused: true,
+                scale: 1.05,
+                angle: 3,
+                ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 1000,
+                yoyo: true,
+                repeat: -1,            // -1: infinity
+            });
+
+            
+            this.buttons[i].on('pointerover', () => {
+                console.log("over")
+                onBtnOverTween.resume()
+                let textureName = this.buttons[i].texture.key + 'Push';
+                this.buttons[i].setTexture(textureName)
+            })
+
+            this.buttons[i].on('pointerout', () => {
+                console.log("out")
+                onBtnOverTween.restart()
+                onBtnOverTween.pause()
+                let textureName = this.buttons[i].texture.key.replace('Push', '');
+                this.buttons[i].setTexture(textureName)
+                // this.buttonOver(this.buttons[i])
+            })
+        }
+    }
+
+    loadScene(sceneKey) {
         ServerConnectionManager.stopAll()
         this.hideHTMLElements()
         this.formUtil.hideElement("btnSend")
         this.formUtil.clearTextAreaValue("myText")
         this.scene.start(sceneKey)
     }
-    
-    hideHTMLElements(){
+
+    hideHTMLElements() {
         this.formUtil.hideElement("btnSend")
         this.formUtil.hideElement("myUser");
         this.formUtil.hideElement("myPass");
         this.formUtil.hideElement("myText");
     }
+
     sendMessage() {
 
         //content es el contenido de la area de texto con el tag de myText
@@ -344,32 +381,43 @@ export class MenuSceneWS extends Phaser.Scene {
 
     selectButton(index) {
         const button = this.buttons[index];
+        this.buttonOver(button)
+    }
+
+    buttonOver(selected) {
+        const button = selected;
         this.tweens.add({
             targets: button,
             scaleX: 1.25,
+            angle: 5,
             ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 100,
+            duration: 1000,
             yoyo: true,
-            repeat: 0,            // -1: infinity
+            repeat: -1,            // -1: infinity
         });
 
         let textureName = button.texture.key + 'Push';
         button.setTexture(textureName)
-        this.selectSprite.x = button.x - button.displayWidth * 0.71
-        this.selectSprite.y = button.y - 2.7;
+        // this.selectSprite.x = button.x - button.displayWidth * 0.71
+        // this.selectSprite.y = button.y - 2.7;
+        //
+        // this.tweens.add({
+        //     targets: this.selectSprite,
+        //     scaleY: .08,
+        //     ease: 'Expo.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+        //     duration: 60,
+        //     yoyo: true,
+        //     repeat: 0,            // -1: infinity
+        // });
 
-        this.tweens.add({
-            targets: this.selectSprite,
-            scaleY: .08,
-            ease: 'Expo.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 60,
-            yoyo: true,
-            repeat: 0,            // -1: infinity
-        });
-
-        this.selectedButtonIndex = index;
-        this.selectSprite.setVisible(true);
+        // this.selectedButtonIndex = index;
+        // this.selectSprite.setVisible(true);
     }
+
+    buttonOut() {
+
+    }
+
 
     defineNetworkAvailabilityFunctionalities() {
         let width = this.game.canvas.width;
@@ -384,7 +432,7 @@ export class MenuSceneWS extends Phaser.Scene {
 
         ServerConnectionManager.enableRequests();
         ServerConnectionManager.GetClientsCount((clientsCount) => this.usersConnectedCountText.setText(clientsCount));
-        
+
         ServerConnectionManager.CheckNetworkConnection(() => {
                 networkSymbol.setTexture("networkSymbolSuccess")
                 this.enableClientsCountBox()
@@ -430,31 +478,30 @@ export class MenuSceneWS extends Phaser.Scene {
         let username = this.formUtil.getTextAreaValue("myUser");
         let password = this.formUtil.getTextAreaValue("myPass");
         let confirmPassword = this.formUtil.getTextAreaValue("myPass");
-        
+
         this.userRegistration.trySignUp(username, password, confirmPassword,
             (user) => this.Registered(user), () => this.loginErrorText.text = "Username " + username + " already taken")
-        
+
     }
 
     Registered(user) {
-        
-        
-        
+
+
         if (user !== null) {
             this.user = user;
             // console.log("username obtained " + user['username'])
-            
+
             ServerConnectionManager.setClientId(user['username'])
-            
+
             // New implementation uses WebSocket to check connections
             // ServerConnectionManager.ConnectUser();
-            
+
             this.displayPlayerWindow()
-            
+
             let connection = getConnection();
             let registrationMsg = {
                 type: "Registration",
-                username:this.user.username
+                username: this.user.username
             }
             connection.send(JSON.stringify(registrationMsg))
 
@@ -462,12 +509,12 @@ export class MenuSceneWS extends Phaser.Scene {
             // console.log("User undefined")
         }
     }
-    
-    
-    displayPlayerWindow(){
+
+
+    displayPlayerWindow() {
         this.enableChatButton();
         this.enableOnlineGameButton()
-        
+
 
         this.xButton2.x = 240;
         this.setPlayerInformation();
@@ -479,9 +526,10 @@ export class MenuSceneWS extends Phaser.Scene {
             this.gamesVisible = true;
         }
     }
+
     enableOnlineGameButton() {
         this.onlineGame.alpha = 1.0;
-        this.buttons.splice(1, 0, this.onlineGame);
+        // this.buttons.splice(1, 0, this.onlineGame);
         this.onlineGame.setInteractive()
         this.onlineGame.on('pointerdown', () => {
             // this.scene.start('HostOrJoin');
@@ -656,11 +704,11 @@ export class MenuSceneWS extends Phaser.Scene {
     disableListeners() {
         cameraFadeOut(this, 1000);
 
-        this.input.keyboard.removeListener('keydown-' + 'DOWN');
+        // this.input.keyboard.removeListener('keydown-' + 'DOWN');
 
-        this.input.keyboard.removeListener('keydown-' + 'UP');
+        // this.input.keyboard.removeListener('keydown-' + 'UP');
 
-        this.input.keyboard.removeListener('keydown-' + 'ENTER');
+        // this.input.keyboard.removeListener('keydown-' + 'ENTER');
     }
 
     playBackgroundMusic() {
@@ -687,18 +735,18 @@ export class MenuSceneWS extends Phaser.Scene {
         this.formUtil.placeElementAt(12, 'myPass', true);
     }
 
-    tryGetLoggedPlayer(){
-        if (getUser()!==undefined){
+    tryGetLoggedPlayer() {
+        if (getUser() !== undefined) {
             // this.playerIcon.setVisible(true)
-            this.loginVisible=true
+            this.loginVisible = true
             this.gamesVisible = false
             // this.user=getUser()
             // this.loginButton.setVisible(true)
             // this.loginButton.setTexture(icons[this.user['iconIndex']])
-            this.user=getUser()
-            let currentUser={
-                username:this.user.username,
-                password:this.user.password
+            this.user = getUser()
+            let currentUser = {
+                username: this.user.username,
+                password: this.user.password
             }
             //
             // this.Registered(user)
