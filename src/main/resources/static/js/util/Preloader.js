@@ -13,7 +13,7 @@ export class Preloader extends Phaser.Scene {
 
     preload(){
 
-        loadFont('ink-free-normal','./Resources/Typography/ink-free-normal.ttf')
+        loadFont('ink-free-normal','./Resources/assets/typography/ink-free-normal.ttf')
         // transitions
         this.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
 
