@@ -17,6 +17,10 @@ jobs:
         type: 'zip'
         filename: 'DualInterestGame.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig'
+    - uses: actions/upload-artifact@v2
+      with:
+        name: DualInterestGame.zip
+        path: DualInterestGame.zip
 
   deployWebGL:
     needs: build
