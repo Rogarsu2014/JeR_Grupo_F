@@ -1,7 +1,6 @@
 name: Create Archive
 on: 
-  pull_request:
-    types: [closed]
+ push
 env:
   ITCH_USERNAME: drowlerd-roberto
   ITCH_GAME_ID: dual-interest
@@ -15,7 +14,7 @@ jobs:
     - name: Archive Release
       uses: thedoctor0/zip-release@master
       with:
-        path: ./src/main/resources/static
+        directory: ./src/main/resources/static
         type: 'zip'
         filename: 'DualInterestGame.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig'
