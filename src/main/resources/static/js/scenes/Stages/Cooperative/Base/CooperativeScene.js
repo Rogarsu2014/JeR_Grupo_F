@@ -11,7 +11,7 @@ export class CooperativeScene extends GameStage {
 
     constructor(sceneKey, timerTime,tilemapKey,sceneWidth=960) {
         super(sceneKey, timerTime,tilemapKey,960);
-        // super(sceneKey, 1000,tilemapKey,960);
+        // super(sceneKey, 1000,tilemapKey,Teimpo de prueba eliminado960);
         
         this.backgroundMusicKey = 'coopStageMusic';
 
