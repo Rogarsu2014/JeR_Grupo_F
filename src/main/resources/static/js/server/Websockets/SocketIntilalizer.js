@@ -49,5 +49,8 @@ export function setPlayerIndex(newPlayerIndex){
 }
 
 function pingConnection(){
-    setTimeout(()=>getConnection(),50000)
+    setTimeout(()=> {
+        console.log("Ping")
+        connection.send("")
+    },5000)
 }
