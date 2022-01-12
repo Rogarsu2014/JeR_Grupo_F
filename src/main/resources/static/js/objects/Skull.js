@@ -35,9 +35,44 @@ export class Skull extends Phaser.Physics.Arcade.Sprite {
     update() {
         
     }
-    remove(player){
+    
+    remove(player,xGoal,yGoal){
         this.music.play();
         player.addPoints(this.puntos);
-        this.destroy();
+        this.createSkullTween(xGoal,yGoal)
+        this.anim=this.context.anims.create({
+            key: 'idle' + this.spriteKey,
+            frames: this.anims.generateFrameNumbers(this.spriteKey, { start: 0, end: 4 }),
+            startFrame: 0,
+            frameRate: 5,
+            repeat: -1,
+            yoyo: true
+        });
+        // this.destroy();
+        this.disableBody()
+    }
+
+    createSkullTween(xGoal,yGoal){
+        let movementTween=this.context.tweens.add({
+            targets:this,
+            paused:true,
+            alpha:0,
+            scale:0,
+            x:xGoal,
+            y:yGoal,
+            duration:100,
+            ease:'Cubic.easeOut'
+        })
+
+        this.context.tweens.add({
+            targets:this,
+            scale:0.15,
+            duration:500,
+            ease:'Expo.easeIn',
+            onComplete:()=> {
+                movementTween.resume()
+            }
+        })
+
     }
 }

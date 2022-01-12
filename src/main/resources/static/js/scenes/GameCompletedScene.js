@@ -2,6 +2,7 @@ import {Player} from '../objects/Player.js'
 import {cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 import {Timer} from "../util/Timer.js";
+import {redefineArrays} from "../util/ScenesRandomizer.js";
 
 var victory, victory1, defeat, defeat1;
 
@@ -82,6 +83,7 @@ export class GameCompletedScene extends Phaser.Scene {
         this.playAgainButton.setInteractive();
 
         this.playAgainButton.on('selected', () => {
+            redefineArrays()
             this.scene.start('Coop1');
         })
 

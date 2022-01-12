@@ -344,6 +344,11 @@ export class MenuSceneWS extends Phaser.Scene {
 
     selectButton(index) {
         const button = this.buttons[index];
+        this.buttonOver(button)
+    }
+
+    buttonOver(selected) {
+        const button = selected;
         this.tweens.add({
             targets: button,
             scaleX: 1.25,
@@ -370,7 +375,8 @@ export class MenuSceneWS extends Phaser.Scene {
         this.selectedButtonIndex = index;
         this.selectSprite.setVisible(true);
     }
-
+    
+    
     defineNetworkAvailabilityFunctionalities() {
         let width = this.game.canvas.width;
         let height = this.game.canvas.height;
@@ -656,11 +662,11 @@ export class MenuSceneWS extends Phaser.Scene {
     disableListeners() {
         cameraFadeOut(this, 1000);
 
-        this.input.keyboard.removeListener('keydown-' + 'DOWN');
+        // this.input.keyboard.removeListener('keydown-' + 'DOWN');
 
-        this.input.keyboard.removeListener('keydown-' + 'UP');
+        // this.input.keyboard.removeListener('keydown-' + 'UP');
 
-        this.input.keyboard.removeListener('keydown-' + 'ENTER');
+        // this.input.keyboard.removeListener('keydown-' + 'ENTER');
     }
 
     playBackgroundMusic() {
