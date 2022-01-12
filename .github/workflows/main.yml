@@ -11,10 +11,10 @@ jobs:
     - uses: actions/checkout@v1
     - name: Zip Folder
       run: zip -r DualInterestGame.zip src/main/resources/static . -x ".git/*" ".github/*"
-#    - uses: actions/upload-artifact@v2
-#      with:
-#        name: DualInterestGame.zip
-#        path: DualInterestGame.zip
+    - uses: actions/upload-artifact@v2
+      with:
+        name: DualInterestGame
+        path: DualInterestGame.zip
 
   deployWebGL:
     needs: build
@@ -26,14 +26,14 @@ jobs:
         channel:
           - webgl
     steps:
-  #    - uses: actions/download-artifact@v2.0.8
-   #     with:
-  #        name: DualInterestGame.zip
-  #        path: DualInterestGame.zip
+      - uses: actions/download-artifact@v2.0.8
+        with:
+          name: DualInterestGame
+          path: DualInterestGame.zip
       - uses: KikimoraGames/itch-publish@v0.0.3
         with:
           butlerApiKey: 8osD3cHHsXM3kiIu4vr8Tcumfm24d9Ip82wW7wfv
-          gameData: 'DualInterestGame.zip'
+          gameData: DualInterestGame.zip
           itchUsername: ${{env.ITCH_USERNAME}}
           itchGameId: ${{ env.ITCH_GAME_ID }}
           buildChannel: ${{ matrix.channel }}
