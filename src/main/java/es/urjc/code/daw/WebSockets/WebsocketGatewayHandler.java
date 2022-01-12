@@ -92,7 +92,10 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
 
     private String getMessageType(TextMessage message) throws IOException {
         JsonNode  messageNode= mapper.readTree(message.getPayload());
-        return messageNode.get("type").asText();
+        if(messageNode.has("type")) {
+            return messageNode.get("type").asText();
+        }
+        return "";
     }
 }
 
