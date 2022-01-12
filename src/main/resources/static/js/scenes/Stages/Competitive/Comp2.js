@@ -85,10 +85,8 @@ export class Comp2 extends CompetitiveScene{
     }
 
     defineSkulls(){
-
-
-
-        this.addSkull(30, 50);
+        
+        this.addSkull(30, 70);
         this.addSkull( 30, 165);
         this.addSkull( 95, 415);
         this.addSkull( 290, 325);
@@ -99,8 +97,7 @@ export class Comp2 extends CompetitiveScene{
 
         this.addSkull(610, 415 );
         this.addSkull(800, 325);
-        this.addSkull( 930, 16);
-        this.addSkull( 930, 50);
+        this.addSkull( 930, 70);
     }
 
 
