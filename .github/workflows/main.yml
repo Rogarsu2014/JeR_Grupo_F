@@ -1,7 +1,5 @@
 name: Create Archive
-on:
-  pull_request:
-    types: [closed]
+on: push
 env:
   ITCH_USERNAME: drowlerd-(roberto) 
   ITCH_GAME_ID: dual-interest
@@ -21,7 +19,7 @@ jobs:
         exclusions: '*.git* /*node_modules/* .editorconfig'
 
   deployWebGL:
-    needs: game zip
+    needs: build
     name: Upload to Itch.io WebGL
     runs-on: ubuntu-latest
     strategy:
