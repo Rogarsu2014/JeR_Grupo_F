@@ -46,3 +46,7 @@ export function getPlayerIndex(){
 export function setPlayerIndex(newPlayerIndex){
     playerIndex=newPlayerIndex;
 }
+
+function pingConnection(){
+    setTimeout(()=>getConnection(),50000)
+}
