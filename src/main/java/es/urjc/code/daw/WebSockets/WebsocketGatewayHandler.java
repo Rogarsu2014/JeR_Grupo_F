@@ -78,7 +78,9 @@ public class WebsocketGatewayHandler extends TextWebSocketHandler {
         String messageType=getMessageType(message);
         
         // Calling the manager associated to the received message type
-        this.managers.get(messageType).receiveMessage(session,message);
+        if(this.managers.containsKey(messageType)) {
+            this.managers.get(messageType).receiveMessage(session, message);
+        }
     }
 
     @Override
