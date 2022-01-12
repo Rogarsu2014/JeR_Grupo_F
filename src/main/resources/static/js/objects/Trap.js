@@ -18,6 +18,7 @@ export class Trap extends Phaser.Physics.Arcade.Sprite {
         this.onPlayerContact = () => {
             player.body.moves = true;
         };
+        
     }
 
     init() {
@@ -45,8 +46,13 @@ export class Trap extends Phaser.Physics.Arcade.Sprite {
         player.addPoints(this.pointsRemoved);
         
         this.music.play();
+        player.instantiateDeathAnimation()
         player.setPosition(player.initialPositionX, player.initialPositionY);
+        player.scale=0;
+        
         player.body.moves = false;
+        
+        this.setDeathTimer(player)
     }
     
     playEffect(){
@@ -55,10 +61,27 @@ export class Trap extends Phaser.Physics.Arcade.Sprite {
     }
     
     primitiveHarm(player){
-        let timer = new Timer(this.context, 2000, () => {
-            player.body.moves = true;
-        });
-        timer.startTimer();
         this.playEffect()
+    }
+    
+    setDeathTimer(player){
+        let timer = new Timer(this.context, 2000, () => {
+            this.timerAction(player);
+        });
+
+        timer.startTimer();
+    }
+    timerAction(player){
+        player.body.moves = true;
+        this.playerScaleTween(player)
+    }
+    
+    playerScaleTween(player){
+        this.context.tweens.add({
+            targets:player,
+            scale:0.07,
+            duration:200,
+            ease:'Quad.easeIn'
+        })
     }
 }

@@ -12,13 +12,17 @@ export class ServerConnectionManager {
         this.clientId=id;
     }
     
-    static windowHref=window.location.href
-    static host=window.location.host
+    // static windowHref=window.location.href
+    // static host=window.location.host
     
-    // static windowHref="https://dual-interest.herokuapp.com/"
+    //AWS
     // static windowHref="dualinterest.eu-west-3.elasticbeanstalk.com"
     // static host="dualinterest.eu-west-3.elasticbeanstalk.com"
-    // static host="dual-interest.herokuapp.com/"
+    
+    //Heroku
+    static windowHref="https://dual-interest.herokuapp.com/"
+    static host="dual-interest.herokuapp.com/"
+    
     static CheckNetworkConnection(onSuccess,onError){
         $.ajax({
             url: this.windowHref+'/ping',

@@ -137,4 +137,25 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     addPoints(cantidad) {
         this.points += cantidad;
     }
+    
+    instantiateDeathAnimation(){
+        this.deathAnimation= this.context.add.sprite(this.x,this.y,"death"+this.spriteKey)
+        this.deathAnimation.setScale(0.07)
+        this.deathAnimation.deathAnimation = this.context.anims.create({
+            key: 'death' + this.spriteKey,
+            frames: this.deathAnimation.anims.generateFrameNumbers(this.spriteKey, {start: 19, end: 20}),
+            frameRate: 4,
+            repeat: -1
+        });
+        
+        this.context.tweens.add({
+            targets: this.deathAnimation,
+            alpha:0,
+            y:this.y-20,
+            duration:2000,
+            onComplete: ()=>this.deathAnimation.destroy()
+        })
+
+        this.deathAnimation.anims.play('death' + this.spriteKey, true);
+    }
 }

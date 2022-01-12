@@ -6,13 +6,12 @@ export class OnlineTrap extends Trap{
     
     primitiveHarm(player) {
         player.setDeath();
-        let timer = new Timer(this.context, 2000, () => {
-            player.removeDeath();
-            player.body.moves = true;
-        });
-        timer.startTimer();
         if (player.isControlledPlayer)
             this.playEffect()
     }
-
+    
+    timerAction(player) {
+        super.timerAction(player);
+        player.removeDeath();
+    }
 }
