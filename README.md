@@ -142,6 +142,7 @@ Gracais a ello,  se consigue lo siguiente:
     + [**Victoria de jugadores**](#victoria-de-jugadores)
   * [**Diagrama UML implementación Websocket**](#diagrama-uml-implementaci-n-websocket)
 - [Instrucciones precisas para ejecutar la aplicacion](#instrucciones-precisas-para-ejecutar-la-aplicacion)
+- [Beta testing](#beta-testing)
 - [Hoja de ruta del desarrollo](#hoja-de-ruta-del-desarrollo)
 # Introduccion
 
