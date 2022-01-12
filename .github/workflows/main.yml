@@ -1,5 +1,7 @@
 name: Create Archive
-on: push
+on: 
+  pull_request:
+    types: [closed]
 env:
   ITCH_USERNAME: drowlerd-roberto
   ITCH_GAME_ID: dual-interest
