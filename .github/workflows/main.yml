@@ -12,6 +12,7 @@ jobs:
       matrix:
         channel:
           - webgl
+          
     steps:
     - uses: actions/checkout@v1
     - name: Zip Folder
