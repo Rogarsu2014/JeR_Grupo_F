@@ -291,7 +291,7 @@ export class HostOrJoin extends Phaser.Scene {
             }
         }
         if (message.type === "ConnectionClosed") {
-            console.log("external Connection closed reached")
+            // console.log("external Connection closed reached")
             // this.scene.manager.getScenes(true)[0].start("MenuSceneWS")
             this.scene.manager.getScenes(true)[0].scene.start("MenuSceneWS")
             // this.scene.manager.start("MenuSceneWS")

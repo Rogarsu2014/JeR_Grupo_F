@@ -38,7 +38,6 @@ export function redefineArrays(){
 }
 
 export function getNextRandomCoop(){
-    console.log("Coop scenes left " + randomCoopScenes.length)
     if (randomCoopScenes.length===0) {
         return victoryStageKey;
     }
