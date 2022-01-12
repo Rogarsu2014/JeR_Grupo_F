@@ -78,7 +78,7 @@ export class OnlineGameStage extends GameStage {
 
     sendReadyStatus() {
         let connection = getConnection();
-
+        this.showWaitingForPlayersText();
         // Delegate with the function to be called
         let getMsgDelegate = (msg) => {
             this.getStageReadyMsg(msg)
@@ -105,6 +105,29 @@ export class OnlineGameStage extends GameStage {
 
     }
 
+    
+    showWaitingForPlayersText(){
+        let centerX=this.game.canvas.width*.5
+        let centerY=this.game.canvas.height*.5
+        let waitingTextElement="Waiting for other player"
+        this.waitingText = this.add.text(centerX, centerY, "Waiting for other player", {fontFamily: 'ink-free-normal',fontSize:50}).setOrigin(.5, .5);
+        let i=0;
+        this.waitingText.depth = 110;
+        
+        this.timeTextInterval=setInterval(()=>{
+            this.waitingText.text = waitingTextElement + '.'.repeat(i % 4)
+            i+=1;
+        },1000)
+    }
+    
+    
+    hideWaitingForPlayerText(){
+        this.waitingText.setVisible(false)
+        clearInterval(this.timeTextInterval)
+        
+    }
+    
+    
     getStageReadyMsg(msg) {
         let message = JSON.parse(msg.data)
         if (message.type === "StageSynchronizer") {
@@ -114,6 +137,7 @@ export class OnlineGameStage extends GameStage {
             if (bothPlayersReady) {
                 this.resumeStartTransition()
             }
+            this.hideWaitingForPlayerText()
         }
     }
 
