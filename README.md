@@ -861,6 +861,28 @@ la que el archivo se encuentre y ejecutando el comando:
 
 Finalmente la URL necesaria para poder jugar al juego debería de ser ***localhost:8080***
 
+# Beta testing
+
+La ejecución del Beta-testing fue realizada por miembros del propio grupo. Estos miembros del grupo se encargaron de probar y "romper" lo máximo posible la aplicación y de documentar los resultados de ello.
+
+
+Para la resolución de los issues generados en el Beta testing se ha seguido el siguiente patrón:
+
+1. Recogida de los resultados obtenidos en el testing en el excel
+2. Subida de los issues a Github
+3. Resolución de los issues por los desarrolladores
+
+## Excel
+Estos resultados fueron puestos en un excel, en el cual se documenta el tipo y nombre del problema, la prioridad o impacto de los errores una descripción de lo que causan y como lo han logrado realizar.
+
+## Github
+Una vez documentados, el propio excel genera unos textos que sirven para ser introducidos como título y cuerpo en los Issues de Github.
+
+## Resolución de issues
+Una vez generado el Issue, los responsables de las áreas en específico indicadas en el tipo han de ser asignados a estos issues, que deberán realizarse y cerrarse de a cuerdo a la prioridad estimada.
+
+La idea de este formato para el Beta testing es poder tener los issues con un formato uniforme y con ello crear una pipeline de trabajo lo más eficiente posible.
+
 # Hoja de ruta del desarrollo
 
 **Plataformas**: Web
@@ -873,5 +895,5 @@ Finalmente la URL necesaria para poder jugar al juego debería de ser ***localho
 
 **Hito 3:** Extensión del juego utilizando REST y WebSockets - 21/12/2021
 
-**Hito 4:** Beta testing / Mejoras finales. - Sin definir
+**Hito 4:** Beta testing / Mejoras finales. - 12/01/2022
 
