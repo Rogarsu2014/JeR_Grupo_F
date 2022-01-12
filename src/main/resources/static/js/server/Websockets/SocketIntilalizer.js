@@ -52,5 +52,5 @@ function pingConnection(){
     setTimeout(()=> {
         console.log("Ping")
         connection.send("")
-    },5000)
+    },1000)
 }
