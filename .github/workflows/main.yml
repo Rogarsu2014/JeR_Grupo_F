@@ -6,13 +6,15 @@ env:
   
 jobs:
   build:
-    name: game zip
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v1
+    - name: Zip Folder
+      run: zip -r DualInterestGame.zip src/main/resources/static . -x ".git/*" ".github/*"
     - uses: actions/upload-artifact@v2
       with:
         name: DualInterestGame.zip
-        path: src/main/resources/static/*
+        path: DualInterestGame.zip
 
   deployWebGL:
     needs: build
