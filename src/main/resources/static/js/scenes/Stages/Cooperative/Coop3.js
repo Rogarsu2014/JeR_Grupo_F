@@ -16,7 +16,7 @@ addCoopScene(sceneKey)
 export class Coop3 extends CooperativeScene {
 
     constructor() {
-        super(sceneKey, 5000,'Coop3Map');
+        super(sceneKey, 8000,'Coop3Map');
     }
 
     init() {

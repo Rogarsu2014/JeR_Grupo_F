@@ -15,7 +15,7 @@ let sceneKey="OnlineCoop3"
 export class OnlineCoop3 extends OnlineCooperativeScene {
 
     constructor() {
-        super(sceneKey, 5000,'Coop3Map');
+        super(sceneKey, 8000,'Coop3Map');
         // super("OnlineCoop3", "OnlineComp3", 5000,'Coop3Map');
     }
 
