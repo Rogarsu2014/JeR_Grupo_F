@@ -45,6 +45,7 @@ ___
     * [**Resolución de issues**](#resoluci-n-de-issues)
 
 ## Mejoras finales
+
 - [**Mejoras finales**](#mejoras-finales)
     * [**Barra de Carga**](#barra-de-carga)
     * [**Efectos visuales**](#efectos-visuales)
@@ -54,11 +55,12 @@ ___
     * [**Transiciones entre escenas**](#transiciones-entre-escenas)
     * [**Mejoras del Backend**](#mejoras-del-backend)
 
-
 ## Publicar
+
 - [**Publicación**](#publicaci-n)
 
 ## Redes Sociales
+
 - [**Redes Sociales**](#redes-sociales)
     * [**Discord**](#discord)
 
@@ -986,18 +988,22 @@ Victoria/Derrota
 ## Mejoras del Backend
 
 * **Movimiento mejorado**: ahora el movimiento es más estable.
-* **Sincronización del tiempo**: ahora más robusto gracias a que el tiempo para cada partida es gestionado por el servidor
-* **Conexión/desconexión**: ahora se realizan con el protocolo Websocket haciendolo más eficiente y menos propenso a fallos
+* **Sincronización del tiempo**: ahora más robusto gracias a que el tiempo para cada partida es gestionado por el
+  servidor
+* **Conexión/desconexión**: ahora se realizan con el protocolo Websocket haciendolo más eficiente y menos propenso a
+  fallos
 * **Limpieza de listeners entre escenas**: al acabar una escena, los listeners que ha de usar dicha escena para recibir
   mensajes se han eliminado, consiguiendo así menos errores.
 * **Actualización de puntos**: los puntos aparecen actualizados en el menu principal tras ganar una partida online.
+
+Además, se cuenta con un servidor de heroku con el que almancenar la aplicación y poder tener la infraestructura
+necesaria para un juego online.
 
 # Publicación
 
 El juego se ha publicado en los siguientes portales:
 
 [itch.io](https://improvisation-productions.itch.io/dual-interest)
-
 
 [Newgrounds](https://www.newgrounds.com/portal/view/829271?updated=1642052026) **En supervisión**
 
@@ -1007,20 +1013,22 @@ El juego se ha publicado en los siguientes portales:
 
 # Redes Sociales
 
-*Click en los siguientes iconos para acceder al respectivo portal.* 
+*Click en los siguientes iconos para acceder al respectivo portal.*
 
 [![barra de carga](doc/GDDImagenes/RedesSociales/facebook.png)](https://www.outpan.com/app/7e74de5240/dual-interest)
 [![barra de carga](doc/GDDImagenes/RedesSociales/twitter.png)](https://twitter.com/ImProductions21?s=20)
 
 ## Discord
 
-Además, se ha usado Discord como red social en la que los integrantes del grupo han podido tener la oprotunidad de interactuar con la comunidad, aprender de otros desarrolladores y dar a conocer el juego:
+Además, se ha usado Discord como red social en la que los integrantes del grupo han podido tener la oprotunidad de
+interactuar con la comunidad, aprender de otros desarrolladores y dar a conocer el juego:
 
 ![img.png](doc/GDDImagenes/RedesSociales/discord_help.png)
 
-También se ha creado un documento en el que aquellos usuarios que lo deseen podrán dejar su feedback. 
+![img.png](doc/GDDImagenes/RedesSociales/discord_showcase.png)
+También se ha creado un documento en el que aquellos usuarios que lo deseen podrán dejar su feedback.
 
-Formulario
+Formulario:
 
 https://forms.gle/fqBKV8QSKm4jbuc76
 
