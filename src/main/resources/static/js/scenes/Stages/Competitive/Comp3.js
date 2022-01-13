@@ -38,9 +38,7 @@ export class Comp3 extends CompetitiveScene {
 
 
         this.setPlatformsColliders();
-
-
-        console.log("Escena comp 3 creada");
+        
     }
     
     primitiveSetTraps() {
