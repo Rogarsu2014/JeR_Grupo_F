@@ -14,10 +14,10 @@ function connect(){
     }
 
     newConnection.onopen=()=>{
-        console.log("Connected")
+        console.log("Websocket connection opened")
     }
     newConnection.onclose = function() {
-        console.log("Closing socket");
+        console.log("Socket closed");
     }
 
     return newConnection;
@@ -26,7 +26,6 @@ function connect(){
 export function getConnection(){
     if (connection===undefined){
         connection=connect();
-        connection.onopen=function (){console.log("opened")}
         pingConnection()
     }
     return connection
@@ -54,7 +53,6 @@ function pingConnection(){
         
         if (connection.readyState===WebSocket.OPEN) {
             connection.send(JSON.stringify({}))
-            console.log("Ping")
         }   
     },1000)
 }

@@ -204,7 +204,6 @@ export class GameCompletedScene extends Phaser.Scene {
             })
 
             this.buttons[i].on('pointerdown', () => {
-                console.log("touched")
                 clickSfx.play()
             })
             this.buttons[i].on('pointerout', () => {

@@ -115,8 +115,8 @@ export class MessagesManager {
             } else {
                 text.appendText(`[b][align=center][color=green]<${(message)['username']}>: ${(message)['content']}[/color][/align][/b]\n`)
             }
-            if (firstPass===false)
-                console.log(message['content'])
+            if (firstPass===false){}
+                // console.log(message['content'])
         } else {
             text.appendText(`[stroke=black][color=black]<${(message)['username']}>: ${(message)['content']}[/color][/stroke]\n`)
         }
