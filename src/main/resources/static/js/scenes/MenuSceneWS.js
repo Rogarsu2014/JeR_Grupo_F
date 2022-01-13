@@ -58,8 +58,9 @@ export class MenuSceneWS extends Phaser.Scene {
         let playButton = this.add.image(width / 2, height / 2 - 25, 'LocalGame').setDepth(1).setScale(.8);
         this.onlineGame = this.add.image(width / 2, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
         let tutorial = this.add.image(width / 2, height / 2 + 125, 'Tutorial').setDepth(1).setScale(.8);
-        let options = this.add.image(width / 2, height / 2 + 200, 'Options').setDepth(1).setScale(.8);
-        let credits = this.add.image(width / 2, height / 2 + 275, 'Credits').setDepth(1).setScale(.8);
+        // let options = this.add.image(width / 2, height / 2 + 200, 'Options').setDepth(1).setScale(.8);
+        // let credits = this.add.image(width / 2, height / 2 + 275, 'Credits').setDepth(1).setScale(.8);
+        let credits = this.add.image(width / 2, height / 2 + 200, 'Credits').setDepth(1).setScale(.8);
 
 
         // chatText.setWordWrapWidth(778 * .5 - 20)
@@ -314,6 +315,7 @@ export class MenuSceneWS extends Phaser.Scene {
         // ServerPing.ConnectUser()
         // ServerPing.GetClientsCount()
         this.events.on('shutdown', () => this.stopBackgroundMusic())
+        this.addCharactersSprites()
 
     }
 
@@ -322,54 +324,38 @@ export class MenuSceneWS extends Phaser.Scene {
         let hoverSfx = this.sound.add("UI_hover", this.game.config.musicConfig);
         let clickSfx = this.sound.add("UI_click", this.game.config.musicConfig);
         for (let i = 0; i < this.buttons.length; i++) {
-            let originalAngle = this.buttons[i].angle
-            let originalScale = this.buttons[i].scale
-
+ 
             let onBtnOverTween = this.tweens.add({
                 targets: this.buttons[i],
                 paused: true,
-                scale: .8,
-                angle: 0,
-                ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                duration: 1000,
+                scale: 1,
+                // angle: 3,
+                ease: 'Bounce.Out',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 500,
                 yoyo: true,
                 repeat: -1,            // -1: infinity
-            });
-            let btnOverTweenShow = this.tweens.add({
-                targets: this.buttons[i],
-                paused: true,
-                scale: 1.05,
-                angle: 3,
-                ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                duration: 200,
-                onComplete: () => {
-                    onBtnOverTween.resume()
-                }
+                repeatDelay:1000
             });
 
 
             this.buttons[i].on('pointerover', () => {
                 hoverSfx.play()
-
-                btnOverTweenShow.play()
-
+                onBtnOverTween.resume()
                 let textureName = this.buttons[i].texture.key + 'Push';
                 this.buttons[i].setTexture(textureName)
             })
+            
             this.buttons[i].on('pointerdown', () => {
                 console.log("touched")
                 clickSfx.play()
             })
-
             this.buttons[i].on('pointerout', () => {
-                onBtnOverTween.seek(0)
-                btnOverTweenShow.seek(0)
+                onBtnOverTween.restart()
                 onBtnOverTween.pause()
-                btnOverTweenShow.pause()
                 let textureName = this.buttons[i].texture.key.replace('Push', '');
                 this.buttons[i].setTexture(textureName)
-                // this.buttonOver(this.buttons[i])
             })
+
         }
     }
 
@@ -809,9 +795,32 @@ export class MenuSceneWS extends Phaser.Scene {
                     let value = Math.floor(tween.getValue())
                     this.playerGamesWonText.setTint(Phaser.Display.Color.GetColor(0, value, value))
                 }
-                
+
             })
         }
+    }
+
+    addCharactersSprites() {
+        this.daiaSprite=this.add.sprite(380,440,'daiaIdle');
+        this.daiaSprite.anim=this.anims.create({
+            key: 'daiaIdleAnim',
+            frames: this.daiaSprite.anims.generateFrameNumbers('daiaIdle', {start: 0, end: 3}),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.daiaSprite.flipX=true
+        this.daiaSprite.scale=.25
+        this.daiaSprite.anims.play('daiaIdleAnim', true);
+        
+        this.ibbanSprite=this.add.sprite(150,450,'ibbanIdle');
+        this.ibbanSprite.scale=.2
+        this.ibbanSprite.anim=this.anims.create({
+            key: 'ibbanIdleAnim',
+            frames: this.ibbanSprite.anims.generateFrameNumbers('ibbanIdle', {start: 0, end: 3}),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.ibbanSprite.anims.play('ibbanIdleAnim', true);
     }
 
     static getTextArea() {

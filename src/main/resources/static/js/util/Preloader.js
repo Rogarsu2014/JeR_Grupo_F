@@ -85,6 +85,8 @@ export class Preloader extends Phaser.Scene {
         this.load.spritesheet("dude","./Resources/assets/items/spritesheetDaia.png", { frameWidth: 706, frameHeight: 672 });
         this.load.spritesheet("dude2","./Resources/assets/items/spritesheetIbban.png", { frameWidth: 731, frameHeight: 526 });
         this.load.spritesheet("skull","./Resources/assets/items/SpriteSkulls.png", { frameWidth: 522, frameHeight: 518 });
+        this.load.spritesheet("daiaIdle","./Resources/assets/UI/MainMenu/spritesheetIdleDaia.png", { frameWidth: 548, frameHeight: 518 });
+        this.load.spritesheet("ibbanIdle","./Resources/assets/UI/MainMenu/spritesheetIdleIbban.png", { frameWidth: 738, frameHeight: 502 });
         //this.load.image("skull", "./Resources/assets/items/skull.png");//Current sprites from tutorial
         
         //sfx
