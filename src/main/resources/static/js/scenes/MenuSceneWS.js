@@ -314,6 +314,7 @@ export class MenuSceneWS extends Phaser.Scene {
         // ServerPing.ConnectUser()
         // ServerPing.GetClientsCount()
         this.events.on('shutdown', () => this.stopBackgroundMusic())
+        this.addCharactersSprites()
 
     }
 
@@ -809,9 +810,32 @@ export class MenuSceneWS extends Phaser.Scene {
                     let value = Math.floor(tween.getValue())
                     this.playerGamesWonText.setTint(Phaser.Display.Color.GetColor(0, value, value))
                 }
-                
+
             })
         }
+    }
+
+    addCharactersSprites() {
+        this.daiaSprite=this.add.sprite(380,440,'daiaIdle');
+        this.daiaSprite.anim=this.anims.create({
+            key: 'daiaIdleAnim',
+            frames: this.daiaSprite.anims.generateFrameNumbers('daiaIdle', {start: 0, end: 3}),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.daiaSprite.flipX=true
+        this.daiaSprite.scale=.25
+        this.daiaSprite.anims.play('daiaIdleAnim', true);
+        
+        this.ibbanSprite=this.add.sprite(150,450,'ibbanIdle');
+        this.ibbanSprite.scale=.2
+        this.ibbanSprite.anim=this.anims.create({
+            key: 'ibbanIdleAnim',
+            frames: this.ibbanSprite.anims.generateFrameNumbers('ibbanIdle', {start: 0, end: 3}),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.ibbanSprite.anims.play('ibbanIdleAnim', true);
     }
 
     static getTextArea() {
