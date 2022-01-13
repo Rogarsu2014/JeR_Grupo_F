@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="js/phaser.js"></script>
@@ -10,14 +10,20 @@
     <script src="js/util/TimePausPrevent.js"></script>
     <title>Document</title>
 </head>
+<style>
+    canvas {
+        display: block;
+        margin: auto;
+    }
+</style>
 <body>
 
-<div id="container" style="align-content: center"></div>
+<div id="container"></div>
 
 
-<input type="text"  name="message" id="myText" style="font-family: ink-free-normal" hidden>
-<input type="text"  name="message1" id="myUser" style="font-family: ink-free-normal" hidden>
-<input type="text"  name="message2" id="myPass" style="font-family: ink-free-normal" hidden>
+<input type="text" name="message" id="myText" style="font-family: ink-free-normal" hidden>
+<input type="text" name="message1" id="myUser" style="font-family: ink-free-normal" hidden>
+<input type="text" name="message2" id="myPass" style="font-family: ink-free-normal" hidden>
 
 <button class="btn btn-success" id="btnSend" name="btnSend" style="font-family: ink-free-normal" hidden>Send</button>
 
