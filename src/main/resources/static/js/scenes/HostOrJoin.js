@@ -61,7 +61,7 @@ export class HostOrJoin extends Phaser.Scene {
         this.joinButton = this.add.image(850, 262, 'JoinButton').setOrigin(0).setDepth(2).setScale(.8);
         this.readyButton = this.add.image(width / 2, height / 2 + 230, 'ReadyButton').setDepth(2).setScale(.8);
 
-        this.returnButton = this.add.image(110, height - 50, 'ReturnButton').setDepth(2).setScale(.8);
+        this.returnButton = this.add.image(110, height - 80, 'ReturnButton').setDepth(2).setScale(.8);
 
         this.codeText = this.add.text(275, 350, " ", {fontFamily: 'ink-free-normal', fontSize: 33});
         this.codeText.visible = false;
@@ -321,9 +321,15 @@ export class HostOrJoin extends Phaser.Scene {
     }
 
     loadScene(sceneKey) {
-        this.stopBackgroundMusic()
-        this.scene.start(sceneKey)
-        this.formUtil.hideElement("myText")
+        cameraFadeOut(this, 1000, () => {
+            this.stopBackgroundMusic()
+            this.scene.start(sceneKey)
+            this.formUtil.hideElement("myText")
+            this.readyButton.setInteractive(false)
+            this.hostButton.setInteractive(false)
+            this.joinButton.setInteractive(false)
+        })
+        
     }
 
     goBackToMenu() {

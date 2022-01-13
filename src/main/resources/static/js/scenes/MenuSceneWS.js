@@ -33,9 +33,11 @@ export class MenuSceneWS extends Phaser.Scene {
     }
 
     create() {
-
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
+        this.cameras.main.fadeFrom(1000,0,0,0)
+        // this.time.delayedCall(1000,()=>{this.scene.start('MenuSceneWS');}, [], this)
+      
 
         this.game.canvas.width = 1408;
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height)

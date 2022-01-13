@@ -12,8 +12,8 @@ export class Preloader extends Phaser.Scene {
     }
 
     preload(){
-
         loadFont('ink-free-normal','./Resources/assets/typography/ink-free-normal.ttf')
+        this.setLoadBar()
         // transitions
         this.load.image("BlackBackground", "./Resources/assets/background/BlackPixel.png")
 
@@ -177,7 +177,43 @@ export class Preloader extends Phaser.Scene {
 
     }
     create(){
-        this.scene.start('MenuSceneWS');
+        this.cameras.main.fade(1000,0,0,0)
+        // this.cameras.main.setBackgroundColor('#fff');
+        this.time.delayedCall(1000,()=>{this.scene.start('MenuSceneWS');}, [], this)
     }
 
+    setLoadBar() {
+        let progressBox= this.add.graphics();
+        let progressBar= this.add.graphics();
+        
+        let width= this.cameras.main.width;
+        let height= this.cameras.main.height;
+                
+        
+        progressBox.fillStyle(0xff0000,0.8);
+        progressBox.fillRect(width*.5-160,height*.5,320,50);
+        
+        let loadingText= this.add.text(width*.5,height*.5-80,'Loading...',{fontFamily:'ink-free-normal',fontSize:'20px'}).setOrigin(.5,.5)
+        let percentText= this.add.text(width*.5,height*.5-10,'',{fontFamily:'ink-free-normal',fontSize:'18px'}).setOrigin(.5,.5)
+        let assetText= this.add.text(width*.5,height*.5+70,'',{fontFamily:'ink-free-normal',fontSize:'18px'}).setOrigin(.5,.5)
+        
+        this.load.on('progress',function (value) {
+            percentText.setText(parseInt(value * 100) + '%');
+            progressBar.clear();
+            progressBar.fillStyle(0x0000ff, 1);
+            progressBar.fillRect(width*.5+10-160, height*.5+10, 300 * value, 30);
+        })
+        this.load.on('fileprogress', function (file) {
+            assetText.setText('Loading asset: ' + file.key);
+        });
+        
+        this.load.on('complete', function () {
+            progressBar.destroy();
+            progressBox.destroy();
+            loadingText.destroy();
+            percentText.destroy();
+            assetText.destroy();
+        });
+        
+    }
 }
