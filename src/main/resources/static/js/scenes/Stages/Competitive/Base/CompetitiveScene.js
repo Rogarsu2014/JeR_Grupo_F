@@ -62,6 +62,7 @@ export class CompetitiveScene extends GameStage {
     }
 
     stageCompleted() {
+        this.timer.pauseTimer();
         this.disableAllPlayersMovement()
         cameraFadeOut(this, 1000, () => {
             this.music.stop()
