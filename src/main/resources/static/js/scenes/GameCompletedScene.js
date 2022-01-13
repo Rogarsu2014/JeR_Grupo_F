@@ -139,10 +139,12 @@ export class GameCompletedScene extends Phaser.Scene {
         this.playAgainButton.on('pointerdown', () => {
             redefineArrays()
             this.setPlayAgainAction()
+            
             this.loadScene(this.playAgainSceneKey)
         })
 
         this.mainMenuButton.on('pointerdown', () => {
+            this.scene.settings.data=null
             this.loadScene(this.mainMenuKey)
             // this.scene.start('MenuSceneWS');
         })
