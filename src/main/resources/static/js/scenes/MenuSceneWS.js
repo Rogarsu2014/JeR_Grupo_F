@@ -67,7 +67,7 @@ export class MenuSceneWS extends Phaser.Scene {
         // chatText.setWordWrapHeight(960 *.5 - 20)
 
         // *fase2* settings
-        options.alpha = 0.4;
+        // options.alpha = 0.4;
         this.onlineGame.alpha = 0.4;
         this.buttons.push(playButton);
         this.buttons.push(tutorial);
