@@ -2,7 +2,7 @@ import {Player} from '../objects/Player.js'
 import {cameraFadeOut} from "../util/cameraEffects.js";
 import {Skull} from "../objects/Skull.js";
 import {Timer} from "../util/Timer.js";
-import {redefineArrays} from "../util/ScenesRandomizer.js";
+import {getNextRandomCoop, redefineArrays} from "../util/ScenesRandomizer.js";
 
 
 // const backgroundMusicKey = 'VictoryMusic';
@@ -15,7 +15,7 @@ export class GameCompletedScene extends Phaser.Scene {
         this.playerPoints = []
         this.scores = []
         this.winnerIndex = -1;
-        this.playAgainSceneKey = 'Coop1'
+        this.playAgainSceneKey = ''
         this.mainMenuKey = 'MenuSceneWS'
         this.backgroundMusicKey = 'VictoryMusic'
         this.music = null
@@ -138,6 +138,7 @@ export class GameCompletedScene extends Phaser.Scene {
         // }) 
         this.playAgainButton.on('pointerdown', () => {
             redefineArrays()
+            this.playAgainSceneKey=getNextRandomCoop()
             this.loadScene(this.playAgainSceneKey)
         })
 
@@ -280,7 +281,7 @@ export class GameCompletedScene extends Phaser.Scene {
         this.removeButtonListeners()
         cameraFadeOut(this, 1000, () => {
             // this.stopBackgroundMusic()
-            this.scene.start(sceneKey)
+            this.scene.start(sceneKey, {})
         })
     }
 

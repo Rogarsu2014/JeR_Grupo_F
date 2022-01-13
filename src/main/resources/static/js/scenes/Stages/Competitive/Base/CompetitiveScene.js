@@ -9,12 +9,13 @@ export class CompetitiveScene extends GameStage {
     constructor(sceneKey, timerTime, tilemapKey, sceneWidth) {
         super(sceneKey, timerTime, tilemapKey, sceneWidth);
         this.backgroundMusicKey = 'compStageMusic';
-        this.skulls = []
-        this.traps = []
+
     }
 
     create(data) {
         super.create(data);
+        this.skulls = []
+        this.traps = []
         this.defineSkulls()
         this.setSkullsCollisions()
         this.setTraps()
