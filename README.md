@@ -35,24 +35,50 @@ ___
 
 # <p align="center">GDD</div>
 
+# Puntos fase 5
+
+## Beta Testing
+
+- [**Beta testing**](#beta-testing)
+    * [**Excel**](#excel)
+    * [**Github**](#github)
+    * [**Resolución de issues**](#resoluci-n-de-issues)
+
+## Mejoras finales
+- [**Mejoras finales**](#mejoras-finales)
+    * [**Barra de Carga**](#barra-de-carga)
+    * [**Efectos visuales**](#efectos-visuales)
+        + [**Calaveras**](#calaveras)
+        + [**Pinchos**](#pinchos)
+    * [**Animaciones y sonidos botones**](#animaciones-y-sonidos-botones)
+    * [**Transiciones entre escenas**](#transiciones-entre-escenas)
+    * [**Mejoras del Backend**](#mejoras-del-backend)
+
+
+## Publicar
+- [**Publicación**](#publicaci-n)
+
+## Redes Sociales
+- [**Redes Sociales**](#redes-sociales)
+    * [**Discord**](#discord)
+
 ### Puntos fase 4
 
 #### Documentación del protocolo utilizado sobre WebSockets
 
 - [**Protocolo WS**](#protocolo-ws)
-  * [**WebsocketGatewayHandler**](#websocketgatewayhandler)
-  * [**Managers**](#managers)
-    + [**Sesiones de usuarios**](#sesiones-de-usuarios)
-    + [**Salas**](#salas)
-    + [**BumpManager**](#bumpmanager)
-    + [**PointsManager**](#pointsmanager)
-    + [**Sincronización de escena**](#sincronizaci-n-de-escena)
-    + [**Movimiento**](#movimiento)
-    + [**Botones de la escena cooperativa**](#botones-de-la-escena-cooperativa)
-    + [**Victoria de jugadores**](#victoria-de-jugadores)
-    + [**ChatWS**](#chatws)
-  
-    
+    * [**WebsocketGatewayHandler**](#websocketgatewayhandler)
+    * [**Managers**](#managers)
+        + [**Sesiones de usuarios**](#sesiones-de-usuarios)
+        + [**Salas**](#salas)
+        + [**BumpManager**](#bumpmanager)
+        + [**PointsManager**](#pointsmanager)
+        + [**Sincronización de escena**](#sincronizaci-n-de-escena)
+        + [**Movimiento**](#movimiento)
+        + [**Botones de la escena cooperativa**](#botones-de-la-escena-cooperativa)
+        + [**Victoria de jugadores**](#victoria-de-jugadores)
+        + [**ChatWS**](#chatws)
+
 #### Actualización del diagrama de clases
 
 * [**Diagrama UML implementación Websocket**](#diagrama-uml-implementaci-n-websocket)
@@ -67,83 +93,100 @@ http://dualinterestonlineweb-env.eba-a9tqfimk.eu-west-3.elasticbeanstalk.com/
 
 Se ha creado una aplicación almacenada en un servidor en la nube.
 
-Gracais a ello,  se consigue lo siguiente:
+Gracais a ello, se consigue lo siguiente:
+
 * **Hacer test del proyecto fuera del ámbito de la red local.**
-* **Tener une version accesible para testing:** gracias a dicho enlace, el juego puede ser distribuido a particulares y comunidades con el fin de que prueban el juego y mejorar el producto.
+* **Tener une version accesible para testing:** gracias a dicho enlace, el juego puede ser distribuido a particulares y
+  comunidades con el fin de que prueban el juego y mejorar el producto.
 
 ## Índice
 
 *Los acentos no están disponibles en el índice por el sistema de Markdown*
 
 - [Introduccion](#introduccion)
-  * [Concepto del juego](#concepto-del-juego)
-  * [Caracteristicas principales](#caracteristicas-principales)
-    - [Competitividad:](#competitividad-)
-    - [Colaboracion:](#colaboracion-)
-    - [Fácil de entender:](#f-cil-de-entender-)
-      * [Frenético:](#fren-tico-)
-  * [Genero](#genero)
-  * [Proposito y publico objetivo](#proposito-y-publico-objetivo)
-  * [Jugabilidad](#jugabilidad)
-    - [Desplazamiento  y movilidad:](#desplazamiento--y-movilidad-)
-    - [Interacción con el oponente:](#interacci-n-con-el-oponente-)
-    - [Escenario:](#escenario-)
-  * [Estilo visual](#estilo-visual)
-  * [Alcance](#alcance)
+    * [Concepto del juego](#concepto-del-juego)
+    * [Caracteristicas principales](#caracteristicas-principales)
+        - [Competitividad:](#competitividad-)
+        - [Colaboracion:](#colaboracion-)
+        - [Fácil de entender:](#f-cil-de-entender-)
+            * [Frenético:](#fren-tico-)
+    * [Genero](#genero)
+    * [Proposito y publico objetivo](#proposito-y-publico-objetivo)
+    * [Jugabilidad](#jugabilidad)
+        - [Desplazamiento  y movilidad:](#desplazamiento--y-movilidad-)
+        - [Interacción con el oponente:](#interacci-n-con-el-oponente-)
+        - [Escenario:](#escenario-)
+    * [Estilo visual](#estilo-visual)
+    * [Alcance](#alcance)
 - [Mecanicas de juego](#mecanicas-de-juego)
-  * [Jugabilidad](#jugabilidad-1)
-    + [Niveles](#niveles)
-    + [Fase de cooperación](#fase-de-cooperaci-n)
-    + [Funcionamiento del nivel](#funcionamiento-del-nivel)
-    + [Tareas](#tareas)
-    + [Recompensas](#recompensas)
-    + [Fase de competición](#fase-de-competici-n)
-  * [Puntos](#puntos)
-  * [Salto](#salto)
-  * [Empuje](#empuje)
-  * [Desplazamiento lateral](#desplazamiento-lateral)
-  * [Trampas](#trampas)
-  * [Tiempos](#tiempos)
-  * [Personaje](#personaje)
+    * [Jugabilidad](#jugabilidad-1)
+        + [Niveles](#niveles)
+        + [Fase de cooperación](#fase-de-cooperaci-n)
+        + [Funcionamiento del nivel](#funcionamiento-del-nivel)
+        + [Tareas](#tareas)
+        + [Recompensas](#recompensas)
+        + [Fase de competición](#fase-de-competici-n)
+    * [Puntos](#puntos)
+    * [Salto](#salto)
+    * [Empuje](#empuje)
+    * [Desplazamiento lateral](#desplazamiento-lateral)
+    * [Trampas](#trampas)
+    * [Tiempos](#tiempos)
+    * [Personaje](#personaje)
 - [Movimiento y fisicas](#movimiento-y-fisicas)
-  * [Colisiones](#colisiones)
-  * [Controles](#controles)
+    * [Colisiones](#colisiones)
+    * [Controles](#controles)
 - [Interfaz](#interfaz)
-  * [Diagrama de flujo](#diagrama-de-flujo)
-  * [Transicion de escenas](#--transicion-de-escenas--)
-    + [Navegación Fase 3 Menu principal y juego](#navegaci-n-fase-3-menu-principal-y-juego)
-  * [Flujo de gameplay](#--flujo-de-gameplay--)
-  * [Game-loop](#--game-loop--)
-  * [Menu principal](#--menu-principal--)
-  * [Seleccion de Personajes (NO IMPLEMENTADA)](#seleccion-de-personajes--no-implementada-)
-  * [Sistema de Log In](#--sistema-de-log-in--)
-  * [Chat](#--chat--)
-  * [Estado de la conexión](#--estado-de-la-conexi-n--)
-  * [Estado de la conexión](#--estado-de-la-conexi-n---1)
-  * [Tutorial y Creditos](#tutorial-y-creditos)
-    - [Pantalla de resultados](#pantalla-de-resultados)
+    * [Diagrama de flujo](#diagrama-de-flujo)
+    * [Transicion de escenas](#--transicion-de-escenas--)
+        + [Navegación Fase 3 Menu principal y juego](#navegaci-n-fase-3-menu-principal-y-juego)
+    * [Flujo de gameplay](#--flujo-de-gameplay--)
+    * [Game-loop](#--game-loop--)
+    * [Menu principal](#--menu-principal--)
+    * [Seleccion de Personajes (NO IMPLEMENTADA)](#seleccion-de-personajes--no-implementada-)
+    * [Sistema de Log In](#--sistema-de-log-in--)
+    * [Chat](#--chat--)
+    * [Estado de la conexión](#--estado-de-la-conexi-n--)
+    * [Estado de la conexión](#--estado-de-la-conexi-n---1)
+    * [Tutorial y Creditos](#tutorial-y-creditos)
+        - [Pantalla de resultados](#pantalla-de-resultados)
 - [Arte](#arte)
-  * [Audio](#audio)
+    * [Audio](#audio)
 - [Diseño de niveles](#dise-o-de-niveles)
 - [Implementacion de Servidor con API REST y diagrama de clases](#implementacion-de-servidor-con-api-rest-y-diagrama-de-clases)
-  * [Datos (Data)](#datos---data--)
-  * [Modelo (Model)](#modelo---model--)
-  * [Vista (View)](#vista---view--)
-- [**Protocolo WS**](#protocolo-ws)
-  * [**WebsocketGatewayHandler**](#websocketgatewayhandler)
-  * [**Managers**](#managers)
-    + [**Sesiones de usuarios**](#sesiones-de-usuarios)
-    + [**Salas**](#salas)
-    + [**BumpManager**](#bumpmanager)
-    + [**PointsManager**](#pointsmanager)
-    + [**Sincronización de escena**](#sincronizaci-n-de-escena)
-    + [**Movimiento**](#movimiento)
-    + [**Botones de la escena cooperativa**](#botones-de-la-escena-cooperativa)
-    + [**Victoria de jugadores**](#victoria-de-jugadores)
-  * [**Diagrama UML implementación Websocket**](#diagrama-uml-implementaci-n-websocket)
+    * [Datos (Data)](#datos---data--)
+    * [Modelo (Model)](#modelo---model--)
+    * [Vista (View)](#vista---view--)
+- [Protocolo WS](#protocolo-ws)
+    * [WebsocketGatewayHandler](#websocketgatewayhandler)
+    * [Managers](#managers)
+        + [Sesiones de usuarios](#sesiones-de-usuarios)
+        + [Salas](#salas)
+        + [BumpManager](#bumpmanager)
+        + [PointsManager](#pointsmanager)
+        + [Sincronización de escena](#sincronizaci-n-de-escena)
+        + [Movimiento](#movimiento)
+        + [Botones de la escena cooperativa](#botones-de-la-escena-cooperativa)
+        + [Victoria de jugadores](#victoria-de-jugadores)
+    * [Diagrama UML implementación Websocket](#diagrama-uml-implementaci-n-websocket)
 - [Instrucciones precisas para ejecutar la aplicacion](#instrucciones-precisas-para-ejecutar-la-aplicacion)
-- [Beta testing](#beta-testing)
+- [**Beta testing**](#beta-testing)
+    * [**Excel**](#excel)
+    * [**Github**](#github)
+    * [**Resolución de issues**](#resoluci-n-de-issues)
+- [**Mejoras finales**](#mejoras-finales)
+    * [**Barra de Carga**](#barra-de-carga)
+    * [**Efectos visuales**](#efectos-visuales)
+        + [**Calaveras**](#calaveras)
+        + [**Pinchos**](#pinchos)
+    * [**Animaciones y sonidos botones**](#animaciones-y-sonidos-botones)
+    * [**Transiciones entre escenas**](#transiciones-entre-escenas)
+    * [**Mejoras del Backend**](#mejoras-del-backend)
+- [**Publicación**](#publicaci-n)
+- [**Redes Sociales**](#redes-sociales)
+    * [**Discord**](#discord)
 - [Hoja de ruta del desarrollo](#hoja-de-ruta-del-desarrollo)
+
 # Introduccion
 
 Este es el documento de diseño de juego de *Dual Interest*.Aquí expondremos la idea original del juego de plataformas y
@@ -607,7 +650,6 @@ y *PlayersManager*.
 
 # Protocolo WS
 
-
 Para el protocolo se ha usado la siguiente implementacion:
 
 WebsocketGatewayHandler:
@@ -697,20 +739,21 @@ otra sesión con la que se está en este momento.
 
 ![img.png](doc/GDDImagenes/Fase_4/RoomManagerGetPair.PNG)
 
-
 ### BumpManager
+
 **Manager responsable del dato:** Mandar las colisiones y el empujon.
 
-Método de funcionamiento similar al de la mayoría, el cuál recibe un valor que indica si los personajes están colisionando o no
-y manda a la pareja un aviso de que está siendo empujado (siempre y cuando estén colisionando)
+Método de funcionamiento similar al de la mayoría, el cuál recibe un valor que indica si los personajes están
+colisionando o no y manda a la pareja un aviso de que está siendo empujado (siempre y cuando estén colisionando)
 
 ![img.png](doc/GDDImagenes/Fase_4/BumpManager.PNG)
 
 ### PointsManager
+
 **Manager responsable del dato:** Mandar los puntos recogidos.
 
-Método de funcionamiento similar al de la mayoría, el cuál recibe un valor que marca el valor de la puntuación del rival, el 
-cual sobreescribe el valor local.
+Método de funcionamiento similar al de la mayoría, el cuál recibe un valor que marca el valor de la puntuación del
+rival, el cual sobreescribe el valor local.
 
 ![img.png](doc/GDDImagenes/Fase_4/PointsManager.PNG)
 
@@ -783,21 +826,23 @@ victoria más.
 
 El funcionamiento del chat en Websockets es el siguiente:
 
-Al entrar al chat por primera vez, el programa detecta si es la primera vez que se ha entrado al chat, si lo es, 
-pasa a solicitar los mensajes anteriores mandando un mensaje "anzuelo" al servidor, el cual propicia que se envíen todos
-los mensajes guardados anteriormente debido a un tipo interno propio del mensaje. 
-Al mandar el mensaje "anzuelo", el programa también activa un eventlistener el cual reacciona a los mensajes enviados por el servidor
-parseándolos y transformándolos a datos que puedan ser imprimidos por pantalla.
+Al entrar al chat por primera vez, el programa detecta si es la primera vez que se ha entrado al chat, si lo es, pasa a
+solicitar los mensajes anteriores mandando un mensaje "anzuelo" al servidor, el cual propicia que se envíen todos los
+mensajes guardados anteriormente debido a un tipo interno propio del mensaje. Al mandar el mensaje "anzuelo", el
+programa también activa un eventlistener el cual reacciona a los mensajes enviados por el servidor parseándolos y
+transformándolos a datos que puedan ser imprimidos por pantalla.
 
-En cuanto al envío de mensajes, una vez que el usuario envía un mensaje dándole al botón Send, el programa recoge y envía el mensaje 
-al servidor, este es recibido y clasificado de acuerdo con un tipo interno genérico, el cual le dice que es un mensaje de chat común
-y lo almacena en el historial de mensajes. Una vez almacenado, lo envía a todos los usuarios conectados al chat.
-Al enviarse, se activa el eventListener activado anteriormente y lo transforma en datos que a continuación son impresos por pantalla.
+En cuanto al envío de mensajes, una vez que el usuario envía un mensaje dándole al botón Send, el programa recoge y
+envía el mensaje al servidor, este es recibido y clasificado de acuerdo con un tipo interno genérico, el cual le dice
+que es un mensaje de chat común y lo almacena en el historial de mensajes. Una vez almacenado, lo envía a todos los
+usuarios conectados al chat. Al enviarse, se activa el eventListener activado anteriormente y lo transforma en datos que
+a continuación son impresos por pantalla.
 
-El motivo principal por el que se pasó de APIs REST a Webscokets el chat fue para evitar que el cliente estuviera pidiendo constantemente
-al servidor una actualización de los mensajes ya fuera la respuesta dada por el servidor positiva (hay mensajes nuevos) o negativa (no hay mensajes nuevos).
-Con Websockets se simplifica esto, ya que la petición por parte del cliente solo se hace al entrar y cuando se envían mensajes, mientras que
-quien entrega los mensajes nuevos es el servidor de manera automática.
+El motivo principal por el que se pasó de APIs REST a Webscokets el chat fue para evitar que el cliente estuviera
+pidiendo constantemente al servidor una actualización de los mensajes ya fuera la respuesta dada por el servidor
+positiva (hay mensajes nuevos) o negativa (no hay mensajes nuevos). Con Websockets se simplifica esto, ya que la
+petición por parte del cliente solo se hace al entrar y cuando se envían mensajes, mientras que quien entrega los
+mensajes nuevos es el servidor de manera automática.
 
 ## Diagrama UML implementación Websocket
 
@@ -843,7 +888,7 @@ Para ejecutar la aplicación, es necesario tener Java instalado. La aplicación 
 
 Una vez creado el .jar si se quiere ejecutar se puede hacer desde la consola de comandos, navegando hasta la carpeta en
 la que el archivo se encuentre y ejecutando el comando:
- 
+
 **Fase 3**
 
 ´´´
@@ -860,12 +905,20 @@ la que el archivo se encuentre y ejecutando el comando:
 
 ´´´
 
+**Fase 5**
+
+´´´
+
+     java -jar Dual_Interest-1.0.0.jar
+
+´´´
+
 Finalmente la URL necesaria para poder jugar al juego debería de ser ***localhost:8080***
 
 # Beta testing
 
-La ejecución del Beta-testing fue realizada por miembros del propio grupo. Estos miembros del grupo se encargaron de probar y "romper" lo máximo posible la aplicación y de documentar los resultados de ello.
-
+La ejecución del Beta-testing fue realizada por miembros del propio grupo. Estos miembros del grupo se encargaron de
+probar y "romper" lo máximo posible la aplicación y de documentar los resultados de ello.
 
 Para la resolución de los issues generados en el Beta testing se ha seguido el siguiente patrón:
 
@@ -874,15 +927,102 @@ Para la resolución de los issues generados en el Beta testing se ha seguido el 
 3. Resolución de los issues por los desarrolladores
 
 ## Excel
-Estos resultados fueron puestos en un excel, en el cual se documenta el tipo y nombre del problema, la prioridad o impacto de los errores una descripción de lo que causan y como lo han logrado realizar.
+
+Estos resultados fueron puestos en un excel, en el cual se documenta el tipo y nombre del problema, la prioridad o
+impacto de los errores una descripción de lo que causan y como lo han logrado realizar.
 
 ## Github
-Una vez documentados, el propio excel genera unos textos que sirven para ser introducidos como título y cuerpo en los Issues de Github.
+
+Una vez documentados, el propio excel genera unos textos que sirven para ser introducidos como título y cuerpo en los
+Issues de Github.
 
 ## Resolución de issues
-Una vez generado el Issue, los responsables de las áreas en específico indicadas en el tipo han de ser asignados a estos issues, que deberán realizarse y cerrarse de a cuerdo a la prioridad estimada.
 
-La idea de este formato para el Beta testing es poder tener los issues con un formato uniforme y con ello crear una pipeline de trabajo lo más eficiente posible.
+Una vez generado el Issue, los responsables de las áreas en específico indicadas en el tipo han de ser asignados a estos
+issues, que deberán realizarse y cerrarse de a cuerdo a la prioridad estimada.
+
+La idea de este formato para el Beta testing es poder tener los issues con un formato uniforme y con ello crear una
+pipeline de trabajo lo más eficiente posible.
+
+# Mejoras finales
+
+## Barra de Carga
+
+![barra de carga](doc/GDDImagenes/Gifs/barra_de_carga.gif)
+
+Se ha implementado una barra de carga para hacerle entender al jugador los recursos que se cargan al inicio dle juego
+
+## Efectos visuales
+
+Se han añadido los siguientes efectos visuales para mejorar la experiencia y el gamefeel del jugador:
+
+### Calaveras
+
+![Calaveras](doc/GDDImagenes/Gifs/effecto_calavera.gif)
+Las calaveras van a la posicion del jugador que las recoja.
+
+### Pinchos
+
+Los pinchos hacen que apareza una animacion de "muerte" y que la cámara tiemble, dando así el efecto de golpe al
+jugador.
+![Calaveras](doc/GDDImagenes/Gifs/effecto_pinchos.gif)
+
+## Animaciones y sonidos botones
+
+![barra de carga](doc/GDDImagenes/Gifs/animaciones_UI.gif)
+
+Se han añadido una animación a los botones de la interfaz para dar a entender al jugador sobre que boton está
+interactuando
+
+Además tienen un efecto de sonido para cuando se está sobre el elemento y para cuando se da click
+
+## Transiciones entre escenas
+
+![barra de carga](doc/GDDImagenes/Gifs/transiciones.gif)
+
+Se han añadido transiciones entre ciertas escenas que no disponian de una, como el menu principal y la escena de
+Victoria/Derrota
+
+## Mejoras del Backend
+
+* **Movimiento mejorado**: ahora el movimiento es más estable.
+* **Sincronización del tiempo**: ahora más robusto gracias a que el tiempo para cada partida es gestionado por el servidor
+* **Conexión/desconexión**: ahora se realizan con el protocolo Websocket haciendolo más eficiente y menos propenso a fallos
+* **Limpieza de listeners entre escenas**: al acabar una escena, los listeners que ha de usar dicha escena para recibir
+  mensajes se han eliminado, consiguiendo así menos errores.
+* **Actualización de puntos**: los puntos aparecen actualizados en el menu principal tras ganar una partida online.
+
+# Publicación
+
+El juego se ha publicado en los siguientes portales:
+
+[itch.io](https://improvisation-productions.itch.io/dual-interest)
+
+
+[Newgrounds](https://www.newgrounds.com/portal/view/829271?updated=1642052026) **En supervisión**
+
+[Outpan](https://www.outpan.com/app/7e74de5240/dual-interest)
+
+[Gamejolt](https://gamejolt.com/games/dual-interest/679881)
+
+# Redes Sociales
+
+*Click en los siguientes iconos para acceder al respectivo portal.* 
+
+[![barra de carga](doc/GDDImagenes/RedesSociales/facebook.png)](https://www.outpan.com/app/7e74de5240/dual-interest)
+[![barra de carga](doc/GDDImagenes/RedesSociales/twitter.png)](https://twitter.com/ImProductions21?s=20)
+
+## Discord
+
+Además, se ha usado Discord como red social en la que los integrantes del grupo han podido tener la oprotunidad de interactuar con la comunidad, aprender de otros desarrolladores y dar a conocer el juego:
+
+![img.png](doc/GDDImagenes/RedesSociales/discord_help.png)
+
+También se ha creado un documento en el que aquellos usuarios que lo deseen podrán dejar su feedback. 
+
+Formulario
+
+https://forms.gle/fqBKV8QSKm4jbuc76
 
 # Hoja de ruta del desarrollo
 
@@ -890,11 +1030,11 @@ La idea de este formato para el Beta testing es poder tener los issues con un fo
 
 **Audiencia:** Edad/género/intereses.
 
-**Hito 1:** Desarrollo de juego en local - 27/10/2021
+<del> **Hito 1:** Desarrollo de juego en local </del> - 27/10/2021
 
-**Hito 2:** Extensión del juego incluyendo un back-end que utilice tecnología REST - 29/11/2021
+<del> **Hito 2:** Extensión del juego incluyendo un back-end que utilice tecnología REST </del>- 29/11/2021 
 
-**Hito 3:** Extensión del juego utilizando REST y WebSockets - 21/12/2021
+<del> **Hito 3:** Extensión del juego utilizando REST y WebSockets </del>- 21/12/2021
 
-**Hito 4:** Beta testing / Mejoras finales. - 12/01/2022
+<del> **Hito 4:** Beta testing / Mejoras finales. </del>- 12/01/2022 
 
