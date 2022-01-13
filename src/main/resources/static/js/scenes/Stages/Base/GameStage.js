@@ -10,11 +10,7 @@ export class GameStage extends Phaser.Scene {
     constructor(sceneKey, timerTime, tilemapKey, sceneWidth) {
         super(sceneKey);
         this.nextLevelKey = ""
-        this.players = [];
-        this.bump = false;
-        this.scores = [];
-        this.door = null;
-        this.music = null;
+
         this.sceneWidth = sceneWidth;
         this.backgroundMusicKey = 'coopStageMusic';
 
@@ -36,7 +32,13 @@ export class GameStage extends Phaser.Scene {
     }
 
     create(data) {
-
+        //variables
+        this.players = [];
+        this.bump = false;
+        this.scores = [];
+        this.door = null;
+        this.music = null;
+        
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
 
