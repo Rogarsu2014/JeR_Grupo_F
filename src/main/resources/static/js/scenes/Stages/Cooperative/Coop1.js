@@ -24,7 +24,7 @@ export class Coop1 extends CooperativeScene {
     init() {
 
         this.taskManager = new TaskManager(this, 4, [1, 0, 1, 0], () => {
-            console.log("All tasks completed");
+            // console.log("All tasks completed");
             this.door.open()
         }, this.timer, this.players, this.updatePoints, 50);
 

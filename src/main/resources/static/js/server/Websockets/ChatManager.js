@@ -98,8 +98,8 @@ export class ChatManager {
             } else {
                 text.appendText(`[b][align=center][color=green]<${(message)['username']}>: ${(message)['content']}[/color][/align][/b]\n`)
             }
-            if (firstPass===false)
-                console.log(message['content'])
+            if (firstPass===false){}
+            
         } else {
             text.appendText(`[b][stroke=black][color=black]<${(message)['username']}>: ${(message)['content']}[/color][/stroke][/b]\n`)
         }

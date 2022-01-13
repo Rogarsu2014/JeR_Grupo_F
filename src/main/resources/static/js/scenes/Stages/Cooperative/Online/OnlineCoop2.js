@@ -20,7 +20,6 @@ export class OnlineCoop2 extends OnlineCooperativeScene {
 
 
         this.taskManager = new TaskManager(this, 3, [0, 1, 0, 1], () => {
-            console.log("All tasks completed");
             this.door.open()
         }, this.timer, this.players, this.updatePoints, 50);
 

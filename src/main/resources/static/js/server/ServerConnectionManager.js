@@ -52,7 +52,6 @@ export class ServerConnectionManager {
             },
             success: () => {
                 if (terminated) return;
-                console.log("User connected to server")
                 if (connected===false){
                     connected=true;
                 }

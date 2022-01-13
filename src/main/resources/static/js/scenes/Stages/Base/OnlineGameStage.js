@@ -65,7 +65,6 @@ export class OnlineGameStage extends GameStage {
     timerListenerFunction(msg) {
         let message = JSON.parse(msg.data)
         if (message.type === "GameTime") {
-            console.log("Time received")
             this.remainingTime -= 1;
             this.timerText.setText(this.remainingTime)
             if (this.remainingTime === 0) {
@@ -136,7 +135,6 @@ export class OnlineGameStage extends GameStage {
     getStageReadyMsg(msg) {
         let message = JSON.parse(msg.data)
         if (message.type === "StageSynchronizer") {
-            console.log("stage status received")
             let stageStatus = JSON.parse(msg.data)
             let bothPlayersReady = Boolean(stageStatus.bothPlayersReady);
             if (bothPlayersReady) {
@@ -184,7 +182,6 @@ export class OnlineGameStage extends GameStage {
             let message = JSON.parse(msg.data)
             if (message.type === "Bump") {
                 let bump = Boolean(message.bump);
-                console.log(bump);
                 this.bump = bump;
                 this.players[getPlayerIndex()].selfPush(bump);
             }
