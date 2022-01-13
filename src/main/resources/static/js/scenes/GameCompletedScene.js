@@ -15,7 +15,7 @@ export class GameCompletedScene extends Phaser.Scene {
         this.playerPoints = []
         this.scores = []
         this.winnerIndex = -1;
-        this.playAgainSceneKey = ''
+        
         this.mainMenuKey = 'MenuSceneWS'
         this.backgroundMusicKey = 'VictoryMusic'
         this.music = null
@@ -26,7 +26,7 @@ export class GameCompletedScene extends Phaser.Scene {
         this.selectedButtonIndex = 0
         this.cursors = this.input.keyboard.createCursorKeys();
         this.selectSprite = null
-
+        
 
     }
 
@@ -35,7 +35,7 @@ export class GameCompletedScene extends Phaser.Scene {
 
 
     create(data) {
-
+        this.playAgainSceneKey = ''
         this.loadBackgroundMusic();
         this.playBackgroundMusic()
         this.game.canvas.width = 960;
@@ -137,8 +137,8 @@ export class GameCompletedScene extends Phaser.Scene {
         //     this.scene.start('MenuSceneWS');
         // }) 
         this.playAgainButton.on('pointerdown', () => {
+            this.setPlayAgainAction()
             redefineArrays()
-            this.playAgainSceneKey=getNextRandomCoop()
             this.loadScene(this.playAgainSceneKey)
         })
 
@@ -176,7 +176,9 @@ export class GameCompletedScene extends Phaser.Scene {
         );
         timer.startTimer();
     }
-
+    setPlayAgainAction(){
+        this.playAgainSceneKey=getNextRandomCoop()
+    }
     setButtonsListeners() {
         let hoverSfx = this.sound.add("UI_hover", this.game.config.musicConfig);
         let clickSfx = this.sound.add("UI_click", this.game.config.musicConfig);
@@ -184,7 +186,7 @@ export class GameCompletedScene extends Phaser.Scene {
             let onBtnOverTween = this.tweens.add({
                 targets: this.buttons[i],
                 paused: true,
-                scale: 1,
+                scale: 1.2,
                 // angle: 3,
                 ease: 'Bounce.Out',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
                 duration: 500,

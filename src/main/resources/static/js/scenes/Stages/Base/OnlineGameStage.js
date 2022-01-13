@@ -58,7 +58,7 @@ export class OnlineGameStage extends GameStage {
         this.timeListener = (msg) => this.timerListenerFunction(msg);
         // let timerListener=(msg)=>this.timerListener(msg);
 
-        connection.addEventListener('message', this.timeListener)
+        
         this.events.on('shutdown', () => connection.removeEventListener('message', this.timeListener))
     }
 
@@ -121,6 +121,11 @@ export class OnlineGameStage extends GameStage {
     }
     
     
+    addTimeListener(){
+        let connection= getConnection()
+        connection.addEventListener('message', this.timeListener)
+    }
+    
     hideWaitingForPlayerText(){
         this.waitingText.setVisible(false)
         clearInterval(this.timeTextInterval)
@@ -136,6 +141,7 @@ export class OnlineGameStage extends GameStage {
             let bothPlayersReady = Boolean(stageStatus.bothPlayersReady);
             if (bothPlayersReady) {
                 this.resumeStartTransition()
+                this.addTimeListener()
             }
             this.hideWaitingForPlayerText()
         }
@@ -204,5 +210,10 @@ export class OnlineGameStage extends GameStage {
                 this.enableAllPlayersMovement()
             }, 500, 500
         )
+    }
+    
+    stageCompleted() {
+        let connection = getConnection()
+        connection.removeEventListener('message', this.timeListener)
     }
 }
