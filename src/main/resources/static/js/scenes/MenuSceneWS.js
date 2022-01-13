@@ -323,54 +323,38 @@ export class MenuSceneWS extends Phaser.Scene {
         let hoverSfx = this.sound.add("UI_hover", this.game.config.musicConfig);
         let clickSfx = this.sound.add("UI_click", this.game.config.musicConfig);
         for (let i = 0; i < this.buttons.length; i++) {
-            let originalAngle = this.buttons[i].angle
-            let originalScale = this.buttons[i].scale
-
+ 
             let onBtnOverTween = this.tweens.add({
                 targets: this.buttons[i],
                 paused: true,
-                scale: .8,
-                angle: 0,
-                ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                duration: 1000,
+                scale: 1,
+                // angle: 3,
+                ease: 'Bounce.Out',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 500,
                 yoyo: true,
                 repeat: -1,            // -1: infinity
-            });
-            let btnOverTweenShow = this.tweens.add({
-                targets: this.buttons[i],
-                paused: true,
-                scale: 1.05,
-                angle: 3,
-                ease: 'Quart.in',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                duration: 200,
-                onComplete: () => {
-                    onBtnOverTween.resume()
-                }
+                repeatDelay:1000
             });
 
 
             this.buttons[i].on('pointerover', () => {
                 hoverSfx.play()
-
-                btnOverTweenShow.play()
-
+                onBtnOverTween.resume()
                 let textureName = this.buttons[i].texture.key + 'Push';
                 this.buttons[i].setTexture(textureName)
             })
+            
             this.buttons[i].on('pointerdown', () => {
                 console.log("touched")
                 clickSfx.play()
             })
-
             this.buttons[i].on('pointerout', () => {
-                onBtnOverTween.seek(0)
-                btnOverTweenShow.seek(0)
+                onBtnOverTween.restart()
                 onBtnOverTween.pause()
-                btnOverTweenShow.pause()
                 let textureName = this.buttons[i].texture.key.replace('Push', '');
                 this.buttons[i].setTexture(textureName)
-                // this.buttonOver(this.buttons[i])
             })
+
         }
     }
 
