@@ -58,8 +58,9 @@ export class MenuSceneWS extends Phaser.Scene {
         let playButton = this.add.image(width / 2, height / 2 - 25, 'LocalGame').setDepth(1).setScale(.8);
         this.onlineGame = this.add.image(width / 2, height / 2 + 50, 'OnlineGame').setDepth(1).setScale(.8);
         let tutorial = this.add.image(width / 2, height / 2 + 125, 'Tutorial').setDepth(1).setScale(.8);
-        let options = this.add.image(width / 2, height / 2 + 200, 'Options').setDepth(1).setScale(.8);
-        let credits = this.add.image(width / 2, height / 2 + 275, 'Credits').setDepth(1).setScale(.8);
+        // let options = this.add.image(width / 2, height / 2 + 200, 'Options').setDepth(1).setScale(.8);
+        // let credits = this.add.image(width / 2, height / 2 + 275, 'Credits').setDepth(1).setScale(.8);
+        let credits = this.add.image(width / 2, height / 2 + 200, 'Credits').setDepth(1).setScale(.8);
 
 
         // chatText.setWordWrapWidth(778 * .5 - 20)
