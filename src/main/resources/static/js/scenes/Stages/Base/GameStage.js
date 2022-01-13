@@ -15,7 +15,6 @@ export class GameStage extends Phaser.Scene {
         this.backgroundMusicKey = 'coopStageMusic';
 
         this.sceneTime=timerTime;
-        
         // Test
         // this.sceneTime=1000;
         
@@ -78,7 +77,10 @@ export class GameStage extends Phaser.Scene {
         //***** between players and floor
         this.addStageFloorCollisions(floor);
 
-        this.events.on('shutdown',()=>this.stopBackgroundMusic())
+        this.events.on('shutdown',()=> {
+            this.stopBackgroundMusic();
+            this.scene.settings.data= {}
+        })
 
     }
     
