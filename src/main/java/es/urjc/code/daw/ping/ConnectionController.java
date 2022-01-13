@@ -1,5 +1,6 @@
 package es.urjc.code.daw.ping;
 
+import es.urjc.code.daw.WebSockets.Managers.RegistrationManager;
 import es.urjc.code.daw.chat.Message;
 import es.urjc.code.daw.chat.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,7 @@ public class ConnectionController {
 
     @GetMapping("/clientsCount")
     public int getClientsCount() {
-        return idsTable.size();
+        return RegistrationManager.getInstance().getLoggedPlayersCount();
+//        return idsTable.size();
     }
 }

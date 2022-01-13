@@ -48,4 +48,8 @@ public class RegistrationManager extends BaseManager{
     public boolean isUserLoggedIn(String username){
         return usernamesMap.containsValue(username);
     }
+    
+    public int getLoggedPlayersCount(){
+        return usernamesMap.size();
+    }
 }

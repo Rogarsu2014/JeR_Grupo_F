@@ -7,11 +7,12 @@ import {isHost, removeHostProperty} from "../server/HostData.js";
 export class OnlineGameCompletedScene extends GameCompletedScene {
     constructor() {
         super("OnlineGameCompletedScene");
-        this.playAgainSceneKey = 'HostOrJoin'
+        
     }
 
     create(data) {
         super.create(data);
+        
         this.checkWinner();
 
         if (isHost()) {
@@ -45,7 +46,7 @@ export class OnlineGameCompletedScene extends GameCompletedScene {
 
             connection.send(JSON.stringify(playerVictoryMessage))
 
-        } else if (this.winnerIndex !== -1){
+        } else if (this.winnerIndex !== -1) {
             this.stopBackgroundMusic()
             this.backgroundMusicKey = 'DefeatMusic'
             this.loadBackgroundMusic(true)
@@ -54,4 +55,7 @@ export class OnlineGameCompletedScene extends GameCompletedScene {
 
     }
 
+    setPlayAgainAction() {
+        this.playAgainSceneKey = 'HostOrJoin'
+    }
 }

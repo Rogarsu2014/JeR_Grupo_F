@@ -95,6 +95,7 @@ export class OnlineCooperativeScene extends OnlineGameStage {
     }
 
     stageCompleted() {
+        super.stageCompleted()
         this.timer.pauseTimer();
         let timeOverTimer = new Timer(this, 1000, () => {
             let endTransition = new SweepVerticalTransitionIn(this);
