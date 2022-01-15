@@ -3,7 +3,7 @@ import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
 import {MessagesManager} from "../server/MessagesManager.js";
 
-import {getConnection, setPlayerIndex, setRoomCode} from "../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getRoomCode, setPlayerIndex, setRoomCode} from "../server/Websockets/SocketIntilalizer.js";
 import {getNextRandomCoop, getScenesOrder, redefineArrays, setScenesOrder} from "../util/ScenesRandomizer.js";
 import {setAsHost} from "../server/HostData.js";
 
@@ -33,7 +33,7 @@ export class HostOrJoin extends Phaser.Scene {
     create() {
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
-
+        isHost=false;
         this.game.canvas.width = 1408;
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height)
         let width = this.game.canvas.width;
@@ -143,6 +143,7 @@ export class HostOrJoin extends Phaser.Scene {
         })
         this.returnButton.on('pointerdown', () => {
             this.disableListeners();
+            this.removeRoom()
             this.loadScene('MenuSceneWS');
         })
 
@@ -331,7 +332,15 @@ export class HostOrJoin extends Phaser.Scene {
         })
         
     }
-
+    removeRoom() {
+        let connection = getConnection()
+        let message = {
+            type: "Room",
+            type2: "RemoveRoom",
+            RoomCode: getRoomCode()
+        }
+        connection.send(JSON.stringify(message))
+    }
     goBackToMenu() {
         this.loadScene("MenuSceneWS")
     }

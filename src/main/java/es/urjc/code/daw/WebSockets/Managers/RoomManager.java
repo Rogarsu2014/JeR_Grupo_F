@@ -39,6 +39,7 @@ public class RoomManager extends BaseManager {
     ActionEvent event;
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
+        System.out.println(games.toString());
         JsonNode roomNode = mapper.readTree(message.getPayload());
         String messageType = roomNode.get("type2").asText();
         

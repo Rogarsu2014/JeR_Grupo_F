@@ -85,7 +85,7 @@ export class ChatManager {
             //recibir todos los mensajes si es la primera vez que se abre el chat
         }
         else{
-            this.getLastMessage(targetMessageBox);
+            this.getLastMessages(targetMessageBox);
             //recibir solo el ultimo mensaje enviado
         }
     }
