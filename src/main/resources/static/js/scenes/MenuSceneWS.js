@@ -35,10 +35,10 @@ export class MenuSceneWS extends Phaser.Scene {
     create() {
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
-            
-        this.cameras.main.fadeFrom(1000,0,0,0)
+
+        this.cameras.main.fadeFrom(1000, 0, 0, 0)
         // this.time.delayedCall(1000,()=>{this.scene.start('MenuSceneWS');}, [], this)
-      
+
 
         this.game.canvas.width = 1408;
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height)
@@ -328,7 +328,7 @@ export class MenuSceneWS extends Phaser.Scene {
         let hoverSfx = this.sound.add("UI_hover", this.game.config.musicConfig);
         let clickSfx = this.sound.add("UI_click", this.game.config.musicConfig);
         for (let i = 0; i < this.buttons.length; i++) {
- 
+
             let onBtnOverTween = this.tweens.add({
                 targets: this.buttons[i],
                 paused: true,
@@ -338,7 +338,7 @@ export class MenuSceneWS extends Phaser.Scene {
                 duration: 500,
                 yoyo: true,
                 repeat: -1,            // -1: infinity
-                repeatDelay:1000
+                repeatDelay: 1000
             });
 
 
@@ -348,7 +348,7 @@ export class MenuSceneWS extends Phaser.Scene {
                 let textureName = this.buttons[i].texture.key + 'Push';
                 this.buttons[i].setTexture(textureName)
             })
-            
+
             this.buttons[i].on('pointerdown', () => {
                 clickSfx.play()
             })
@@ -526,7 +526,15 @@ export class MenuSceneWS extends Phaser.Scene {
                 type: "Registration",
                 username: this.user.username
             }
-            connection.send(JSON.stringify(registrationMsg))
+            if (connection.readyState !== WebSocket.OPEN) {
+                let sendMsgListener = () => {
+                    connection.send(JSON.stringify(registrationMsg))
+                };
+                connection.addEventListener('open', sendMsgListener)
+                this.events.on('shutdown', () => connection.removeEventListener('open', sendMsgListener))
+            } else {
+                connection.send(JSON.stringify(registrationMsg))
+            }
 
         } else {
             // console.log("User undefined")
@@ -804,20 +812,20 @@ export class MenuSceneWS extends Phaser.Scene {
     }
 
     addCharactersSprites() {
-        this.daiaSprite=this.add.sprite(380,440,'daiaIdle');
-        this.daiaSprite.anim=this.anims.create({
+        this.daiaSprite = this.add.sprite(380, 440, 'daiaIdle');
+        this.daiaSprite.anim = this.anims.create({
             key: 'daiaIdleAnim',
             frames: this.daiaSprite.anims.generateFrameNumbers('daiaIdle', {start: 0, end: 3}),
             frameRate: 4,
             repeat: -1
         });
-        this.daiaSprite.flipX=true
-        this.daiaSprite.scale=.25
+        this.daiaSprite.flipX = true
+        this.daiaSprite.scale = .25
         this.daiaSprite.anims.play('daiaIdleAnim', true);
-        
-        this.ibbanSprite=this.add.sprite(150,450,'ibbanIdle');
-        this.ibbanSprite.scale=.2
-        this.ibbanSprite.anim=this.anims.create({
+
+        this.ibbanSprite = this.add.sprite(150, 450, 'ibbanIdle');
+        this.ibbanSprite.scale = .2
+        this.ibbanSprite.anim = this.anims.create({
             key: 'ibbanIdleAnim',
             frames: this.ibbanSprite.anims.generateFrameNumbers('ibbanIdle', {start: 0, end: 3}),
             frameRate: 4,
@@ -829,8 +837,8 @@ export class MenuSceneWS extends Phaser.Scene {
     static getTextArea() {
         return this.textArea;
     }
-    
-    steChatManagerValues(){
+
+    steChatManagerValues() {
         ChatManager.setFirstPass(true)
         ChatManager.setTargetMessageBox(this.textArea)
         this.events.on('shutdown', () => ChatManager.removeCatchMessagesListener())
