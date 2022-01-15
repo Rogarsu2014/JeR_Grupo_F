@@ -5,7 +5,6 @@ function connect(){
     
     //publish
     let newConnection = new WebSocket('wss:'+ServerConnectionManager.host+'/applicationGateway');
-    
     //local
     // let newConnection = new WebSocket('ws:'+ServerConnectionManager.host+'/applicationGateway');
     
@@ -17,6 +16,7 @@ function connect(){
         console.log("Websocket connection opened")
     }
     newConnection.onclose = function() {
+        connection=undefined;
         console.log("Socket closed");
     }
 
@@ -51,7 +51,7 @@ export function setPlayerIndex(newPlayerIndex){
 function pingConnection(){
     
     setInterval(()=> {
-        
+        if (connection===undefined) return;
         if (connection.readyState===WebSocket.OPEN) {
             connection.send(JSON.stringify({}))
         }   
