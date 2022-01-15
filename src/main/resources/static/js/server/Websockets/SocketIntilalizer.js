@@ -4,9 +4,9 @@ let connection;
 function connect(){
     
     //publish
-    // let newConnection = new WebSocket('wss:'+ServerConnectionManager.host+'/applicationGateway');
+    let newConnection = new WebSocket('wss:'+ServerConnectionManager.host+'/applicationGateway');
     //local
-    let newConnection = new WebSocket('ws:'+ServerConnectionManager.host+'/applicationGateway');
+    // let newConnection = new WebSocket('ws:'+ServerConnectionManager.host+'/applicationGateway');
     
     newConnection.onerror = function(e) {
         console.log("WS error: " + e);

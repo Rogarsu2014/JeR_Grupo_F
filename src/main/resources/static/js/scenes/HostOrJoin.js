@@ -167,9 +167,16 @@ export class HostOrJoin extends Phaser.Scene {
 
         this.setOnButtonInfoReceived();
         this.events.on('shutdown',()=>this.stopBackgroundMusic())
-
+        this.setOnConnectionLostListener();
     }
 
+    setOnConnectionLostListener(){
+        let connection=getConnection()
+        let returnToMenuOnConnectionLostListener= ()=>this.returnToMenuOnConnectionLost();
+        connection.addEventListener('close',returnToMenuOnConnectionLostListener)
+        this.events.on('shutdown',()=>connection.removeEventListener('close',returnToMenuOnConnectionLostListener))
+    }
+    
     sendMessage() {
         // console.log("sendForm");
         let content = this.formUtil.getTextAreaValue("myText");
@@ -210,7 +217,7 @@ export class HostOrJoin extends Phaser.Scene {
         this.selectedButtonIndex = index;
         //this.selectSprite.setVisible(true);
     }
-
+    
 
     selectNextButton(change = 1) {
         const button = this.buttons[this.selectedButtonIndex];
@@ -304,6 +311,10 @@ export class HostOrJoin extends Phaser.Scene {
 
     }
     
+    
+    returnToMenuOnConnectionLost(){
+        this.scene.manager.getScenes(true)[0].scene.start("MenuSceneWS")
+    }
 
     setJoinCodeText(code) {
 

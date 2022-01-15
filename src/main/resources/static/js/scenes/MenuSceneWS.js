@@ -240,16 +240,7 @@ export class MenuSceneWS extends Phaser.Scene {
             }
         })
         this.xButton.on('pointerdown', () => {
-            if (this.chatVisible === true) {
-                this.chatScreen.setVisible(0);
-                this.xButton.setVisible(0);
-                this.formUtil.hideElement("myText");
-                this.formUtil.hideElement("btnSend");
-                this.chatVisible = false;
-                this.chatErrorText.setVisible(false);
-                this.textArea.setVisible(false);
-                //ChatManager.stopReceivingLastMessages()
-            }
+            this.closeChat()
             /*
             * Si usamos el if de abajo funciona bien el cerrar y abrir de forma INDIVIDUAL cada ventana
             * pero cuando abres las dos al mismo tiempo y le das a la X se cierran ambas
@@ -323,6 +314,19 @@ export class MenuSceneWS extends Phaser.Scene {
 
     }
 
+    closeChat(){
+        if (this.chatVisible === true) {
+            this.chatScreen.setVisible(0);
+            this.xButton.setVisible(0);
+            this.formUtil.hideElement("myText");
+            this.formUtil.hideElement("btnSend");
+            this.chatVisible = false;
+            this.chatErrorText.setVisible(false);
+            this.textArea.setVisible(false);
+            //ChatManager.stopReceivingLastMessages()
+        }
+    }
+    
     setButtonsListeners() {
 
         let hoverSfx = this.sound.add("UI_hover", this.game.config.musicConfig);
@@ -376,6 +380,10 @@ export class MenuSceneWS extends Phaser.Scene {
         })
 
 
+    }
+
+    setLogOutListener() {
+        this.logInPlayer()
     }
 
     removeButtonListeners() {
@@ -495,6 +503,13 @@ export class MenuSceneWS extends Phaser.Scene {
         this.userRegistration.logIn(username, password, (user) => this.Registered(user),
             () => this.loginErrorText.text = "Wrong Username or Password",
             () => this.loginErrorText.text = "User has already logged in")
+
+        let connection = getConnection()
+
+        let logOutListener = () => this.logOut();
+        connection.addEventListener('close', logOutListener)
+        this.events.on('shutdown', () => connection.removeEventListener('close', logOutListener))
+
     }
 
     signUpPlayer() {
@@ -541,6 +556,38 @@ export class MenuSceneWS extends Phaser.Scene {
         }
     }
 
+    logOut() {
+        // this.loginErrorText.setVisible(0)
+        // this.loginScreen.setVisible(0);
+
+        console.log("Log Out")
+
+        this.closeChat()
+        
+        // this.logInButton.setVisible(1);
+        this.loginButton.setTexture('loginButton')
+
+        // this.registerButton.setVisible(0);
+        this.disableOnlineGameButton()
+
+        this.xButton2.setVisible(0);
+        this.xButton2.x = 320;
+        this.xButton.setVisible(0);
+        this.loginVisible = false;
+        this.gamesVisible = false;
+
+
+        this.playerUsernameText.setVisible(false);
+        this.playerGamesWonText.setVisible(false);
+
+        this.playerIcon.setVisible(false)
+        this.disableChangeIconArrows()
+
+        this.disableChatButton() 
+        
+
+    }
+
 
     displayPlayerWindow() {
         this.enableChatButton();
@@ -566,6 +613,11 @@ export class MenuSceneWS extends Phaser.Scene {
             // this.scene.start('HostOrJoin');
             this.loadScene('HostOrJoin')
         })
+    }
+
+    disableOnlineGameButton() {
+        this.onlineGame.alpha = 0.4;
+        this.onlineGame.setInteractive(false)
     }
 
     setPlayerInformation() {
@@ -789,6 +841,14 @@ export class MenuSceneWS extends Phaser.Scene {
             })
 
             this.displayPlayerWindow()
+            
+            
+            let connection = getConnection()
+            
+            let logOutListener = () => this.logOut();
+            connection.addEventListener('close', logOutListener)
+            this.events.on('shutdown', () => connection.removeEventListener('close', logOutListener))
+            
             //TODO-> obtener victorias de nuevo
         }
     }
@@ -845,8 +905,11 @@ export class MenuSceneWS extends Phaser.Scene {
     }
 }
 
+
 //Devuelve el área de texto del menú
-export function getText() {
+export function
+
+getText() {
     return MenuSceneWS.getTextArea();
 }
 

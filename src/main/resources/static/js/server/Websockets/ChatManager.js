@@ -148,6 +148,7 @@ function connectionSend(message) {
     }
 }
 
+
 function connectionAddEventListener(type, listener) {
     let connection = getConnection()
     if (connection !== undefined) {
