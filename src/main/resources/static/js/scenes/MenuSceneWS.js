@@ -35,6 +35,7 @@ export class MenuSceneWS extends Phaser.Scene {
     create() {
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
+            
         this.cameras.main.fadeFrom(1000,0,0,0)
         // this.time.delayedCall(1000,()=>{this.scene.start('MenuSceneWS');}, [], this)
       
@@ -235,7 +236,7 @@ export class MenuSceneWS extends Phaser.Scene {
                 this.textArea.setVisible(true);
                 this.chatErrorText.setVisible(true);
                 this.chatVisible = true;
-                ChatManager.receiveMessages(this.textArea)
+                ChatManager.receiveMessages()
             }
         })
         this.xButton.on('pointerdown', () => {
@@ -318,6 +319,7 @@ export class MenuSceneWS extends Phaser.Scene {
         // ServerPing.GetClientsCount()
         this.events.on('shutdown', () => this.stopBackgroundMusic())
         this.addCharactersSprites()
+        this.steChatManagerValues()
 
     }
 
@@ -826,6 +828,12 @@ export class MenuSceneWS extends Phaser.Scene {
 
     static getTextArea() {
         return this.textArea;
+    }
+    
+    steChatManagerValues(){
+        ChatManager.setFirstPass(true)
+        ChatManager.setTargetMessageBox(this.textArea)
+        this.events.on('shutdown', () => ChatManager.removeCatchMessagesListener())
     }
 }
 

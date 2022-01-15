@@ -333,6 +333,8 @@ export class HostOrJoin extends Phaser.Scene {
         
     }
     removeRoom() {
+        let roomCode=getRoomCode();
+        if (roomCode === undefined) return;
         let connection = getConnection()
         let message = {
             type: "Room",

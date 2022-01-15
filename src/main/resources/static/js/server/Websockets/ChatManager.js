@@ -23,12 +23,12 @@ export class ChatManager {
 
     //Pillar los ultimos mensajes con un anzuelo
     static getLastMessages(messagesBox) {
-        let dameLosMensajes = {
+        let getMessagesObj = {
             type: "Chat",
             typeId: "BaitMensajes"
         }
 
-        connection.send(JSON.stringify(dameLosMensajes));
+        connection.send(JSON.stringify(getMessagesObj));
         this.catchMessages();
     }
 
@@ -44,13 +44,14 @@ export class ChatManager {
 
     //Receptor de mensajes
     static catchMessages(){
-        connection.addEventListener('message', event => {
+        this.catchMessagesListener=(event) => {
             let aux;
+            let eventDataObj=JSON.parse(event.data)
             //Si es un array, parsea todos los elementos y los pone por pantalla
-            if(Array.isArray(JSON.parse(event.data))){
+            if(Array.isArray(eventDataObj)){
                 for (let i = 0; i < JSON.parse(event.data).length; i++) {
                     aux = JSON.parse(event.data)[i];
-                    if(lastMessageId == 0){
+                    if(lastMessageId === 0){
                         this.printMessageLn(targetMessageBox,aux,true)
                     }
                     else{
@@ -62,8 +63,10 @@ export class ChatManager {
             }
             //Si no es un array, solo parsea el elemento en cuestión
             else{
+                if (eventDataObj.username === undefined) return
                 aux = JSON.parse(event.data);
-                if(lastMessageId == 0){
+                console.log(event.data)
+                if(lastMessageId === 0){
                     this.printMessageLn(targetMessageBox,aux,true)
                 }
                 else{
@@ -71,21 +74,25 @@ export class ChatManager {
                 }
                 lastMessageId += 1;
             }
-        })
-    }
-
-    //Método principal receptor de mensajes
-    static receiveMessages(messageBox) {
-        if (targetMessageBox===undefined) {
-            targetMessageBox = messageBox;
         }
+        connection.addEventListener('message', this.catchMessagesListener)
+    }
+    static removeCatchMessagesListener(){
+        connection.removeEventListener('message', this.catchMessagesListener)
+    }
+    //Método principal receptor de mensajes
+    static receiveMessages() {
+        // if (targetMessageBox===undefined) {
+        //     targetMessageBox = messageBox;
+        // }
         if(firstPass === true){
+            console.log("First pass entered")
             this.getLastMessages(targetMessageBox);
             firstPass = false;
             //recibir todos los mensajes si es la primera vez que se abre el chat
         }
         else{
-            this.getLastMessages(targetMessageBox);
+            this.getLastMessage(targetMessageBox);
             //recibir solo el ultimo mensaje enviado
         }
     }
@@ -104,5 +111,14 @@ export class ChatManager {
             text.appendText(`[b][stroke=black][color=black]<${(message)['username']}>: ${(message)['content']}[/color][/stroke][/b]\n`)
         }
         text.scrollToBottom();
+    }
+    
+    static setFirstPass(firstPassValue){
+        firstPass=firstPassValue;
+        console.log("First pass")
+    }
+    
+    static setTargetMessageBox(messageBox){
+        targetMessageBox=messageBox;
     }
 }
