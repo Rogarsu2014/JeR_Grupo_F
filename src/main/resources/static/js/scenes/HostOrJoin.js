@@ -342,6 +342,7 @@ export class HostOrJoin extends Phaser.Scene {
             RoomCode: getRoomCode()
         }
         connection.send(JSON.stringify(message))
+        setRoomCode(undefined)
     }
     goBackToMenu() {
         this.loadScene("MenuSceneWS")

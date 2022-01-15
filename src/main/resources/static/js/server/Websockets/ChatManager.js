@@ -65,7 +65,6 @@ export class ChatManager {
             else{
                 if (eventDataObj.username === undefined) return
                 aux = JSON.parse(event.data);
-                console.log(event.data)
                 if(lastMessageId === 0){
                     this.printMessageLn(targetMessageBox,aux,true)
                 }
