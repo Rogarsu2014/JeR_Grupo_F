@@ -63,7 +63,7 @@ public class GameTimeManager {
     }
 
     public void removeTimer(SessionPair sessionPair) {
-        if (timers.containsKey(sessionPair)) {
+        if (timers.containsKey(sessionPair) && timers.get(sessionPair)!=null) {
             timers.get(sessionPair).cancel();
             timers.get(sessionPair).purge();
             timers.remove(sessionPair);
