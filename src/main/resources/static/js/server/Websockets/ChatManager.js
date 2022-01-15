@@ -86,7 +86,6 @@ export class ChatManager {
         //     targetMessageBox = messageBox;
         // }
         if(firstPass === true){
-            console.log("First pass entered")
             this.getLastMessages(targetMessageBox);
             firstPass = false;
             //recibir todos los mensajes si es la primera vez que se abre el chat
@@ -115,7 +114,6 @@ export class ChatManager {
     
     static setFirstPass(firstPassValue){
         firstPass=firstPassValue;
-        console.log("First pass")
     }
     
     static setTargetMessageBox(messageBox){

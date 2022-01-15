@@ -277,7 +277,6 @@ export class HostOrJoin extends Phaser.Scene {
         let message = JSON.parse(msg.data)
         if (message.type === "RoomCode") {
             let code = message.code;
-            navigator.clipboard.writeText(code)
             setPlayerIndex(message.playerIndex);
             setRoomCode(code);
 
