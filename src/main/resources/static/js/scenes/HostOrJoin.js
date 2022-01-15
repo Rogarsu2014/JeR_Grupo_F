@@ -34,6 +34,7 @@ export class HostOrJoin extends Phaser.Scene {
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
         isHost=false;
+        codeRecieved=false;
         this.game.canvas.width = 1408;
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height)
         let width = this.game.canvas.width;
@@ -269,17 +270,17 @@ export class HostOrJoin extends Phaser.Scene {
         let connection = getConnection()
         let roomCodeMsgListener = (msg) => this.getRoomCode(msg)
         connection.addEventListener('message', roomCodeMsgListener)
-        // this.events.on('shutdown',()=>connection.removeEventListener('message',roomCodeMsgListener))
+        this.events.on('shutdown',()=>connection.removeEventListener('message',roomCodeMsgListener))
     }
 
     getRoomCode(msg) {
 
         let message = JSON.parse(msg.data)
         if (message.type === "RoomCode") {
+            
             let code = message.code;
             setPlayerIndex(message.playerIndex);
             setRoomCode(code);
-
 
             codeRecieved = true;
             this.codeText.visible = true;
