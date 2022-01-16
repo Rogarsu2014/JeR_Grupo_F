@@ -10,14 +10,14 @@ export class OnlineCooperativeScene extends OnlineGameStage {
         super(sceneKey, timerTime, tilemapKey, 960);
 
         this.backgroundMusicKey = 'coopStageMusic';
-        this.buttons = []
+
 
     }
 
     create(data) {
 
         super.create(data)
-
+        this.buttons = []
         /// only coop
         let timerTween = this.tweens.add({
             targets: this.timerText,
