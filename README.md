@@ -35,55 +35,6 @@ ___
 
 # <p align="center">GDD</div>
 
-# Fase 5v2
-
-Los errores de servidor a resolver eran:
-
-* Desconexiones inesperadas al usar el chat.
-* Error en la escena de unierse/hacer host de salas
-
-## Solucion
-
-### Desconexiones inesperadas al usar el chat
-
-El error venía dado por:
-
-* La referencia de la caja de texto donde escribir se perdía.
-* Los mensajes se mandaban dos veces ya que el listener de imprimir mensaje no se borraba al salir del Menu.
-
-Las referencias de donde escribir no se actualizaba, pillando la caja de texto desactualizada. Al mostrar el texto daba erro haciendo que la conexión se perdiese.
-
-Al no borrar los listener de mostrar los últimos mensajes, se escribian mensajes extra por cada listener no borrado.
-
-Solución:
-
-* Actualizar la referencia de la caja de texto donde escribir cada vez que se entra en el Menu.
-* Borrar los listeners de recibir mensajes al salir de la escena y añadirlo de nuevo al usar el chat de nuevo.
-
-
-
-### Error en la escena de unierse/hacer host de salas
-
-Pasos para reproducir el error:
-
-* (Cliente 1) Pulsar Online Game -> (Cliente 1) Pulsar Host -> (Cliente 1) Volver atrás -> (Cliente 2) Online Game -> (
-  Cliente 2) Host -> (Cliente 1) Unirse a sala creada por Cliente 2.
-
-El error venía dado por que la sala creada por (Cliente 1) no se eliminaba al volver al menú principal. Esto hacía que
-los jugadores al jugar una partida hubiese casos en los que estaban en escenas diferentes.
-
-Al crear una sala se genera una lista con un orden aleatorio. El orden no se actualizaba porque la sala no se eliminaba
-del servidor, además que no se indicaba que (Cliente 1) dejaba de ser *Host* y contaba con que (Cliente 1) ya tenía un
-orden de salas aleatorio.
-
-
-## Cambios extras
-
-Respuestas al pulsar el botón Join.
-
-Añadido en los créditos los correspondientes artistas de cada música y Sfx usado en el juego.
-
-
 # Puntos fase 5
 
 ## Beta Testing
