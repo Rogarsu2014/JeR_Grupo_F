@@ -3,7 +3,14 @@ import {Skull} from "../objects/Skull.js";
 import {FormUtil} from "../util/FormUtil.js";
 import {MessagesManager} from "../server/MessagesManager.js";
 
-import {getConnection, getRoomCode, setPlayerIndex, setRoomCode} from "../server/Websockets/SocketIntilalizer.js";
+import {
+    connectionAddEventListener,
+    connectionSend,
+    getConnection,
+    getRoomCode,
+    setPlayerIndex,
+    setRoomCode
+} from "../server/Websockets/SocketIntilalizer.js";
 import {getNextRandomCoop, getScenesOrder, redefineArrays, setScenesOrder} from "../util/ScenesRandomizer.js";
 import {setAsHost} from "../server/HostData.js";
 
@@ -33,8 +40,8 @@ export class HostOrJoin extends Phaser.Scene {
     create() {
         this.loadBackgroundMusic()
         this.playBackgroundMusic()
-        isHost=false;
-        codeRecieved=false;
+        isHost = false;
+        codeRecieved = false;
         this.game.canvas.width = 1408;
         this.physics.world.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height)
         let width = this.game.canvas.width;
@@ -111,11 +118,16 @@ export class HostOrJoin extends Phaser.Scene {
             this.hostButton.disableInteractive();
         })
         this.joinButton.on('pointerdown', () => {
+            this.clearJoinStatusText()
             let connection = getConnection()
             let joinInfo = {
                 type: "Room",
                 type2: "Join",
                 RoomCode: this.formUtil.getTextAreaValue("myText")
+            }
+            if (joinInfo.RoomCode.length !== 6) {
+                this.setJoinStatusText("Please use a 6 digits code")
+                return;
             }
             if (codeRecieved === true) {
 
@@ -166,17 +178,18 @@ export class HostOrJoin extends Phaser.Scene {
         var arrowUp = this.input.keyboard.on('keydown-' + 'UP', () => this.selectNextButton(-1));
 
         this.setOnButtonInfoReceived();
-        this.events.on('shutdown',()=>this.stopBackgroundMusic())
+        this.events.on('shutdown', () => this.stopBackgroundMusic())
         this.setOnConnectionLostListener();
+        this.setJoinStatusListener()
     }
 
-    setOnConnectionLostListener(){
-        let connection=getConnection()
-        let returnToMenuOnConnectionLostListener= ()=>this.returnToMenuOnConnectionLost();
-        connection.addEventListener('close',returnToMenuOnConnectionLostListener)
-        this.events.on('shutdown',()=>connection.removeEventListener('close',returnToMenuOnConnectionLostListener))
+    setOnConnectionLostListener() {
+        let connection = getConnection()
+        let returnToMenuOnConnectionLostListener = () => this.returnToMenuOnConnectionLost();
+        connection.addEventListener('close', returnToMenuOnConnectionLostListener)
+        this.events.on('shutdown', () => connection.removeEventListener('close', returnToMenuOnConnectionLostListener))
     }
-    
+
     sendMessage() {
         // console.log("sendForm");
         let content = this.formUtil.getTextAreaValue("myText");
@@ -217,7 +230,7 @@ export class HostOrJoin extends Phaser.Scene {
         this.selectedButtonIndex = index;
         //this.selectSprite.setVisible(true);
     }
-    
+
 
     selectNextButton(change = 1) {
         const button = this.buttons[this.selectedButtonIndex];
@@ -277,14 +290,14 @@ export class HostOrJoin extends Phaser.Scene {
         let connection = getConnection()
         let roomCodeMsgListener = (msg) => this.getRoomCode(msg)
         connection.addEventListener('message', roomCodeMsgListener)
-        this.events.on('shutdown',()=>connection.removeEventListener('message',roomCodeMsgListener))
+        this.events.on('shutdown', () => connection.removeEventListener('message', roomCodeMsgListener))
     }
 
     getRoomCode(msg) {
 
         let message = JSON.parse(msg.data)
         if (message.type === "RoomCode") {
-            
+
             let code = message.code;
             setPlayerIndex(message.playerIndex);
             setRoomCode(code);
@@ -292,14 +305,14 @@ export class HostOrJoin extends Phaser.Scene {
             codeRecieved = true;
             this.codeText.visible = true;
             if (isHost) {
-                this.codeText.setText("Your room code: " + code)
+                this.setHostText("Your room code: " + code)
                 setAsHost()
             } else {
                 this.setJoinCodeText(code)
                 setScenesOrder(message.scenesOrder)
             }
         }
-        
+
         if (message.type === "ConnectionClosed") {
             // console.log("external Connection closed reached")
             // this.scene.manager.getScenes(true)[0].start("MenuSceneWS")
@@ -310,17 +323,24 @@ export class HostOrJoin extends Phaser.Scene {
         }
 
     }
-    
-    
-    returnToMenuOnConnectionLost(){
+
+
+    setHostText(text) {
+        this.codeText.y = 350;
+        this.codeText.x = 275;
+        this.codeText.setText(text)
+    }
+
+    returnToMenuOnConnectionLost() {
         this.scene.manager.getScenes(true)[0].scene.start("MenuSceneWS")
     }
 
     setJoinCodeText(code) {
 
 
-        this.codeText.x = 785
-        this.codeText.setText("Joined in room: " + code)
+        this.setJoinStatusText("Joined in room: " + code)
+        // this.codeText.x = 785
+        // this.codeText.setText("Joined in room: " + code)
 
         this.readyButton.setInteractive();
         this.readyButton.alpha = 1
@@ -332,6 +352,42 @@ export class HostOrJoin extends Phaser.Scene {
 
     }
 
+    setJoinStatusText(text) {
+        this.codeText.setVisible(1)
+        this.codeText.x = 778
+        this.codeText.y = 410
+        this.codeText.setText(text)
+    }
+
+    clearJoinStatusText() {
+        this.codeText.setText("")
+    }
+
+    setJoinStatusListener() {
+        let connection = getConnection();
+        let processJoinStatusListener = (msg) => this.processJoinStatusMessage(msg);
+        connectionAddEventListener('message', processJoinStatusListener)
+        this.events.on('shutdown', () => connection.removeEventListener('message', processJoinStatusListener));
+    }
+
+    processJoinStatusMessage(message) {
+
+        let messageObj = JSON.parse(message.data)
+        if (messageObj.type !== "JoinStatus") return;
+
+        let joinStatus = messageObj.status;
+
+        switch (joinStatus) {
+            case "RoomFull":
+                this.setJoinStatusText("Room '" + messageObj.roomCode + "' full")
+                break;
+            case "RoomNotFound":
+                this.setJoinStatusText("Room '" + messageObj.roomCode + "' not found")
+                break;
+        }
+    }
+
+
     loadScene(sceneKey) {
         cameraFadeOut(this, 1000, () => {
             this.stopBackgroundMusic()
@@ -341,10 +397,11 @@ export class HostOrJoin extends Phaser.Scene {
             this.hostButton.setInteractive(false)
             this.joinButton.setInteractive(false)
         })
-        
+
     }
+
     removeRoom() {
-        let roomCode=getRoomCode();
+        let roomCode = getRoomCode();
         if (roomCode === undefined) return;
         let connection = getConnection()
         let message = {
@@ -355,7 +412,9 @@ export class HostOrJoin extends Phaser.Scene {
         connection.send(JSON.stringify(message))
         setRoomCode(undefined)
     }
+
     goBackToMenu() {
         this.loadScene("MenuSceneWS")
     }
 }
+

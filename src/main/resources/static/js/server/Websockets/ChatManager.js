@@ -1,6 +1,5 @@
 import {ServerConnectionManager} from "../ServerConnectionManager.js";
-import {getConnection} from "./SocketIntilalizer.js";
-import {getText} from "../../scenes/MenuSceneWS.js"
+import {connectionAddEventListener, connectionSend, getConnection} from "./SocketIntilalizer.js";
 
 let lastMessageId = 0;
 let messagesTimeout = null;
@@ -132,26 +131,26 @@ export class ChatManager {
 
 
 
-function connectionSend(message) {
-    let connection = getConnection()
-    if (connection !== undefined) {
-        if (connection.readyState === WebSocket.OPEN) {
-            connection.send(JSON.stringify(message));
-        } else {
-            let sendMsgListener = () => {
-                connection.send(JSON.stringify(message));
-                connection.removeEventListener('open', sendMsgListener)
-            }
-
-            connectionAddEventListener('open', sendMsgListener)
-        }
-    }
-}
-
-
-function connectionAddEventListener(type, listener) {
-    let connection = getConnection()
-    if (connection !== undefined) {
-        connection.addEventListener(type, listener);
-    }
-}
+// function connectionSend(message) {
+//     let connection = getConnection()
+//     if (connection !== undefined) {
+//         if (connection.readyState === WebSocket.OPEN) {
+//             connection.send(JSON.stringify(message));
+//         } else {
+//             let sendMsgListener = () => {
+//                 connection.send(JSON.stringify(message));
+//                 connection.removeEventListener('open', sendMsgListener)
+//             }
+//
+//             connectionAddEventListener('open', sendMsgListener)
+//         }
+//     }
+// }
+//
+//
+// function connectionAddEventListener(type, listener) {
+//     let connection = getConnection()
+//     if (connection !== undefined) {
+//         connection.addEventListener(type, listener);
+//     }
+// }

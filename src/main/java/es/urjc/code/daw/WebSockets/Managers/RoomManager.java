@@ -34,15 +34,17 @@ public class RoomManager extends BaseManager {
 
     @Override
     public void connectionEstablished(WebSocketSession session) {
-        
+
     }
+
     ActionEvent event;
+
     @Override
     public void receiveMessage(WebSocketSession session, TextMessage message) throws Exception {
         System.out.println(games.toString());
         JsonNode roomNode = mapper.readTree(message.getPayload());
         String messageType = roomNode.get("type2").asText();
-        
+
         switch (messageType) {
             case "Host":
                 HostAction(session, roomNode);
@@ -82,7 +84,7 @@ public class RoomManager extends BaseManager {
         node.put("type", "ConnectionClosed");
         session.sendMessage(new TextMessage(node.toString()));
     }
-        
+
     public void HostAction(WebSocketSession session, JsonNode roomNode) throws IOException {
         String roomCode = randomString();
         SessionPair p = new SessionPair(session);
@@ -98,6 +100,7 @@ public class RoomManager extends BaseManager {
     }
 
     public void JoinAction(WebSocketSession session, JsonNode roomNode) throws IOException {
+        String roomCode = roomNode.get("RoomCode").asText();
         if (games.containsKey(roomNode.get("RoomCode").asText())) {
             SessionPair pair = games.get(roomNode.get("RoomCode").asText());
             WebSocketSession player1 = pair.getW1();
@@ -105,6 +108,7 @@ public class RoomManager extends BaseManager {
                 System.out.println("Room not Found");
             } else if (games.get(roomNode.get("RoomCode").asText()).getStatus().equals("full")) {
                 System.out.println("Room Full");
+                sendJoinStatus(session,"RoomFull",roomCode);
             } else {
                 games.get(roomNode.get("RoomCode").asText()).setW2(session);
                 System.out.println("Connected in room with " + games.get(roomNode.get("RoomCode").asText()).getW1().getId()); //Falta nombre
@@ -119,15 +123,26 @@ public class RoomManager extends BaseManager {
             }
         } else {
             System.out.println("Room not Found");
+            sendJoinStatus(session,"RoomNotFound",roomCode);
         }
     }
+
+    public void sendJoinStatus(WebSocketSession session,String status,String roomCode) throws IOException {
+        ObjectNode node = mapper.createObjectNode();
+        node.put("type", "JoinStatus");
+        node.put("status", status);
+        node.put("roomCode", roomCode);
+        
+        session.sendMessage(new TextMessage(node.toString()));
+    } 
     
-    public void RemoveRoomAction(JsonNode roomNode){
-        String roomCode= roomNode.get("RoomCode").asText();
+    public void RemoveRoomAction(JsonNode roomNode) {
+        String roomCode = roomNode.get("RoomCode").asText();
         GameTimeManager.getInstance().removeTimer(games.get(roomCode));
         games.remove(roomCode);
-    }  
-    public void RemoveRoomAction(String roomCode){
+    }
+
+    public void RemoveRoomAction(String roomCode) {
         GameTimeManager.getInstance().removeTimer(games.get(roomCode));
         games.remove(roomCode);
     }
