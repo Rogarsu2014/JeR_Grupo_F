@@ -57,3 +57,26 @@ function pingConnection(){
         }   
     },1000)
 }
+
+export function connectionAddEventListener(type, listener) {
+    let connection = getConnection()
+    if (connection !== undefined) {
+        connection.addEventListener(type, listener);
+    }
+}
+
+export function connectionSend(message) {
+    let connection = getConnection()
+    if (connection !== undefined) {
+        if (connection.readyState === WebSocket.OPEN) {
+            connection.send(JSON.stringify(message));
+        } else {
+            let sendMsgListener = () => {
+                connection.send(JSON.stringify(message));
+                connection.removeEventListener('open', sendMsgListener)
+            }
+
+            connectionAddEventListener('open', sendMsgListener)
+        }
+    }
+}
