@@ -37,7 +37,7 @@ export class Credits extends Phaser.Scene{
             onComplete:()=> {
                 thanksText.play()
             },
-            duration: 10000
+            duration: 20000
         })
 
     }
