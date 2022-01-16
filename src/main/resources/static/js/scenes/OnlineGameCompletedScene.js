@@ -1,5 +1,5 @@
 import {GameCompletedScene} from "./GameCompletedScene.js";
-import {getConnection, getPlayerIndex, getRoomCode} from "../server/Websockets/SocketIntilalizer.js";
+import {getConnection, getPlayerIndex, getRoomCode, setRoomCode} from "../server/Websockets/SocketIntilalizer.js";
 import {getUser} from "../server/PlayersDataManager.js";
 import {isHost, removeHostProperty} from "../server/HostData.js";
 
@@ -16,9 +16,10 @@ export class OnlineGameCompletedScene extends GameCompletedScene {
         this.checkWinner();
 
         if (isHost()) {
-            this.removeRoom()
-            removeHostProperty()
+            this.removeRoom();
+            removeHostProperty();
         }
+        setRoomCode(undefined);
     }
 
     removeRoom() {
