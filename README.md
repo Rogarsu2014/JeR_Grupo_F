@@ -21,7 +21,7 @@ en una serie de niveles en los que deberán recolectar calaveras que les darán 
 
 *Pablo Pomares Crespo, p.pomaresc.2018@alumnos.urjc.es, A6MFlygon*
 
-*Roberto García Martín, r.garciama.2018@alumnos.urjc.es, drowlerd*
+*Roberto García Martín, r.garciama.2018@alumnos.urjc.es, drowlerd* 
 
 **https://trello.com/b/JyMPz9K5/improvisation-productions**
 
